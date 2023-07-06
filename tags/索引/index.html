@@ -18,12 +18,12 @@
     <meta name="description" content="索引">
         
     <meta name="author" content="老王">
-    <meta property="og:url" content="https://hehe-1234.github.io/tags/%E7%B4%A2%E5%BC%95/">
+    <meta property="og:url" content="https://hello-code.xyz/tags/%E7%B4%A2%E5%BC%95/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://hehe-1234.github.io/tags/%E7%B4%A2%E5%BC%95/index.xml" title="技术博客" />
+    <link rel="alternate" type="application/rss+xml" href="https://hello-code.xyz/tags/%E7%B4%A2%E5%BC%95/index.xml" title="技术博客" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -43,7 +43,7 @@
         <div class="col-group">
             <div class="site-name ">
                 
-                    <a id="logo" href="https://hehe-1234.github.io/">
+                    <a id="logo" href="https://hello-code.xyz/">
                         技术博客
                     </a>
                 
@@ -51,13 +51,13 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://hehe-1234.github.io/">首页</a>
+                    <a class="" href="https://hello-code.xyz/">首页</a>
                     
-                    <a  href="https://hehe-1234.github.io/linked/" title="链接">链接</a>
+                    <a  href="https://hello-code.xyz/linked/" title="链接">链接</a>
                     
-                    <a  href="https://hehe-1234.github.io/archives/" title="归档">归档</a>
+                    <a  href="https://hello-code.xyz/archives/" title="归档">归档</a>
                     
-                    <a  href="https://hehe-1234.github.io/about/" title="关于">关于</a>
+                    <a  href="https://hello-code.xyz/about/" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -84,7 +84,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.github.io/post/2023/06/bitweaving/">BitWeaving: Fast Scans for Main Memory Data Processing</a>
+                <a href="https://hello-code.xyz/post/2023/06/bitweaving/">BitWeaving: Fast Scans for Main Memory Data Processing</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -100,14 +100,14 @@
         
         <div class="post-content">
             基于主内存数据库的 scan 优化，提出的技术：BitWeaving，又分为两种：BitWeaving/V 和 BitWeaving/H；BW/H 相当于是bit 级别的水平分布，将列的数据水平的分布到不同segment 中，通过亦或、以及各种位运算技术，实现了 =、!=、&lt;、&lt;= 的比较操作，比较完之后，每个process word 分隔符bit就会被设置为 1 或者0，然后将上下四组分别做不同的位移在 or，就能得到最终结果；BW/V 实现bit 级别的列存储，一列数据将每个数据的第一个bit存到 process word v1中，第二列存到 v2中，按照这种分布就可以实现早期裁剪，SIMD 再进一步优化，他的scan很快，但是查找需要跨多个processor word，相当于是垂直的从左往右计算，性能会 BW/H要差；而对于 VBP，其真实数据布局可以再优化，比如原先 9个processor word 一个segment，变成一个segment 3个 bit group，每个bit group 3个 processor word，这样做 cut-off的时候可以不用再加载斗鱼的processor word，节省了内存带宽，减少cache miss；从性能对比看，BW 技术在scan方面是最好的，SIMD有打包和对其开销所以效果远不如 BW，而BW 存在选择 BW/V 和 BW/H 布局的问题，也是待研究的问题
-            <p class="readmore"><a href="https://hehe-1234.github.io/post/2023/06/bitweaving/">阅读全文</a></p>
+            <p class="readmore"><a href="https://hello-code.xyz/post/2023/06/bitweaving/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.github.io/post/2023/05/cache_conscious/">Cache Conscious Indexing for Decision-Support in Main Memory</a>
+                <a href="https://hello-code.xyz/post/2023/05/cache_conscious/">Cache Conscious Indexing for Decision-Support in Main Memory</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -123,14 +123,14 @@
         
         <div class="post-content">
             对于主内存 OLAP 场景，提出的针对 cache有效性的优化，如果排序数组远大于 cache line，则二分查找的 cache miss 是很严重的，基本每查找一次就有一次cache miss；T树 看起来是缓存友好的，但每次查找只有 min、max做了匹配，仍然会有很大的 cache miss，B 树虽然是面向磁盘的，但有多个子节点，一次可以做多个匹配，所以cache miss 比 T 树更好一些，hash index需要占用大量空间，当然二分的好处是不用空间；在这些基础上论文提出了针对cache line的 CSS树(Cache Sensitive Search Trees)，他在排序数组基础上，增加了一个字典数组，使得整个树可以被平铺，有点像 树堆，不过它的节点有多个，个数一般跟 cache line有关，它没有子节点指针，而是用数组下标来代替，这样一个 node 内可以放更多的数据，查找起来的cache miss就会小很多；值得注意的是类似满二叉树，CSS树的字典指向的排序数组其 part-1、part-2整合跟正常排序数组是相反的；从测试结果看CSS 树的表现也不错，随着CPU和内存差距越来越大，CSS树可能会变现的更好
-            <p class="readmore"><a href="https://hehe-1234.github.io/post/2023/05/cache_conscious/">阅读全文</a></p>
+            <p class="readmore"><a href="https://hello-code.xyz/post/2023/05/cache_conscious/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.github.io/post/2023/05/column_imprints/">Column Imprints: A Secondary Index Structure</a>
+                <a href="https://hello-code.xyz/post/2023/05/column_imprints/">Column Imprints: A Secondary Index Structure</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -146,14 +146,14 @@
         
         <div class="post-content">
             针对主内存数据库，提出了一种轻量级二级索引技术：imprints column，它是属于bit 向量索引家族的，zone map对于随机值正好落在min、max内的查询就无效了，仍然需要扫描，而 bit map占用的空间更大，imprint 则综合了这两者的优点，它是基于cache line做bit向量分组的，对CPU更友好，而且将一个cache line内的值统一合并为一个bit向量，占用空间更小；通过 counter 和 repeat标志位，可以实现imprint 的压缩，论文中给出了相关的压缩、查询算法，由于是针对读场景的设计，更新主要是append和索引重建；通过实验对比，imprint 对于数据分布随机和有规律的场景，表现的都很好，索引压缩效果不错，压缩后的索引占比看 imprint最少，zonemap也差不多，WAH最高；查询性能看，三个索引基本差不多，imprint略好一些，时间上imprint也略块一些，但随着选择率上升几个都趋同；总体看随选择率上升也跟scan 差不多，但是对于熵低/高的场景表现都比较稳定
-            <p class="readmore"><a href="https://hehe-1234.github.io/post/2023/05/column_imprints/">阅读全文</a></p>
+            <p class="readmore"><a href="https://hello-code.xyz/post/2023/05/column_imprints/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.github.io/post/2023/05/sql_server_column_store_indexes/">SQL Server Column Store Indexes</a>
+                <a href="https://hello-code.xyz/post/2023/05/sql_server_column_store_indexes/">SQL Server Column Store Indexes</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -169,14 +169,14 @@
         
         <div class="post-content">
             SQL Server 11代 Denali，在行存系统上增加了列存和索引结构，这些改动并不是重新来一套，而是基于现有技术的改进，如对行做了分片segment，每个 row segment 再根据 column 进一步细分为 column segment；column segment本身是现有的 blob存储，同时还利用了压缩技术，基于 column segment 又开发出了 segment directory，这个 directory包含了一些元信息如行数量、size、多少数据被编码了、min和max等，这些改动之后，还可以跟现有的lock、log、recovery、patition、mirror、replication完全兼容整合；之后查询引擎部分也会做一些改动来兼容行、列数据，这里使用了多核、bitmap filter、算子间的内存共享、SIMD等进一步优化，根据代价模型评估，选择合适的索引，测试TPC-DS时，前面大部分数据都是批的方式处理的，而且做了并行化，只有最后的聚合、重分区是用 行模式处理的，最后效率大幅度提升
-            <p class="readmore"><a href="https://hehe-1234.github.io/post/2023/05/sql_server_column_store_indexes/">阅读全文</a></p>
+            <p class="readmore"><a href="https://hello-code.xyz/post/2023/05/sql_server_column_store_indexes/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.github.io/post/2023/05/bitmap_index/">Bitmap Index Design and Evaluation </a>
+                <a href="https://hello-code.xyz/post/2023/05/bitmap_index/">Bitmap Index Design and Evaluation </a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -192,14 +192,14 @@
         
         <div class="post-content">
             针对 bitmap 索引提出的一系列指导设计建议，传统方式对于带谓词的查询，一般是：全表scan、B树 索引、每个谓词做scan然后merge；使用 bitmap 后采用第三种方案效果最好，论文中提出了四种时空权衡：空间最优、时间最优、基于空间限制下的时间最优、时空权衡； 在大量数、数据基础范围较小的情况下使用 bitmap 索引效果很好，而 bitmap 可以采用 基于范围的、基于等值的；基于范围的相当于 Value-List set，在这种场景下继续拆分，如基于&lt;3,3&gt;的Value-List，其空间比原始的更小；论文中提出了对 Algorithm RangeEval 改进的 Algorithm RangeEval-Opt 算法，需要处理的谓词更少，只需一次扫描；论文指出 范围编码的时空权衡效果更好，之后又对比了压缩的情况，buffer的增大，对于时空权衡也有帮助
-            <p class="readmore"><a href="https://hehe-1234.github.io/post/2023/05/bitmap_index/">阅读全文</a></p>
+            <p class="readmore"><a href="https://hello-code.xyz/post/2023/05/bitmap_index/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.github.io/post/2023/05/column_sketches/">Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation</a>
+                <a href="https://hello-code.xyz/post/2023/05/column_sketches/">Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -215,7 +215,7 @@
         
         <div class="post-content">
             B数索引 对于选择率低时效果很好、但选择率一旦上升性能就不行了；轻量级索引 Zone Map、Column Imprints、Feature Based Data Skipping对数据聚集性有要求；早期裁剪 ByteSlicing、Bit-Slicing、Approximate and Refine 在数据倾斜情况下，高位可能都是重复的效果不好。Column Sketches使用直方图统计列数据分布，同时考虑了频繁值和普通值，之后建立映射函数，将频繁值映射成唯一code，非频繁值均匀分布，通过这种映射之后，数值类型的 原先 8bit 的值，映射完只需要 2bit 就可以表示了，对于频繁唯一值也不需要回表检查进一步加速；对于分类型也是类似方式，只是不需要排序，可以直接映射。对比其他方案，Column Sketches在选择率高/低，L1 miss，tuple处理速度，数据倾斜，鲁棒性，数据加载上都很不错；Column Sketches还可以利用 SIMD加速scan，可以跟现有技术做整合
-            <p class="readmore"><a href="https://hehe-1234.github.io/post/2023/05/column_sketches/">阅读全文</a></p>
+            <p class="readmore"><a href="https://hello-code.xyz/post/2023/05/column_sketches/">阅读全文</a></p>
         </div>
     </article>
     
@@ -233,10 +233,10 @@
 
                 <div id="secondary">
     <section class="widget">
-        <form id="search" action='https://hehe-1234.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='https://hello-code.xyz/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://hehe-1234.github.io/">
+      <input type="hidden" name="sitesearch" value="https://hello-code.xyz/">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
@@ -246,43 +246,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2023/06/bitweaving/" title="BitWeaving: Fast Scans for Main Memory Data Processing">BitWeaving: Fast Scans for Main Memory Data Processing</a>
+        <a href="https://hello-code.xyz/post/2023/06/bitweaving/" title="BitWeaving: Fast Scans for Main Memory Data Processing">BitWeaving: Fast Scans for Main Memory Data Processing</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2023/05/cache_conscious/" title="Cache Conscious Indexing for Decision-Support in Main Memory">Cache Conscious Indexing for Decision-Support in Main Memory</a>
+        <a href="https://hello-code.xyz/post/2023/05/cache_conscious/" title="Cache Conscious Indexing for Decision-Support in Main Memory">Cache Conscious Indexing for Decision-Support in Main Memory</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2023/05/column_imprints/" title="Column Imprints: A Secondary Index Structure">Column Imprints: A Secondary Index Structure</a>
+        <a href="https://hello-code.xyz/post/2023/05/column_imprints/" title="Column Imprints: A Secondary Index Structure">Column Imprints: A Secondary Index Structure</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
+        <a href="https://hello-code.xyz/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2023/05/bitmap_index/" title="Bitmap Index Design and Evaluation ">Bitmap Index Design and Evaluation </a>
+        <a href="https://hello-code.xyz/post/2023/05/bitmap_index/" title="Bitmap Index Design and Evaluation ">Bitmap Index Design and Evaluation </a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
+        <a href="https://hello-code.xyz/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2023/05/column_sketches/" title="Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation">Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation</a>
+        <a href="https://hello-code.xyz/post/2023/05/column_sketches/" title="Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation">Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" title="资源隔离修改配置动态加载">资源隔离修改配置动态加载</a>
+        <a href="https://hello-code.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" title="资源隔离修改配置动态加载">资源隔离修改配置动态加载</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
+        <a href="https://hello-code.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2023/05/optimal_column_layout_for_hybrid_workloads/" title="Optimal Column Layout for Hybrid Workloads">Optimal Column Layout for Hybrid Workloads</a>
+        <a href="https://hello-code.xyz/post/2023/05/optimal_column_layout_for_hybrid_workloads/" title="Optimal Column Layout for Hybrid Workloads">Optimal Column Layout for Hybrid Workloads</a>
     </li>
     
 </ul>
@@ -294,27 +294,27 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://hehe-1234.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (6)</a></li>
+    <li><a href="https://hello-code.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (6)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
+    <li><a href="https://hello-code.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (28)</a></li>
+    <li><a href="https://hello-code.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (28)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (35)</a></li>
+    <li><a href="https://hello-code.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (35)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
+    <li><a href="https://hello-code.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E7%AE%97%E6%B3%95/">算法 (8)</a></li>
+    <li><a href="https://hello-code.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (8)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
+    <li><a href="https://hello-code.xyz/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
+    <li><a href="https://hello-code.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
+    <li><a href="https://hello-code.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (12)</a></li>
+    <li><a href="https://hello-code.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (12)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
+    <li><a href="https://hello-code.xyz/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
     
 </ul>
     </section>
@@ -323,11 +323,11 @@
         <h3 class="widget-title">归档</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://hehe-1234.github.io/years/2021%E5%B9%B4/">2021年 (22)</a></li>
+    <li><a href="https://hello-code.xyz/years/2021%E5%B9%B4/">2021年 (22)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/years/2022%E5%B9%B4/">2022年 (53)</a></li>
+    <li><a href="https://hello-code.xyz/years/2022%E5%B9%B4/">2022年 (53)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/years/2023%E5%B9%B4/">2023年 (38)</a></li>
+    <li><a href="https://hello-code.xyz/years/2023%E5%B9%B4/">2023年 (38)</a></li>
     
 </ul>
     </section>
@@ -336,115 +336,115 @@
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
     
-    <a href="https://hehe-1234.github.io/tags/b%E6%A0%91/">B树 </a>
+    <a href="https://hello-code.xyz/tags/b%E6%A0%91/">B树 </a>
     
-    <a href="https://hehe-1234.github.io/tags/calcite/">calcite </a>
+    <a href="https://hello-code.xyz/tags/calcite/">calcite </a>
     
-    <a href="https://hehe-1234.github.io/tags/cmu-database/">CMU-Database </a>
+    <a href="https://hello-code.xyz/tags/cmu-database/">CMU-Database </a>
     
-    <a href="https://hehe-1234.github.io/tags/flink/">flink </a>
+    <a href="https://hello-code.xyz/tags/flink/">flink </a>
     
-    <a href="https://hehe-1234.github.io/tags/hana/">HANA </a>
+    <a href="https://hello-code.xyz/tags/hana/">HANA </a>
     
-    <a href="https://hehe-1234.github.io/tags/hive/">Hive </a>
+    <a href="https://hello-code.xyz/tags/hive/">Hive </a>
     
-    <a href="https://hehe-1234.github.io/tags/k8s/">k8s </a>
+    <a href="https://hello-code.xyz/tags/k8s/">k8s </a>
     
-    <a href="https://hehe-1234.github.io/tags/kudu/">kudu </a>
+    <a href="https://hello-code.xyz/tags/kudu/">kudu </a>
     
-    <a href="https://hehe-1234.github.io/tags/kyuubi/">Kyuubi </a>
+    <a href="https://hello-code.xyz/tags/kyuubi/">Kyuubi </a>
     
-    <a href="https://hehe-1234.github.io/tags/lakehouse/">Lakehouse </a>
+    <a href="https://hello-code.xyz/tags/lakehouse/">Lakehouse </a>
     
-    <a href="https://hehe-1234.github.io/tags/leveldb/">LevelDB </a>
+    <a href="https://hello-code.xyz/tags/leveldb/">LevelDB </a>
     
-    <a href="https://hehe-1234.github.io/tags/llvm/">LLVM </a>
+    <a href="https://hello-code.xyz/tags/llvm/">LLVM </a>
     
-    <a href="https://hehe-1234.github.io/tags/manacher/">Manacher </a>
+    <a href="https://hello-code.xyz/tags/manacher/">Manacher </a>
     
-    <a href="https://hehe-1234.github.io/tags/mapreduce/">MapReduce </a>
+    <a href="https://hello-code.xyz/tags/mapreduce/">MapReduce </a>
     
-    <a href="https://hehe-1234.github.io/tags/mysql/">MySQL </a>
+    <a href="https://hello-code.xyz/tags/mysql/">MySQL </a>
     
-    <a href="https://hehe-1234.github.io/tags/newsql/">NewSQL </a>
+    <a href="https://hello-code.xyz/tags/newsql/">NewSQL </a>
     
-    <a href="https://hehe-1234.github.io/tags/oceanbase/">OceanBase </a>
+    <a href="https://hello-code.xyz/tags/oceanbase/">OceanBase </a>
     
-    <a href="https://hehe-1234.github.io/tags/paxos/">paxos </a>
+    <a href="https://hello-code.xyz/tags/paxos/">paxos </a>
     
-    <a href="https://hehe-1234.github.io/tags/quick-sql/">quick-sql </a>
+    <a href="https://hello-code.xyz/tags/quick-sql/">quick-sql </a>
     
-    <a href="https://hehe-1234.github.io/tags/raft/">raft </a>
+    <a href="https://hello-code.xyz/tags/raft/">raft </a>
     
-    <a href="https://hehe-1234.github.io/tags/scala/">scala </a>
+    <a href="https://hello-code.xyz/tags/scala/">scala </a>
     
-    <a href="https://hehe-1234.github.io/tags/simd/">SIMD </a>
+    <a href="https://hello-code.xyz/tags/simd/">SIMD </a>
     
-    <a href="https://hehe-1234.github.io/tags/snowflake/">snowflake </a>
+    <a href="https://hello-code.xyz/tags/snowflake/">snowflake </a>
     
-    <a href="https://hehe-1234.github.io/tags/spark/">spark </a>
+    <a href="https://hello-code.xyz/tags/spark/">spark </a>
     
-    <a href="https://hehe-1234.github.io/tags/teradata/">TeraData </a>
+    <a href="https://hello-code.xyz/tags/teradata/">TeraData </a>
     
-    <a href="https://hehe-1234.github.io/tags/unix/">unix </a>
+    <a href="https://hello-code.xyz/tags/unix/">unix </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找 </a>
+    <a href="https://hello-code.xyz/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">二叉树遍历 </a>
+    <a href="https://hello-code.xyz/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">二叉树遍历 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
+    <a href="https://hello-code.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%88%97%E5%AD%98/">列存 </a>
+    <a href="https://hello-code.xyz/tags/%E5%88%97%E5%AD%98/">列存 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
+    <a href="https://hello-code.xyz/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
+    <a href="https://hello-code.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%9B%9E%E6%BA%AF/">回溯 </a>
+    <a href="https://hello-code.xyz/tags/%E5%9B%9E%E6%BA%AF/">回溯 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
+    <a href="https://hello-code.xyz/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
+    <a href="https://hello-code.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%AD%98%E5%82%A8/">存储 </a>
+    <a href="https://hello-code.xyz/tags/%E5%AD%98%E5%82%A8/">存储 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
+    <a href="https://hello-code.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
+    <a href="https://hello-code.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
+    <a href="https://hello-code.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
+    <a href="https://hello-code.xyz/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
+    <a href="https://hello-code.xyz/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
+    <a href="https://hello-code.xyz/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
+    <a href="https://hello-code.xyz/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
+    <a href="https://hello-code.xyz/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
+    <a href="https://hello-code.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
+    <a href="https://hello-code.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E7%AE%97%E6%B3%95/">算法 </a>
+    <a href="https://hello-code.xyz/tags/%E7%AE%97%E6%B3%95/">算法 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
+    <a href="https://hello-code.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E7%BC%93%E5%AD%98/">缓存 </a>
+    <a href="https://hello-code.xyz/tags/%E7%BC%93%E5%AD%98/">缓存 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
+    <a href="https://hello-code.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
+    <a href="https://hello-code.xyz/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
+    <a href="https://hello-code.xyz/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E8%AE%BA%E6%96%87/">论文 </a>
+    <a href="https://hello-code.xyz/tags/%E8%AE%BA%E6%96%87/">论文 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
+    <a href="https://hello-code.xyz/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
+    <a href="https://hello-code.xyz/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
     
 </div>
     </section>
@@ -454,7 +454,7 @@
     <section class="widget">
         <h3 class="widget-title">RSS</h3>
         <ul class="widget-list">
-            <li><a href="https://hehe-1234.github.io/index.xml">文章 RSS</a></li>
+            <li><a href="https://hello-code.xyz/index.xml">文章 RSS</a></li>
         </ul>
     </section>
 </div>
@@ -463,7 +463,7 @@
     </div>
     <footer id="footer">
     <div>
-        &copy; 2023 <a href="https://hehe-1234.github.io/">技术博客 By 老王</a>
+        &copy; 2023 <a href="https://hello-code.xyz/">技术博客 By 老王</a>
         
     </div>
     <br />
