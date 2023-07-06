@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>MapReduce论文 | 技术博客</title>
+    <meta property="og:title" content="MapReduce论文 - 技术博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2022-04-20T12:43:19&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-04-20T12:43:19&#43;08:00'>
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="MapReduce论文">
+        <meta name="author" content="隔壁老王">
+        
+    <meta property="og:url" content="https://hehe-1234.github.io/post/2022/04/mapreduce%E8%AE%BA%E6%96%87/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hehe-1234.github.io/">
+                        技术博客
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hehe-1234.github.io/">首页</a>
+                    
+                    <a  href="https://hehe-1234.github.io/linked/" title="链接">链接</a>
+                    
+                    <a  href="https://hehe-1234.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hehe-1234.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">MapReduce论文</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年4月20日
+        </date>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#程序模型">程序模型</a></li>
+        <li><a href="#实现">实现</a></li>
+        <li><a href="#细节">细节</a></li>
+        <li><a href="#性能">性能</a></li>
+        <li><a href="#经验和总结">经验和总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        
+        <div class="post-meta">
+            
+            <span class="post-meta meta-tags">
+                <ul class="clearfix">
+                    <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
+                </ul>
+            </span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <blockquote>
+<p>原文<br>
+<a href="http://static.googleusercontent.com/media/research.google.com/en/us/archive/mapreduce-osdi04.pdf">MapReduce: Simplified Data Processing on Large Clusters</a></p>
+</blockquote>
+<h2 id="背景">背景</h2>
+<p>MapReduce可以运行到大规模集群上，用户只需要编写<code>map</code>和<code>reduce</code>函数</p>
+<ul>
+<li>map函数，将生成一系列的key/value中间结果</li>
+<li>reduce按照相同的key读取这些中间结果做合并</li>
+</ul>
+<p>程序员无需知道任何并行计算、分布式相关的内容，便可以有效利用集群资源  <br>
+MapReduce也可以高度可扩展的，可以在几千台机器上运行上百个MapReduce任务</p>
+<p>介绍</p>
+<ul>
+<li>过去几年，作者们处理了各种web爬虫文档、web请求日志、倒排索引、图结构文档、每台机器的爬虫摘要</li>
+<li>这些计算都很简单，但需要几千台机器来处理</li>
+<li>而为了应对失败，则需要增加很多复杂的逻辑</li>
+<li>为此实现了一套抽象框架，可以执行简单的计算逻辑，而隐藏了复杂的并行细节、容错、数据分布等问题</li>
+<li>这个设计来自 Lisp和其他函数语言的 map 和 reduce 特性</li>
+<li>map用来处理每一个逻辑的行记录然后输出key/value中间结果，reduce读取相同key做合并</li>
+<li>这种函数模型只需要简单重试就可以处理容错问题</li>
+<li>这种计算框架可以很容易在普通机器上运行</li>
+</ul>
+<h2 id="程序模型">程序模型</h2>
+<p>这里需要用户手动编写两个函数，<code>map</code>和<code>reduce</code>
+map</p>
+<ul>
+<li>输入为 key/value，输出一些列中间的 key/value对</li>
+<li>map-reduce函数将所有的中间做分组，将key相同的value放在一起</li>
+<li>之后将他们发送给reduce函数</li>
+</ul>
+<p>reduce</p>
+<ul>
+<li>也是由用户实现，读取中间结果key，以及key关联的一系列value</li>
+<li>合并这些value产生更小的结果集，一般每个reduce只产生 1个或0个结果</li>
+<li>中间结果由Iterator的方式提供给用户</li>
+<li>这可以让我们处理非常大的数据集</li>
+</ul>
+<p>一段 map 和 reduce 的伪代码如下：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map(String key, String value)<span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// key: document name
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	<span style="color:#6272a4">// value: document contents
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	<span style="color:#ff79c6">for</span> each word w in <span style="color:#8be9fd;font-style:italic">value</span>:
+</span></span><span style="display:flex;"><span>		EmitIntermediate(w, <span style="color:#f1fa8c">&#34;1&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>reduce(String key, Iterator values)<span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// key: a word
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	<span style="color:#6272a4">// values: a list of counts
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	<span style="color:#8be9fd">int</span> result <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> each v in <span style="color:#8be9fd;font-style:italic">values</span>:
+</span></span><span style="display:flex;"><span>		result <span style="color:#ff79c6">+=</span> ParseInt(v);
+</span></span><span style="display:flex;"><span>	Emit(AsString(result));
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之后用户指定输入、输出的文件名，以及可选的参数，将自定义的代码和MapReduce库整合到一起<br>
+用户提供的 函数也是有类型的</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map (k1,v1)            →     list(k2,v2)
+</span></span><span style="display:flex;"><span>reduce(k2,list(v2))  →      list(v2)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输入的 key和value跟输出的key/value是不同的范围   <br>
+而中间key/value跟输出的key/value属于相同范围</p>
+<p>更多的例子</p>
+<ul>
+<li>分布式grep：map函数匹配指定模式然后输出，reduce识别中间结果并最终输出</li>
+<li>URL访问频率：map函数输出 (URL，1)，reduce将所有的value相同的URL做统计并输出(URL，total count)</li>
+<li>倒排web连接图：map函数输出(target,source)，这里的target是souce文件中指向的各种目标url，reduce输出(target,list(source))</li>
+<li>每个主机的条目向量：是一系列(word,frequency)对，map函数对每个文档输出(hostname,term vector)对，reduce传递给定主机的所有文档向量，并加起来丢弃不常用的，生成最终的(hostname,term vector)</li>
+<li>倒排索引：map解析每个文档输出(wrod,doc_ID)对，reduce接收所有word对应的pair，排序doc_id，输出(word,list(doc_id))，这个就是倒排索引</li>
+<li>分布式排序：map函数根据一条记录，提取出(key,record)对，reduce输出也是这样的，但依赖于分区，排序逻辑</li>
+</ul>
+<h2 id="实现">实现</h2>
+<p>map-reduce的实现有很多不同</p>
+<ul>
+<li>一种是依赖于共享内存的小型机器</li>
+<li>依赖于NUMA的多处理器机器</li>
+<li>更大规模的联机机器集合</li>
+</ul>
+<p>谷歌的环境是大量普通机器组成的</p>
+<ul>
+<li>x86机器+linux环境，2-4G内存</li>
+<li>100M、1G的网络，但是平均使用的带宽要更少</li>
+<li>集群有几百上千个机器组成，因此失败是常态</li>
+<li>存储由廉价的磁盘组成，数据存储在内部开发的分布式文件系统之上，并使用副本来保存高可靠</li>
+<li>用户提交job到调度系统，每个job由一系列task组成，调度器会将其映射到集群的一组机器上</li>
+</ul>
+<p>执行概览</p>
+<ul>
+<li>输入文件会自动拆分为M个子集，map函数并行的在多个机器上执行</li>
+<li>reduce也是并行的，通过分区函数，将中间结果划分为R个区域</li>
+<li>hash(key) mod R，分区数量R和分区函数都是可以被指定的</li>
+</ul>
+<p>当用户调用 MapReduce函数时，就会触发下面动作
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/04/MapReduce%E8%AE%BA%E6%96%87/1.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/04/MapReduce%E8%AE%BA%E6%96%87/1.png" />
+        </a>
+    </p>
+<p>执行过程：</p>
+<ul>
+<li>用户程序中的MapReduce函数首先将输入文件split，一般为16M-64M为单位做拆分，然后在多台机器上同时启动程序</li>
+<li>其中一个程序副本是master，其余是master分配到了work上，有M个map任务和R各reduce任务</li>
+<li>master挑选空闲的work分配map和reduce</li>
+<li>worker上的map任务首先读取一个split文件，然后解析key/value，并将每个key/value交给用户编写的map程序处理</li>
+<li>之后map程序会产生中间结果key/value，将他们缓存到内存中</li>
+<li>之后key/value对会被写到本地磁盘，被分区函数划分到R个不同的分区中</li>
+<li>本地磁盘上的key/value对位置被master转发给reduce程序</li>
+<li>之后reduce程序通过RPC调用，从远程的work机器上读取中间缓存结果</li>
+<li>当reduce读取完所有数据后，就根据key对中间结果排序，这样所有相同的key都会被分组到一起</li>
+<li>排序是必须的，因为不同的key会被映射到相同的reduce任务中，如果内存不够则触发外排序</li>
+<li>reduce执行iterator，将每个key和对应的list(value)传递给用户编写的reduce函数</li>
+<li>reduce函数的输出会append到这个reduce分区的最终文件中</li>
+<li>当所有的map和reduce任务完成后master唤醒用户程序，用户程序中的mapreduce函数就返回了</li>
+</ul>
+<p>当做 mapreduce 任务执行完后，会输出 R个文件，每个都是reduce程序输出的<br>
+一般来说不用将这 R个文件再做合并，它们会由另一个MapReduce程序来读取</p>
+<p>master数据结构</p>
+<ul>
+<li>存储每个map和reduce的状态(进行中、完成、空闲)</li>
+<li>识别机器的身份</li>
+<li>master将map完成的任务交给reduce，所以需要知道这些数据的位置和大小</li>
+<li>这些信息被不断的传给reduce</li>
+</ul>
+<p>容错</p>
+<ul>
+<li>master会定期ping worker机器，如果一段时间没反应就worker挂了</li>
+<li>这台机器上的所有完成的、未完成的map任务都将变成空闲状态，然后在其他机器上重新执行</li>
+<li>已完成的map任务将数据写到了本地磁盘，所以这些数据无法访问，只能重新执行map</li>
+<li>而reduce输出的数据是放在全局的文件系统中的，因此无需再执行</li>
+<li>mapreduce有很好的容错性，即使集群内有几十台机器因为维护等原因不可用，master分发不可达worker上的工作，直到最终完成</li>
+</ul>
+<p>master失败</p>
+<ul>
+<li>master会定期写checkpoint，挂了之后会从新的checkpoint读取数据</li>
+<li>master只有一个，一旦挂了mapreduce任务就会终止</li>
+<li>终止的任务会通知到客户端，客户端检查到后就继续重试</li>
+</ul>
+<p>失败时的语义</p>
+<ul>
+<li>当用户的map和reduce操作是确定性的，那么重新执行就会得到同样的结果</li>
+<li>map完成后，这个机器会发送消息给master，报告这R个文件的名字和位置</li>
+<li>当reduce任务完成后，会自动重命名临时文件到最终文件</li>
+<li>当多个重命名同时操作时，底层的文件系统会保证只包含一次</li>
+<li>如果语义是不确定的，就只能保证弱的语义了</li>
+</ul>
+<p>本地性</p>
+<ul>
+<li>利用GFS来读取数据，GFS本身有3副本保障</li>
+<li>master根据位置信息，首先将map发送到对应的机器(此机器本身就包含了输入数据)</li>
+<li>否则，就将map发送到位置靠近的机器，也就是同一个交换机下的机器(此机器也有输入数据)</li>
+</ul>
+<p>任务粒度</p>
+<ul>
+<li>将map任务划分为M个，将reduce任务划分为R个</li>
+<li>M和R应该远大于集群机器数量，一个机器可以同时执行多个任务，这样可以达到动态平衡</li>
+<li>M和R的数量是有上限的，因为master需要用O(M+R)来决定调动，并用O(M*R)在内存中保持状态</li>
+<li>M中每个独立的数据大小为16M-64M，R是集群总量的 x 倍，这个x是比较小的数</li>
+<li>M大概为20W，R为5K，机器数量为2K个</li>
+</ul>
+<p>备份任务</p>
+<ul>
+<li>导致mapreduce任务执行时间超长的原因是，出现了 掉队者</li>
+<li>比如有坏道的磁盘会频繁经历纠正的错误，导致30M/s读取变成1M/s</li>
+<li>调度不当，导致任务抢资源，导致其他任务执行的更慢</li>
+<li>机器的bug禁用了缓存导致速度慢了100倍</li>
+<li>解决策略是当mapreduce操作快完成时增加一个备份task</li>
+<li>当主任务或者备份task之一完成时，整个任务都完成了</li>
+<li>通过调整资源，这种备份机制就不会太占整体资源，大概百分之几，但可以大幅降低总执行时间</li>
+<li>有测试表明，当备份机制关闭后，排序算法慢了44%</li>
+</ul>
+<h2 id="细节">细节</h2>
+<p>分区函数</p>
+<ul>
+<li>通过指定的分区函数，执行 hash(key) mod R，可以将数据均匀打散</li>
+<li>如果想将相同主机下的URL放在一个文件中，可以用：hash(hostname(url_key)) mod R 来实现</li>
+</ul>
+<p>combiner函数</p>
+<ul>
+<li>对于词频统计程序来说，map端可能会出现大量重复的中间key，比如&lt;the,1&gt;这样的</li>
+<li>一个优化思路是，将这些大量的&lt;the,1&gt;直接在map端做合并，合并完了之后再发给reduce端</li>
+<li>combiner跟reduce很类似，唯一的区别是reduce输出到最终文件，而combiner输出到中间结果</li>
+<li>combiner对于某些场景下，可以大幅提速</li>
+</ul>
+<p>输入输出类型</p>
+<ul>
+<li>支持 text这种类型， key是文件的偏移量，value是一行内容</li>
+<li>文本类型输入是按key排序的key/value对</li>
+<li>而指定的split就可以确保本文类型的拆分范围，一般是按行拆分</li>
+<li>用户也可以自己定义输入类型和输出类型</li>
+<li>输入类型不一定要从文件中读取，也可以从数据库，内存中读取，输出也是一样</li>
+</ul>
+<p>副作用</p>
+<ul>
+<li>map端和reduce端都会产生文件，等文件写完后做rename，这种是原子和冥等的</li>
+<li>单个task只有一个输出，这样只会对一个文件做rename</li>
+<li>单个task产生多个文件不支持，因为需要原子的两阶段提交</li>
+</ul>
+<p>跳过错误记录</p>
+<ul>
+<li>map/reduce程序可能有bug，导致执行失败</li>
+<li>而如果代码来自第三方库失败，没有源码则很难解决</li>
+<li>对此可以忽略掉过这些错误</li>
+<li>map/reduce程序会安装一个signal用于捕获错误，当信号被触发后就发送UDP包通知master</li>
+<li>master发现某个记录频繁出错后，就让其跳过这些记录</li>
+</ul>
+<p>本地执行</p>
+<ul>
+<li>由于map/reduce真实环境上前台机器，而且是动态分配的，很难调试</li>
+<li>于是出现了一个本地版的map/reduce实现</li>
+<li>可以顺序执行一系列的map/reduce，并可以限制某些map/reduce的执行</li>
+<li>用户可以通过flag打开这些调试命令，并使用类似 gdb 方式调试</li>
+</ul>
+<p>状态信息</p>
+<ul>
+<li>master有一个HTTP服务，可以展示一些内部的状态信息</li>
+<li>如多个任务成功、失败、读取/写入字节数、写入中间状态字节数、执行速率等</li>
+<li>对每个任务都有一个标准输出、错误文件</li>
+<li>对于任务诊断时，这些信息非常有用，还可以帮助用户预估程序所需的机器规模，完成时间等</li>
+</ul>
+<p>计数器</p>
+<ul>
+<li>提供了一个计数器，用于计算各种事件，比如统计处理单词总数、索引的德语文档数量等</li>
+<li>map/reduce会独立的统计这些信息，然后通过ping的方式交给master</li>
+<li>master的监控页面会实时看到这些数据，当map/reduce任务执行完后，master就将结果返回给用户</li>
+<li>有些是内置的，比如处理的输入key/键值对的数量，产生的输出文件数量等</li>
+<li>用户可以利用这个功能，来检测输入文件数量是否 == 输出文件数量</li>
+</ul>
+<p>计数器代码如下：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Counter<span style="color:#ff79c6">*</span> uppercase;
+</span></span><span style="display:flex;"><span>uppercase <span style="color:#ff79c6">=</span> GetCounter(<span style="color:#f1fa8c">&#34;uppercase&#34;</span>);
+</span></span><span style="display:flex;"><span>map(String name, String contents)<span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> each word w in <span style="color:#8be9fd;font-style:italic">contents</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> (IsCapitalized(w))<span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>            uppercase<span style="color:#ff79c6">-&gt;</span>Increment();
+</span></span><span style="display:flex;"><span>        EmitIntermediate(w, <span style="color:#f1fa8c">&#34;1&#34;</span>);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="性能">性能</h2>
+<p>这里使用两个测试场景</p>
+<ul>
+<li>对1TB的数据做grep，这表示从一个大数据集中提取一小部分数据</li>
+<li>对1TB数据做排序，这表示对一类数据做shuffle然后转换成另一类数据</li>
+<li>这两种类型都是比较典型的真实场景的例子</li>
+<li>机器配置是2Gcpu、4G内存、160G磁盘、100M网络，两层树状网络，顶层100-200G带宽</li>
+<li>1800台机器，任意两个机器之间延迟小于1ms，4G内存中大约1-1.5G被其他任务保留</li>
+</ul>
+<p>Grep</p>
+<ul>
+<li>搜索10亿条记录，比较少见的三字符模式，该模式出现在92337条记录中</li>
+<li>输入为M=15000，64M分片，输出为R=1</li>
+<li>figure 2展示了这个计算时间，Y轴是数据规模，随着机器的增加速度加快，峰值为1764个work，30G/s</li>
+<li>当所有的map执行完后大概在80秒后将为0</li>
+<li>整个计算任务大概花费150秒，包括1分钟的启动开销</li>
+<li>开销是将程序分发到所有机器上，延迟交互GFS打开1000个文件，并做数据本地优化</li>
+</ul>
+<p>
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/04/MapReduce%E8%AE%BA%E6%96%87/2.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/04/MapReduce%E8%AE%BA%E6%96%87/2.png" />
+        </a>
+      <br>
+Figure 2: Data transfer rate over time</p>
+<p>排序</p>
+<ul>
+<li>大约是10亿条记录，1TB数据量，使用TeraSort benchmark做测试</li>
+<li>排序程序总共不到50行代码，3行map函数从一行文本中提取10个字节的排序key</li>
+<li>将排序好的key和文本行作为key/value作为中间结果</li>
+<li>使用内置的 Identity函数作为reduce的操作符，将中间结果作为传递过去</li>
+<li>最终的排序输出写入一组双向复制的GFS文件中，也就总共 2TB</li>
+<li>之后按照64M作为分片拆分，M=15000，R=4000，使用分区函数将其分给reduce程序</li>
+<li>增加了一个pre-pass的map/reduce操作，收集采用的key，这个key是分布式计算排序时的分裂点</li>
+<li>figure3(a)展示了整个处理过程，最上方的是处理输入数据，其峰值大约是13G/s</li>
+<li>这个处理速度比例比 Grep 程序要小，因为map程序要花费一半的时间用来做I/O操作(写中间结果)</li>
+<li>中间的是map将结果传递给reduce(通过网络)，第一个峰值是reduce，第二个是reduce的shuffle</li>
+<li>下方图是sort，因为正在对结果做排序，第一个shuffle周期结束和写周期开始之间存在延迟</li>
+<li>因为本地性优化，输入数据比列高于shuffle比列</li>
+<li>shuffle比列高于sort后的写入速率，因为存在两副原因，要保证高可用和可靠性</li>
+<li>如果底层的系统使用了纠删码，则写入数据会减少</li>
+</ul>
+<p>备份任务的效果</p>
+<ul>
+<li>figure3(b)展示了关闭备份task后的效果</li>
+<li>总体跟(a)差不多，但有很长的尾巴，此时没有任何写入活动</li>
+<li>大概有5个straggler任务把整个map/reduce任务拖长了，增加了44%的时间</li>
+</ul>
+<p>机器失效</p>
+<ul>
+<li>在figure3(c)展示了排序算法，执行中有200个任务被人为的kill了(一共有1746个worker)</li>
+<li>被杀掉后的任务立刻重启执行了(只有任务被杀，机器还是好的)</li>
+<li>这里显示了负的输入比列，因为之前完成的task被杀了，任务需要重新执行</li>
+<li>整个计算时间比正常时间只增加了 5%</li>
+</ul>
+<p>
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/04/MapReduce%E8%AE%BA%E6%96%87/3.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/04/MapReduce%E8%AE%BA%E6%96%87/3.png" />
+        </a>
+    </p>
+<p>figure4展示了最近一段时间map/reduce job的变化情况，目前整个集群有上千个job了<br>
+大大加快了程序开发和原型开发的速度，也为不会分布式的程序员提供了便利</p>
+<p>
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/04/MapReduce%E8%AE%BA%E6%96%87/4.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/04/MapReduce%E8%AE%BA%E6%96%87/4.png" />
+        </a>
+    </p>
+<p>每个任务结束后，map/reduce库记录了作业使用的计算资源统计信息，如table 1所示<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/04/MapReduce%E8%AE%BA%E6%96%87/5.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/04/MapReduce%E8%AE%BA%E6%96%87/5.png" />
+        </a>
+    </p>
+<h2 id="经验和总结">经验和总结</h2>
+<p>目前谷歌内部试用map/reduce的场景：</p>
+<ul>
+<li>大规模的机器学习</li>
+<li>谷歌新闻和 Froogle 产品</li>
+<li>提取数据的使用报告和流行分析，谷歌 zeitgeist</li>
+<li>为实验性的产品和新产品 提取网页的属性，从大量语料中提取地理位置用于本地化搜索</li>
+<li>大规模图计算</li>
+</ul>
+<p>大规模索引</p>
+<ul>
+<li>map/reduce的一个重要用户是索引系统，爬虫将20T的数据抓取到GFS上，再用map/reduce分析</li>
+<li>索引程序顺序执行 5 - 10个map/reduce任务</li>
+<li>索引代码很简单，底层的分布式处理都被隐藏了，执行的map/reduce从3800行C++代码优化到700行</li>
+<li>map/reduce库资源充足，可以将不相关的计算逻辑隔离</li>
+<li>之前计算索引大概需要几个月，现在只需要几天</li>
+<li>通过简单的增加机器，就可以提高map/reduce集群处理索引的性能</li>
+</ul>
+<p>相关工作</p>
+<ul>
+<li>很多系统通过受限的编程模型、受限的并行化计算来实现自动化</li>
+<li>比如计算N个元素的前缀，可以在N个机器上计算，来实现N个元素数组的前缀</li>
+<li>map/reduce跟其他分布式系统相比，提供了更大规模以及容错性</li>
+<li>之前的分布式系统规模有限，而且把容错的任务丢给了用户</li>
+<li>本地性优化，是将计算下推到靠近本地磁盘的处理单元中，避免了网络传输</li>
+<li>我们的备用task有点类似Charlotte 系统的迫切调度机制</li>
+<li>但迫切调度的问题是一旦计算失败整个任务就失败了，在map/reduce中修复了这个问题</li>
+<li>map/reduce实现依赖于一个内部集群管理系统，该系统负责在大量共享机器上分配和运行任务</li>
+<li>这个内部管理系统类似 Condor</li>
+<li>map/reduce的排序类似于 NOW-Sort</li>
+<li>River提供了一个编程模型，可以通过分布式队列发送数据来相互通信，容错也挺好</li>
+<li>map/reduce跟River类似，但提供了一个受限的编程模型，这样底层就可以更好的去调度</li>
+<li>BAD-FS提供了一种跨广域网的编程模型，它跟map/reduce一样都提供本地性优化、冗余任务来实现容错</li>
+<li>TACC 通过重新执行来实现容错</li>
+</ul>
+<p>结论<br>
+map/reduce在谷歌内部大规模使用，其成功的原因包括：</p>
+<ul>
+<li>使用简单，隐藏了大量的底层分布式特性</li>
+<li>map/reduce可以解决各种问题，如：web检索、排序、数据检索、机器学习等等</li>
+<li>map/reduce可以扩展到几千台机器</li>
+</ul>
+<p>我也们从这项工作中学习到了一些东西：</p>
+<ul>
+<li>限制编程模型可以使并行计算和分布式计算变得容易，也使容错变得简单</li>
+<li>网络带宽有限，很多的优化都是基于优化网络的，比如本地性优化，以及将中间结果写到本地磁盘</li>
+<li>冗余的执行任务，可以对应机器执行过慢的影响，也可以应对失败和数据丢失</li>
+</ul>
+
+			<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>相关文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2021/11/spark%E8%AE%BA%E6%96%87/">Spark论文</a></li>
+        
+        <li><a href="/post/2022/04/gfs%E8%AE%BA%E6%96%87/">GFS论文</a></li>
+        
+        <li><a href="/post/2022/03/hive%E8%AE%BA%E6%96%87/">Hive论文</a></li>
+        
+        <li><a href="/post/2022/02/kudu%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91/">Kudu论文翻译</a></li>
+        
+        <li><a href="/post/2021/11/a-critique-of-ansi-sql-isolation-levels/">A Critique of ANSI SQL Isolation Levels论文</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6'>计算框架</a></li>
+                
+                <li><a href='/tags/%E8%AE%BA%E6%96%87'>论文</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "hehe-1234/hugoblogtalks"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hehe-1234.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hehe-1234.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/06/bitweaving/" title="BitWeaving: Fast Scans for Main Memory Data Processing">BitWeaving: Fast Scans for Main Memory Data Processing</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/cache_conscious/" title="Cache Conscious Indexing for Decision-Support in Main Memory">Cache Conscious Indexing for Decision-Support in Main Memory</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/column_imprints/" title="Column Imprints: A Secondary Index Structure">Column Imprints: A Secondary Index Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/bitmap_index/" title="Bitmap Index Design and Evaluation ">Bitmap Index Design and Evaluation </a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/column_sketches/" title="Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation">Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" title="资源隔离修改配置动态加载">资源隔离修改配置动态加载</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/optimal_column_layout_for_hybrid_workloads/" title="Optimal Column Layout for Hybrid Workloads">Optimal Column Layout for Hybrid Workloads</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (6)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (28)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (35)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E7%AE%97%E6%B3%95/">算法 (8)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (12)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">归档</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hehe-1234.github.io/years/2021%E5%B9%B4/">2021年 (22)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/years/2022%E5%B9%B4/">2022年 (53)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/years/2023%E5%B9%B4/">2023年 (38)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hehe-1234.github.io/tags/b%E6%A0%91/">B树 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/calcite/">calcite </a>
+    
+    <a href="https://hehe-1234.github.io/tags/cmu-database/">CMU-Database </a>
+    
+    <a href="https://hehe-1234.github.io/tags/flink/">flink </a>
+    
+    <a href="https://hehe-1234.github.io/tags/hana/">HANA </a>
+    
+    <a href="https://hehe-1234.github.io/tags/hive/">Hive </a>
+    
+    <a href="https://hehe-1234.github.io/tags/k8s/">k8s </a>
+    
+    <a href="https://hehe-1234.github.io/tags/kudu/">kudu </a>
+    
+    <a href="https://hehe-1234.github.io/tags/kyuubi/">Kyuubi </a>
+    
+    <a href="https://hehe-1234.github.io/tags/lakehouse/">Lakehouse </a>
+    
+    <a href="https://hehe-1234.github.io/tags/leveldb/">LevelDB </a>
+    
+    <a href="https://hehe-1234.github.io/tags/llvm/">LLVM </a>
+    
+    <a href="https://hehe-1234.github.io/tags/manacher/">Manacher </a>
+    
+    <a href="https://hehe-1234.github.io/tags/mapreduce/">MapReduce </a>
+    
+    <a href="https://hehe-1234.github.io/tags/mysql/">MySQL </a>
+    
+    <a href="https://hehe-1234.github.io/tags/newsql/">NewSQL </a>
+    
+    <a href="https://hehe-1234.github.io/tags/oceanbase/">OceanBase </a>
+    
+    <a href="https://hehe-1234.github.io/tags/paxos/">paxos </a>
+    
+    <a href="https://hehe-1234.github.io/tags/quick-sql/">quick-sql </a>
+    
+    <a href="https://hehe-1234.github.io/tags/raft/">raft </a>
+    
+    <a href="https://hehe-1234.github.io/tags/scala/">scala </a>
+    
+    <a href="https://hehe-1234.github.io/tags/simd/">SIMD </a>
+    
+    <a href="https://hehe-1234.github.io/tags/snowflake/">snowflake </a>
+    
+    <a href="https://hehe-1234.github.io/tags/spark/">spark </a>
+    
+    <a href="https://hehe-1234.github.io/tags/teradata/">TeraData </a>
+    
+    <a href="https://hehe-1234.github.io/tags/unix/">unix </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">二叉树遍历 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%88%97%E5%AD%98/">列存 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%9B%9E%E6%BA%AF/">回溯 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%AD%98%E5%82%A8/">存储 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%AE%97%E6%B3%95/">算法 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%BC%93%E5%AD%98/">缓存 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E8%AE%BA%E6%96%87/">论文 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">RSS</h3>
+        <ul class="widget-list">
+            <li><a href="https://hehe-1234.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div>
+        &copy; 2023 <a href="https://hehe-1234.github.io/">技术博客 By 老王</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'GA ID', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+
+</html>

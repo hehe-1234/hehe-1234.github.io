@@ -1,0 +1,1707 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>分布式数据库课程中的论文 | 技术博客</title>
+    <meta property="og:title" content="分布式数据库课程中的论文 - 技术博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2021-12-19T20:53:31&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2021-12-19T20:53:31&#43;08:00'>
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="这里罗列了《分布式数据库课程中的论文》这个网络课程中推荐的论文">
+        <meta name="author" content="隔壁老王">
+        
+    <meta property="og:url" content="https://hehe-1234.github.io/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hehe-1234.github.io/">
+                        技术博客
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hehe-1234.github.io/">首页</a>
+                    
+                    <a  href="https://hehe-1234.github.io/linked/" title="链接">链接</a>
+                    
+                    <a  href="https://hehe-1234.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hehe-1234.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">分布式数据库课程中的论文</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2021年12月19日
+        </date>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#基础部分">基础部分</a>
+          <ul>
+            <li><a href="#总结">总结</a></li>
+            <li><a href="#论文">论文</a></li>
+          </ul>
+        </li>
+        <li><a href="#分布式事务">分布式事务</a>
+          <ul>
+            <li><a href="#总结-1">总结</a></li>
+            <li><a href="#论文-1">论文</a></li>
+          </ul>
+        </li>
+        <li><a href="#数据库查询">数据库查询</a>
+          <ul>
+            <li><a href="#总结-2">总结</a></li>
+            <li><a href="#论文-2">论文</a></li>
+          </ul>
+        </li>
+        <li><a href="#实践部分">实践部分</a>
+          <ul>
+            <li><a href="#总结-3">总结</a></li>
+            <li><a href="#论文-3">论文</a></li>
+          </ul>
+        </li>
+        <li><a href="#思维导图">思维导图</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        
+        <div class="post-meta">
+            
+            <span class="post-meta meta-tags">
+                <ul class="clearfix">
+                    <a href='/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0'>读书笔记</a>
+                </ul>
+            </span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <h2 id="基础部分">基础部分</h2>
+<h3 id="总结">总结</h3>
+<ul>
+<li>分布式数据库特性：写多读少、低延迟、海量并发、海量存储、高可靠性、关系型数据库</li>
+<li>分布式数据库内部演化视角
+<ul>
+<li>客户端组件 + 单体数据库，sharding-jdbc</li>
+<li>代理中间件 + 单体数据库，mycat</li>
+<li>单元化架构 + 单体数据库</li>
+</ul>
+</li>
+<li>一致性模型
+<ul>
+<li>分布式系统，探讨当系统内一份逻辑数据存在多个物理副本时，对其读写操作会产生什么影响，CAP理论</li>
+<li>数据库领域，于事务相关，进一步细化到ACID四方面</li>
+</ul>
+</li>
+<li>数据一致性
+<ul>
+<li>状态一致性 state consistency，数据所处的客观、实际状态所体现的一致性</li>
+<li>操作一致性 operation consistency，外部用户通过协议约定的操作，能够读取到的数据一致性</li>
+<li>强一致性</li>
+<li>弱一致性，最终一致性
+<ul>
+<li>写后读一致性，读自己写一致性</li>
+<li>单调读一致性</li>
+<li>前缀一致性，因果关系</li>
+<li>线性一致性 linearizability，全局时钟</li>
+<li>因果一致性，逻辑时钟</li>
+</ul>
+</li>
+<li>排序：线性一致性 &gt; 顺序一致性 &gt; 因果一致性 &gt; {写后读一致性、单调一致性、前缀一致性}</li>
+<li>其他：
+<ul>
+<li>有限旧一致性</li>
+<li>会话一致性</li>
+<li>单调写一致性</li>
+<li>读和写一致性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>事务一致性
+<ul>
+<li>WAL</li>
+<li>主从复制、基于paxos/raft的共识算法日志数据</li>
+<li>SQL-92定义的四种隔离级别没有考虑到快照问题，少了一些情况</li>
+<li>幻读和写倾斜</li>
+</ul>
+</li>
+<li>数据库的基本架构
+<ul>
+<li>客户端通讯管理器</li>
+<li>进程管理器</li>
+<li>查询处理器</li>
+<li>事务存储管理器</li>
+<li>共享组件和工具</li>
+</ul>
+</li>
+<li>架构风格
+<ul>
+<li>PGXC 单体数据库演进的架构</li>
+<li>NewSQL风格，spanner架构</li>
+</ul>
+</li>
+<li>全局时钟
+<ul>
+<li>时间源：单个还是多个</li>
+<li>使用的时钟类型：物理时钟、混合逻辑时钟</li>
+<li>授时点：一个还是多个</li>
+<li>分类
+<ul>
+<li>TrueTime，多时间源 + 多点授时 + 物理时钟</li>
+<li>HLC，多时间源 + 多点授时 + 混合逻辑时钟</li>
+<li>TSO(Timestamp Oracle)，PGXC架构中的GTM，单时间源 + 单点授时 + 混合逻辑时钟</li>
+<li>STP(SequoiaDB Time Protocol)巨杉数据库的方式，单时间源 + 多点授时 + 混合逻辑时钟</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分片策略
+<ul>
+<li>hash分片，一致性hash；属于静态分片，写性能好</li>
+<li>range分片-静态，PGXC风格 查性能好</li>
+<li>range分片-动态，newsql风格，如bigtable这样的</li>
+<li>分片 + 共识</li>
+</ul>
+</li>
+<li>数据复制
+<ul>
+<li>静态分片</li>
+<li>TiDB，无存储状态，每次上报全副本，方便raft选主</li>
+<li>CockroachDB，去中心化，采用p2p方式大规模部署效率高</li>
+<li>raft复制的问题：基于顺序投票，不能出现空洞</li>
+<li>TiDB的raft优化
+<ul>
+<li>批操作提交日志</li>
+<li>流水线，没发送一个batch后，不等follower，立刻进行下一个</li>
+<li>并行追加日志，发送给follower的同时，并发执行本地的append日志</li>
+<li>异步应用日志</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>分布式数据库的强一致性<br>
+左边的是事务一致性，最高等级是：可串行化；右边是数据一致性，最高等级是：可线性化<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-1.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-1.jpg" />
+        </a>
+    </p>
+<p>不同数据库的一致性比较<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-2.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-2.jpg" />
+        </a>
+    </p>
+<p>数据库的架构风格<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-3.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-3.jpg" />
+        </a>
+    </p>
+<p>PGXC风格的架构   <br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-4.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-4.jpg" />
+        </a>
+    </p>
+<p>NewSQL风格的架构   <br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-5.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-5.jpg" />
+        </a>
+    </p>
+<p>全局时钟的设计方式 <br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-6.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-6.jpg" />
+        </a>
+    </p>
+<p>分片类型
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-7.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/a-7.jpg" />
+        </a>
+    </p>
+<h3 id="论文">论文</h3>
+<ul>
+<li><a href="http://bnrg.eecs.berkeley.edu/~randy/Courses/CS294.F07/11.3.pdf">谷歌的论文 Failure Treads in Large Disk Drive</a></li>
+<li>The many faces of consistency</li>
+<li>Lamport&rsquo;s Paper： Time,Clocks, and the Ordering of Events in a Distributed System</li>
+<li><a href="https://docs.microsoft.com/en-us/azure/cosmos-db/consistency-levels">Consistency levels in Azure Cosmos DB</a></li>
+<li><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf">A Critique of ANSI SQL Isolation Levels</a></li>
+<li>Highly Available Transactions:Virtues and Limitations</li>
+<li><a href="https://jepsen.io/consistency">Jepsen网站简化版</a></li>
+<li><a href="https://dsf.berkeley.edu/papers/fntdb07-architecture.pdf">Architecture of a Database System</a></li>
+<li><a href="https://book.douban.com/subject/4838430/">《数据库系统实现》</a></li>
+<li><a href="https://www.cs.princeton.edu/courses/archive/fall10/cos597B/papers/percolator-osdi10.pdf">Large-scale Incremental Processing
+Using Distributed Transactions and Notifications</a></li>
+<li><a href="https://cse.buffalo.edu/~demirbas/publications/hlc.pdf">Logical Physical Clocks</a></li>
+<li><a href="http://cs.brown.edu/courses/cs296-2/papers/consistent.pdf">Consistent Hashing and Random Trees</a></li>
+<li><a href="https://courses.cs.duke.edu//cps399.28/spring08/papers/osdi06-ChangDeanEtAl-bigtable.pdf">Bigtable: A Distributed Storage System for Structured Data</a></li>
+<li><a href="https://hbase.apache.org/book.html#arch.overview">Hbase reference</a></li>
+<li><a href="https://www.cs.princeton.edu/courses/archive/fall13/cos518/papers/spanner.pdf">spanner</a></li>
+</ul>
+<h2 id="分布式事务">分布式事务</h2>
+<h3 id="总结-1">总结</h3>
+<ul>
+<li>原子性
+<ul>
+<li>Either all the changes from the transaction occur(writes, and messages sent), or none occur.</li>
+<li>实现事务原子性的两种协议
+<ul>
+<li>面向应用层的TCC，try confirm cancel</li>
+<li>TCC是应用层的分布式事务框架，完全依赖应用层编码</li>
+<li>面向资源层，2PC协议</li>
+<li>2PC的问题：同步阻塞、单点故障、数据不一致</li>
+</ul>
+</li>
+<li>2PC的改进，NewSQL的Percolator
+<ul>
+<li>需要数据库支持MVCC 多版本并发控制</li>
+<li>多个节点中只有一个节点拥有 主锁primary key，其他事务参与者指向主锁</li>
+<li>提交阶段就记录主锁，并记录最终数据(暂时不可见)</li>
+<li>commit阶段，将主锁去掉，之后在读其他分片时，根据指向的主锁记录，可以认定为最终提交成功</li>
+<li>实际会有异步线程来处理从节点数据中的：指向主锁的信息</li>
+<li>2PC中的不一致，因为事务管理器只和主锁通信，单节点本身就是原子的，即可以解决一致性问题</li>
+<li>异步线程在事务管理器宕机后回滚分片上的事务</li>
+<li>事务管理器通过记录日志使自身无状态化，日志通过共识算法保存在其他节点</li>
+<li>TiDB、CockroachDB都使用了Percolator算法</li>
+</ul>
+</li>
+<li>GoldenDB的一阶段提交
+<ul>
+<li>这是标准的PGXC架构，其实分为两个阶段</li>
+<li>第一阶段，GoldenDB的协调者收到事务后，在全局事务管理器的全局事务列表中将事务标记为活跃状态</li>
+<li>协调节点把一个全局事务拆分成若干子事务，分配给对应的MySQL去执行</li>
+<li>并发控制从锁调度 改为 时间戳排序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>事务的延迟
+<ul>
+<li>2PC的延迟公式：  Ltxn = Lprep + Lcommit， prep是准备、commit是提交延迟
+<ul>
+<li>准备阶段 Lprep = R * Lr + W * Lw</li>
+<li>读时 读本地，可以忽略，所以延迟又等于： Lprep = W * Lw</li>
+<li>而分布式需要多轮共识的，所以延迟等于： Lprep = W * Lc</li>
+<li>提交阶段，只有共识，所以： Lcommit = Lc</li>
+</ul>
+</li>
+<li>总延迟为：  Ltxn = (W + 1) * Lc</li>
+<li>TiDB，缓存写提交
+<ul>
+<li>缺点，长事务+海量并发，会成为瓶颈；MySQL是【first write win】，TiDB变成了【first comit win】语义变了</li>
+</ul>
+</li>
+<li>管道，CockroachDB采用的方式，相当于最慢的一个写操作延迟
+<ul>
+<li>整体延迟：Ltxn = 2 * Lc</li>
+</ul>
+</li>
+<li>并行提交，把prep和commit也做成并行的
+<ul>
+<li>准备阶段，在CockroachDB中称为意向写，引入一个新的状态 “staging”表示正在进行事务</li>
+<li>意向写中的key，是留给后面异步线程的线索，通过这些key是否写成功，可以倒推出事务是否提交成功</li>
+<li>客户端提交事务后就直接返回了；之后由异步线程根据事务表中的线索，再次确认事务的状态，并落盘维护状态记录</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>读写冲突
+<ul>
+<li>多版本并发控制 Multi-Vesin Concurrency Control MVCC</li>
+<li>单体数据库的MVCC
+<ul>
+<li>将历史版本直接存在数据表中， append-only，如PG</li>
+<li>存储在独立的表空间中，增量方式，MySQL、Oracle</li>
+<li>存储在独立的表空间中，全量方式，Time-Travel，HANA</li>
+<li>append-only：
+<ul>
+<li>在事务包含大量更新时候也能保存较高效率，因为更新被转为delete+insert，数据并未被迁移，只是有当前版本被标记为历史版本，磁盘操作开销小</li>
+<li>可以追溯更多历史版本</li>
+<li>因为执行更新操时，历史版仍在数据表中，出现问题事务能快速完成回滚</li>
+<li>新老数据放在一起，增加磁盘寻址的开销，历史版本增多，导致查询速度变慢</li>
+</ul>
+</li>
+<li>Delta方式
+<ul>
+<li>历史数据独立存不影响当前读效率，增量占用空间小</li>
+<li>历史版本再回滚段中，如果事务执行视角长，历史版本会被其他数据覆盖，无法查询</li>
+<li>此模式下的历史版本，是基于当前版本+多个增量版本计算来的，计算开销较大</li>
+</ul>
+</li>
+<li>TimeTravel
+<ul>
+<li>同样是历史版本独立存储，不影响当前读效率，历史版本全量存储直接访问，计算开销小</li>
+<li>相比delta要占用更多空间</li>
+</ul>
+</li>
+<li>MVCC工作过程，读已提交、可重复读</li>
+<li>PGXC模式下的RR，会碰到的问题
+<ul>
+<li>如何保证单调递增的事务ID，需要一个集中点来统一生成</li>
+<li>如何提供全局快照，由一个集中点，维护一个全局事务列表，并向所有事务提供快照</li>
+</ul>
+</li>
+<li>NewSQL读写冲突处理
+<ul>
+<li>TiDB，没有试用快照读，所以对同一条数据读写会阻塞，没有设计全局事务列表导致的</li>
+</ul>
+</li>
+<li>CockroachDB，是可串行的隔离级别，对于读写/写写冲突，采用事务重启的方式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>读写冲突时的不确定时间
+<ul>
+<li>处理方式：写等待spanner、读等待CockroachDB</li>
+<li>读写冲突时，会出现一个不确定的时间窗口，只能确定 T1、T2落在这个区间内，冲突了</li>
+<li>Spanner，写等待，如果Tb 在 Ta之后启动，但启动时间小于一个窗口，那么Tb 可能读不到 Ta的数据，不满足一致性
+<ul>
+<li>分为两阶段，预备阶段获取一个“预备时间戳”， 第二阶段 协调节点需要一个“提交时间戳”，必须大于任何参与者的“预备时间戳”</li>
+<li>事务从拿到提交时间戳，到TT.after(s)为true，实际等待了两个时间窗口 8毫秒</li>
+<li>spanner对于读写有重叠时，TPS就是125，TrueTime的平均误差为4毫秒，commit-wait需要等待两个周期</li>
+</ul>
+</li>
+<li>CockroachDB的写等待，B-1时间读取，但中间有不确定时间窗口，B-1可能小于A-s的提交时间
+<ul>
+<li>重启B事务 相当于等待一会，最大时间为250ms，如果中间还有其他写事务，又会继续重启B事务</li>
+</ul>
+</li>
+<li>比较
+<ul>
+<li>写等待影响范围更大，所有包含写的事务至少要等待一个误差周期，适合误差更小的系统</li>
+<li>读等待影响范围小，只有当读时间戳访问数据项的提交时间戳落入不确定窗口才会触发，会等数个周期，适合误差更大的系统</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>乐观锁和悲观锁
+<ul>
+<li>乐观就是直接提交，遇到冲突就回滚；悲观是在提交前加锁</li>
+<li>乐观协议 和 悲观协议都分成了四个阶段：有效验证(V)、读(R)、计算(C)、写(W)
+<ul>
+<li>悲观协议的操作顺序是 VRCW，计算没有实质影响去掉后简化为： VRW</li>
+<li>乐观协议的操作顺序是 RCVW，简化为 RVW</li>
+</ul>
+</li>
+<li>三阶段说明
+<ul>
+<li>读阶段，这里也包含了写，是写到一个临时区域，所以更新对其他事务是不可见的</li>
+<li>有效性检查，检查于隔离性目标有直接联系；可以基于锁的检查，也可以基于时间戳</li>
+<li>将读阶段的更新结果写入数据库中，提交事务</li>
+</ul>
+</li>
+<li>TiDB的三阶段
+<ul>
+<li>根据 Precolator 模型实现的乐观锁</li>
+<li>收集所有参与修改的行，随机选择一行作为 primary row，这行有所，成为primary lock，这个锁用来标记整个事务的完成</li>
+<li>每个修改都会上锁并执行&quot;prewrite&quot;，将数据写入私有版本，如果碰到冲突就终止，如果完成则第一阶段介绍</li>
+<li>提交 primary row 写入并提交记录清除 primary lock，剩余的 secondary rows由异步线程根据primary lock状态去清理</li>
+</ul>
+</li>
+<li>狭义的乐观并发控制，验证遵循 RVW 顺序，但工业界很少有使用狭义 OCC 进行控制的(FoundationDB除外)，而TiDB则是广义的乐观并发</li>
+<li>乐观锁的挑战
+<ul>
+<li>频繁的事务冲突，如企业给1W个员工发工资，就是一个大事务，如果冲突了需要频繁重启，还不如悲观锁</li>
+<li>需要兼容单体数据库的协议，如： SELECT FOR UPDATE ，这并不是标准的语法，但大多数据库都支持，但乐观锁没有这种语义</li>
+</ul>
+</li>
+<li>TiDB的悲观锁，在局部有效性检查之前，增加一个全局检查，这样就是悲观锁了</li>
+</ul>
+</li>
+<li>锁的类型
+<ul>
+<li>学术上悲观锁、乐观锁的分类也比较含糊</li>
+<li>锁的种类(下面集中在真实数据库中很少使用)：
+<ul>
+<li>有序共享 Ordered sharding 2PL, O2PL</li>
+<li>利他锁 Altruistic Locking，AL</li>
+<li>只写封锁树 Write-only Tree Locking，WTL</li>
+<li>读写封锁住 Read/Write Tree Locking，RWTL</li>
+</ul>
+</li>
+<li>2PL，关键是释放锁之后，不能再加锁
+<ul>
+<li>2PL，加锁严格区分释放锁</li>
+<li>Conservative 2PL，C2PL，保守两阶段封锁协议，在事务开始时就要设置它需要的所有锁</li>
+<li>Strict 2PL，S2PL，事务一直持有获得的所有写锁，直到事务终止</li>
+<li>Strong Strict 2PL，SS2PL，强两阶段封锁协议，事务一直持有获得的所有锁，包括读和写锁</li>
+<li>SS2PL，S2PL差别只是持有锁的类型</li>
+<li>Percolator也属于 S2PL</li>
+</ul>
+</li>
+<li>可串行化快照隔离 SSI
+<ul>
+<li>CockroachDB的 串行化图检测 SGT</li>
+</ul>
+</li>
+<li>事务作为节点，当一个操作于另一个操作冲突时，在连个事务节点之间画上一条有向边
+<ul>
+<li>写读依赖 WR-Dependencies，第二个操作读取了一个操作写入的值</li>
+<li>写写依赖 WW-Dependencies，第二个操作覆盖了第一个操作写入的值</li>
+<li>读写反依赖 RW-Antidependencies，第二个操作覆盖了第一个操作读取的值，可能导致读到过期值</li>
+<li>读写反依赖，应该是顺序是 T2、T3、T1，实际T2先开始，T3执行关闭这样T2拿到的就是过期了</li>
+<li>T1读取数据但此时T2还没提交，最后T2更新，这笔更新就会丢失</li>
+</ul>
+</li>
+<li>CockroachDB的反向依赖如果用快照成本太高，实际为： 读时间戳缓存 RTC
+<ul>
+<li>任何读取操作时，时间戳都会记录在所访问节点的本地 RTC 中</li>
+<li>写的时候以key作为输入，向RTC查询最大读时间戳，如果时间戳&gt;写入时间戳就会形成RW依赖，此事务需要重启</li>
+<li>RTC是大小有限的，采用LRU缓存</li>
+</ul>
+</li>
+<li>SGT没有锁管理，性能比S2PL更好</li>
+<li>CockroachDB局部是悲观的，但不符合严格的VRW顺序，在全局看仍是相对乐观的</li>
+<li>CockroachDB 通过增加全局的锁表，就变成悲观锁了</li>
+</ul>
+</li>
+</ul>
+<p>Percolator的执行过程
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-1.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-1.jpg" />
+        </a>
+    <br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-2.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-2.jpg" />
+        </a>
+    <br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-3.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-3.jpg" />
+        </a>
+    </p>
+<p>GoldenDB的一阶段提交   	
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-4.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-4.jpg" />
+        </a>
+    <br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-5.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-5.jpg" />
+        </a>
+    </p>
+<p>MySQL的first write win、TiDB的first commit win	
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-6.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-6.jpg" />
+        </a>
+    </p>
+<p>全球各个地区的机房延迟，延迟最大为 新加坡 &lt;-&gt; 圣保罗，理论光速延迟为 106.7毫秒，实际RTT为 362.8毫秒 Ltxn为 1.3秒	
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-7.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-7.jpg" />
+        </a>
+    </p>
+<p>并行提交	
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-8.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-8.jpg" />
+        </a>
+    </p>
+<p>没有MVCC下的读/写冲突，会阻塞
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-9.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-9.jpg" />
+        </a>
+    </p>
+<p>单体数据库实现MVCC时的存储方式和优缺点
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-10.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-10.jpg" />
+        </a>
+       	
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-11.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-11.jpg" />
+        </a>
+    </p>
+<p>RC隔离方式，启动时可以看到T1、T2的最新数据
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-12.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-12.jpg" />
+        </a>
+    </p>
+<p>RR隔离方式
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-13.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-13.jpg" />
+        </a>
+    </p>
+<p>TiDB的读写冲突处理
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-14.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-14.jpg" />
+        </a>
+    </p>
+<p>CockroachDB的冲突处理，事务重启
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-15.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-15.jpg" />
+        </a>
+    </p>
+<p>不确定的时间窗口
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-16.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-16.jpg" />
+        </a>
+    </p>
+<p>spanner对于事务重叠的处理，采用wait-commit 
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-17.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-17.jpg" />
+        </a>
+    </p>
+<p>在预备阶段拿到了时间窗口是[99,103]，采用103作为提交时间戳，然后再等待一个周期，相当于等待2个周期，这样 T9启动时就肯定能读到 T8的最新数据
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-18.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-18.jpg" />
+        </a>
+    </p>
+<p>CockroachDB的读等待，可能会有经历多个等待窗口
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-19.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-19.jpg" />
+        </a>
+    </p>
+<p>TiDB的乐观锁模式
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-20.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-20.jpg" />
+        </a>
+    </p>
+<p>乐观锁模式 RVW
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-21.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-21.jpg" />
+        </a>
+    </p>
+<p>TiDB的悲观锁模式
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-22.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-22.jpg" />
+        </a>
+    </p>
+<p>锁的类型
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-23.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-23.jpg" />
+        </a>
+    </p>
+<p>2PL、C2PL、S2PL	
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-24.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-24.jpg" />
+        </a>
+    </p>
+<p>读写依赖的图检测	
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-25.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-25.jpg" />
+        </a>
+    </p>
+<p>死锁的图检测	
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-26.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-26.jpg" />
+        </a>
+    </p>
+<p>读写反依赖的图检测
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-27.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/b-27.jpg" />
+        </a>
+    </p>
+<h3 id="论文-1">论文</h3>
+<ul>
+<li><a href="https://cs.nyu.edu/courses/fall18/CSCI-GA.3033-002/papers/Gray1978.pdf">2pc Nodes on Data Base Operating System</a></li>
+<li><a href="https://www.cs.princeton.edu/courses/archive/fall10/cos597B/papers/percolator-osdi10.pdf">Percolator:Large-scale Incremental Processing Using Distributed Transactions and Notifications</a></li>
+<li><a href="https://amplab.cs.berkeley.edu/wp-content/uploads/2013/10/hat-vldb2014.pdf">Highly Available Transactions: Virtues and Limitations</a></li>
+<li>Randy Wigginton et al. : Distributed Transactions in MySQL</li>
+<li><a href="https://amplab.cs.berkeley.edu/wp-content/uploads/2013/10/hat-vldb2014.pdf">Highly Available Transactions: Virtues and Limitations</a></li>
+<li>Distributed Transion in MySQL</li>
+<li><a href="https://link.springer.com/content/pdf/bfm%3A978-1-4419-8834-8%2F1.pdf">Principles Of Distributed Database System</a></li>
+<li><a href="https://www.cs.du.edu/~leut/4423/papers/kung.pdf">On Optimistic Methods for Concurrency Control</a></li>
+<li><a href="http://www.gbv.de/dms/weimar/toc/647210940_toc.pdf">Transactional Information System</a></li>
+<li><a href="http://vldb.org/pvldb/vol5/p1850_danrkports_vldb2012.pdf">Serializable Snapshot Isolation In PostgreSQL</a></li>
+<li><a href="https://www.cs.princeton.edu/courses/archive/fall13/cos518/papers/spanner.pdf">Spanner:Google&rsquo;s Globally-Distributed Database</a></li>
+<li><a href="https://dsf.berkeley.edu/cs286/papers/paxoscommit-tods2006.pdf">Consensus on Transaction Commit</a></li>
+<li><a href="https://www.cs.princeton.edu/courses/archive/fall08/cos597B/papers/time-clocks.pdf">Time,Clocks,and the Ordering of Events in a Distributed System</a></li>
+</ul>
+<h2 id="数据库查询">数据库查询</h2>
+<h3 id="总结-2">总结</h3>
+<ul>
+<li>不要使用存储过程
+<ul>
+<li>C/S时代，数据库的存储过程，其实承担了业务逻辑，业务逻辑是用存储过程完成的</li>
+<li>B/S时代，存储过程被抛弃，应用服务器承担了业务逻辑，触发器使用的很多</li>
+<li>触发器多了之后，根本搞不清各个表的触发器关系，改了一个表可能会引发大量的触发器</li>
+<li>每个数据库厂商的存储过程标准不一样，难以迁移和调试</li>
+<li>阿里的规范中就明确定义禁止使用存储过</li>
+<li>随着敏捷开发、DevOps工具链的发展，存储过程更不适合了</li>
+<li>一种技术必须要匹配同时代的工程化水平，于整个技术生态融合，否则它就会退出绝大多数应用场景</li>
+<li>OceanBase支持存储过程，但这是因为想替换Oracle而必须做的商业考虑</li>
+<li>谷歌的F1支持UDF，但不是存储过程，而是自定义函数，兼容性比较好</li>
+<li>谷歌的F1不一定能能适用普通的环境</li>
+<li>VoltDB以存储过程作为主要的操作定义方式，支持Java开发</li>
+<li>VoltDB的基础就是存储过程这种预定义事务方式，存储过程、内存存储、单线程相互影响，使其性能优越</li>
+</ul>
+</li>
+<li>不用使用自增主键
+<ul>
+<li>MySQL无法保证自增，事务异常后就会导致出现空洞</li>
+<li>无法保证单调递增</li>
+<li>海量并发下性能不行，高位数据库自增控制，低若干位机器自己生成</li>
+<li>分布式情况下 TSO会有单点性能问题</li>
+<li>range分区下会有尾部热点问题</li>
+<li>随机主键
+<ul>
+<li>UUID</li>
+<li>TiDB的AutoRandom， 1个符号位+5个事务时间+58个序列号，可以保证表内主键唯一</li>
+<li>snowflake，1个符号位+41个本地毫秒时间+10个长度机器编码+12位序列号</li>
+<li>snowflake支持的TPS为 2 ^22 * 1000，为 419W</li>
+<li>snowflake的问题，要注意时间回拨，可能会导致重复</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>HTAP数据库
+<ul>
+<li>
+<p>通过ETL在OLTP和OLAP之间导数据，可能会有T+1问题，时效性太差</p>
+</li>
+<li>
+<p>重建OLAP体系</p>
+<ul>
+<li>流计算无法替代批计算，kafka+flink</li>
+<li>serving DB也无法满足各种类型的分析查询需求，，clickhouse</li>
+</ul>
+</li>
+<li>
+<p>HTAP hybrid Transaction/Analytical Processing 混合事务分析处理</p>
+<ul>
+<li>由于数据出现在OLTP以免，HTAP往往偏向OLTP了</li>
+<li>目前号称支持HTAP的： TiDB、TBase、OceanBase</li>
+</ul>
+</li>
+<li>
+<p>HTAP的实现方式</p>
+<ul>
+<li>分布式数据库是存储计算分离的，一个HTAP内可以有多个计算引擎</li>
+<li>行存和列存才是OLTP和OLAP最根本的区别，所以HTAP的难点在存储</li>
+<li>Spanner的存储合一</li>
+<li>NSM，n-ary storage model行存储</li>
+<li>decomposition storage model 列式存储，C-store、Vertica，很难将不同列高效关联</li>
+<li>PAX增加了minipage概念，是原有数据页下的二级单位，一行数据页上的基本分布不会破坏</li>
+<li>相同数据被集中存在一起，本质更偏向行存</li>
+<li>类似的思路还有 HyPer的 DatBlock，独有的数据结构，同时面向OLTP和OLAP</li>
+<li>TiDB存储分离，TiKV行存，TiFlash列存</li>
+<li>learner每次都会拿事务的时间戳向leader发起请求，获得最新的commit index，一直等待直到超时</li>
+<li>TiFlash的存储层是Delta Tree，分为Delta Layer和Stable Layer，对列存储做了优化，类似LSM</li>
+<li>TiFlash是OLAP系统，所以读比写优先级更高，要优先做读优化</li>
+</ul>
+</li>
+<li>
+<p>查询性能优化</p>
+</li>
+<li>
+<p>查询下推，也就是谓词下推</p>
+</li>
+<li>
+<p>TiDB的问题</p>
+<ul>
+<li>如果一个事务中包含了insert、select则比较麻烦，因为TiDB采用了 缓存写提交技术，所有的SQL直到commit才发送</li>
+<li>当计算节点没有缓存数据时，就下推，否则不下推</li>
+<li>改进，将缓存数据组织成Row格式，将缓存和存储节点返回结果做merge，就得到了最终结果</li>
+</ul>
+</li>
+<li>
+<p>分区键和 join下推</p>
+<ul>
+<li>分区键，就是分片，SQL中谓词条件中包含分区键，可以下推到各个存储节点执行</li>
+<li>多表关联时，使用了相同的分区键</li>
+<li>PolarDB称为join下推，Greenplumn称为本地连接</li>
+<li>不是所有的计算都能下推，如排序操作</li>
+</ul>
+</li>
+<li>
+<p>分区索引</p>
+<ul>
+<li>分区的索引和数据放在一起</li>
+<li>Spanner的父子表模式，通过键的左前缀匹配key区间特性，设置字表记录与父表记录保持相同的前缀，实现两种同分布</li>
+<li>HBase中主键是唯一的，在主键前面加上前缀也是唯一的</li>
+<li>存储节点在每个region上执行下推计算，取region的起始值+查询条件中的索引值，拼在一起作为左前缀，扫描索引数据行</li>
+<li>根据索引扫描结果中的PID，回表查询，最后返回给计算节点</li>
+<li>难点，如果时钟保持索引与数据的同分布，尤其是发生分片分裂时，有的方案是重建索引</li>
+<li>将索引和数据装入一个更小的单元，而分裂时保持这个单元的完整性，就可以继续维持同分布了</li>
+</ul>
+</li>
+<li>
+<p>全局索引</p>
+<ul>
+<li>分区索引无法确定全局唯一性</li>
+<li>全局索引和数据不是同部分，读操作成本更高，需要先走全局索引，再回表查数据</li>
+<li>写操作延迟更长，同部分情况下可以用本地事务完成，而全局索引就变成分布式事务了</li>
+<li>TiDB的二级索引只支持全局索引</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>关联查询
+<ul>
+<li>循环嵌套关联 nested loop join
+<ul>
+<li>外表为驱动表，里面的为inner内表</li>
+<li>Simple Nested-Loop Join SNLJ，遍历外表取r1，遍历内表不断跟r1做关联</li>
+<li>Block Nested-Loop Join BNJ，外表一次取 n 条数据，这样内标遍历时一次可以比较n个记录</li>
+<li>MySQL有一个Join Buffer选项，直接影响了BNJ的效率</li>
+<li>Index Loopup Join，ILJ，在BNJ基础上对内表加了索引，遍历外表取一个批次，然后跟内表索引关联，得到结果</li>
+</ul>
+</li>
+<li>归并排序关联 sort-merge join SMJ
+<ul>
+<li>先对外表、内表做排序，排序好之后，一次循环遍历就可以得到结果</li>
+<li>时间复杂度为：两次排序+两次遍历，索引本身是有序的，如果连接的正好是索引，SMJ就是三种嵌套循环中效率最高的</li>
+</ul>
+</li>
+<li>hash关联     hash join
+<ul>
+<li>simple hash join，包括建立阶段、探索阶段</li>
+<li>使用小表来建立，根据记录上的连接属性使用hash函数得到hash值，从而建立hash表</li>
+<li>扫描外表，对每一行连接属性计算hash值，与之前的hash表对比</li>
+<li>SHJ 的缺点是小表必须完全放入内存中</li>
+<li>Grace hash join，内表根据hash值分为若干个bucket写入磁盘(必须小于内存容量)，外表同样分bucket写盘，但不受内存限制</li>
+<li>将内表的bucket放入内存，再读取外表的bucket进行匹配，所有的bucket读取玩后就得到了最终结果</li>
+<li>Hybrid hash join，对于内存足够情况下，将内表第一个bucket和外表bucket都放入内存，这样建立阶段一结束就可以匹配</li>
+</ul>
+</li>
+<li>分布式数据库实现，合理的划分和调度子任务需要引入更复杂的计算引起，在OLAP中很常见，如MPP架构</li>
+<li>TiDB + TiKV体系中就没有MPP引擎，存储节点不能相互通讯，后引入Spark来处理复杂的OLAP计算任务，TiSpark组件</li>
+<li>OceanBase中扩展了并行计算框架，存储节点之间也可以进行数据交换</li>
+<li>OceanBase是P2P架构，每个Observer部署了相同服务，运行中动态承担不同角色</li>
+<li>大小表关联-复制表
+<ul>
+<li>静态方式，建表的时候声明为复制表，这样每个节点都有一份考虑，如TBase、TDSQL等，都支持复制表</li>
+<li>动态方式，如小表广播，Spark的broadcast hash join就是这种方式</li>
+</ul>
+</li>
+<li>大表关联-重分布
+<ul>
+<li><code>select A.C1,B.C2 from A,B where A.C1=B.C1</code></li>
+<li>如果 C1是A表的分区键，但不是B表的分区键，则B表按C1做重分布，推送到A的各个分片上，实现本地关联</li>
+<li>如果都不是，两个表都需要根据C1做重分布，然后在多个节点上再做本地关联，代价会比较高</li>
+<li>本质上跟MapReduce、Spark的shuffle类似</li>
+<li>Spark的shuffle hash join，将两个表按照连接键做分区，将相同连接键的记录重分布同一节点，数据就会被分片到尽可能多的节点上，增加并行度</li>
+<li>hash join阶段，每个节点上的数据执行单机的hash join操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查询引擎优化
+<ul>
+<li>火山模型，迭代模型
+<ul>
+<li>调研子节点operator的next接口，获取一个元组 tuple</li>
+<li>对元祖执行operator特定的处理</li>
+<li>返回处理后的元组</li>
+<li>对虚函数调用次数过多，造成CPU的浪费</li>
+<li>数据以行为单位进行处理，不利于发挥现代CPU特性</li>
+<li>以行为组织单位很容易造成CPU缓存失效</li>
+<li>运行简单的循环时，编译器和CPU可以做循环展开，使用SIMD指令处理多个单元，可以并行执行16个4字节整数</li>
+</ul>
+</li>
+<li>运算符融合，OceanBase中将常见的Operator融合到其他Operator中，减少虚函数调研</li>
+<li>分支预测，当执行跳转时无法确定下一条指令，就从专门寄存器中取出最近几次某个地址的跳转指令，这样避免了盲等</li>
+<li>但会造成分支预测失败的场景，白做了一些无用功</li>
+<li>向量化模型
+<ul>
+<li>TiDB、CockroachDB、ClickHouse</li>
+<li>其Operator是向量化运算符，跟火山模型类似，但是每次拉取一批数据，每批返回一个向量块</li>
+<li>背后思想是，按列组织数据和计算，充分利用CPU，把从多列到元组的转换推迟到较晚的时候执行，在不同的操作符间平摊了函数调用的开销</li>
+<li>减少虚函数调研，提高分支预测准确性；以向量块为单独，提高CPU缓存命中率；SIMD并行处理</li>
+</ul>
+</li>
+<li>代码生成
+<ul>
+<li>使用push模型，跟火山模型的pull正好相反</li>
+<li>自底向上的执行，执行逻辑的起点直接在最底层的Operator</li>
+<li>Hyper是一个深入使用代码生成技术的数据库</li>
+<li>整个查询计划粒度，是全代码生成 whole-stage-code generation，难度最大</li>
+<li>相对容易的是生成对应的表达式求值 expression evaluation，OceanBase在2.0中实现这个功能</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>RUM猜想
+<ul>
+<li>append操作对于写是最优的，但是对读不友好，没有额外的数据结构辅助，必须从头扫描文件</li>
+<li>而为更高效的读，需要复杂的数据结构，写入速度会降低</li>
+<li>2016年的RUM论文，在read overhead(读)、update overhead(写)、memory or storage overhead(存储)中，只能三选二</li>
+<li>同时优化两项时，需要另一项劣化为代价</li>
+<li>存储结构 B+树
+<ul>
+<li>写放大，本来只需一条写入记录，但要更新3个页表中的7条索引记录，额外的6条记录，是维护 B+树结构产生的写入放大</li>
+<li>写入放大系数，Write Amplification Factor WAF</li>
+<li>空间放大系数 Space Amplification Factor SAF</li>
+<li>上面提到的更新了7条记录，WAF是 7</li>
+<li>存储不连续，新增叶节点会放入原有叶节点的有序链表中，逻辑上是连续的，但磁盘存储可能不是连续的</li>
+<li>如果进行大量随机写会造成存储碎片化，导致写放大、读放大</li>
+<li>填充因子，Factor Fill，在页表中预留一些空间，不会因为少量写入造成树结构大幅变动</li>
+<li>填充因子过大无法解决写入放大问题，过小导致也表数量膨胀，增大磁盘扫描范围，降低查询性能</li>
+</ul>
+</li>
+<li>存储结构 LSM树</li>
+<li>写先进入到mem-store中，并记录到HLog中</li>
+<li>当mem-store到一定阈值后，写入有序文件sorted string table SSTable，系统会创建新的mem-store</li>
+<li>定期将多个SSTable合并为更大的SSTable</li>
+<li>LSM将随机写转为顺序写，flush不会产生写放大，但在compact的时候，会产生写放大</li>
+<li>Size-Tiered Compact Strategy，Tiered，BigTable和HBase的合并策略</li>
+<li>Tiered的读放大，因为有M个文件所以都要读一遍，合并后将为O(LOG(M*N))，只有一个SSTable时没有读放大</li>
+<li>Tiered的写放大比B+树 还严重，持续的写入后需要一部分I/O用于compact，而这个操作也影响了I/O读</li>
+<li>Tiered空间放大，需要 2倍空间，存储合并前的多个SSTable、合并后的1个SSTable，而B+树的空间放大SAF为1.33</li>
+<li>LSM的Leveled Compact Strategy
+<ul>
+<li>Tiered的问题每次Compact要全量数据参与，开销很大</li>
+<li>将数据分成一系列Key互不重叠且固定大小的SSTable文件，并分层处理，同时记录每个SSTable文件存储的Key范围</li>
+<li>LevelDB、RocksDB</li>
+<li>当内存数据较多时，会flush到SSTable，此时对应L0，其他层级同样采用Ln形式表示，n为对应层级，L0不做整理，按时间顺序生成</li>
+<li>L0的SSTablekey是交叉的，会重叠，当L0超过一定数量后，会写入L1，从L1开始，SSTable的key都不重叠</li>
+<li>随着L1层的数据增多，SSTable会重新划分边界，目的是保证相对均衡的存储</li>
+<li>L1超过一定阈值后，触发L1写入到L2，因为L1文件不重叠，不用所有文件都参与compact，降低I/O开销，从L1-&gt;L2往后，每层增大10倍，Ln-&gt;Ln+1只会牵涉少数SSTable</li>
+<li>读放大，每层有M个SSTable文件，借助Bloom Filter，多个SSTable只需要O(1)，优化后 O(X + L - 1 + logN)，X是L0 SSTable数量</li>
+<li>Leveled对写放大有明显改善，但是L0的compcat会比较频繁，仍然是读写操作的瓶颈</li>
+<li>空间放大，不同层不重复，每层按比例递增，大部分数据会存在在底层，空间放大得以控制</li>
+</ul>
+</li>
+<li>分布式数据库实现
+<ul>
+<li>数据存储在每个数据节点上进行的，单机过程是一样的</li>
+<li>TiDB、CockroachDB直接使用了 RocksDB 作为单机存储引擎，RocksDB位于Raft协议之下</li>
+<li>OceanBase也使用了LSM树，引入了宏块、微块的概念，在进行compcat时，可以在宏、微两个级别判断，是否可以复用</li>
+<li>复用的话，直接文件拷贝，省去了解析、编码、校验等操作</li>
+<li>OceanBase轮转合并，将compcat操作放在与leader保持数据同步的follower上执行，leader继续对外提供查询，等compcat玩后，切换follower为leader</li>
+<li>WiscKey ，在合并的时候主要是对key处理value只是拷贝而已，将value从sstable中单独拿出来存储，降低写放大</li>
+<li>value单独存储问题是 不连续，WiscKey设计使用SSD替换HDD，SSD随机写接近顺序写，而过高的写也降低SSD寿命，WiscKey是针对SSD设计的模型</li>
+<li>CGo Barrier，CockroachDB采用GO实现，而RocksDB是C++的，Go调用C++有开销</li>
+<li>TiDB放弃Go作为存储引擎，改用Rust，因为Rust和C++之间调用成本非常小</li>
+<li>CockroachDB的存储引擎 Pebble； TiDB的存储引擎 TiTan</li>
+<li>RocksDB最初只有30K代码，但现在已经膨胀到350K+</li>
+<li>TiDB的TiFlash，其存储层模型Delta Tree类似LSM结构，Delta Layer对应L0层，Stable Layer对应L1层</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>F1的架构<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-1.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-1.jpg" />
+        </a>
+    </p>
+<p>重建OLAP体系
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-2.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-2.png" />
+        </a>
+    </p>
+<p>行列混存PAX结构
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-3.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-3.png" />
+        </a>
+    </p>
+<p>TiDB的HTAP架构
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-4.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-4.png" />
+        </a>
+    </p>
+<p>计算下推
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-5.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-5.jpg" />
+        </a>
+    </p>
+<p>HBase的索引前缀<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-6.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-6.jpg" />
+        </a>
+    </p>
+<p>HBase索引前缀计算示例<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-7.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-7.png" />
+        </a>
+    </p>
+<p>Index Lookup Join<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-8.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-8.png" />
+        </a>
+    </p>
+<p>Grace Hash Join<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-9.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-9.png" />
+        </a>
+    </p>
+<p>OceanBase的MPP架构，observer节点可以动态改变身份<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-10.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-10.png" />
+        </a>
+    </p>
+<p>火山模型<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-11.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-11.png" />
+        </a>
+    </p>
+<p>向量化模型<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-12.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-12.png" />
+        </a>
+    </p>
+<p>火山模型 VS 代码生成<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-13.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-13.png" />
+        </a>
+    </p>
+<p>SQL解析后得到左边的查询树，找到R1、R2、R3对应的三个分支<br>
+要获得最优的CPU执行效率，数据尽量不要离开CPU寄存器，这样可以在一个CPU流水线上完成数据处理 <br>
+但查询计划的Join操作要生成hash表加载到内存中，这个动作使数据必须离开寄存器，称为物化 materilaize<br>
+整个过程会被物化为4个pipeline，而join的这种操作，在Hyper论文中被称为pipleline-breaker<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-14.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-14.png" />
+        </a>
+    </p>
+<p>通过即使遍历省的代码得到对应pipeline的四个阶段，伪代码
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-15.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-15.png" />
+        </a>
+    </p>
+<p>RUM猜想<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-16.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-16.png" />
+        </a>
+    </p>
+<p>B+树<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-17.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-17.png" />
+        </a>
+    </p>
+<p>LSM树<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-18.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-18.png" />
+        </a>
+    </p>
+<p>LSM树 Leveled策略，L0层<br>
+当内存数据较多时，会flush到SSTable，此时对应L0，其他层级同样采用Ln形式表示，n为对应层级，L0不做整理，按时间顺序生成      <br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-19.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-19.png" />
+        </a>
+    </p>
+<p>L0的SSTablekey是交叉的，会重叠，当L0超过一定数量后，会写入L1，从L1开始，SSTable的key都不重叠<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-20.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-20.png" />
+        </a>
+    </p>
+<p>随着L1层的数据增多，SSTable会重新划分边界，目的是保证相对均衡的存储<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-21.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-21.png" />
+        </a>
+    </p>
+<p>L1超过一定阈值后，触发L1写入到L2，因为L1文件不重叠，不用所有文件都参与compact，降低I/O开销，从L1-&gt;L2往后，每层增大10倍，Ln-&gt;Ln+1只会牵涉少数SSTable<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-22.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-22.png" />
+        </a>
+    </p>
+<p>TiDB的RocksDB架构<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-23.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/c-23.png" />
+        </a>
+    </p>
+<h3 id="论文-2">论文</h3>
+<ul>
+<li><a href="http://vldb.org/pvldb/vol11/p1835-samwel.pdf">http://vldb.org/pvldb/vol11/p1835-samwel.pdf</a></li>
+<li><a href="https://www.cockroachlabs.com/blog/unpacking-competitive-benchmarks/">Yugabyte vs CockroachDB: Unpacking Competitive Benchmark Claims</a></li>
+<li><a href="https://research.cs.wisc.edu/multifacet/papers/vldbj02_pax.pdf">Data Page Layouts for Relational Databases on Deep Memory Hierarchies</a></li>
+<li><a href="http://db.in.tum.de/downloads/publications/datablocks.pdf">Data Blocks</a></li>
+<li><a href="https://www.oreilly.com/radar/questioning-the-lambda-architecture/">Questiong the lambda Architecture</a></li>
+<li><a href="https://www.gartner.com/en/documents/2657815">Gartner的HTAP分析报告</a></li>
+<li><a href="https://dl.acm.org/doi/10.1145/3035918.3056103">Spanner: Becoming a SQL System</a></li>
+<li><a href="https://core.ac.uk/download/pdf/54846488.pdf">Volcano, an Extensible and Parallel Query Evalution System</a></li>
+<li><a href="http://cs.brown.edu/courses/cs227/archives/2008/Papers/ColumnStores/MonetDB.pdf">MonetDB/X100:Hyper-Pipleling Query Execution</a></li>
+<li><a href="https://databricks.com/blog/2016/05/23/apache-spark-as-a-compiler-joining-a-billion-rows-per-second-on-a-laptop.html">Apache Spark as a Compiler: Joining a Billion Row per Second on a Laptop</a></li>
+<li><a href="">Efficiently Compling Efficient Query for Modern Hardware</a></li>
+<li><a href="https://courses.cs.duke.edu//cps399.28/current/papers/osdi06-ChangDeanEtAl-bigtable.pdf">Bigtable: A distributed Storage System for Structured Data</a></li>
+<li><a href="https://www.usenix.org/system/files/conference/fast16/fast16-papers-lu.pdf">WiscKey: Separating Keys from Values in SSD-conscious Storage</a></li>
+<li><a href="">Designing Access Methods: The RUM Conjecture</a></li>
+<li><a href="https://dsf.berkeley.edu/cs286/papers/lsm-acta1996.pdf">The Log-Structured Merge-Tree(LSM-Tree)</a></li>
+</ul>
+<h2 id="实践部分">实践部分</h2>
+<h3 id="总结-3">总结</h3>
+<ul>
+<li>全球化部署
+<ul>
+<li>异地多活</li>
+<li>单体数据库
+<ul>
+<li>异地容灾</li>
+<li>异地读写分离</li>
+<li>异地双向同步</li>
+</ul>
+</li>
+<li>分布式数据库
+<ul>
+<li>机房级容灾(两地三中心五副本)</li>
+<li>城市级容灾(三地三中心五副本)</li>
+<li>三地五中心七副本</li>
+</ul>
+</li>
+<li>架构问题
+<ul>
+<li>paxos风格的架构必须有一个主节点，一般在主机房</li>
+<li>只有一个全局时钟，异地写入增加通信延迟</li>
+<li>异地机器A获取的时间戳早，本地机器时间戳靠后，加上延迟，导致A写入比B迟，会失败</li>
+<li>类似问题：网购付款时会出现多个事务在短时间内竞争修改商户的账户余额</li>
+<li>全球化部署：多个时间源，多点授时，不同分片主副本可以分散在多个机房</li>
+</ul>
+</li>
+<li>同城双机房
+<ul>
+<li>为保证主机房高可用，raft在主机房部署多个副本</li>
+<li>理想的架构是：三地五副 + raft降级</li>
+</ul>
+</li>
+<li>follower read，源端读取无法保证一致性
+<ul>
+<li>CockroachDB支持，但无法保证一致性，TiDB的follower不支持跨机房部署</li>
+<li>利用raft无日志空洞，在数据密集情况下，日志时间戳 &gt; 查询时间戳 即可保证最新</li>
+<li>分片数据比较冷时，将时间戳更新时间 附加到raft通信包中打包发送，其他节点判断</li>
+</ul>
+</li>
+<li>全球化的意义
+<ul>
+<li>真正的异地机房读和写</li>
+<li>异地机房如果是容灾需要定期演练，相比于时刻运行的系统，仍不能让人放心</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>容灾与备份
+<ul>
+<li>选择一个稳定成熟的逃生库</li>
+<li>异构数据库之间的复制方案
+<ul>
+<li>数据文件，通过文件导入导出方式同步(全量)</li>
+<li>ETL(Extract-Transform-Load)</li>
+<li>CDC(Change Data Capture)，业务入侵小</li>
+<li>Oracle的OGG(Gold Gate)</li>
+<li>DB2的Inforsphere CDC</li>
+</ul>
+</li>
+<li>逃生方案
+<ul>
+<li>日志格式适配，一般分布式数据库都兼容MySQL、PostgreSQL</li>
+<li>选择更强的单体数据库如Oracle，分布式数据库 -&gt; 消息队列 &lt;-&gt; 逃生库 的架构</li>
+<li>事务一致性</li>
+</ul>
+</li>
+<li>事务处理
+<ul>
+<li>每个Raft Group的leader发送Raft日志</li>
+<li>难点在于跨分片日志的处理</li>
+<li>通过时间戳可以判断出  ts1 &lt; ts2，然后重放ts1时刻的日志</li>
+<li>ts1时刻可能产生了多条变更，逃生库在同一时间可能没有收到所有时间戳变更日志</li>
+<li>CockroachDB引入了&quot;Resolved&quot;消息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>容器化
+<ul>
+<li>Kubernetes：
+<ul>
+<li>Container：Cgroup、Namespace、AUFS</li>
+<li>Pod</li>
+</ul>
+</li>
+<li>有状态服务，存储状态，还有状态拓扑，因为集群中不同角色作用不同</li>
+<li>底层基于分布式文件系统、挂本地盘方式</li>
+<li>Operator：利用k8s自定义资源来描述用户期望的部署状态；在控制器里根据自定义API对象变化，完成部署和运维工作</li>
+<li>大数据可用性低于OLTP场景，但集群规模更大，更适合容器化</li>
+</ul>
+</li>
+<li>产品测试
+<ul>
+<li>TPC-C（Transaction Processing Performance Council)，国际事务性能委员会，针对OLTP场景</li>
+<li>TPC-H 针对OLAP场景</li>
+<li>针对数据仓库建模又推出了TPC-DS</li>
+<li>开源的分布式一致性验证框架：Jepsen</li>
+<li>测试分布式数据库、键值系统、消息队列</li>
+<li>工作方式：Generator生成客户端操作；Nemesis实现故障注入；Checker分析每个客户端一致性</li>
+<li>混沌工程
+<ul>
+<li>复杂性、实验、生成环境</li>
+</ul>
+</li>
+<li>TLA(Temporal Logical of Actions 行为时态逻辑)
+<ul>
+<li>形式化验证(Formal Verification)，用数学方法去证明系统是无Bug的</li>
+<li>需要用数学语言重写一遍，代价太高</li>
+<li>用TLA验证关键逻辑，剩余大部分靠测试验证</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>银行案例
+<ul>
+<li>工行OLTP：分布式中间件+开源单体数据库；OLAP联合华为GaussDB200，对标TeraData和GreenPlum</li>
+<li>邮政储蓄：PG，单元化架构，但是改造起来也很麻烦</li>
+<li>交通银行：自研NewSQL数据库CBase</li>
+<li>中信银行：自研GoldenDB，属于PGXC架构</li>
+<li>北京银行：OceanBase，南京银行也选用了这个数据库</li>
+<li>张家港银行：TDSQL</li>
+<li>城商行选择NewSQL的原因
+<ul>
+<li>国产化诉求</li>
+<li>实际收益</li>
+<li>技术潮流</li>
+</ul>
+</li>
+<li>光大银行：NewSQL+分库分表</li>
+<li>选型建议
+<ul>
+<li>产品选型要服从项目整体目标</li>
+<li>先进的产品可能会延长项目交付时间</li>
+<li>当产品选型可能导致业务流程变更时，谨慎对待</li>
+<li>产品选中的非技术因素</li>
+<li>评估技术潮流对选型的影响</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分布式数据库
+<ul>
+<li>Spanner，F1(前端)，兼顾OLTP和OLAP场景</li>
+<li>CockroachDB</li>
+<li>YugabyteDB</li>
+<li>TiDB</li>
+<li>PGXC，TDSQL、TBase、GoldenDB</li>
+<li>VoltDB</li>
+<li>SequoiaDB</li>
+</ul>
+</li>
+</ul>
+<p>全球化部署
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-1.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-1.jpg" />
+        </a>
+    </p>
+<p>同城双机房的退化模式<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-2.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-2.jpg" />
+        </a>
+    </p>
+<p>逃生库的分片日志复制方式
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-3.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-3.png" />
+        </a>
+    </p>
+<p>逃生库的事务一致性<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-4.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-4.png" />
+        </a>
+    </p>
+<p>Kubernetes架构<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-5.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-5.png" />
+        </a>
+    </p>
+<p>Kubernetes有状态存储-分布式文件系统方式<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-6.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-6.png" />
+        </a>
+    </p>
+<p>Kubernetes有状态存储-挂本地盘方式
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-7.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/d-7.png" />
+        </a>
+    </p>
+<h3 id="论文-3">论文</h3>
+<ul>
+<li><a href="https://github.com/jepsen-io/jepsen">Jepsen Github</a></li>
+<li><a href="http://jepsen.io/analyses">Jepsen Analyses</a></li>
+<li><a href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.33.4815&amp;rep=rep1&amp;type=pdf">A Temporal Logic of Actions</a></li>
+<li><a href="http://lamport.azurewebsites.net/tla/book-02-08-08.pdf">Specifying Concurrent System with TLA+</a></li>
+<li><a href="http://lamport.azurewebsites.net/tla/book-02-08-08.pdf">Specifying Systems:The TLA+ Language and Tools for Software Engineers</a></li>
+<li><a href="http://www.tpc.org/tpc_documents_current_versions/pdf/tpc-c_v5.11.0.pdf">Transaction Processing Performance Council</a></li>
+<li><a href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9C%A8%E9%87%91%E8%9E%8D%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%AD%E7%9A%84%E6%8E%A2%E7%B4%A2%E4%B8%8E%E5%AE%9E%E8%B7%B5.pdf">分布式数据库在金融应用场景中的探索与实践</a></li>
+<li><a href="http://vldb.org/pvldb/vol11/p1835-samwel.pdf">F1 Query:Declarative Querying at Scale</a></li>
+<li><a href="http://www.cs.ucf.edu/~kienhua/classes/COP5711/Papers/Google2017.pdf">Spanner:Becoming a SQL System</a></li>
+<li><a href="http://www.vldb.org/pvldb/vol13/p3072-huang.pdf">TiDB, A Raft-based HTAP Database</a></li>
+<li><a href="https://storage.googleapis.com/pub-tools-public-publication-data/pdf/41344.pdf">F1:A Distributed SQL Database That Scales</a></li>
+<li><a href="http://storage.googleapis.com/pub-tools-public-publication-data/pdf/39966.pdf">Spanner: Google&rsquo;s Globally-Distributed Database</a></li>
+<li><a href="https://dl.acm.org/doi/pdf/10.1145/3318464.3386134">CockroachDB:The Resilient Geo-Distributed SQL Database</a></li>
+</ul>
+<h2 id="思维导图">思维导图</h2>
+<p>
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/%E5%AE%9E%E8%B7%B5%E9%83%A8%E5%88%86%E6%80%BB%E7%BB%93.png">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/%E5%AE%9E%E8%B7%B5%E9%83%A8%E5%88%86%E6%80%BB%E7%BB%93.png" />
+        </a>
+    </p>
+
+			<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>相关文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2021/12/%E6%95%B0%E6%8D%AE%E5%AF%86%E9%9B%86%E5%9E%8B%E5%BA%94%E7%94%A8%E8%AE%BE%E8%AE%A1/">数据密集型应用设计读书笔记</a></li>
+        
+        <li><a href="/post/2021/12/unix%E7%8E%AF%E5%A2%83%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/">UNIX环境高级编程读书笔记</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0'>读书笔记</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "hehe-1234/hugoblogtalks"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hehe-1234.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hehe-1234.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/06/bitweaving/" title="BitWeaving: Fast Scans for Main Memory Data Processing">BitWeaving: Fast Scans for Main Memory Data Processing</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/cache_conscious/" title="Cache Conscious Indexing for Decision-Support in Main Memory">Cache Conscious Indexing for Decision-Support in Main Memory</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/column_imprints/" title="Column Imprints: A Secondary Index Structure">Column Imprints: A Secondary Index Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/bitmap_index/" title="Bitmap Index Design and Evaluation ">Bitmap Index Design and Evaluation </a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/column_sketches/" title="Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation">Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" title="资源隔离修改配置动态加载">资源隔离修改配置动态加载</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/optimal_column_layout_for_hybrid_workloads/" title="Optimal Column Layout for Hybrid Workloads">Optimal Column Layout for Hybrid Workloads</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (6)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (28)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (35)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E7%AE%97%E6%B3%95/">算法 (8)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (12)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">归档</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hehe-1234.github.io/years/2021%E5%B9%B4/">2021年 (22)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/years/2022%E5%B9%B4/">2022年 (53)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/years/2023%E5%B9%B4/">2023年 (38)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hehe-1234.github.io/tags/b%E6%A0%91/">B树 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/calcite/">calcite </a>
+    
+    <a href="https://hehe-1234.github.io/tags/cmu-database/">CMU-Database </a>
+    
+    <a href="https://hehe-1234.github.io/tags/flink/">flink </a>
+    
+    <a href="https://hehe-1234.github.io/tags/hana/">HANA </a>
+    
+    <a href="https://hehe-1234.github.io/tags/hive/">Hive </a>
+    
+    <a href="https://hehe-1234.github.io/tags/k8s/">k8s </a>
+    
+    <a href="https://hehe-1234.github.io/tags/kudu/">kudu </a>
+    
+    <a href="https://hehe-1234.github.io/tags/kyuubi/">Kyuubi </a>
+    
+    <a href="https://hehe-1234.github.io/tags/lakehouse/">Lakehouse </a>
+    
+    <a href="https://hehe-1234.github.io/tags/leveldb/">LevelDB </a>
+    
+    <a href="https://hehe-1234.github.io/tags/llvm/">LLVM </a>
+    
+    <a href="https://hehe-1234.github.io/tags/manacher/">Manacher </a>
+    
+    <a href="https://hehe-1234.github.io/tags/mapreduce/">MapReduce </a>
+    
+    <a href="https://hehe-1234.github.io/tags/mysql/">MySQL </a>
+    
+    <a href="https://hehe-1234.github.io/tags/newsql/">NewSQL </a>
+    
+    <a href="https://hehe-1234.github.io/tags/oceanbase/">OceanBase </a>
+    
+    <a href="https://hehe-1234.github.io/tags/paxos/">paxos </a>
+    
+    <a href="https://hehe-1234.github.io/tags/quick-sql/">quick-sql </a>
+    
+    <a href="https://hehe-1234.github.io/tags/raft/">raft </a>
+    
+    <a href="https://hehe-1234.github.io/tags/scala/">scala </a>
+    
+    <a href="https://hehe-1234.github.io/tags/simd/">SIMD </a>
+    
+    <a href="https://hehe-1234.github.io/tags/snowflake/">snowflake </a>
+    
+    <a href="https://hehe-1234.github.io/tags/spark/">spark </a>
+    
+    <a href="https://hehe-1234.github.io/tags/teradata/">TeraData </a>
+    
+    <a href="https://hehe-1234.github.io/tags/unix/">unix </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">二叉树遍历 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%88%97%E5%AD%98/">列存 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%9B%9E%E6%BA%AF/">回溯 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%AD%98%E5%82%A8/">存储 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%AE%97%E6%B3%95/">算法 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%BC%93%E5%AD%98/">缓存 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E8%AE%BA%E6%96%87/">论文 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">RSS</h3>
+        <ul class="widget-list">
+            <li><a href="https://hehe-1234.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div>
+        &copy; 2023 <a href="https://hehe-1234.github.io/">技术博客 By 老王</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'GA ID', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+
+</html>

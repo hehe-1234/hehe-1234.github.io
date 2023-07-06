@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>Materialization Strategies in the Vertica Analytic Database: Lessons Learned | 技术博客</title>
+    <meta property="og:title" content="Materialization Strategies in the Vertica Analytic Database: Lessons Learned - 技术博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2023-01-07T20:05:19&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2023-01-07T20:05:19&#43;08:00'>
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="Materialization Strategies in the Vertica Analytic Database: Lessons Learned">
+        <meta name="author" content="隔壁老王">
+        
+    <meta property="og:url" content="https://hehe-1234.github.io/post/2023/01/materialization-strategies-in-the-vertica-analytic-database-lessons-learned/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hehe-1234.github.io/">
+                        技术博客
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hehe-1234.github.io/">首页</a>
+                    
+                    <a  href="https://hehe-1234.github.io/linked/" title="链接">链接</a>
+                    
+                    <a  href="https://hehe-1234.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hehe-1234.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">Materialization Strategies in the Vertica Analytic Database: Lessons Learned</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年1月7日
+        </date>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#介绍">介绍</a></li>
+        <li><a href="#数据模型和磁盘存储">数据模型和磁盘存储</a></li>
+        <li><a href="#边信息传递">边信息传递</a>
+          <ul>
+            <li><a href="#算法">算法</a></li>
+            <li><a href="#sip-filter评估">SIP filter评估</a></li>
+            <li><a href="#额外收益">额外收益</a></li>
+          </ul>
+        </li>
+        <li><a href="#性能评估">性能评估</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        
+        <div class="post-meta">
+            
+            <span class="post-meta meta-tags">
+                <ul class="clearfix">
+                    <a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a>
+                </ul>
+            </span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <blockquote>
+<p>原文 <br>
+<a href="https://15721.courses.cs.cmu.edu/spring2020/papers/13-execution/shrinivas-icde2013.pdf">https://15721.courses.cs.cmu.edu/spring2020/papers/13-execution/shrinivas-icde2013.pdf</a></p>
+</blockquote>
+<h2 id="介绍">介绍</h2>
+<p>列存在物理上是完全隔离的，查询的时候会通过物化技术，将不同的列柔和为一行<br>
+这种也叫tuple的重建策略(物化策略)
+具体来说有两种实现方式</p>
+<ul>
+<li>早期物化，Early materialization</li>
+<li>延迟物化，Last materialization</li>
+</ul>
+<p>一般来说，延迟物化的性能会比 早起物化要好，但是实现起来会更复杂，需要维持更多的参数<br>
+而物化的本质上，是对 join 来说的，他们不适合放在内存，产生了 spilling join，也就是join溢出<br>
+通过对早起物化的一些优化也能达到不错的性能</p>
+<p>早起物化又细分为两种</p>
+<ul>
+<li>EM并行化</li>
+<li>EM流水线化
+他们的区别如下：<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/1.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/1.jpg" />
+        </a>
+    <br>
+Fig. 1. Early materialization strategies</li>
+</ul>
+<p>所谓的并行化，就是同时去查两个列，然后列拼在一起，最后做数据过滤，取出想要的行<br>
+而流水线化，则是直接去列中过滤数据，这样取出来的就已经过滤掉很多数据了<br>
+Vertica 使用的就是 EM-流水线的方式</p>
+<p>延迟物化，是只抓取查询计划中需要的列，对于多个join来说，只抓取join中需要的列<br>
+join的输出是只匹配那些需要的行，并用来匹配剩下的查询<br>
+Vertica采用hash join的方式来做早起物化</p>
+<p>下面是 早期物化 vs 延迟物化<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/2.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/2.jpg" />
+        </a>
+    
+Fig. 2. Late and Early Materialized Joins in Vertica for the query “SELECT C1,C2,D1,D2 FROM C,D WHERE C1=D1”</p>
+<p>延迟物化的优点</p>
+<ul>
+<li>可以大幅度提升性能</li>
+<li>对于join来说，可以大幅度减少需要scan的I/O数量</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>需要跟踪哪些列需要在什么时间点做物化</li>
+<li>执行引擎也需要跟着配合</li>
+<li>对于部分聚合来说，实现起来非常困难，因为需要评估 基数减少后的收益，需要对聚合的额外列做评估</li>
+<li>对于多个列中不同值做评估也非常困难，特别是存在谓词的情况</li>
+</ul>
+<p>延迟物化在join两边输入数据都无法放到内存时，还不如早期物化</p>
+<ul>
+<li>此时需要sort-merge-join，或者混合hash-join</li>
+<li>混合hash-join，根据join的key做重分区，放入一个桶中，这样数据就能放到内存中了</li>
+<li>如果join只输出row id，那么在join之后的tuple重构，需要多次扫描外部输入，和桶的数量一样多</li>
+<li>类似的，sort-merge join也需要根据join的key排序</li>
+<li>如果join只输出row id，那么它就是乱序的，因此重构tuple需要根据row id排序，或者除join本身之外的随机I/O</li>
+</ul>
+<p>当join会溢出时，想对其评估使用早期物化、或者延迟物化非常困难<br>
+Vertica最初是将这个锅甩给用户，让用户自己决定，如果join溢出那么延迟物化会执行出错，于是退回到早期物化重新执行<br>
+最近修改了策略，都采用延迟物化，如果出错则退回到早期物化，这样用户就不用选择物化策略了</p>
+<p><strong>Sideways Information Passing (SIP)</strong> 是一系列的技术集合，可以用于改进join的性能<br>
+它将查询计划的一部分信息，传递给其他部分，允许尽早过滤不必要的信息，这些技术包含</p>
+<ul>
+<li>Bloom joins，跟半连接类似，只是缓存了bloom方式</li>
+<li>two-way semi joins，比如R和S，R的属性会存储起来，当发生join时会去查找并重建tuple</li>
+<li>magic sets</li>
+</ul>
+<p>这些策略可以对所有查询找到最佳的性能<br>
+相当于是早期物化的增强<br>
+比如，对于Figure 2(b)，如果能将<code>D1</code>传递给<code>C1</code>，那么在扫描<code>C2</code>时就可以过滤不必要的信息</p>
+<p>对于早期物化EM、延迟物化LM、侧边信息传递SIP，得到的结论是</p>
+<ul>
+<li>延迟物化实现起来更困难，优化器需要保存更多的信息，来记录在哪些列在什么时间点做物化，在查询优化期间还需要记录代价模型</li>
+<li>延迟物化的性能更好，除了一种场景：溢出join(两边输入信息内存都放不下)</li>
+<li>SIP结合EM比普通EM性能更好，而且没有溢出join的情况，基本跟LM性能差不多</li>
+</ul>
+<p>相关的列存数据库</p>
+<ul>
+<li>HANA</li>
+<li>MonetDB</li>
+<li>Blink</li>
+</ul>
+<h2 id="数据模型和磁盘存储">数据模型和磁盘存储</h2>
+<p>Vertica 中的数据是按照<strong>投影</strong>来存储的，每个表至少要包含一个 超级投影，它包含了每列的位置<br>
+这种投影 projections 不同于标准的物化视图，它是一种数据的物理存储结构，而不是辅助索引结构   <br>
+解释</p>
+<ul>
+<li>投影可以分为 replicated、segmented</li>
+<li>复制是将tuple的copy存储到每个投影node上</li>
+<li>分片是 hash(col)，将数据分布到不同node上，一般按照 primary key分片</li>
+<li>数据存储在标准文件系统上的多个container中</li>
+<li>每个容器逻辑上包含一定数量的tuple，根据投影的排序顺序存储</li>
+<li>Vertica是按列存储的，每个列包含 数据文件、元数据文件、位置索引</li>
+<li>位置信息是隐式包含的，还包含 min、max信息</li>
+<li>完整tuple通过获取相		
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/3.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/3.jpg" />
+        </a>
+    </li>
+</ul>
+<h2 id="边信息传递">边信息传递</h2>
+<p>一个具体的例子</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> fact,dim
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> fact.FK <span style="color:#ff79c6">=</span> dim.PK
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">AND</span> dim.B <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">5</span>;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Fig. 4. Example Join Query 1.</p>
+<p>在没有 边信息传递 SIP时，join的情况如下，此时需要扫码实事表的每个tuple<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/5.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/5.jpg" />
+        </a>
+    </p>
+<p>有SIP的情况时，跟之前差不多，变化是 node2，这里会做一个SIP的过滤</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>hash(FK) IN <span style="color:#ff79c6">&lt;</span>hash<span style="color:#ff79c6">-</span>table <span style="color:#ff79c6">for</span> dim.PK<span style="color:#ff79c6">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>检查 实事表 的FK 是否在 维度表的PK中，如下图所示：   <br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/6.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/6.jpg" />
+        </a>
+    
+Fig. 6. SIPS Evaluation for Query 1</p>
+<h3 id="算法">算法</h3>
+<p>1、SIP 过滤器的创建<br>
+会创建 表达式数量 + 1个 SIP filter，比如：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>fact.A1 <span style="color:#ff79c6">=</span> dim.B1 <span style="color:#ff79c6">AND</span> fact.A2 <span style="color:#ff79c6">=</span> dim.B2 <span style="color:#ff79c6">AND</span> fact.A3 <span style="color:#ff79c6">=</span> dim.B3.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里有<code>3</code>个表达式，分别创建，再加上一个表达式合并，一共<code>4</code>个</p>
+<ul>
+<li>fact.A1 IN (检查是否在hash dim.B1中)</li>
+<li>fact.A2 IN (检查是否在hash dim.B2中)</li>
+<li>fact.A3 IN (检查是否在hash dim.B3中)</li>
+<li>fact.A1, fact.A2, fact.A3</li>
+</ul>
+<p>2、SIP 过滤器的分布</p>
+<ul>
+<li>首先是根据每个join操作来创建过滤器</li>
+<li>然后按照规则进行push down</li>
+</ul>
+<p>规则</p>
+<ol>
+<li>如果当前操作时 left outer join、full outer join、anti-join(由NOT IN生成)、设置ALL操作的semi-join，则停止push down</li>
+<li>如果当前是join，且outer部分(join左边)不包含SIP filter谓词评估的所有列，则停止push down</li>
+<li>如果当前是join，且outer部分需要跨网络发送数据，则停止push down</li>
+<li>如果当前是group-by，且SIP filter包含任何聚合函数(不仅仅是对表达式分组)，则停止push down</li>
+</ol>
+<p>比如下图，查询计划包含 n1 和 n2，n2包含的条件为：fact.FK1 = dim.PK，n4表示对事实表scan，n5对DIM1做scan<br>
+n1的条件就是 fact.FK2 = dim2.PK，n2是作为n1 的outer，而n1的inner是scan DIM2表<br>
+之后根据n1、n2分别创建SIP filter，之后开始 push down，它也满足4个rule   <br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/7.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/7.jpg" />
+        </a>
+    <br>
+Fig. 7. SIP Filter Creation and Distribution Example.</p>
+<p>下图中 两个SIP</p>
+<ul>
+<li>fact.FK1 = dim1.PK</li>
+<li>fact.FK2 + dim1.C = dim2.PK</li>
+</ul>
+<p>filter2被下推到 n2 的位置，filter1 被下推到 n4 的位置<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/8.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/8.jpg" />
+        </a>
+    
+Fig. 8. An Example Push Down Avoided by Rule 2.</p>
+<h3 id="sip-filter评估">SIP filter评估</h3>
+<p>这里使用了多种手段来加速</p>
+<ul>
+<li>hash表 是基于之前创建的</li>
+<li>每个列存储文件中还包含了 min、max信息</li>
+<li>而数据是按照hash分片的，根据min、max就可以过滤掉很多不需要读取的block</li>
+</ul>
+<p>假设条件为： fact.FK = dim.PK<br>
+谓词条件为： dim.B = 5 <br>
+根据谓词从 dim 表中查找合适的条件，找到 min = 3，max=8<br>
+也就是[3,8]这段满足 dim.PK，根据这些PK 建立hash表<br>
+之后事实表去hash表中匹配，完成 merge join操作<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/9.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/9.jpg" />
+        </a>
+       <br>
+Fig. 9. SIP Evaluation for Merge Joins.</p>
+<p>还有一些特殊场景：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> c_mktsegment, <span style="color:#ff79c6">SUM</span>(o_totalprice)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> orders <span style="color:#ff79c6">JOIN</span> customer
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ON</span> o_custkey <span style="color:#ff79c6">=</span> c_custkey
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> c_mktsegment;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>比如选择性很高的时候，建立SIP再评估就有点浪费了，此时会评估 输入/输出 数据的比例，如果<strong>高于</strong><code>0.9</code>则不建立 SIP</p>
+<p>Algorithm 1 The SIP Filter Creation Algorithm, CreateSIPFilters<br>
+Input: Root R of a Query Plan P.<br>
+Output: Query Plan, Ps with initialized SIP Expressions.<br>
+伪代码如下：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">if</span> R is not a Join <span style="color:#ff79c6">operator</span> then
+</span></span><span style="display:flex;"><span>	<span style="color:#50fa7b">CreateSIPFilters</span>(Input(R));
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">return</span>; {Just process child and exit}
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">else</span>
+</span></span><span style="display:flex;"><span>	join ← R;
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> join is a Left<span style="color:#ff79c6">-</span>Outer Join or Full<span style="color:#ff79c6">-</span>Outer Join or AntiJoin or Semi<span style="color:#ff79c6">-</span>Join with ALL <span style="color:#ff79c6">operator</span> then 
+</span></span><span style="display:flex;"><span>		{Rule <span style="color:#bd93f9">1</span>}
+</span></span><span style="display:flex;"><span>		CreateSIPFilters(InnerInput(join));
+</span></span><span style="display:flex;"><span>		CreateSIPFilters(OuterInput(join));
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span>; {Just process children and exit}
+</span></span><span style="display:flex;"><span>	end <span style="color:#ff79c6">if</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> <span style="color:#50fa7b">OuterInput</span>(join) needs a network operation then
+</span></span><span style="display:flex;"><span>		{Rule <span style="color:#bd93f9">3</span>}
+</span></span><span style="display:flex;"><span>		CreateSIPFilters(InnerInput(join));
+</span></span><span style="display:flex;"><span>		CreateSIPFilters(OuterInput(join));
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span>; {Just process children and exit}
+</span></span><span style="display:flex;"><span>	end <span style="color:#ff79c6">if</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>	Initialize a SIP Filter List, runtimeFilters;
+</span></span><span style="display:flex;"><span>	joinPredicates ← getJoinPredicatesFor(join);
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> each predicate pred in joinPredicates <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">if</span> pred is an equality predicate then
+</span></span><span style="display:flex;"><span>			Create a SIP filter s <span style="color:#ff79c6">for</span> pred;
+</span></span><span style="display:flex;"><span>			Add s to runtimeFilters;
+</span></span><span style="display:flex;"><span>		end <span style="color:#ff79c6">if</span>
+</span></span><span style="display:flex;"><span>	end <span style="color:#ff79c6">for</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> <span style="color:#50fa7b">size</span>(runtimeFilters) <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">1</span> then
+</span></span><span style="display:flex;"><span>		Create a SIP filter s <span style="color:#ff79c6">for</span> all join keys involved in equality predicates;
+</span></span><span style="display:flex;"><span>		Add s to runtimeFilters;
+</span></span><span style="display:flex;"><span>	end <span style="color:#ff79c6">if</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	Store runtimeFilters in <span style="color:#50fa7b">OuterInput</span>(join);
+</span></span><span style="display:flex;"><span>	CreateSIPFilters(InnerInput(join));
+</span></span><span style="display:flex;"><span>	CreateSIPFilters(OuterInput(join));
+</span></span><span style="display:flex;"><span>end <span style="color:#ff79c6">if</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Algorithm 2 The SIP Filter Distribution Algorithm, DistributeSIPFilters<br>
+Input: Root R of Query Plan Ps with initialized SIP Expressions.<br>
+Output: Query Plan, Pd with distributed SIP Expressions.<br>
+伪代码如下：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">if</span> R is a Group<span style="color:#ff79c6">-</span>By <span style="color:#ff79c6">operator</span> then
+</span></span><span style="display:flex;"><span>	groupby ← R
+</span></span><span style="display:flex;"><span>	runtimeFilters ← getSIPFiltersFor(groupby);
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> each filter in runtimeFilters <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">if</span> filter is in terms of just grouping keys of groupby then 
+</span></span><span style="display:flex;"><span>			{Rule <span style="color:#bd93f9">4</span>}
+</span></span><span style="display:flex;"><span>			Push filter to <span style="color:#50fa7b">Input</span>(groupby);
+</span></span><span style="display:flex;"><span>		end <span style="color:#ff79c6">if</span>
+</span></span><span style="display:flex;"><span>	end <span style="color:#ff79c6">for</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#50fa7b">DistributeSIPFilters</span>(Input(groupby));
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">return</span>;
+</span></span><span style="display:flex;"><span>end <span style="color:#ff79c6">if</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span> R is a Join <span style="color:#ff79c6">operator</span> then
+</span></span><span style="display:flex;"><span>	join ← R;
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> join is a Left<span style="color:#ff79c6">-</span>Outer Join or Full<span style="color:#ff79c6">-</span>Outer Join or AntiJoin or Semi<span style="color:#ff79c6">-</span>Join with ALL <span style="color:#ff79c6">operator</span> then 
+</span></span><span style="display:flex;"><span>		{Rule <span style="color:#bd93f9">1</span>}
+</span></span><span style="display:flex;"><span>		DistributeSIPFilters(InnerInput(join));
+</span></span><span style="display:flex;"><span>		DistributeSIPFilters(OuterInput(join));
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span>; {Just process children and exit}
+</span></span><span style="display:flex;"><span>	end <span style="color:#ff79c6">if</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> <span style="color:#50fa7b">OuterInput</span>(join) needs a network operation then
+</span></span><span style="display:flex;"><span>		{Rule <span style="color:#bd93f9">3</span>}
+</span></span><span style="display:flex;"><span>		DistributeSIPFilters(InnerInput(join));
+</span></span><span style="display:flex;"><span>		DistributeSIPFilters(OuterInput(join));
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span>; {Just process children and exit}
+</span></span><span style="display:flex;"><span>	end <span style="color:#ff79c6">if</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	runtimeFilters ← getSIPFiltersFor(join);
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> each filter in runtimeFilters <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">if</span> filter can be applied in <span style="color:#50fa7b">OuterInput</span>(join) then 
+</span></span><span style="display:flex;"><span>			{Rule <span style="color:#bd93f9">2</span>}
+</span></span><span style="display:flex;"><span>			Push filter to <span style="color:#50fa7b">OuterInput</span>(join);
+</span></span><span style="display:flex;"><span>		end <span style="color:#ff79c6">if</span>
+</span></span><span style="display:flex;"><span>	end <span style="color:#ff79c6">for</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#50fa7b">DistributeSIPFilters</span>(InnerInput(join));
+</span></span><span style="display:flex;"><span>	DistributeSIPFilters(OuterInput(join));
+</span></span><span style="display:flex;"><span>end <span style="color:#ff79c6">if</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="额外收益">额外收益</h3>
+<p>这里介绍边信息传递 SIP的两种特殊场景，用的好可以提升性能<br>
+1、谓词评估顺序</p>
+<ul>
+<li>列存对于 push down的顺序，其重要性大于行存</li>
+<li>如果按照投影扫描的顺序来评估谓词，其效率更高</li>
+<li>比如(o_orderdate, o_shippriority) 这样的列</li>
+<li>如果先评估o_orderdate 则效果更好，因为靠近前面的列压缩比更高，可以节省I/O</li>
+<li>延迟物化时，评估的列顺序跟 扫描时的列顺序可能不同</li>
+<li>而延迟物化是在 join的时候才评估列的，这可能会导致其性能比push down时要差</li>
+<li>本质上这是一种权衡：基于投影的顺序执行join  VS  基于评估的选择性、代价执行join</li>
+</ul>
+<p>实际执行时</p>
+<ul>
+<li>优化器根据选择性、成本来执行join</li>
+<li>而执行引擎根据投影扫描的顺序应用 SIP过滤器和下推谓词</li>
+</ul>
+<p>2、编码的影响</p>
+<ul>
+<li>使用的是  run-length 编码，可以直接作用到数据，省去了解码的时间</li>
+<li>下面的SQL会创建 3个SIP</li>
+<li>如果 fact.a1 经过run-length编码，而 fact.a2 没有，则需要解码</li>
+<li>如果执行SIP下推，fact.a1 IN <!-- raw HTML omitted --></li>
+<li>可以直接作用于编码数据，如果hash表数据很少，又能提升很多性能</li>
+</ul>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> fact <span style="color:#ff79c6">JOIN</span> dim <span style="color:#ff79c6">ON</span>
+</span></span><span style="display:flex;"><span>fact.A1 <span style="color:#ff79c6">=</span> dim.B1 <span style="color:#ff79c6">AND</span>
+</span></span><span style="display:flex;"><span>fact.A2 <span style="color:#ff79c6">=</span> dim.B2
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> dim.B3 <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">5</span>;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="性能评估">性能评估</h2>
+<p>对比：</p>
+<ul>
+<li>早期物化 EM</li>
+<li>延迟物化 LM</li>
+<li>带有边信息传递的早期物化 EMSIP</li>
+</ul>
+<p>将 EM 作为基准，测试 TPC-DH 的几个查询用例<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/10.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/shrinivas-icde2013/10.jpg" />
+        </a>
+    
+查询 5 的LM性能并不好，因为出现了 join溢出<br>
+这里使用的都是冷缓存，而query5执行后，相当于把数据加载到cache中了，虽然join溢出重新执行了 ME<br>
+但是数据在缓存中，加速其查询速度<br>
+查询17、18、20 采用了SIP下推，得到了很好的效果，比LM性能更好<br>
+查询10 显示了 EMSIP比LM有些场景下要差，但是比 EM还是有30%的性能提升</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> o_orderpriority, <span style="color:#ff79c6">COUNT</span>(<span style="color:#ff79c6">*</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> orders
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> o_orderdate <span style="color:#ff79c6">in</span> (<span style="color:#ff79c6">SELECT</span> date_col
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">FROM</span> date_filter)
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">AND</span> o_totalprice <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">1000</span>.<span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> o_orderpriority;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该查询本质上计算每个订单优先级的订单数量，对于在单独的表中指定的订单日期列表，其中每个订单超过1000美元<br>
+一般由 BI 工具生成<br>
+对比 Table II， EMSIP相比EM、LM有了50倍的性能提升<br>
+这是因为执行引擎在应用普通谓词之前，先将SIP应用于<code>o_orderdate</code>
+<code>o_orderdate</code>是投影扫描顺序的第一列，也是 run-length 编码的，因此执行谓词评估非常快<br>
+而 LM 评估的第一个谓词不是<code>o_orderdate</code>，因此浪费了很多时间</p>
+<p>考虑如下查询：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">COUNT</span>(<span style="color:#ff79c6">*</span>) <span style="color:#ff79c6">FROM</span> lineitem
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> (l_shipdate, l_orderkey) <span style="color:#ff79c6">IN</span>
+</span></span><span style="display:flex;"><span>	(<span style="color:#ff79c6">SELECT</span> o_orderdate<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>, o_orderkey
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">FROM</span> orders
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">WHERE</span> o_totalprice <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">550000</span>.<span style="color:#bd93f9">0</span>);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该查询本质上是查找在订购后一天发货的行项目的数量，对于高价的订单(大于550000美元)  <br>
+投影在<code>lineitem</code>列上，也是 run-length 编码的，这个查询跟上面的查询类似<br>
+使用 EMSIP会带来巨大的性能提升，大概比 EM、LM有两个数量级提升</p>
+
+			<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>相关文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2023/01/monetdbx100-hyper-pipelining-query-execution/">MonetDB/X100: Hyper-Pipelining Query Execution</a></li>
+        
+        <li><a href="/post/2023/01/access-path-selection-in-main-memory-optimized-data-systems-should-i-scan-or-should-i-probe/">Access Path Selection in Main-Memory Optimized Data Systems Should I Scan or Should I Probe</a></li>
+        
+        <li><a href="/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/">Photon A Fast Query Engine for Lakehouse Systems</a></li>
+        
+        <li><a href="/post/2022/11/multi-tenant-cloud-data-services/">关于云环境中多租户问题的论文</a></li>
+        
+        <li><a href="/post/2023/03/millwheel/">MillWheel</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96'>查询优化</a></li>
+                
+                <li><a href='/tags/%E8%AE%BA%E6%96%87'>论文</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "hehe-1234/hugoblogtalks"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hehe-1234.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hehe-1234.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/06/bitweaving/" title="BitWeaving: Fast Scans for Main Memory Data Processing">BitWeaving: Fast Scans for Main Memory Data Processing</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/cache_conscious/" title="Cache Conscious Indexing for Decision-Support in Main Memory">Cache Conscious Indexing for Decision-Support in Main Memory</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/column_imprints/" title="Column Imprints: A Secondary Index Structure">Column Imprints: A Secondary Index Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/bitmap_index/" title="Bitmap Index Design and Evaluation ">Bitmap Index Design and Evaluation </a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/column_sketches/" title="Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation">Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" title="资源隔离修改配置动态加载">资源隔离修改配置动态加载</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/optimal_column_layout_for_hybrid_workloads/" title="Optimal Column Layout for Hybrid Workloads">Optimal Column Layout for Hybrid Workloads</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (6)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (28)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (35)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E7%AE%97%E6%B3%95/">算法 (8)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (12)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">归档</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hehe-1234.github.io/years/2021%E5%B9%B4/">2021年 (22)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/years/2022%E5%B9%B4/">2022年 (53)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/years/2023%E5%B9%B4/">2023年 (38)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hehe-1234.github.io/tags/b%E6%A0%91/">B树 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/calcite/">calcite </a>
+    
+    <a href="https://hehe-1234.github.io/tags/cmu-database/">CMU-Database </a>
+    
+    <a href="https://hehe-1234.github.io/tags/flink/">flink </a>
+    
+    <a href="https://hehe-1234.github.io/tags/hana/">HANA </a>
+    
+    <a href="https://hehe-1234.github.io/tags/hive/">Hive </a>
+    
+    <a href="https://hehe-1234.github.io/tags/k8s/">k8s </a>
+    
+    <a href="https://hehe-1234.github.io/tags/kudu/">kudu </a>
+    
+    <a href="https://hehe-1234.github.io/tags/kyuubi/">Kyuubi </a>
+    
+    <a href="https://hehe-1234.github.io/tags/lakehouse/">Lakehouse </a>
+    
+    <a href="https://hehe-1234.github.io/tags/leveldb/">LevelDB </a>
+    
+    <a href="https://hehe-1234.github.io/tags/llvm/">LLVM </a>
+    
+    <a href="https://hehe-1234.github.io/tags/manacher/">Manacher </a>
+    
+    <a href="https://hehe-1234.github.io/tags/mapreduce/">MapReduce </a>
+    
+    <a href="https://hehe-1234.github.io/tags/mysql/">MySQL </a>
+    
+    <a href="https://hehe-1234.github.io/tags/newsql/">NewSQL </a>
+    
+    <a href="https://hehe-1234.github.io/tags/oceanbase/">OceanBase </a>
+    
+    <a href="https://hehe-1234.github.io/tags/paxos/">paxos </a>
+    
+    <a href="https://hehe-1234.github.io/tags/quick-sql/">quick-sql </a>
+    
+    <a href="https://hehe-1234.github.io/tags/raft/">raft </a>
+    
+    <a href="https://hehe-1234.github.io/tags/scala/">scala </a>
+    
+    <a href="https://hehe-1234.github.io/tags/simd/">SIMD </a>
+    
+    <a href="https://hehe-1234.github.io/tags/snowflake/">snowflake </a>
+    
+    <a href="https://hehe-1234.github.io/tags/spark/">spark </a>
+    
+    <a href="https://hehe-1234.github.io/tags/teradata/">TeraData </a>
+    
+    <a href="https://hehe-1234.github.io/tags/unix/">unix </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">二叉树遍历 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%88%97%E5%AD%98/">列存 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%9B%9E%E6%BA%AF/">回溯 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%AD%98%E5%82%A8/">存储 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%AE%97%E6%B3%95/">算法 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%BC%93%E5%AD%98/">缓存 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E8%AE%BA%E6%96%87/">论文 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">RSS</h3>
+        <ul class="widget-list">
+            <li><a href="https://hehe-1234.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div>
+        &copy; 2023 <a href="https://hehe-1234.github.io/">技术博客 By 老王</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'GA ID', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+
+</html>

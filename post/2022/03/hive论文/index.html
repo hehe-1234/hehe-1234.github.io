@@ -1,0 +1,1098 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>Hive论文 | 技术博客</title>
+    <meta property="og:title" content="Hive论文 - 技术博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2022-03-20T08:54:37&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2022-03-20T08:54:37&#43;08:00'>
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="Hive论文">
+        <meta name="author" content="隔壁老王">
+        
+    <meta property="og:url" content="https://hehe-1234.github.io/post/2022/03/hive%E8%AE%BA%E6%96%87/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hehe-1234.github.io/">
+                        技术博客
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hehe-1234.github.io/">首页</a>
+                    
+                    <a  href="https://hehe-1234.github.io/linked/" title="链接">链接</a>
+                    
+                    <a  href="https://hehe-1234.github.io/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hehe-1234.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">Hive论文</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年3月20日
+        </date>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#背景">背景</a></li>
+        <li><a href="#数据模型">数据模型</a></li>
+        <li><a href="#数据存储序列化和文件格式">数据存储、序列化和文件格式</a></li>
+        <li><a href="#系统架构和组件">系统架构和组件</a></li>
+        <li><a href="#内部使用情况和总结">内部使用情况和总结</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        
+        <div class="post-meta">
+            
+            <span class="post-meta meta-tags">
+                <ul class="clearfix">
+                    <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
+                </ul>
+            </span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <blockquote>
+<p>论文地址 <br>
+<a href="http://infolab.stanford.edu/~ragho/hive-icde2010.pdf">http://infolab.stanford.edu/~ragho/hive-icde2010.pdf</a></p>
+</blockquote>
+<h2 id="背景">背景</h2>
+<p><code>Hive</code>是Facebook推出的一个基于Hadoop的开源项目。<br>
+为什么Facebook会开发这么一款产品，根据论文和相关背景，大概能得到这么一些信息：</p>
+<ul>
+<li>数据量是越来越大了，而商用的解决方案太贵了</li>
+<li>因为数据量的增多，用户的增多，相应的BI、机器学习、数据分析的需求也变得更多了</li>
+<li>Facebook就靠广告业务来赚钱的，所以数据分析对他们来说很重要</li>
+<li>Facebook当时已经有<code>PB</code>数据规模了，用传统的存储对他们不合适，所以也上了Hadoop</li>
+<li>Hadoop的Map-Reduce确实不错，但是太底层了，连简单的<code>count</code>、<code>avg</code>都没有</li>
+<li>Facebook内部的分析人员使用最多的可能是<code>SQL</code>，这是他们最熟悉的</li>
+<li>既然Map-Recue太底层，而很多分析人员对<code>SQL</code>又很熟悉，所以就想做一个类SQL的系统</li>
+<li>这个系统基于Hadoop，可以享受Hadoop的扩展性，同时又有SQL的一些特性</li>
+</ul>
+<p>根据背景能发现，Facebook做的Hive并不是拍脑门弄出来的，而是真的有实际场景的。 <br>
+Facebook的体量决定了它们必须上Hadoop，而他们的商业模式使得对数据分析非常依赖，但是Map-Recue太底层不合适分析人员。<br>
+像<code>pig</code>也是基于Map-Reduce，提供了更高层的接口，但是<code>pig</code>有自己的语法，跟<code>SQL</code>完全不同。<br>
+而<code>Hive</code>就是给公司内部分析人员使用的，所以场景其实很明确，就是谷歌的<code>GFS</code>一样，最初也是解决公司内部需求的。<br>
+所以<code>Hive</code>的出现提示了我们，好的产品应该是有明确的定位，能真正解决一些典型的问题<br>
+同时，这个产品最好能在已经成熟的基础方案之上，比如<code>Hive</code>很多重要的组件和思想都是基于成熟产品的：</p>
+<ul>
+<li>元数据库的关系型数据库</li>
+<li>底层的分布式文件系统、Map-Reduce</li>
+<li>SQL</li>
+</ul>
+<p><strong>基于现有成熟技术，找准产品定位，解决典型用户的需求，做微小创新</strong></p>
+<h2 id="数据模型">数据模型</h2>
+<p><code>Hive</code>支持基本类型，以及复杂类型：</p>
+<ul>
+<li>Integers
+<ul>
+<li>bigint(8 bytes)</li>
+<li>int(4 bytes)</li>
+<li>smallint(2 bytes),</li>
+<li>tinyint(1 byte)</li>
+<li>All integer types are signed.</li>
+</ul>
+</li>
+<li>Floating point numbers 
+– float(single precision),
+<ul>
+<li>double(double precision)</li>
+</ul>
+</li>
+<li>String</li>
+<li>Associative arrays – map&lt;key-type, value-type&gt;</li>
+<li>Lists – list<!-- raw HTML omitted --></li>
+<li>Structs – struct&lt;file-name: field-type, &hellip; &gt;</li>
+</ul>
+<p>复杂类型还可以继续组合成更复杂的类型，比如：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>list<span style="color:#ff79c6">&lt;</span>map<span style="color:#ff79c6">&lt;</span>string, <span style="color:#ff79c6">struct</span>&lt;<span style="color:#50fa7b">p1</span><span style="color:#ff79c6">:</span><span style="color:#8be9fd">int</span>, <span style="color:#8be9fd;font-style:italic">p2</span>:<span style="color:#8be9fd">int</span><span style="color:#ff79c6">&gt;&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这就是 list 里面可以嵌套 map，而map的value又是 struct类型<br>
+struct本身由两个基本类型组成，这样 Hive 就可以组合成任意复杂的数据结构了</p>
+<p>创建复杂结构的建表语句如下：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> t1(
+</span></span><span style="display:flex;"><span>    st string, 
+</span></span><span style="display:flex;"><span>    fl <span style="color:#8be9fd;font-style:italic">float</span>, 
+</span></span><span style="display:flex;"><span>    li list<span style="color:#ff79c6">&lt;</span><span style="color:#ff79c6">map</span><span style="color:#ff79c6">&lt;</span>string,struct<span style="color:#ff79c6">&lt;</span>p1:<span style="color:#8be9fd;font-style:italic">int</span>, p2:<span style="color:#8be9fd;font-style:italic">int</span><span style="color:#ff79c6">&gt;&gt;</span>
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>t1.li[0] 可以引用 list里面的元素，也就是map<br>
+t1.li[0][&lsquo;key&rsquo;] 可以引用 map里面嵌套的 struct<br>
+y t1.li[0][&lsquo;key&rsquo;].p2 可以引用 最里面的struct</p>
+<p>Hive 需要处理一些遗留的数据，那么就需要 序列化、反序列化 
+对此Hive提供了序列化接口：</p>
+<ul>
+<li>SerDe</li>
+<li>ObjectInspector</li>
+</ul>
+<p>Hive内置的SerDe和复杂结构也是实现了上述接口，当实现了这些接口后，可以以jar包的形式导入<br>
+比如这样：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">add</span> jar <span style="color:#ff79c6">/</span>jars<span style="color:#ff79c6">/</span>myformat.jar;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> t2
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ROW</span> FORMAT SERDE <span style="color:#f1fa8c">&#39;com.myformat.MySerDe&#39;</span>;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Hive的查询语言非常类似SQL，但有一些限制，此外还增加了很多针对企业内部特点的功能<br>
+像子查询、左右连接、笛卡尔积、union，group by、聚合都是支持的
+所以任何对SQL熟悉的人(Facebook内部就有很多这样的分析人员)，上手Hive就很快<br>
+Hive还提供了元数据展示，比如 <code>show tables</code>、<code>desc</code>、分析查询计划这样的功能</p>
+<p>论文中给出了Hive的一些限制<br>
+比如，在join中有相等判断的谓词时需要这么写：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> t1.a1 <span style="color:#ff79c6">as</span> c1, t2.b1 <span style="color:#ff79c6">as</span> c2
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> t1 <span style="color:#ff79c6">JOIN</span> t2 <span style="color:#ff79c6">ON</span> (t1.a2 <span style="color:#ff79c6">=</span> t2.b2);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#</span> 传统关系型数据库可以这么写：
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> t1.a1 <span style="color:#ff79c6">as</span> c1, t2.b1 <span style="color:#ff79c6">as</span> c2
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> t1, t2
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> t1.a2 <span style="color:#ff79c6">=</span> t2.b2;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>另一个显示就是 插入，可能是底层的HDFS本身只有append，并不支持随机的插入<br>
+所以Hive的插入实际是覆盖：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> OVERWRITE <span style="color:#ff79c6">TABLE</span> t1 <span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> t2;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不过论文中也提到了，随着数据量的增加，这种折中的 insert，update都会有性能问题<br>
+所以未来会支持真正的 增删改</p>
+<p>Hive还可以在SQL中嵌入map-readuce：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> (
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">MAP</span> doctext <span style="color:#ff79c6">USING</span> <span style="color:#f1fa8c">&#39;python wc_mapper.py&#39;</span> <span style="color:#ff79c6">AS</span> (word, cnt)
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">FROM</span> docs
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">CLUSTER</span> <span style="color:#ff79c6">BY</span> word
+</span></span><span style="display:flex;"><span>) a
+</span></span><span style="display:flex;"><span>REDUCE word, cnt <span style="color:#ff79c6">USING</span> <span style="color:#f1fa8c">&#39;python wc_reduce.py&#39;</span>;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的输入是通过自定义的程序(map)转为 doctext的，然后输出也是通过自定义的reduce做处理的</p>
+<p>SQL中可以只包含 map 部分没有reduce，反之也一样，如下就是一个例子：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> (
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">FROM</span> session_table
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">SELECT</span> sessionid, tstamp, <span style="color:#ff79c6">data</span>
+</span></span><span style="display:flex;"><span> DISTRIBUTE <span style="color:#ff79c6">BY</span> sessionid SORT <span style="color:#ff79c6">BY</span> tstamp
+</span></span><span style="display:flex;"><span>) a
+</span></span><span style="display:flex;"><span>REDUCE sessionid, tstamp, <span style="color:#ff79c6">data</span> <span style="color:#ff79c6">USING</span> <span style="color:#f1fa8c">&#39;session_reducer.sh&#39;</span>;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Hive 对于 insert的目标端也支持多种类型<br>
+可以插入到表中，也可以写到HDFS，或者本地文件中，如下：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> t1
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">INSERT</span> OVERWRITE <span style="color:#ff79c6">TABLE</span> t2
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">SELECT</span> t3.c2, <span style="color:#ff79c6">count</span>(<span style="color:#bd93f9">1</span>)
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">FROM</span> t3
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">WHERE</span> t3.c1 <span style="color:#ff79c6">&lt;=</span> <span style="color:#bd93f9">20</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> t3.c2
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">INSERT</span> OVERWRITE DIRECTORY <span style="color:#f1fa8c">&#39;/output_dir&#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">SELECT</span> t3.c2, <span style="color:#ff79c6">avg</span>(t3.c1)
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">FROM</span> t3
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">WHERE</span> t3.c1 <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">20</span> <span style="color:#ff79c6">AND</span> t3.c1 <span style="color:#ff79c6">&lt;=</span> <span style="color:#bd93f9">30</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> t3.c2
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">INSERT</span> OVERWRITE <span style="color:#ff79c6">LOCAL</span> DIRECTORY <span style="color:#f1fa8c">&#39;/home/dir&#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">SELECT</span> t3.c2, <span style="color:#ff79c6">sum</span>(t3.c1)
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">FROM</span> t3
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">WHERE</span> t3.c1 <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">30</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> t3.c2;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Hive这个产品在设计的时候，考虑到了公司的遗留数据处理问题，而把处理数据的细节(序列化、反序列化)交给用户了<br>
+并以jar包的形式导入，这么设计整个产品就更开放了 <br>
+另外为了照顾到更高级的用户，在SQL中也可以嵌入map-reduce的脚本<br>
+因为Hive本身是基于Map-Reduce的，但是做了更高层的封装，但它并没有完全关上，而是提供了一个入口，让用户也可以直接执行M-R
+Hive的字段类型是任意嵌套结构的，这种结构设计比较有意思，可以支持非常复杂的数据结构<br>
+从Hive的设计看</p>
+<ul>
+<li>应该是在公司层面做了大量的调研</li>
+<li>主要是面向使用SQL的分析人员(大部分用户)，也照顾了小部分用户(使用MapReduce的用户)</li>
+<li>还考虑了遗留数据和复杂结构的处理</li>
+<li>从技术上来说很难，可能也不需要完全兼容标准SQL，所以这个SQL就不是标准SQL了</li>
+</ul>
+<h2 id="数据存储序列化和文件格式">数据存储、序列化和文件格式</h2>
+<p>表在Hive中只是一个逻辑概念，Hive表的数据和HDFS上的目录管理，而管理的信息则存在元数据中<br>
+数据到HDFS的映射有这么几种：</p>
+<ul>
+<li>Table，对应到HDFS的目录</li>
+<li>Partitions，相当于一个表在HDFS上的子目录</li>
+<li>Buckets，分区或者表中的文件</li>
+</ul>
+<p>table的完整路径是：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">&lt;</span>warehouse_root_directory<span style="color:#ff79c6">&gt;/</span>test_table   
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中 <code>&lt;warehouse_root_directory&gt;</code>的默认路径为：<code>/user/hive/warehouse</code></p>
+<p>分区表的创建语法如下：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> test_part(c1 string, c2 <span style="color:#8be9fd;font-style:italic">int</span>)
+</span></span><span style="display:flex;"><span>PARTITIONED <span style="color:#ff79c6">BY</span> (ds string, hr <span style="color:#8be9fd;font-style:italic">int</span>);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个表的存储路径为：<code>/user/hive/warehouse/test_part</code><br>
+Hive的分区列并非真实存在数据文件中，它仅仅是编码到 HDFS 的路径中了<br>
+当然 元数据中仍然会存储分区的列信息</p>
+<p>分区可以通过下面SQL创建：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> OVERWRITE <span style="color:#ff79c6">TABLE</span>
+</span></span><span style="display:flex;"><span> test_part PARTITION(ds<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;2009-01-01&#39;</span>, hr<span style="color:#ff79c6">=</span><span style="color:#bd93f9">12</span>)
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> t;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ALTER</span> <span style="color:#ff79c6">TABLE</span> test_part
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">ADD</span> PARTITION(ds<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;2009-02-02&#39;</span>, hr<span style="color:#ff79c6">=</span><span style="color:#bd93f9">11</span>);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面两个SQL会分别创建下面两个目录：</p>
+<ul>
+<li>/user/hive/warehouse/test_part/ds=2009-01-01/hr=12</li>
+<li>/user/hive/warehouse/test_part/ds=2009-02-02/hr=11</li>
+</ul>
+<p>Hive的编译器会根据分区，也就是目录信息，做列裁剪，这样在scan的时候会忽略大量的目录，可以大幅提高性能</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> test_part
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> ds<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;2009-02-02&#39;</span> <span style="color:#ff79c6">AND</span> hr<span style="color:#ff79c6">=</span><span style="color:#bd93f9">11</span>;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面的SQL只会扫描<code>/user/hive/warehouse/test_part/ds=2009-01-01/hr=12</code> 这一个分区，这样效率就提高了</p>
+<p>Hive还支持分桶，下面的SQL就是在32个分桶文件中只查询一个，这样对于分析的采样特别有效，因为底层是hash过滤的</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> t TABLESAMPLE(<span style="color:#bd93f9">2</span> <span style="color:#ff79c6">OUT</span> <span style="color:#ff79c6">OF</span> <span style="color:#bd93f9">32</span>);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Hive还可以支持外部表，也就是在建表的时候指定<code>LOCATION</code>，外部表删除时只会删除元数据信息，而不会真正删除外部数据</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">EXTERNAL</span> <span style="color:#ff79c6">TABLE</span> test_extern(c1 string, c2 <span style="color:#8be9fd;font-style:italic">int</span>)
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">LOCATION</span> <span style="color:#f1fa8c">&#39;/user/mytables/mydata&#39;</span>;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>默认的序列化为<code>LazySerDe</code>，这个类实现类<code>SerDe</code>接口<br>
+只有在需要时才会序列化<br>
+这个序列化类假设数据存储在文件中，并使用指定的分隔符来分割数据和行 <br>
+比如，可以这么指定字段、行、list中元素、map中的元素不同的分隔符<br>
+分隔符</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> test_delimited(c1 string, c2 <span style="color:#8be9fd;font-style:italic">int</span>，
+</span></span><span style="display:flex;"><span>	c3 list<span style="color:#ff79c6">&lt;</span><span style="color:#ff79c6">map</span><span style="color:#ff79c6">&lt;</span>string, <span style="color:#8be9fd;font-style:italic">int</span><span style="color:#ff79c6">&gt;&gt;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">ROW</span> FORMAT DELIMITED
+</span></span><span style="display:flex;"><span>    FIELDS TERMINATED <span style="color:#ff79c6">BY</span> <span style="color:#f1fa8c">&#39;\002&#39;</span>
+</span></span><span style="display:flex;"><span>    LINES TERMINATED <span style="color:#ff79c6">BY</span> <span style="color:#f1fa8c">&#39;\012&#39;</span>;
+</span></span><span style="display:flex;"><span>    COLLECTION ITEMS TERMINATED <span style="color:#ff79c6">BY</span> <span style="color:#f1fa8c">&#39;\003&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">MAP</span> KEYS TERMINATED <span style="color:#ff79c6">BY</span> <span style="color:#f1fa8c">&#39;\004&#39;</span>;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>字段使用ASCII字符002 ctrl+B分割</li>
+<li>行使用012，ctrl+L 分割</li>
+<li>使用ASCII 003 来分割list中的每个元素</li>
+<li>使用004来分割map中的元素</li>
+</ul>
+<p>Hive还提供了基于正则表达式的 序列化</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">add</span> jar <span style="color:#f1fa8c">&#39;hive_contrib.jar&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> apachelog(
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">host</span> string,
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">identity</span> string,
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">user</span> string,
+</span></span><span style="display:flex;"><span> time string,
+</span></span><span style="display:flex;"><span> request string,
+</span></span><span style="display:flex;"><span> status string,
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">size</span> string,
+</span></span><span style="display:flex;"><span> referer string,
+</span></span><span style="display:flex;"><span> agent string)
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">ROW</span> FORMAT SERDE
+</span></span><span style="display:flex;"><span> <span style="color:#f1fa8c">&#39;org.apache.hadoop.hive.contrib.serde2.RegexSerDe&#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">WITH</span> SERDEPROPERTIES(
+</span></span><span style="display:flex;"><span> <span style="color:#f1fa8c">&#39;input.regex&#39;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;([^ ]*) ([^ ]*) ([^ ]*) (-|\\[[^\\]]*\\]) ([^
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">\&#34;]*|\&#34;[^\&#34;]*\&#34;) (-|[0-9]*) (-|[0-9]*)(?: ([^ \&#34;]*|\&#34;[^\&#34;]*\&#34;) ([^
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">\&#34;]*|\&#34;[^\&#34;]*\&#34;))?&#39;</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#f1fa8c">&#39;output.format.string&#39;</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;%1$s %2$s %3$s %4$s %5$s %6$s
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c">%7$s %8$s %9$s&#39;</span>);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里使用了<code>input.regex</code>对输入的数据做正则拆分<br>
+然后用<code>output.format.string</code>将拆分后的数据写入到对应的字段中</p>
+<p>Hadoop文件可以用各种格式来存储，如 文件、二进制、RCF等</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">CREATE</span> <span style="color:#ff79c6">TABLE</span> dest1(<span style="color:#ff79c6">key</span> <span style="color:#8be9fd;font-style:italic">INT</span>, value STRING)
+</span></span><span style="display:flex;"><span> STORED <span style="color:#ff79c6">AS</span>
+</span></span><span style="display:flex;"><span> INPUTFORMAT
+</span></span><span style="display:flex;"><span> <span style="color:#f1fa8c">&#39;org.apache.hadoop.mapred.SequenceFileInputFormat&#39;</span>
+</span></span><span style="display:flex;"><span> OUTPUTFORMAT
+</span></span><span style="display:flex;"><span> <span style="color:#f1fa8c">&#39;org.apache.hadoop.mapred.SequenceFileOutputFormat&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>像上面的方式，就指定了输入、输出为 二进制格式，当然也可以自定义文件格式，只需要实现：</p>
+<ul>
+<li>FileInputFormat</li>
+<li>FileOutputFormat</li>
+</ul>
+<p>实现完后，将它们打成 jar 包，然后在建表的时候引入就行了，这种方式跟 实现自定义的 SerDe 类似</p>
+<p>从论文的这章描述来看</p>
+<ul>
+<li>Hive确实跟传统的关系数仓不同，它的文件是存储在HDFS之上，所以其表结构只是逻辑的，最终到HDFS上都是目录格式</li>
+<li>Hive可以创建分区，这是逻辑列，只是在目录上出现，并非真实数据，但通过列裁剪可以大幅提供性能</li>
+<li>Facebook内部可能有大量的分析需求，所以分桶这个功能对于数据采用非常有用</li>
+<li>Hive在设计的时候就很开放，考虑到了HDFS上不同的文件格式，所以提供了不同的输入、输出格式，并可以自定义文件格式</li>
+<li>同理，Hive也提供了各种序列化的方式，也支持自定义</li>
+<li>可以看出Hive的SQL底层其实跟普通数据库差别非常大，但是它在设计的时候就充分考虑到了存储文件的特点</li>
+<li>对于上层应用的使用尽可能接近SQL，同时又提供了很多的开放接口，方便自定义</li>
+</ul>
+<h2 id="系统架构和组件">系统架构和组件</h2>
+<p>Hive包含了下面这些组件：</p>
+<ul>
+<li>Metastore，存储了系统的catalog，表、列、分区的元数据信息</li>
+<li>Driver，管理hive sql的生命周期，也维持了session处理和session统计信息</li>
+<li>Query Compiler，将hive sql编译为无环图的 map/reduce 任务</li>
+<li>Execution Engine，执行由编译器生成的任务，并按照指定顺序执行，底层是跟Hadoop实例交互</li>
+<li>HiveServer，提供thrift接口和JDBC/ODBC server，用来整合hive和其他应用</li>
+<li>Clients，包括命令行，web UI，JDBC/ODBC 驱动</li>
+<li>扩展的接口，包括 SerDe、ObjectInspector接口，以及UDF、UDAF接口</li>
+</ul>
+<p>
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/03/Hive%E8%AE%BA%E6%96%87/1.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/03/Hive%E8%AE%BA%E6%96%87/1.jpg" />
+        </a>
+    
+Hive 通过CLI、web UI、thrift、jdbc等 来提交hive sql <br>
+之后驱动会把查询语句交给编译器，编译器会做一些语法检查、语法校验，然后将元数据跟解析的逻辑计划绑定 <br>
+之后是优化阶段，hive内置了一些简单的优化规则，最终会生成一个优化后的DAG map/reduce 和HDFS任务<br>
+执行引擎按照依赖关系的顺序来执行这些任务</p>
+<p>Hive的元数据库管理 表结构、分区信息、类型、数据路径等等 <br>
+为了保证低延迟，Facebook选用MySQL作为Hive的元数据存储库，当然也可以切换到其他关系型数据库<br>
+元数据库非常重要，就是它把Hadoop上的数据映射为逻辑的表<br>
+map、reduce任务需要的元信息由XML传递，而这些XML是由编译器生成的</p>
+<p>Hive的编译器使用元数据来编译查询语句，生成逻辑计划，这些步骤跟传统的关系型数据很类似<br>
+整个过程如下：</p>
+<ul>
+<li>语法解析，Hive用ANTLR做的词语、语法解析</li>
+<li>类型检查和语法分析，从元数据库中读取表信息做绑定，再做类型检查，之后将AST转为 query block(QB) tree</li>
+<li>将嵌套查询转为QB树的父子关系</li>
+<li>优化，由一些转换规则组成，将一个转换变为另一个转换，想要添加自己的优化规则，只需要继承 Transform 接口</li>
+<li>DAG遍历的时候牵扯到5个接口：Node、GraphWalker、Dispatcher、Rule、Processor</li>
+<li>转换过程是对DAG遍历，将满足某个条件或规则时调用对应的规则</li>
+<li>Dispatcher 维护了 Rules 到 Processors 的映射关系</li>
+<li>DAG中的操作符实现了Node接口</li>
+<li>GraphWalker负责遍历，当Node节点被访问时，就会调用对应的Processors</li>
+</ul>
+<p>整个优化过程如下：
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/03/Hive%E8%AE%BA%E6%96%87/2.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/03/Hive%E8%AE%BA%E6%96%87/2.jpg" />
+        </a>
+    <br>
+Fig. 2: Flowchart for typical transformation during optimization</p>
+<p>优化内容包括：</p>
+<ul>
+<li>列裁剪</li>
+<li>谓词下推</li>
+<li>分区裁剪</li>
+<li>map端join，对于小表就直接复制到所有的map端做join</li>
+<li>join重排序</li>
+</ul>
+<p>map端join的可以通过一个提示来触发</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#6272a4">/*+ MAPJOIN(t2) */</span> t1.c1, t2.c1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> t1 <span style="color:#ff79c6">JOIN</span> t2 <span style="color:#ff79c6">ON</span>(t1.c2 <span style="color:#ff79c6">=</span> t2.c2);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>map端join可以通过参数设置</p>
+<ul>
+<li>hive.mapjoin.size.key</li>
+<li>hive.mapjoin.cache.numrows</li>
+</ul>
+<p>除了 map端join的提示，Hive还有下面一些提示</p>
+<ul>
+<li>处理 group by，真实世界的数据可能分布的不均匀导致效率低，可以通过 2个阶段的map/reduce来优化</li>
+<li>首先将 数据随机分布到 reduce端并计算部分聚合</li>
+<li>在第二阶段，这些部分聚合数据被分布到 group by列的reduce</li>
+<li>由于部分聚合的的数量比 数据集要小很多，所以性能会有大幅提升</li>
+</ul>
+<p>使用下面方式来触发：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">set</span> hive.groupby.skewindata<span style="color:#ff79c6">=</span><span style="color:#ff79c6">true</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> t1.c1, <span style="color:#ff79c6">sum</span>(t1.c2)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> t1
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> t1;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>map端基于 hash的部分聚合</p>
+<ul>
+<li>基于hash的部分聚合可以有效减少map发往reduce的数据</li>
+<li>从而也减少了merge、sort的数据量</li>
+<li>通过参数： hive.map.aggr.hash.percentmemory 来控制</li>
+<li>另一个参数：hive.map.aggr.hash.min.reduction</li>
+</ul>
+<p>优化阶段之后会生成物理执行计划<br>
+比如处理group by倾斜数据的情况，会生成 两个map/reduce，后会有一个HDFS任务，将数据移动到正确的路径<br>
+整个物理计划就是一个DAG，每个任务封装了部分计划</p>
+<p>下面是一个多表插入查询，以及对应的物理计划</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> (<span style="color:#ff79c6">SELECT</span> a.status, b.school, b.gender
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">FROM</span> status_updates a <span style="color:#ff79c6">JOIN</span> profiles b
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">ON</span> (a.userid <span style="color:#ff79c6">=</span> b.userid
+</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">AND</span> a.ds<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;2009-03-20&#39;</span> )) subq1
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> OVERWRITE <span style="color:#ff79c6">TABLE</span> gender_summary
+</span></span><span style="display:flex;"><span> PARTITION(ds<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;2009-03-20&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> subq1.gender, <span style="color:#ff79c6">COUNT</span>(<span style="color:#bd93f9">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> subq1.gender
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">INSERT</span> OVERWRITE <span style="color:#ff79c6">TABLE</span> school_summary
+</span></span><span style="display:flex;"><span> PARTITION(ds<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;2009-03-20&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> subq1.school, <span style="color:#ff79c6">COUNT</span>(<span style="color:#bd93f9">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> subq1.school 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>一个join后面跟了两个聚合函数，然后是一个多表的插入操作，join只会执行一次   <br>
+对应的物理计划如下：<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/03/Hive%E8%AE%BA%E6%96%87/3.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/03/Hive%E8%AE%BA%E6%96%87/3.jpg" />
+        </a>
+    
+上图有 三个map/reduce，边缘表示 两个操作之间的数据流转<br>
+在同一个map/reduce任务内，mapper操作执行 在重分区ReduceSinkOperator 下面的部分，上面的是reducer部分<br>
+重分区是由执行引擎执行的
+第一个map/reduce将两个临时文件写入到HDFS，tmp1和tmp2，他们被第二、第三个map/reduce继续使用，而后面的任务需要等待第一个map/reduce执行完</p>
+<p>所有的任务是按依赖顺序执行的，只有当父依赖全部执行完后才会执行当前任务<br>
+map/reduce任务首先会将查询计划的一部分 序列化到 plan.xml 中<br>
+文件随后被添加到 任务的 job cache中<br>
+而 ExecMapper、ExecReduers 是由Hadoop创建的<br>
+每个class都会反序列化plan.xml，并执行DAG的一部分，并将结果写入到临时文件中 <br>
+整个查询完成，会将临时路径的数据move到执行的位置</p>
+<p>根据这章的论文：</p>
+<ul>
+<li>Hive的那些组件基本都不是原创的，很多都是基于现有组件</li>
+<li>MySQL、Hadoop、map/reduce、thrift、ANTLR的语法解析、数据库的优化技术、分布式技术</li>
+<li>但是Hive创造性的在开源的Hadoop、map/reduce之上，增加了SQL这个高层的API</li>
+<li>同时借助编译技术、数据库技术，把上层的SQL，跟底层的Hadoop很好的整合了</li>
+<li>Hive就是把现有技术组合在一起，搞了一个发明创新，解决了本公司内部的很多真实需求</li>
+</ul>
+<h2 id="内部使用情况和总结">内部使用情况和总结</h2>
+<p>那个时候，Facebook的集群有 700TB的规模，每天增加5T的压缩数据(压缩比1:7)<br>
+每天都有 7500个job作业，75TB的数据处理量<br>
+集群中有一半的资源用于处理 adhoc 查询，剩下用于来处大屏报告<br>
+但是共享集群有一个挑战，可能会碰到各种各样的job，导致消耗了大量资源，从而使正常的查询报告也变得很慢<br>
+这主要是Hadoop的资源调度能力有点弱，目前唯一的解决办法是将 adhoc和查询报告所属的集群分开部署<br>
+集群上跑了各种job，从简单的总结job，到rollup、cube的job，再到高级的机器学习算法<br>
+系统上有老手也有新手，新手经过简单的培训就可以使用了<br>
+由于Hadoop的伸缩能力，这套系统的成本比传统数仓要小得多</p>
+<p>Hive相比Pig，提供了元数据功能，使得它更像一个传统的数仓<br>
+后面的工作包括增加更多的RBO、加入一些CBO、扩展更多的语法、跑TPC-H变得更工业化、支持更多的BI工具等等</p>
+
+			<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>相关文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2022/02/kudu%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91/">Kudu论文翻译</a></li>
+        
+        <li><a href="/post/2021/11/a-critique-of-ansi-sql-isolation-levels/">A Critique of ANSI SQL Isolation Levels论文</a></li>
+        
+        <li><a href="/post/2021/11/alluxio%E8%AE%BA%E6%96%87/">Alluxio论文</a></li>
+        
+        <li><a href="/post/2021/11/spark%E8%AE%BA%E6%96%87/">Spark论文</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/hive'>Hive</a></li>
+                
+                <li><a href='/tags/%E8%AE%BA%E6%96%87'>论文</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "hehe-1234/hugoblogtalks"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hehe-1234.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hehe-1234.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/06/bitweaving/" title="BitWeaving: Fast Scans for Main Memory Data Processing">BitWeaving: Fast Scans for Main Memory Data Processing</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/cache_conscious/" title="Cache Conscious Indexing for Decision-Support in Main Memory">Cache Conscious Indexing for Decision-Support in Main Memory</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/column_imprints/" title="Column Imprints: A Secondary Index Structure">Column Imprints: A Secondary Index Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/bitmap_index/" title="Bitmap Index Design and Evaluation ">Bitmap Index Design and Evaluation </a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/column_sketches/" title="Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation">Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" title="资源隔离修改配置动态加载">资源隔离修改配置动态加载</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.github.io/post/2023/05/optimal_column_layout_for_hybrid_workloads/" title="Optimal Column Layout for Hybrid Workloads">Optimal Column Layout for Hybrid Workloads</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (6)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (28)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (35)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E7%AE%97%E6%B3%95/">算法 (8)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (12)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">归档</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hehe-1234.github.io/years/2021%E5%B9%B4/">2021年 (22)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/years/2022%E5%B9%B4/">2022年 (53)</a></li>
+    
+    <li><a href="https://hehe-1234.github.io/years/2023%E5%B9%B4/">2023年 (38)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hehe-1234.github.io/tags/b%E6%A0%91/">B树 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/calcite/">calcite </a>
+    
+    <a href="https://hehe-1234.github.io/tags/cmu-database/">CMU-Database </a>
+    
+    <a href="https://hehe-1234.github.io/tags/flink/">flink </a>
+    
+    <a href="https://hehe-1234.github.io/tags/hana/">HANA </a>
+    
+    <a href="https://hehe-1234.github.io/tags/hive/">Hive </a>
+    
+    <a href="https://hehe-1234.github.io/tags/k8s/">k8s </a>
+    
+    <a href="https://hehe-1234.github.io/tags/kudu/">kudu </a>
+    
+    <a href="https://hehe-1234.github.io/tags/kyuubi/">Kyuubi </a>
+    
+    <a href="https://hehe-1234.github.io/tags/lakehouse/">Lakehouse </a>
+    
+    <a href="https://hehe-1234.github.io/tags/leveldb/">LevelDB </a>
+    
+    <a href="https://hehe-1234.github.io/tags/llvm/">LLVM </a>
+    
+    <a href="https://hehe-1234.github.io/tags/manacher/">Manacher </a>
+    
+    <a href="https://hehe-1234.github.io/tags/mapreduce/">MapReduce </a>
+    
+    <a href="https://hehe-1234.github.io/tags/mysql/">MySQL </a>
+    
+    <a href="https://hehe-1234.github.io/tags/newsql/">NewSQL </a>
+    
+    <a href="https://hehe-1234.github.io/tags/oceanbase/">OceanBase </a>
+    
+    <a href="https://hehe-1234.github.io/tags/paxos/">paxos </a>
+    
+    <a href="https://hehe-1234.github.io/tags/quick-sql/">quick-sql </a>
+    
+    <a href="https://hehe-1234.github.io/tags/raft/">raft </a>
+    
+    <a href="https://hehe-1234.github.io/tags/scala/">scala </a>
+    
+    <a href="https://hehe-1234.github.io/tags/simd/">SIMD </a>
+    
+    <a href="https://hehe-1234.github.io/tags/snowflake/">snowflake </a>
+    
+    <a href="https://hehe-1234.github.io/tags/spark/">spark </a>
+    
+    <a href="https://hehe-1234.github.io/tags/teradata/">TeraData </a>
+    
+    <a href="https://hehe-1234.github.io/tags/unix/">unix </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">二叉树遍历 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%88%97%E5%AD%98/">列存 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%9B%9E%E6%BA%AF/">回溯 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%AD%98%E5%82%A8/">存储 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%AE%97%E6%B3%95/">算法 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%BC%93%E5%AD%98/">缓存 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E8%AE%BA%E6%96%87/">论文 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
+    
+    <a href="https://hehe-1234.github.io/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">RSS</h3>
+        <ul class="widget-list">
+            <li><a href="https://hehe-1234.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div>
+        &copy; 2023 <a href="https://hehe-1234.github.io/">技术博客 By 老王</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'GA ID', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+
+</html>
