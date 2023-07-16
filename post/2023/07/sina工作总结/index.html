@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>新浪工作总结 | 找工作中，以下是我的一些个人介绍和技术笔记</title>
+    <meta property="og:title" content="新浪工作总结 - 找工作中，以下是我的一些个人介绍和技术笔记">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2023-07-13T09:12:07&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2023-07-13T09:12:07&#43;08:00'>
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="新浪工作总结">
+        <meta name="author" content="隔壁老王">
+        
+    <meta property="og:url" content="https://find-job.xyz/post/2023/07/sina%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://find-job.xyz/">
+                        找工作中，以下是我的一些个人介绍和技术笔记
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://find-job.xyz/">首页</a>
+                    
+                    <a  href="https://find-job.xyz/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://find-job.xyz/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">新浪工作总结</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年7月13日
+        </date>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#公司产品介绍">公司产品介绍</a></li>
+        <li><a href="#工作内容">工作内容</a>
+          <ul>
+            <li><a href="#总体架构">总体架构</a></li>
+            <li><a href="#使用的技术">使用的技术</a></li>
+            <li><a href="#第-1-阶段java-平台搭建">第 1 阶段：Java 平台搭建</a></li>
+            <li><a href="#第-2-阶段对外开放">第 2 阶段：对外开放</a></li>
+            <li><a href="#第-3-阶段稳定性改进">第 3 阶段：稳定性改进</a></li>
+          </ul>
+        </li>
+        <li><a href="#主要工作业绩和贡献">主要工作业绩和贡献</a>
+          <ul>
+            <li><a href="#专利一种资源占用的统计方法及装置简单描述">专利：一种资源占用的统计方法及装置简单描述</a></li>
+            <li><a href="#基于paas平台的应用部署方法和装置">基于PAAS平台的应用部署方法和装置</a></li>
+            <li><a href="#一些原理分析的记录">一些原理分析的记录</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        
+        <div class="post-meta">
+            
+            <span class="post-meta meta-tags">
+                <ul class="clearfix">
+                    <a href='/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0'>读书笔记</a>
+                </ul>
+            </span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <h2 id="公司产品介绍">公司产品介绍</h2>
+<p>仿造谷歌 GAE 做的一款 PAAS 产品，是国内最早的 PAAS 产品<br>
+<a href="https://www.sinacloud.com/">产品主页</a></p>
+<p>主要客户</p>
+<ul>
+<li>传媒类:新浪娱乐，成都商报，河北卫视</li>
+<li>社交类:内推网，YOU+青年社区</li>
+<li>金融类:中信银行，东方证券</li>
+<li>移动类:天气通，掌上贵金属</li>
+</ul>
+<h2 id="工作内容">工作内容</h2>
+<h3 id="总体架构">总体架构</h3>
+<p>架构如下：<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/sae_1.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/sae_1.jpg" />
+        </a>
+    </p>
+<ul>
+<li>基于物理机之上，部署多个 JVM，每个 JVM 之上再运行一个 Jetty，Jetty 上面部署了多个用户的应用</li>
+<li>隔离策略包括了多层，每个用户单独账号读写路径分离</li>
+<li>使用 cgroup 控制资源，使用 LD_PRELOAD 给系统库打桩，JVM 方面使用 Java 自己的安全管理器</li>
+<li>再往上层的 Jetty 定义了一堆安全策略，同时增加一些门面类，通过禁止对这些门面类调用放射，隔离用户和 Jetty</li>
+<li>Jetty 中有平台的 SDK，通过 SDK 来访问各种服务</li>
+<li>运行期间会日志写入到 日志中心，将监控信息写入到监控中心，调用信息汇总到计费中心，用户 WAR 通过分布式代码管理系统导入</li>
+<li>多个 APP 由 Keeper 来管理，负责启动/停止等</li>
+</ul>
+<h3 id="使用的技术">使用的技术</h3>
+<h3 id="第-1-阶段java-平台搭建">第 1 阶段：Java 平台搭建</h3>
+<p>这个阶段是从 0 开始搭建 Java 平台，并推广试用<br>
+主要工作内容</p>
+<ul>
+<li>编写 Java 版本的几个核心客户端，实现最基本的 Java 平台环境</li>
+<li>做隔离，包括系统级别的用户隔离，基于 Java 安全管理器的隔离</li>
+<li>增加 Jetty 的扩展对接 Syslog，增加 Jetty 的 Facade</li>
+<li>跟阿里白帽子的几次攻防战，最后修改openjdk解决所有安全问题</li>
+<li>企业内部推广，对外推出邀请码试用</li>
+</ul>
+<h3 id="第-2-阶段对外开放">第 2 阶段：对外开放</h3>
+<p>这个阶段已经完全放开注册了，开始接一些大客户支持，增加更多功能<br>
+主要工作内容</p>
+<ul>
+<li>增加 Jetty 的分布式 Session 功能</li>
+<li>关注用户反馈 BBS 解决相关问题，做一些大客户支持</li>
+<li>将 KV 存储服务，从 Memcached 迁移到 HBase 并负责维护</li>
+<li>竞品调研</li>
+</ul>
+<h3 id="第-3-阶段稳定性改进">第 3 阶段：稳定性改进</h3>
+<p>因为扩张太快导致平台出现各种稳定性问题，后面不断提升平台稳定性<br>
+出现的各种故障</p>
+<ul>
+<li>整个机房停电没做异地容灾出现数据丢失问题(KV存储 和 MySQL)</li>
+<li>GoDaddy 域名续费问题，新浪法务没有及时通知导致一天整个平台域名都没法访问</li>
+<li>各种攻击事件，乌云在我们平台上然后整个平台频繁被攻击最后乌云迁走了</li>
+<li>因为雾霾导致GPS时钟失灵，机房所有的机器恢复到格林威治初始时间 1970 年</li>
+<li>物理机房交换器部署不当，接入层交换器流量过大 buffer 不够了，导致定期出现丢包</li>
+<li>运维没有良好的自动运维工具，运维脚本，很多是手动处理的，也导致了很多故障</li>
+</ul>
+<p>主要工作</p>
+<ul>
+<li>完善整个打包部署上线流程，完善测试用例、自动化测试，增加自动化运维，SLA 最后达到 99.98%</li>
+<li>KV 存储服务，增加 thrift 接口，可以对外其他语言</li>
+<li>尝试转向 Docker</li>
+<li>研究 Agent 探针工作开始平台的 APM 监控运维工作</li>
+<li>参与可信云认证、大数据联盟项目</li>
+<li>将工作上的一些创新发明申请了专利</li>
+</ul>
+<h2 id="主要工作业绩和贡献">主要工作业绩和贡献</h2>
+<p>主要业绩</p>
+<ul>
+<li>作为核心人员，参与了从无到有的 Java 平台发展过程，是 Java 平台的最主要贡献者</li>
+<li>维护了 KV 存储系统，保证了系统的稳定性</li>
+<li>在经历了 10 年一见的故障后，找回了很多丢失数据，帮助平台挽回很大损失</li>
+<li>工作期间有过两个创新的技术，帮助平台实现了易用性和稳定性，后将这两个创新申请了专利</li>
+</ul>
+<h3 id="专利一种资源占用的统计方法及装置简单描述">专利：一种资源占用的统计方法及装置简单描述</h3>
+<p>原理描述：通过扫描hbase的索引(包括一级索引和多级索引)然后统计出某个key范围内的数据大致占用情况<br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/sae_2.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/sae_2.jpg" />
+        </a>
+     <br>
+申请公布号：CN104765774A<br>
+申请号：2015101143651<br>
+申请公布日：2015-7-8<br>
+分类号：G06F17/30(2006.01)I</p>
+<h3 id="基于paas平台的应用部署方法和装置">基于PAAS平台的应用部署方法和装置</h3>
+<p>原理描述: 通过修改class文件常量池中的import类名称<br>
+比如将java.lang.FileInputStraem 改为了saex.lang.FileInputStream   <br>
+
+        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/sae_3.jpg">
+            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/sae_3.jpg" />
+        </a>
+     
+申请公布号：CN103942051A<br>
+申请号：2014101506665<br>
+申请公布日：2014-7-23<br>
+分类号：G06F9/44(2006.01)I</p>
+<h3 id="一些原理分析的记录">一些原理分析的记录</h3>
+<p>HBase 原理方面的记录</p>
+<ul>
+<li><a href="https://blog.csdn.net/hixiaoxiaoniao/article/details/80670614">Hbase-HMaster架构</a></li>
+<li><a href="https://blog.csdn.net/hixiaoxiaoniao/article/details/80670631">HBase-RegionServer架构</a></li>
+<li><a href="https://blog.csdn.net/hixiaoxiaoniao/article/details/80670673">HBase-客户端请求</a></li>
+<li><a href="https://blog.csdn.net/hixiaoxiaoniao/article/details/80670698">HBase-服务端处理请求的过程</a></li>
+<li><a href="https://blog.csdn.net/hixiaoxiaoniao/article/details/80659432">HBase-HFile分析</a></li>
+<li><a href="https://blog.csdn.net/hixiaoxiaoniao/article/details/80670723">HBase-HFile的读写操作</a></li>
+<li><a href="https://blog.csdn.net/hixiaoxiaoniao/article/details/80670733">HBase-WAL相关线程处理逻辑</a></li>
+<li><a href="https://blog.csdn.net/hixiaoxiaoniao/article/details/80670749">HBase-HLog分析</a></li>
+<li><a href="https://blog.csdn.net/hixiaoxiaoniao/article/details/80681526">HBase-压缩和分割原理</a></li>
+<li><a href="https://blog.csdn.net/hixiaoxiaoniao/article/details/80681637">HBase-cache相关</a></li>
+<li><a href="https://blog.csdn.net/hixiaoxiaoniao/article/details/80771622">HBase-数据恢复</a></li>
+</ul>
+
+			<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>相关文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2023/07/borland%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/">Borland工作总结</a></li>
+        
+        <li><a href="/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/">资源隔离修改配置动态加载</a></li>
+        
+        <li><a href="/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/">资源隔离设计</a></li>
+        
+        <li><a href="/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/">镜像合并&amp;配置文件同步</a></li>
+        
+        <li><a href="/post/2022/09/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/">高可用设计</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95'>工作记录</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "hehe-1234/hugoblogtalks"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://find-job.xyz/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://find-job.xyz/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/07/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/" title="个人工作简介">个人工作简介</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/07/%E6%9F%90%E5%A4%A7%E5%9E%8Btob%E4%BC%81%E4%B8%9A/" title="某大型toB 企业">某大型toB 企业</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/07/%E6%9F%90%E4%BA%92%E8%81%94%E7%BD%91&#43;%E4%BC%81%E4%B8%9A/" title="大型互联网&#43; 企业">大型互联网&#43; 企业</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/07/sina%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" title="新浪工作总结">新浪工作总结</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/07/borland%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" title="Borland工作总结">Borland工作总结</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/07/presto%E5%9C%A8%E5%90%84%E5%A4%A7%E5%85%AC%E5%8F%B8%E7%9A%84%E5%BA%94%E7%94%A8/" title="Presto在各大公司的应用">Presto在各大公司的应用</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/06/bitweaving/" title="BitWeaving: Fast Scans for Main Memory Data Processing">BitWeaving: Fast Scans for Main Memory Data Processing</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/05/cache_conscious/" title="Cache Conscious Indexing for Decision-Support in Main Memory">Cache Conscious Indexing for Decision-Support in Main Memory</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/05/column_imprints/" title="Column Imprints: A Secondary Index Structure">Column Imprints: A Secondary Index Structure</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://find-job.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (6)</a></li>
+    
+    <li><a href="https://find-job.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
+    
+    <li><a href="https://find-job.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (29)</a></li>
+    
+    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (35)</a></li>
+    
+    <li><a href="https://find-job.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
+    
+    <li><a href="https://find-job.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (8)</a></li>
+    
+    <li><a href="https://find-job.xyz/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
+    
+    <li><a href="https://find-job.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
+    
+    <li><a href="https://find-job.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
+    
+    <li><a href="https://find-job.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (17)</a></li>
+    
+    <li><a href="https://find-job.xyz/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">归档</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://find-job.xyz/years/2021%E5%B9%B4/">2021年 (22)</a></li>
+    
+    <li><a href="https://find-job.xyz/years/2022%E5%B9%B4/">2022年 (53)</a></li>
+    
+    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (44)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://find-job.xyz/tags/b%E6%A0%91/">B树 </a>
+    
+    <a href="https://find-job.xyz/tags/calcite/">calcite </a>
+    
+    <a href="https://find-job.xyz/tags/cmu-database/">CMU-Database </a>
+    
+    <a href="https://find-job.xyz/tags/flink/">flink </a>
+    
+    <a href="https://find-job.xyz/tags/hana/">HANA </a>
+    
+    <a href="https://find-job.xyz/tags/hive/">Hive </a>
+    
+    <a href="https://find-job.xyz/tags/k8s/">k8s </a>
+    
+    <a href="https://find-job.xyz/tags/kudu/">kudu </a>
+    
+    <a href="https://find-job.xyz/tags/kyuubi/">Kyuubi </a>
+    
+    <a href="https://find-job.xyz/tags/lakehouse/">Lakehouse </a>
+    
+    <a href="https://find-job.xyz/tags/leveldb/">LevelDB </a>
+    
+    <a href="https://find-job.xyz/tags/llvm/">LLVM </a>
+    
+    <a href="https://find-job.xyz/tags/manacher/">Manacher </a>
+    
+    <a href="https://find-job.xyz/tags/mapreduce/">MapReduce </a>
+    
+    <a href="https://find-job.xyz/tags/mysql/">MySQL </a>
+    
+    <a href="https://find-job.xyz/tags/newsql/">NewSQL </a>
+    
+    <a href="https://find-job.xyz/tags/oceanbase/">OceanBase </a>
+    
+    <a href="https://find-job.xyz/tags/paxos/">paxos </a>
+    
+    <a href="https://find-job.xyz/tags/presto/">Presto </a>
+    
+    <a href="https://find-job.xyz/tags/quick-sql/">quick-sql </a>
+    
+    <a href="https://find-job.xyz/tags/raft/">raft </a>
+    
+    <a href="https://find-job.xyz/tags/scala/">scala </a>
+    
+    <a href="https://find-job.xyz/tags/simd/">SIMD </a>
+    
+    <a href="https://find-job.xyz/tags/snowflake/">snowflake </a>
+    
+    <a href="https://find-job.xyz/tags/spark/">spark </a>
+    
+    <a href="https://find-job.xyz/tags/teradata/">TeraData </a>
+    
+    <a href="https://find-job.xyz/tags/unix/">unix </a>
+    
+    <a href="https://find-job.xyz/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找 </a>
+    
+    <a href="https://find-job.xyz/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">二叉树遍历 </a>
+    
+    <a href="https://find-job.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
+    
+    <a href="https://find-job.xyz/tags/%E5%88%97%E5%AD%98/">列存 </a>
+    
+    <a href="https://find-job.xyz/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
+    
+    <a href="https://find-job.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
+    
+    <a href="https://find-job.xyz/tags/%E5%9B%9E%E6%BA%AF/">回溯 </a>
+    
+    <a href="https://find-job.xyz/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
+    
+    <a href="https://find-job.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
+    
+    <a href="https://find-job.xyz/tags/%E5%AD%98%E5%82%A8/">存储 </a>
+    
+    <a href="https://find-job.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
+    
+    <a href="https://find-job.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
+    
+    <a href="https://find-job.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
+    
+    <a href="https://find-job.xyz/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
+    
+    <a href="https://find-job.xyz/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
+    
+    <a href="https://find-job.xyz/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
+    
+    <a href="https://find-job.xyz/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
+    
+    <a href="https://find-job.xyz/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
+    
+    <a href="https://find-job.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
+    
+    <a href="https://find-job.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
+    
+    <a href="https://find-job.xyz/tags/%E7%AE%97%E6%B3%95/">算法 </a>
+    
+    <a href="https://find-job.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
+    
+    <a href="https://find-job.xyz/tags/%E7%BC%93%E5%AD%98/">缓存 </a>
+    
+    <a href="https://find-job.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
+    
+    <a href="https://find-job.xyz/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
+    
+    <a href="https://find-job.xyz/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
+    
+    <a href="https://find-job.xyz/tags/%E8%AE%BA%E6%96%87/">论文 </a>
+    
+    <a href="https://find-job.xyz/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
+    
+    <a href="https://find-job.xyz/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">RSS</h3>
+        <ul class="widget-list">
+            <li><a href="https://find-job.xyz/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div>
+        &copy; 2023 <a href="https://find-job.xyz/">找工作中，以下是我的一些个人介绍和技术笔记 By 老王</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'GA ID', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+
+</html>
