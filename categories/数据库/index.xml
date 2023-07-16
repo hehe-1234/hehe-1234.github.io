@@ -313,14 +313,5 @@
       <description>TPC-DS的安装和测试</description>
     </item>
     
-    <item>
-      <title>A Critique of ANSI SQL Isolation Levels论文</title>
-      <link>https://find-job.xyz/post/2021/11/a-critique-of-ansi-sql-isolation-levels/</link>
-      <pubDate>Fri, 26 Nov 2021 13:06:19 +0800</pubDate>
-      
-      <guid>https://find-job.xyz/post/2021/11/a-critique-of-ansi-sql-isolation-levels/</guid>
-      <description>读A Critique of ANSI SQL Isolation Levels论文</description>
-    </item>
-    
   </channel>
 </rss>
