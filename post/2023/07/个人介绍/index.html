@@ -111,32 +111,49 @@
         <div class="post-content">
             <h1 id="某大型-tob-企业">某大型 toB 企业</h1>
 <p>公司主打的湖仓一体查询引擎，作为其他产品的底座支撑，<a href="/post/2023/07/%E6%9F%90%E5%A4%A7%E5%9E%8Btob%E4%BC%81%E4%B8%9A/">【工作详细介绍】</a><br>
-主要工作</p>
+主要工作内容</p>
 <ul>
-<li>参与公司核心产品的主要功能设计</li>
-<li>包括：元数据管理、HiveServer、高可用等</li>
-<li>调研商用数据库替换方案，参与了工业级 分布式数据库 的调研和维护</li>
+<li>参与公司核心产品的主要功能设计，基于 Spark、Delta-Lake 实现湖仓一体查询引擎</li>
+<li>设计产品的几个核心功能：元数据管理、HiveServer、高可用等</li>
+<li>调研商用数据库替换方案，参与了工业级 分布式数据库 的调研和部分维护</li>
 </ul>
-<p>按模块划分
+<p>按模块划分</p>
+<ul>
+<li>扩展了 Spark，增加了元数据管理、对接各种数据源，以及自定义的一些优化规则</li>
+<li>按照集群的规模分为小、中、大版本，配合资源控制实现隔离机制</li>
+<li>可以自己管理存储，存储格式为 Delta-Lake，也可以将数据存储在外部
 
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/gs_1.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/gs_1.jpg" />
         </a>
-    </p>
-<p>架构
+    </li>
+</ul>
+<p>架构</p>
+<ul>
+<li>参考了 Kyuubi，使用了两层调度，实现可高可用</li>
+<li>不同集群被划分到 不同的 k8s namespace 下</li>
+<li>支持权限认证，SQL 下推
 
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/gs_2.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/gs_2.jpg" />
         </a>
-    </p>
+    </li>
+</ul>
 <h1 id="某大型互联网-企业">某大型互联网+ 企业</h1>
 <p>一款企业内部的数据同步产品，<a href="/post/2023/07/%E6%9F%90%E4%BA%92%E8%81%94%E7%BD%91+%E4%BC%81%E4%B8%9A/">【工作详细介绍】</a><br>
 为公司多个大业务部门内，部门间提供数据同步功能<br>
-主要工作</p>
+主要工作内容</p>
 <ul>
 <li>开发了适应公司业务需求的同步系统，大幅度减轻了之前错乱复杂的同步流程</li>
 <li>持续迭代维护了系统的稳定性</li>
-<li>跟其他部门的实时同步整合成一个更大的系统，之后开源出去了
+<li>跟其他部门的实时同步整合成一个更大的系统，之后开源出去了</li>
+</ul>
+<p>产品架构</p>
+<ul>
+<li>用户可以通过浏览器访问，也可以通过 API 的方式调用</li>
+<li>Proxy 前面还有一个负载均衡，请求落到 Proxy 之后，会读取源数据库，根据数据量大小做适当拆分</li>
+<li>将整个任务拆分成多个子任务，然后调用不同的 DataX 节点来读取、写入数据</li>
+<li>DataX 节点在写入过程中，会不断监控源节点/目标阶段状态(通过调用监控接口)，来调整自身的流量
 
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/ucar_1.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/ucar_1.jpg" />
@@ -144,45 +161,74 @@
     </li>
 </ul>
 <h1 id="某创业公司">某创业公司</h1>
-<p>主要业绩</p>
+<p>主要工作内容</p>
 <ul>
 <li>在公司最危机时刻，接手了前员工遗留的项目，并熟悉项目将产品慢慢稳定</li>
 <li>持续改进，迭代开发、测试、发布、监控流程和规范，提升产品访问性能</li>
 </ul>
 <h1 id="新浪网">新浪网</h1>
 <p>仿造谷歌 GAE 做的一款 PAAS 产品，是国内最早的 PAAS 产品，<a href="/post/2023/07/sina%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/">【工作详细介绍】</a><br>
-主要业绩</p>
+主要工作内容</p>
 <ul>
 <li>作为核心人员，参与了从无到有的 Java 平台发展过程，是 Java 平台的最主要贡献者</li>
 <li>维护了 KV 存储系统，保证了系统的稳定性</li>
 <li>在经历了 10 年一见的故障后，找回了很多丢失数据，帮助平台挽回很大损失</li>
-<li>工作期间有过两个创新的技术，帮助平台实现了易用性和稳定性，后将这两个创新申请了专利
+<li>工作期间有过两个创新的技术，帮助平台实现了易用性和稳定性，后将这两个创新申请了专利</li>
+</ul>
+<p>产品架构</p>
+<ul>
+<li>基于物理机之上，部署多个 JVM，每个 JVM 之上再运行一个 Jetty，Jetty 上面部署了多个用户的应用</li>
+<li>隔离策略包括了多层，每个用户单独账号读写路径分离</li>
+<li>使用 Cgroup 控制资源，使用 LD_PRELOAD 给系统库打桩，JVM 方面使用 Java 自己的安全管理器</li>
+<li>再往上层的 Jetty 定义了一堆安全策略，同时增加一些门面类，通过禁止对这些门面类调用放射，隔离用户和 Jetty</li>
+<li>Jetty 中有平台的 SDK，通过 SDK 来访问各种服务</li>
+<li>运行期间会日志写入到 日志中心，将监控信息写入到监控中心，调用信息汇总到计费中心，用户 WAR 通过分布式代码管理系统导入</li>
+<li>多个 APP 由 Keeper 来管理，负责启动/停止等
 
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/sae_1.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/sae_1.jpg" />
         </a>
     </li>
 </ul>
-<p>两个专利<br>
-通过扫描hbase的索引(包括一级索引和多级索引)然后统计出某个key范围内的数据大致占用情况 <br>
+<p>专利 1 原理描述</p>
+<ul>
+<li>通过扫描hbase的索引(包括一级索引和多级索引)然后统计出某个key范围内的数据大致占用情况</li>
+<li>根索引、中间索引只占文件总量的 5% 不到，剩下都是数据部分，而数据不会被扫描到</li>
+<li>扫描的是 HBase 的 HFile 文件，多个 HFile 之间不相关，并且是只读的</li>
+<li>通过并行扫描多个文件并汇总统计，可以在几分钟内统计几百G 数据，误差可以控制在 5% 左右   <br>
 
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/sae_2.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/sae_2.jpg" />
         </a>
-    </p>
-<p>通过修改class文件常量池中的import类名称<br>
+    </li>
+</ul>
+<p>专利 2 原理描述:</p>
+<ul>
+<li>通过修改class文件常量池中的import类名称</li>
+<li>比如将java.lang.FileInputStraem 改为了saex.lang.FileInputStream</li>
+<li>替换后实际调用的是 saex 类，这个类再调用 平台的分布式文件存储</li>
+<li>这样用户不用修改代码，可以平滑迁移<br>
 
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/sae_3.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/sae_3.jpg" />
         </a>
-    </p>
+    </li>
+</ul>
 <h1 id="borland">Borland</h1>
 <p>toB 项目，用户主要是县一级的电信、移动，<a href="/post/2023/07/borland%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/">【工作详细介绍】</a><br>
 这些企业将他们的 计费系统 就运行在我们的服务器上面<br>
 主要工作内容</p>
 <ul>
 <li>测试选型，基于开源应用服务器做二次开发</li>
-<li>开发 Web 管理界面，深入研究 Web 模块
+<li>开发 Web 管理界面，深入研究 Web 模块</li>
+</ul>
+<p>产品架构</p>
+<ul>
+<li>Web组件，类似于Tomcat、Jetty</li>
+<li>EJB，这种组件现在用的很少，尤其互联网企业几乎不会用，但他相当于是现在的RPC框架</li>
+<li>JMS，消息队列，上图中将其归纳为 EJB组件了，之前的架构图是分离的，相当于现在的开源消息队列</li>
+<li>其他的包括安全、事务、JNDI，也是应用服务器内很重要的组件</li>
+<li>最底层的是一套可插拔的框架，用来管理上述的各种大小模块
 
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/bes_1.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/07/%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/bes_1.jpg" />
