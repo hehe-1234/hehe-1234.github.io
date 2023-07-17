@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>统一查询项目介绍 | 找工作中，以下是我的一些个人介绍和技术笔记</title>
-    <meta property="og:title" content="统一查询项目介绍 - 找工作中，以下是我的一些个人介绍和技术笔记">
+    <title>统一查询项目介绍 | gg</title>
+    <meta property="og:title" content="统一查询项目介绍 - gg">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2021-12-26T13:07:19&#43;08:00'>
@@ -47,7 +47,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://find-job.xyz/">
-                        找工作中，以下是我的一些个人介绍和技术笔记
+                        gg
                     </a>
                 
                 
@@ -297,13 +297,13 @@
         </a>
     <br>
 <strong>my-project</strong>需要将元数据信息注入到服务中，这里的元数据指的是客户端查询的库、表等信息。比如：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> t.id,t.name,t.info <span style="color:#ff79c6">FROM</span> my_db.my_table <span style="color:#ff79c6">AS</span> t <span style="color:#ff79c6">WHERE</span> t.id <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">10</span>;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">SELECT</span> t.id,t.name,t.info <span style="color:#ff79c6">FROM</span> my_db.my_table <span style="color:#ff79c6">AS</span> t <span style="color:#ff79c6">WHERE</span> t.id <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">10</span>;
+</code></pre></td></tr></table>
 </div>
 </div><p>在这个<strong>SQL</strong>中，客户需要查询<strong>my_db</strong>这个库，但他并没有将<strong>my_db</strong>库的配置信息(url、用户名、密码等)告诉<strong>my-project</strong>，所以要完成上述的<strong>SQL</strong>查询，需要先将<strong>my_db</strong>库的配置信息注入到<strong>my-project</strong>中。<br>
 而<strong>meta</strong>模块就是用来完成元数据注入的，它下面指向的<strong>mysql</strong>是内部库，仅供<strong>my-project</strong>使用。<br>
@@ -319,38 +319,38 @@
         </a>
     <br>
 客户端需要先引入<code>my-project驱动</code>。      只需要对传统<strong>JDBC</strong>方式方式稍作配置即可，传统<strong>JDBC</strong>查询代码如下：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Class<span style="color:#ff79c6">.</span><span style="color:#50fa7b">forName</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;com.mysql.jdbc.Driver&#34;</span><span style="color:#ff79c6">);</span>
-</span></span><span style="display:flex;"><span>String url <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;jdbc:mysql://localhost:3306/my_db&#34;</span><span style="color:#ff79c6">;</span>
-</span></span><span style="display:flex;"><span>Connection  conn <span style="color:#ff79c6">=</span> DriverManager<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getConnection</span><span style="color:#ff79c6">(</span>url<span style="color:#ff79c6">,</span> properties<span style="color:#ff79c6">);</span>
-</span></span><span style="display:flex;"><span>ResultSet rs <span style="color:#ff79c6">=</span> conn<span style="color:#ff79c6">.</span><span style="color:#50fa7b">createStatement</span><span style="color:#ff79c6">().</span><span style="color:#50fa7b">executeQuery</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;SELECT * FROM my_db.my_table&#34;</span><span style="color:#ff79c6">);</span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4">// some logic .....
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Class<span style="color:#ff79c6">.</span><span style="color:#50fa7b">forName</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;com.mysql.jdbc.Driver&#34;</span><span style="color:#ff79c6">);</span>
+String url <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;jdbc:mysql://localhost:3306/my_db&#34;</span><span style="color:#ff79c6">;</span>
+Connection  conn <span style="color:#ff79c6">=</span> DriverManager<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getConnection</span><span style="color:#ff79c6">(</span>url<span style="color:#ff79c6">,</span> properties<span style="color:#ff79c6">);</span>
+ResultSet rs <span style="color:#ff79c6">=</span> conn<span style="color:#ff79c6">.</span><span style="color:#50fa7b">createStatement</span><span style="color:#ff79c6">().</span><span style="color:#50fa7b">executeQuery</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;SELECT * FROM my_db.my_table&#34;</span><span style="color:#ff79c6">);</span>
+<span style="color:#6272a4">// some logic .....
+</span></code></pre></td></tr></table>
 </div>
 </div><p>使用<strong>my-project</strong>驱动后，将<strong>url</strong>和<strong>driver</strong>替换掉即可使用：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>Class<span style="color:#ff79c6">.</span><span style="color:#50fa7b">forName</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;com.my-project.client.Driver&#34;</span><span style="color:#ff79c6">);</span>
-</span></span><span style="display:flex;"><span>String url <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;jdbc:my-project:http//localhost:15888/my_db&#34;</span><span style="color:#ff79c6">;</span>
-</span></span><span style="display:flex;"><span>Connection  conn <span style="color:#ff79c6">=</span> DriverManager<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getConnection</span><span style="color:#ff79c6">(</span>url<span style="color:#ff79c6">,</span> properties<span style="color:#ff79c6">);</span>
-</span></span><span style="display:flex;"><span>ResultSet rs <span style="color:#ff79c6">=</span> conn<span style="color:#ff79c6">.</span><span style="color:#50fa7b">createStatement</span><span style="color:#ff79c6">().</span><span style="color:#50fa7b">executeQuery</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;SELECT * FROM my_db.my_table&#34;</span><span style="color:#ff79c6">);</span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4">// some logic .....
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Class<span style="color:#ff79c6">.</span><span style="color:#50fa7b">forName</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;com.my-project.client.Driver&#34;</span><span style="color:#ff79c6">);</span>
+String url <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;jdbc:my-project:http//localhost:15888/my_db&#34;</span><span style="color:#ff79c6">;</span>
+Connection  conn <span style="color:#ff79c6">=</span> DriverManager<span style="color:#ff79c6">.</span><span style="color:#50fa7b">getConnection</span><span style="color:#ff79c6">(</span>url<span style="color:#ff79c6">,</span> properties<span style="color:#ff79c6">);</span>
+ResultSet rs <span style="color:#ff79c6">=</span> conn<span style="color:#ff79c6">.</span><span style="color:#50fa7b">createStatement</span><span style="color:#ff79c6">().</span><span style="color:#50fa7b">executeQuery</span><span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#34;SELECT * FROM my_db.my_table&#34;</span><span style="color:#ff79c6">);</span>
+<span style="color:#6272a4">// some logic .....
+</span></code></pre></td></tr></table>
 </div>
 </div><p><strong>my-project</strong>驱动底层是<strong>HTTP</strong>方式的通讯，服务端是内嵌的<strong>Jetty</strong>。<br>
 客户端发送的<strong>JDBC</strong>请求实际是一个<strong>HTTP</strong>请求，而<strong>JDBC</strong>的请求内容被封装到<strong>HTTP的body</strong>中。<br>
@@ -370,13 +370,13 @@ HTTP body有两种编码方式：</p>
         </a>
     <br>
 对于一个跨数据源的<strong>SQL</strong>:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> Oracle_db.a <span style="color:#ff79c6">Join</span> MySQL_db.b <span style="color:#ff79c6">ON</span> a.id <span style="color:#ff79c6">=</span> b.id <span style="color:#ff79c6">WHERE</span> b.id <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">10</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">FROM</span> Oracle_db.a <span style="color:#ff79c6">Join</span> MySQL_db.b <span style="color:#ff79c6">ON</span> a.id <span style="color:#ff79c6">=</span> b.id <span style="color:#ff79c6">WHERE</span> b.id <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">10</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>解析层首先将这个<strong>SQL</strong>解析，得到一个语法树。<br>
 再遍历这棵树，就能确定需要查询的数据源，通过数据源的数量，也就确定了是否为<strong>跨数据源</strong>查询。<br>
@@ -729,7 +729,7 @@ code.has-jax {
     </div>
     <footer id="footer">
     <div>
-        &copy; 2023 <a href="https://find-job.xyz/">找工作中，以下是我的一些个人介绍和技术笔记 By find-job</a>
+        &copy; 2023 <a href="https://find-job.xyz/">gg By find-job</a>
         
     </div>
     <br />

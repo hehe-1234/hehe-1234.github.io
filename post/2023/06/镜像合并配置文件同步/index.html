@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>镜像合并&amp;配置文件同步 | 找工作中，以下是我的一些个人介绍和技术笔记</title>
-    <meta property="og:title" content="镜像合并&amp;配置文件同步 - 找工作中，以下是我的一些个人介绍和技术笔记">
+    <title>镜像合并&amp;配置文件同步 | gg</title>
+    <meta property="og:title" content="镜像合并&amp;配置文件同步 - gg">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2023-05-12T11:23:04&#43;08:00'>
@@ -47,7 +47,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://find-job.xyz/">
-                        找工作中，以下是我的一些个人介绍和技术笔记
+                        gg
                     </a>
                 
                 
@@ -137,70 +137,70 @@
 <h2 id="背景">背景</h2>
 <p>Spark的 driver template，executor template，在跨 k8s 的 namespace 下，需要再搞一份<br>
 比如 executor需要这些</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>    <span style="color:#ff79c6">volumeMounts</span>:
-</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">mountPath</span>: /tmp/krb5_conf
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">name</span>: my_project-krb5-conf
-</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">mountPath</span>: /tmp/krb5_keytab
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">name</span>: my_project-krb5-keytab
-</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">mountPath</span>: /my_project/resources/kerberos
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">name</span>: keytab-config		
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">    <span style="color:#ff79c6">volumeMounts</span>:
+        - <span style="color:#ff79c6">mountPath</span>: /tmp/krb5_conf
+          <span style="color:#ff79c6">name</span>: my_project-krb5-conf
+        - <span style="color:#ff79c6">mountPath</span>: /tmp/krb5_keytab
+          <span style="color:#ff79c6">name</span>: my_project-krb5-keytab
+        - <span style="color:#ff79c6">mountPath</span>: /my_project/resources/kerberos
+          <span style="color:#ff79c6">name</span>: keytab-config		
+</code></pre></td></tr></table>
 </div>
 </div><p>driver的就更多了</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>    <span style="color:#ff79c6">volumeMounts</span>:
-</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">mountPath</span>: /tmp/krb5
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">name</span>: kerberos-temp
-</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">mountPath</span>: /my_project/resources/kerberos
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">name</span>: keytab-config
-</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">mountPath</span>: /tmp/executoe_template
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">name</span>: my_project-executor-template
-</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">mountPath</span>: /my_project/resources
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">name</span>: resource-config
-</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">mountPath</span>: /tmp/application-properties
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">name</span>: my_project-app-properties
-</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">mountPath</span>: /my_project/resources/config
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">name</span>: app-config
-</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">mountPath</span>: /tmp/scheduler-config
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">name</span>: my_project-scheduler-config	
-</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">mountPath</span>: /my_project/resources/scheduler-config
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">name</span>: scheduler-config	
-</span></span><span style="display:flex;"><span>        - <span style="color:#ff79c6">mountPath</span>: /tmp/ranger
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">name</span>: my_project-ranger-xml	
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">    <span style="color:#ff79c6">volumeMounts</span>:
+        - <span style="color:#ff79c6">mountPath</span>: /tmp/krb5
+          <span style="color:#ff79c6">name</span>: kerberos-temp
+        - <span style="color:#ff79c6">mountPath</span>: /my_project/resources/kerberos
+          <span style="color:#ff79c6">name</span>: keytab-config
+        - <span style="color:#ff79c6">mountPath</span>: /tmp/executoe_template
+          <span style="color:#ff79c6">name</span>: my_project-executor-template
+        - <span style="color:#ff79c6">mountPath</span>: /my_project/resources
+          <span style="color:#ff79c6">name</span>: resource-config
+        - <span style="color:#ff79c6">mountPath</span>: /tmp/application-properties
+          <span style="color:#ff79c6">name</span>: my_project-app-properties
+        - <span style="color:#ff79c6">mountPath</span>: /my_project/resources/config
+          <span style="color:#ff79c6">name</span>: app-config
+        - <span style="color:#ff79c6">mountPath</span>: /tmp/scheduler-config
+          <span style="color:#ff79c6">name</span>: my_project-scheduler-config	
+        - <span style="color:#ff79c6">mountPath</span>: /my_project/resources/scheduler-config
+          <span style="color:#ff79c6">name</span>: scheduler-config	
+        - <span style="color:#ff79c6">mountPath</span>: /tmp/ranger
+          <span style="color:#ff79c6">name</span>: my_project-ranger-xml	
+</code></pre></td></tr></table>
 </div>
 </div><p>在资源隔离场景下，使用了 k8s 的 namespace，由于 namespace是天然隔离的，所以 不同 namespace 中的 配置文件没法共用</p>
 <p>
@@ -320,189 +320,189 @@ env 的name 是文件名，value是文件内容的base64编码<br>
 当 engine启动 executor之前，会执行一个 k8s扩展，将 MY_PROJECT_EXECUTOR 变量设置进去，于是新 pod 启动时就认为自己是 executor</p>
 <h2 id="dockerfile">dockerfile</h2>
 <h3 id="统一镜像后的dockerfile">统一镜像后的dockerfile</h3>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#6272a4"># builder</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> maven:3.6.3-openjdk-11-slim AS builder</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> . .
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> settings.xml <span style="color:#8be9fd;font-style:italic">$MAVEN_CONFIG</span>/
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WORKDIR</span><span style="color:#f1fa8c"> /</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RUN</span> mvn clean package -Dmaven.test.skip<span style="color:#ff79c6">=</span>true
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 使用 Spark3.3.2 的镜像，后续升级的话，将这里的版本号修改一下即可</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> spark:3.3.2-amd64 AS SPARK_IMAGE</span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 基础镜像，包含 JDK11.0.16，以及一些方便排查的工具和命令</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> base:OpenJDK-11.0.16_V1.0</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ARG</span> <span style="color:#8be9fd;font-style:italic">TARGET</span><span style="color:#ff79c6">=</span>/my_project-main/target
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ARG</span> <span style="color:#8be9fd;font-style:italic">MY_PROJECT</span><span style="color:#ff79c6">=</span>/my_project
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ARG</span> <span style="color:#8be9fd;font-style:italic">DEPENDENCY</span><span style="color:#ff79c6">=</span>/dependency
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ARG</span> <span style="color:#8be9fd;font-style:italic">SPARK_HOME</span><span style="color:#ff79c6">=</span>/opt/spark
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ARG</span> <span style="color:#8be9fd;font-style:italic">JAVA_HOME</span><span style="color:#ff79c6">=</span>/usr/local/openjdk-11.0.16+8-x64
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ENV</span> <span style="color:#8be9fd;font-style:italic">SPARK_HOME</span><span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">$SPARK_HOME</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ENV</span> <span style="color:#8be9fd;font-style:italic">MY_PROJECT_DOCKER_IMAGE</span><span style="color:#ff79c6">=</span>my_project.container.image
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ENV</span> SPARK_CLASSPATH <span style="color:#8be9fd;font-style:italic">$SPARK_CLASSPATH</span>:<span style="color:#8be9fd;font-style:italic">$SPARK_HOME</span>/lib/*
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 将 Spark 镜像中的目录、相关文件、核心启动脚本拷贝到 基础镜像中</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>SPARK_IMAGE     /opt/spark                  /opt/spark
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>SPARK_IMAGE     /opt/decom.sh               /opt
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>SPARK_IMAGE     /opt/entrypoint.sh          /opt
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>SPARK_IMAGE     /usr/bin/tini               /usr/bin
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder         <span style="color:#8be9fd;font-style:italic">$DEPENDENCY</span>/bootstrap.sh    /opt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/main-*.jar             <span style="color:#8be9fd;font-style:italic">$MY_PROJECT</span>/engine-main.jar
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/lib                    <span style="color:#8be9fd;font-style:italic">$MY_PROJECT</span>/lib
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/lib                    <span style="color:#8be9fd;font-style:italic">$SPARK_HOME</span>/lib
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/main-*.jar             <span style="color:#8be9fd;font-style:italic">$SPARK_HOME</span>/lib
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/resources/scheduler-config               <span style="color:#8be9fd;font-style:italic">$MY_PROJECT</span>/resources/scheduler-config
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/resources/custom-log4j2-json-layout.json <span style="color:#8be9fd;font-style:italic">$MY_PROJECT</span>/resources/custom-log4j2-json-layout.json
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/resources/log4j2-spring.xml              <span style="color:#8be9fd;font-style:italic">$MY_PROJECT</span>/resources/log4j2-spring.xml
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RUN</span> ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;Asia/Shanghai&#39;</span> &gt; /etc/timezone                     <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    useradd -ms /bin/bash hive                               <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    chmod +x /opt/bootstrap.sh                               
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">EXPOSE</span><span style="color:#f1fa8c"> 8011</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">EXPOSE</span><span style="color:#f1fa8c"> 4040</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">EXPOSE</span><span style="color:#f1fa8c"> 7078</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">EXPOSE</span><span style="color:#f1fa8c"> 7079</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WORKDIR</span><span style="color:#f1fa8c"> /my_project</span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 统一镜像后的核心启动脚本</span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 如果环境变量中包含 MY_PROJECT_EXECUTOR，则脚本调用 executor 的启动逻辑</span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 否则，调用启动 my_project 的启动逻辑</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ENTRYPOINT</span> [ <span style="color:#f1fa8c">&#34;/opt/bootstrap.sh&#34;</span> ]
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#6272a4"># builder</span>
+<span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> maven:3.6.3-openjdk-11-slim AS builder</span>
+<span style="color:#ff79c6">COPY</span> . .
+<span style="color:#ff79c6">COPY</span> settings.xml <span style="color:#8be9fd;font-style:italic">$MAVEN_CONFIG</span>/
+<span style="color:#ff79c6">WORKDIR</span><span style="color:#f1fa8c"> /</span>
+<span style="color:#ff79c6">RUN</span> mvn clean package -Dmaven.test.skip<span style="color:#ff79c6">=</span>true
+
+
+<span style="color:#6272a4"># 使用 Spark3.3.2 的镜像，后续升级的话，将这里的版本号修改一下即可</span>
+<span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> spark:3.3.2-amd64 AS SPARK_IMAGE</span>
+<span style="color:#6272a4"># 基础镜像，包含 JDK11.0.16，以及一些方便排查的工具和命令</span>
+<span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> base:OpenJDK-11.0.16_V1.0</span>
+<span style="color:#ff79c6">ARG</span> <span style="color:#8be9fd;font-style:italic">TARGET</span><span style="color:#ff79c6">=</span>/my_project-main/target
+<span style="color:#ff79c6">ARG</span> <span style="color:#8be9fd;font-style:italic">MY_PROJECT</span><span style="color:#ff79c6">=</span>/my_project
+<span style="color:#ff79c6">ARG</span> <span style="color:#8be9fd;font-style:italic">DEPENDENCY</span><span style="color:#ff79c6">=</span>/dependency
+<span style="color:#ff79c6">ARG</span> <span style="color:#8be9fd;font-style:italic">SPARK_HOME</span><span style="color:#ff79c6">=</span>/opt/spark
+<span style="color:#ff79c6">ARG</span> <span style="color:#8be9fd;font-style:italic">JAVA_HOME</span><span style="color:#ff79c6">=</span>/usr/local/openjdk-11.0.16+8-x64
+<span style="color:#ff79c6">ENV</span> <span style="color:#8be9fd;font-style:italic">SPARK_HOME</span><span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">$SPARK_HOME</span>
+<span style="color:#ff79c6">ENV</span> <span style="color:#8be9fd;font-style:italic">MY_PROJECT_DOCKER_IMAGE</span><span style="color:#ff79c6">=</span>my_project.container.image
+<span style="color:#ff79c6">ENV</span> SPARK_CLASSPATH <span style="color:#8be9fd;font-style:italic">$SPARK_CLASSPATH</span>:<span style="color:#8be9fd;font-style:italic">$SPARK_HOME</span>/lib/*
+
+
+<span style="color:#6272a4"># 将 Spark 镜像中的目录、相关文件、核心启动脚本拷贝到 基础镜像中</span>
+<span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>SPARK_IMAGE     /opt/spark                  /opt/spark
+<span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>SPARK_IMAGE     /opt/decom.sh               /opt
+<span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>SPARK_IMAGE     /opt/entrypoint.sh          /opt
+<span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>SPARK_IMAGE     /usr/bin/tini               /usr/bin
+<span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder         <span style="color:#8be9fd;font-style:italic">$DEPENDENCY</span>/bootstrap.sh    /opt
+
+<span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/main-*.jar             <span style="color:#8be9fd;font-style:italic">$MY_PROJECT</span>/engine-main.jar
+<span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/lib                    <span style="color:#8be9fd;font-style:italic">$MY_PROJECT</span>/lib
+<span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/lib                    <span style="color:#8be9fd;font-style:italic">$SPARK_HOME</span>/lib
+<span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/main-*.jar             <span style="color:#8be9fd;font-style:italic">$SPARK_HOME</span>/lib
+
+<span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/resources/scheduler-config               <span style="color:#8be9fd;font-style:italic">$MY_PROJECT</span>/resources/scheduler-config
+<span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/resources/custom-log4j2-json-layout.json <span style="color:#8be9fd;font-style:italic">$MY_PROJECT</span>/resources/custom-log4j2-json-layout.json
+<span style="color:#ff79c6">COPY</span> --from<span style="color:#ff79c6">=</span>builder <span style="color:#8be9fd;font-style:italic">$TARGET</span>/resources/log4j2-spring.xml              <span style="color:#8be9fd;font-style:italic">$MY_PROJECT</span>/resources/log4j2-spring.xml
+
+
+<span style="color:#ff79c6">RUN</span> ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;Asia/Shanghai&#39;</span> &gt; /etc/timezone                     <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    useradd -ms /bin/bash hive                               <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    chmod +x /opt/bootstrap.sh                               
+
+
+<span style="color:#ff79c6">EXPOSE</span><span style="color:#f1fa8c"> 8011</span>
+<span style="color:#ff79c6">EXPOSE</span><span style="color:#f1fa8c"> 4040</span>
+<span style="color:#ff79c6">EXPOSE</span><span style="color:#f1fa8c"> 7078</span>
+<span style="color:#ff79c6">EXPOSE</span><span style="color:#f1fa8c"> 7079</span>
+
+<span style="color:#ff79c6">WORKDIR</span><span style="color:#f1fa8c"> /my_project</span>
+<span style="color:#6272a4"># 统一镜像后的核心启动脚本</span>
+<span style="color:#6272a4"># 如果环境变量中包含 MY_PROJECT_EXECUTOR，则脚本调用 executor 的启动逻辑</span>
+<span style="color:#6272a4"># 否则，调用启动 my_project 的启动逻辑</span>
+<span style="color:#ff79c6">ENTRYPOINT</span> [ <span style="color:#f1fa8c">&#34;/opt/bootstrap.sh&#34;</span> ]
+</code></pre></td></tr></table>
 </div>
 </div><h3 id="基础镜像-dockerfile">基础镜像 dockerfile</h3>
 <p>基于 JDK11 打的基础镜像dockerfile</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#6272a4"># 基于 CentOS 7.4 基础上，创建新基础镜像</span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 此基础镜像包含 OpenJDK 11.0.16，和 Spark-executor 镜像的 JDK 版本保持一致</span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4"># 并增加了一些排查工具和命令</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> centos:centos7.4.1708</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">LABEL</span> <span style="color:#8be9fd;font-style:italic">describe</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;MY_PROJECT base image(OpenJDK 11.0.16)&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RUN</span> rm -f /etc/yum.repos.d/*
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> My_project-Centos7-public.repo /etc/yum.repos.d/
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> openjdk-11.0.16+8-x64 /usr/local/openjdk-11.0.16+8-x64
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">COPY</span> arthas /arthas
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">RUN</span> yum -y install krb5-devel krb5-workstation <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    yum -y install curl <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    yum -y install dstat <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    yum -y install traceroute <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    yum -y install wget <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    yum -y install lsof <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    yum -y install tcpdump <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    yum -y install net-tools <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    yum -y install sysstat <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    yum -y install telnet <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    yum -y install psmisc <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;alias ll=&#39;ls -l&#39;&#34;</span> &gt;&gt; /root/.bashrc <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    yum -y remove perl <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    rm -rf /var/cache/yum <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
-</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span>    touch /var/cache/yum
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ENV</span> <span style="color:#8be9fd;font-style:italic">PATH</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">PATH</span><span style="color:#f1fa8c">}</span>:/usr/local/openjdk-11.0.16+8-x64/bin
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ENV</span> <span style="color:#8be9fd;font-style:italic">TZ</span><span style="color:#ff79c6">=</span>Asia/Shanghai
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ENV</span> LANG zh_CN.UTF-8
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-dockerfile" data-lang="dockerfile"><span style="color:#6272a4"># 基于 CentOS 7.4 基础上，创建新基础镜像</span>
+<span style="color:#6272a4"># 此基础镜像包含 OpenJDK 11.0.16，和 Spark-executor 镜像的 JDK 版本保持一致</span>
+<span style="color:#6272a4"># 并增加了一些排查工具和命令</span>
+<span style="color:#ff79c6">FROM</span><span style="color:#f1fa8c"> centos:centos7.4.1708</span>
+<span style="color:#ff79c6">LABEL</span> <span style="color:#8be9fd;font-style:italic">describe</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;MY_PROJECT base image(OpenJDK 11.0.16)&#34;</span>
+
+<span style="color:#ff79c6">RUN</span> rm -f /etc/yum.repos.d/*
+<span style="color:#ff79c6">COPY</span> My_project-Centos7-public.repo /etc/yum.repos.d/
+<span style="color:#ff79c6">COPY</span> openjdk-11.0.16+8-x64 /usr/local/openjdk-11.0.16+8-x64
+<span style="color:#ff79c6">COPY</span> arthas /arthas
+
+<span style="color:#ff79c6">RUN</span> yum -y install krb5-devel krb5-workstation <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    yum -y install curl <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    yum -y install dstat <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    yum -y install traceroute <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    yum -y install wget <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    yum -y install lsof <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    yum -y install tcpdump <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    yum -y install net-tools <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    yum -y install sysstat <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    yum -y install telnet <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    yum -y install psmisc <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;alias ll=&#39;ls -l&#39;&#34;</span> &gt;&gt; /root/.bashrc <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    yum -y remove perl <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    rm -rf /var/cache/yum <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    touch /var/cache/yum
+
+<span style="color:#ff79c6">ENV</span> <span style="color:#8be9fd;font-style:italic">PATH</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">PATH</span><span style="color:#f1fa8c">}</span>:/usr/local/openjdk-11.0.16+8-x64/bin
+<span style="color:#ff79c6">ENV</span> <span style="color:#8be9fd;font-style:italic">TZ</span><span style="color:#ff79c6">=</span>Asia/Shanghai
+<span style="color:#ff79c6">ENV</span> LANG zh_CN.UTF-8
+</code></pre></td></tr></table>
 </div>
 </div>
 			<script type="text/javascript"
@@ -831,7 +831,7 @@ code.has-jax {
     </div>
     <footer id="footer">
     <div>
-        &copy; 2023 <a href="https://find-job.xyz/">找工作中，以下是我的一些个人介绍和技术笔记 By find-job</a>
+        &copy; 2023 <a href="https://find-job.xyz/">gg By find-job</a>
         
     </div>
     <br />

@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation | 找工作中，以下是我的一些个人介绍和技术笔记</title>
-    <meta property="og:title" content="Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation - 找工作中，以下是我的一些个人介绍和技术笔记">
+    <title>Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation | gg</title>
+    <meta property="og:title" content="Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation - gg">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2023-05-17T09:23:04&#43;08:00'>
@@ -47,7 +47,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://find-job.xyz/">
-                        找工作中，以下是我的一些个人介绍和技术笔记
+                        gg
                     </a>
                 
                 
@@ -182,25 +182,25 @@ Figure 2: Column Sketches use their compression map to transform (possibly compr
 <li>for x,y ∈ I8, S (x) &lt; S (y) ⇒ x &lt; y</li>
 </ul>
 <p>Algorithm 1 Select where B &lt; x</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">Require</span>: S is a function which is order preserving, B is the base attribute, Bs is the sketched column
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> to B.size <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> Bs [i] <span style="color:#ff79c6">&lt;</span> S (x) then
-</span></span><span style="display:flex;"><span>        write position i to result output
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> Bs [i] <span style="color:#ff79c6">==</span> S (x) then
-</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> B[i] <span style="color:#ff79c6">&lt;</span> x then
-</span></span><span style="display:flex;"><span>            write position i to result output
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#8be9fd;font-style:italic">Require</span>: S is a function which is order preserving, B is the base attribute, Bs is the sketched column
+<span style="color:#ff79c6">for</span> i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> to B.size <span style="color:#ff79c6">do</span>
+    <span style="color:#ff79c6">if</span> Bs [i] <span style="color:#ff79c6">&lt;</span> S (x) then
+        write position i to result output
+    <span style="color:#ff79c6">else</span> <span style="color:#ff79c6">if</span> Bs [i] <span style="color:#ff79c6">==</span> S (x) then
+        <span style="color:#ff79c6">if</span> B[i] <span style="color:#ff79c6">&lt;</span> x then
+            write position i to result output
+</code></pre></td></tr></table>
 </div>
 </div><p>byte 需要对其，否则会有 30%的性能损失<br>
 源入股有序可以直接这么映射，无序的话需要做hash</p>
@@ -260,59 +260,59 @@ Figure 6: Regardless of the level of skew, the number of values in non-unique co
 </ul>
 <p>Algorithm 2 Column Sketches Scan<br>
 Select where B &lt; x, Column Sketch of one byte values</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#6272a4">// Require: S is a function which is order preserving
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">// repeat_sx = _mm128_set1_epi8(S (x ))
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">for</span> each segment b in sketched column <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">/* Work over the code one block of data at a time */</span>
-</span></span><span style="display:flex;"><span>    position<span style="color:#ff79c6">=</span> b× segment size
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> number of simd iterations in segment size <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">/* Perform logical comparisons necessary for predicate evaluation
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">        on each code. The 1,2 denote that this is done twice */</span>
-</span></span><span style="display:flex;"><span>        codes1,<span style="color:#bd93f9">2</span> <span style="color:#ff79c6">=</span> _mm_load_si128(codes_address)
-</span></span><span style="display:flex;"><span>        definite1,<span style="color:#bd93f9">2</span> <span style="color:#ff79c6">=</span> _mm_cmplt_epi8(codes,repeat_sx)
-</span></span><span style="display:flex;"><span>        possible1,<span style="color:#bd93f9">2</span> <span style="color:#ff79c6">=</span> _mm_cmpeq_epi8(codes,repeat_sx)
-</span></span><span style="display:flex;"><span>        bitvector_def1,<span style="color:#bd93f9">2</span> <span style="color:#ff79c6">=</span> _mm128_movemask_epi8(definite1)
-</span></span><span style="display:flex;"><span>        bitvector_possible1,<span style="color:#bd93f9">2</span> <span style="color:#ff79c6">=</span> _mm128_movemask_epi8(possible1)
-</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">/* Store results we are certain of */</span>
-</span></span><span style="display:flex;"><span>        bitvector_def <span style="color:#ff79c6">=</span> (bitvector_def1 « <span style="color:#bd93f9">16</span>) <span style="color:#ff79c6">|</span> bitvector_def2
-</span></span><span style="display:flex;"><span>        store(bitvector_def) into result
-</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">/* Check if the boundary values have any matching tuples and
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4">        store qualifying positions. */</span>
-</span></span><span style="display:flex;"><span>        conditional store bitvector_possible1,<span style="color:#bd93f9">2</span> into temp_result.
-</span></span><span style="display:flex;"><span>        position <span style="color:#ff79c6">+</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">32</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">/* Check all tuples that we are uncertain about */</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> position in temp_result <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> B[position] <span style="color:#ff79c6">==</span> x then
-</span></span><span style="display:flex;"><span>            set bit position <span style="color:#ff79c6">+</span> beginning position in result
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#6272a4">// Require: S is a function which is order preserving
+</span><span style="color:#6272a4">// repeat_sx = _mm128_set1_epi8(S (x ))
+</span><span style="color:#6272a4"></span><span style="color:#ff79c6">for</span> each segment b in sketched column <span style="color:#ff79c6">do</span>
+    <span style="color:#6272a4">/* Work over the code one block of data at a time */</span>
+    position<span style="color:#ff79c6">=</span> b× segment size
+    <span style="color:#ff79c6">for</span> number of simd iterations in segment size <span style="color:#ff79c6">do</span>
+        <span style="color:#6272a4">/* Perform logical comparisons necessary for predicate evaluation
+</span><span style="color:#6272a4">        on each code. The 1,2 denote that this is done twice */</span>
+        codes1,<span style="color:#bd93f9">2</span> <span style="color:#ff79c6">=</span> _mm_load_si128(codes_address)
+        definite1,<span style="color:#bd93f9">2</span> <span style="color:#ff79c6">=</span> _mm_cmplt_epi8(codes,repeat_sx)
+        possible1,<span style="color:#bd93f9">2</span> <span style="color:#ff79c6">=</span> _mm_cmpeq_epi8(codes,repeat_sx)
+        bitvector_def1,<span style="color:#bd93f9">2</span> <span style="color:#ff79c6">=</span> _mm128_movemask_epi8(definite1)
+        bitvector_possible1,<span style="color:#bd93f9">2</span> <span style="color:#ff79c6">=</span> _mm128_movemask_epi8(possible1)
+        <span style="color:#6272a4">/* Store results we are certain of */</span>
+        bitvector_def <span style="color:#ff79c6">=</span> (bitvector_def1 « <span style="color:#bd93f9">16</span>) <span style="color:#ff79c6">|</span> bitvector_def2
+        store(bitvector_def) into result
+        <span style="color:#6272a4">/* Check if the boundary values have any matching tuples and
+</span><span style="color:#6272a4">        store qualifying positions. */</span>
+        conditional store bitvector_possible1,<span style="color:#bd93f9">2</span> into temp_result.
+        position <span style="color:#ff79c6">+</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">32</span>
+        <span style="color:#6272a4">/* Check all tuples that we are uncertain about */</span>
+    <span style="color:#ff79c6">for</span> position in temp_result <span style="color:#ff79c6">do</span>
+        <span style="color:#ff79c6">if</span> B[position] <span style="color:#ff79c6">==</span> x then
+            set bit position <span style="color:#ff79c6">+</span> beginning position in result
+</code></pre></td></tr></table>
 </div>
 </div><p>代码解释：</p>
 <ul>
@@ -733,7 +733,7 @@ code.has-jax {
     </div>
     <footer id="footer">
     <div>
-        &copy; 2023 <a href="https://find-job.xyz/">找工作中，以下是我的一些个人介绍和技术笔记 By find-job</a>
+        &copy; 2023 <a href="https://find-job.xyz/">gg By find-job</a>
         
     </div>
     <br />

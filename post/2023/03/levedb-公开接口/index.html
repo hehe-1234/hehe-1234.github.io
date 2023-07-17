@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>LevelDB 公开的接口 | 找工作中，以下是我的一些个人介绍和技术笔记</title>
-    <meta property="og:title" content="LevelDB 公开的接口 - 找工作中，以下是我的一些个人介绍和技术笔记">
+    <title>LevelDB 公开的接口 | gg</title>
+    <meta property="og:title" content="LevelDB 公开的接口 - gg">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2023-03-30T11:32:19&#43;08:00'>
@@ -47,7 +47,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://find-job.xyz/">
-                        找工作中，以下是我的一些个人介绍和技术笔记
+                        gg
                     </a>
                 
                 
@@ -153,13 +153,13 @@
 <li>找到短字符串的后继</li>
 <li>默认的比较是按字节一位一位比较的</li>
 </ul>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">virtual</span> <span style="color:#8be9fd">int</span> <span style="color:#50fa7b">Compare</span>(<span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> a, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> b) <span style="color:#ff79c6">const</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ff79c6">virtual</span> <span style="color:#8be9fd">int</span> <span style="color:#50fa7b">Compare</span>(<span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> a, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> b) <span style="color:#ff79c6">const</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>;
+</code></pre></td></tr></table>
 </div>
 </div><p><strong>DB</strong></p>
 <ul>
@@ -223,23 +223,23 @@
 <h2 id="环境和移植相关接口">环境和移植相关接口</h2>
 <p><strong>env</strong><br>
 env.h 内部包含了这么一些类</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">FileLock</span>;
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Logger</span>;
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">RandomAccessFile</span>;
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">SequentialFile</span>;
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Slice</span>;
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">WritableFile</span>;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">FileLock</span>;
+<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Logger</span>;
+<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">RandomAccessFile</span>;
+<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">SequentialFile</span>;
+<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Slice</span>;
+<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">WritableFile</span>;
+</code></pre></td></tr></table>
 </div>
 </div><p>这些都是跟具体 操作系统相关的<br>
 env.h 中就包含了创建上述几个类的函数(除 Slice)<br>
@@ -248,46 +248,46 @@ env.h 中包含了很多类似这样的定义，这里是创建一个 Logger的�
 <li>如果创建成功，Status为空，Logger** 指针 指向实现对象</li>
 <li>如果创建失败，Logger** 指向空，Status包含具体的错误信息和状态码</li>
 </ul>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">virtual</span> Status <span style="color:#50fa7b">NewLogger</span>(<span style="color:#ff79c6">const</span> std<span style="color:#ff79c6">::</span>string<span style="color:#ff79c6">&amp;</span> fname, Logger<span style="color:#ff79c6">**</span> result) <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ff79c6">virtual</span> Status <span style="color:#50fa7b">NewLogger</span>(<span style="color:#ff79c6">const</span> std<span style="color:#ff79c6">::</span>string<span style="color:#ff79c6">&amp;</span> fname, Logger<span style="color:#ff79c6">**</span> result) <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>;
+</code></pre></td></tr></table>
 </div>
 </div><p>env.h 中包含了一个 EnvWrapper类，对所有的函数做一个包装，指向其代理的真正 Env 的实现类</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">LEVELDB_EXPORT</span> <span style="color:#8be9fd;font-style:italic">EnvWrapper</span> : <span style="color:#ff79c6">public</span> Env {
-</span></span><span style="display:flex;"><span> <span style="color:#ff79c6">public</span><span style="color:#ff79c6">:</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Initialize an EnvWrapper that delegates all calls to *t.
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#ff79c6">explicit</span> EnvWrapper(Env<span style="color:#ff79c6">*</span> t) <span style="color:#ff79c6">:</span> target_(t) {}
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">virtual</span> <span style="color:#ff79c6">~</span>EnvWrapper();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Return the target to which this Env forwards all calls.
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  Env<span style="color:#ff79c6">*</span> <span style="color:#50fa7b">target</span>() <span style="color:#ff79c6">const</span> { <span style="color:#ff79c6">return</span> target_; }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// The following text is boilerplate that forwards all methods to target().
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  Status <span style="color:#50fa7b">NewSequentialFile</span>(<span style="color:#ff79c6">const</span> std<span style="color:#ff79c6">::</span>string<span style="color:#ff79c6">&amp;</span> f, SequentialFile<span style="color:#ff79c6">**</span> r) <span style="color:#ff79c6">override</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> target_<span style="color:#ff79c6">-&gt;</span>NewSequentialFile(f, r);
-</span></span><span style="display:flex;"><span>  }
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">LEVELDB_EXPORT</span> <span style="color:#8be9fd;font-style:italic">EnvWrapper</span> : <span style="color:#ff79c6">public</span> Env {
+ <span style="color:#ff79c6">public</span><span style="color:#ff79c6">:</span>
+  <span style="color:#6272a4">// Initialize an EnvWrapper that delegates all calls to *t.
+</span><span style="color:#6272a4"></span>  <span style="color:#ff79c6">explicit</span> EnvWrapper(Env<span style="color:#ff79c6">*</span> t) <span style="color:#ff79c6">:</span> target_(t) {}
+  <span style="color:#ff79c6">virtual</span> <span style="color:#ff79c6">~</span>EnvWrapper();
+
+  <span style="color:#6272a4">// Return the target to which this Env forwards all calls.
+</span><span style="color:#6272a4"></span>  Env<span style="color:#ff79c6">*</span> <span style="color:#50fa7b">target</span>() <span style="color:#ff79c6">const</span> { <span style="color:#ff79c6">return</span> target_; }
+
+  <span style="color:#6272a4">// The following text is boilerplate that forwards all methods to target().
+</span><span style="color:#6272a4"></span>  Status <span style="color:#50fa7b">NewSequentialFile</span>(<span style="color:#ff79c6">const</span> std<span style="color:#ff79c6">::</span>string<span style="color:#ff79c6">&amp;</span> f, SequentialFile<span style="color:#ff79c6">**</span> r) <span style="color:#ff79c6">override</span> {
+    <span style="color:#ff79c6">return</span> target_<span style="color:#ff79c6">-&gt;</span>NewSequentialFile(f, r);
+  }
+</code></pre></td></tr></table>
 </div>
 </div><p><strong>port.h</strong> 中包含了不同操作系统之间的接口抽象<br>
 LevelDB为支持多种操作系统，方便的跨平台，LevelDB提供了一些依赖 操作系统的最小接口<br>
@@ -351,37 +351,37 @@ LevelDB为支持多种操作系统，方便的跨平台，LevelDB提供了一些
 包括 put、delete、write<br>
 所有写操作都会封装成一个批量写，然后调用 write 
 Write里面还封装了是否同步，条件变量等</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">DBImpl</span><span style="color:#ff79c6">::</span>Writer {
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">explicit</span> <span style="color:#50fa7b">Writer</span>(port<span style="color:#ff79c6">::</span>Mutex<span style="color:#ff79c6">*</span> mu)
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">:</span> batch(<span style="color:#ff79c6">nullptr</span>), sync(<span style="color:#8be9fd;font-style:italic">false</span>), done(<span style="color:#8be9fd;font-style:italic">false</span>), cv(mu) {}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  Status status;
-</span></span><span style="display:flex;"><span>  WriteBatch<span style="color:#ff79c6">*</span> batch;
-</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd">bool</span> sync;
-</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd">bool</span> done;
-</span></span><span style="display:flex;"><span>  port<span style="color:#ff79c6">::</span>CondVar cv;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4">// Queue of writers.
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>std<span style="color:#ff79c6">::</span>deque<span style="color:#ff79c6">&lt;</span>Writer<span style="color:#ff79c6">*&gt;</span> writers_ GUARDED_BY(mutex_);
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">DBImpl</span><span style="color:#ff79c6">::</span>Writer {
+  <span style="color:#ff79c6">explicit</span> <span style="color:#50fa7b">Writer</span>(port<span style="color:#ff79c6">::</span>Mutex<span style="color:#ff79c6">*</span> mu)
+      <span style="color:#ff79c6">:</span> batch(<span style="color:#ff79c6">nullptr</span>), sync(<span style="color:#8be9fd;font-style:italic">false</span>), done(<span style="color:#8be9fd;font-style:italic">false</span>), cv(mu) {}
+
+  Status status;
+  WriteBatch<span style="color:#ff79c6">*</span> batch;
+  <span style="color:#8be9fd">bool</span> sync;
+  <span style="color:#8be9fd">bool</span> done;
+  port<span style="color:#ff79c6">::</span>CondVar cv;
+};
+
+<span style="color:#6272a4">// Queue of writers.
+</span><span style="color:#6272a4"></span>std<span style="color:#ff79c6">::</span>deque<span style="color:#ff79c6">&lt;</span>Writer<span style="color:#ff79c6">*&gt;</span> writers_ GUARDED_BY(mutex_);
+</code></pre></td></tr></table>
 </div>
 </div><p>具体流程</p>
 <ol>
@@ -397,19 +397,19 @@ Write里面还封装了是否同步，条件变量等</p>
 调用 db-&gt;GetSnapshot() 获取当前数据库的一个快照备份<br>
 修改和读取的是快照，不会破坏当前数据<br>
 快照创建的是一个备份记录的 序列号</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>SnapshotList
-</span></span><span style="display:flex;"><span>SnapshotImpl  <span style="color:#ff79c6">&lt;--&gt;</span>  SnapshotImpl  <span style="color:#ff79c6">&lt;--&gt;</span>  SnapshotImpl 
-</span></span><span style="display:flex;"><span>     <span style="color:#ff79c6">|</span>                    <span style="color:#ff79c6">|</span>                  <span style="color:#ff79c6">|</span>
-</span></span><span style="display:flex;"><span>SequenceNumber<span style="color:#ff79c6">&lt;--&gt;</span>  SequenceNumber <span style="color:#ff79c6">&lt;--&gt;</span> SequenceNumber  	 
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">SnapshotList
+SnapshotImpl  <span style="color:#ff79c6">&lt;--&gt;</span>  SnapshotImpl  <span style="color:#ff79c6">&lt;--&gt;</span>  SnapshotImpl 
+     <span style="color:#ff79c6">|</span>                    <span style="color:#ff79c6">|</span>                  <span style="color:#ff79c6">|</span>
+SequenceNumber<span style="color:#ff79c6">&lt;--&gt;</span>  SequenceNumber <span style="color:#ff79c6">&lt;--&gt;</span> SequenceNumber  	 
+</code></pre></td></tr></table>
 </div>
 </div><p>SequenceNumber 是 uint64_t 类型<br>
 创建和删除快照，实际操作的是 这个 双链表<br>
@@ -757,7 +757,7 @@ code.has-jax {
     </div>
     <footer id="footer">
     <div>
-        &copy; 2023 <a href="https://find-job.xyz/">找工作中，以下是我的一些个人介绍和技术笔记 By find-job</a>
+        &copy; 2023 <a href="https://find-job.xyz/">gg By find-job</a>
         
     </div>
     <br />

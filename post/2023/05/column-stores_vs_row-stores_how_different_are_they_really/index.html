@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>Column-Stores vs. Row-Stores: How Different Are They Really? | 找工作中，以下是我的一些个人介绍和技术笔记</title>
-    <meta property="og:title" content="Column-Stores vs. Row-Stores: How Different Are They Really? - 找工作中，以下是我的一些个人介绍和技术笔记">
+    <title>Column-Stores vs. Row-Stores: How Different Are They Really? | gg</title>
+    <meta property="og:title" content="Column-Stores vs. Row-Stores: How Different Are They Really? - gg">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2023-05-07T13:23:04&#43;08:00'>
@@ -47,7 +47,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://find-job.xyz/">
-                        找工作中，以下是我的一些个人介绍和技术笔记
+                        gg
                     </a>
                 
                 
@@ -280,26 +280,26 @@ A 表： </p>
 在查询时，系统将使用这个 position 列来将来自不同列 但相同行号的值连接在一起<br>
 默认的 hash-join代价很高，作者尝试在每个表的 position列上添加聚集索引，强制使用索引连接，由于索引访问产生的额外 I/O，这导致比hash-join更慢</p>
 <p>比如这样查询：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> a.value, <span style="color:#ff79c6">c</span>.status
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> A a <span style="color:#ff79c6">JOIN</span> <span style="color:#ff79c6">C</span> <span style="color:#ff79c6">c</span> <span style="color:#ff79c6">ON</span> a.<span style="color:#ff79c6">position</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">c</span>.<span style="color:#ff79c6">position</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">SELECT</span> a.value, <span style="color:#ff79c6">c</span>.status
+<span style="color:#ff79c6">FROM</span> A a <span style="color:#ff79c6">JOIN</span> <span style="color:#ff79c6">C</span> <span style="color:#ff79c6">c</span> <span style="color:#ff79c6">ON</span> a.<span style="color:#ff79c6">position</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">c</span>.<span style="color:#ff79c6">position</span>
+</code></pre></td></tr></table>
 </div>
 </div><p>可以把 A 和 C 关联的同一行的列取出来</p>
 <p>还有索引方式，比如将每个列都加一个索引<br>
 对于这种查询</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">AVG</span>(salary) <span style="color:#ff79c6">FROM</span> emp <span style="color:#ff79c6">WHERE</span> age<span style="color:#ff79c6">&gt;</span><span style="color:#bd93f9">40</span> –
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">AVG</span>(salary) <span style="color:#ff79c6">FROM</span> emp <span style="color:#ff79c6">WHERE</span> age<span style="color:#ff79c6">&gt;</span><span style="color:#bd93f9">40</span> –
+</code></pre></td></tr></table>
 </div>
 </div><p>如果只是在 age、salary 上加索引则不行<br>
 首先 age 这个是非聚集索引，然后找到主键，根据主键去 salary索引上提取值<br>
@@ -357,35 +357,35 @@ run-length 这样的压缩算法，可以直接基于压缩数据查询，可以
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Column-Stores_vs_Row-Stores_How_Different_Are_They_Really/x3.png" />
         </a>
     </p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">c</span>.nation, s.nation, d.<span style="color:#ff79c6">year</span>,
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">sum</span>(lo.revenue) <span style="color:#ff79c6">as</span> revenue
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">FROM</span> customer <span style="color:#ff79c6">AS</span> <span style="color:#ff79c6">c</span>, lineorder <span style="color:#ff79c6">AS</span> lo,
-</span></span><span style="display:flex;"><span>supplier <span style="color:#ff79c6">AS</span> s, dwdate <span style="color:#ff79c6">AS</span> d
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">WHERE</span> lo.custkey <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">c</span>.custkey
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">AND</span> lo.suppkey <span style="color:#ff79c6">=</span> s.suppkey
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">AND</span> lo.orderdate <span style="color:#ff79c6">=</span> d.datekey
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">AND</span> <span style="color:#ff79c6">c</span>.region <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ASIA&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">AND</span> s.region <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ASIA&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">AND</span> d.<span style="color:#ff79c6">year</span> <span style="color:#ff79c6">&gt;=</span> <span style="color:#bd93f9">1992</span> <span style="color:#ff79c6">and</span> d.<span style="color:#ff79c6">year</span> <span style="color:#ff79c6">&lt;=</span> <span style="color:#bd93f9">1997</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> <span style="color:#ff79c6">c</span>.nation, s.nation, d.<span style="color:#ff79c6">year</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> d.<span style="color:#ff79c6">year</span> <span style="color:#ff79c6">asc</span>, revenue <span style="color:#ff79c6">desc</span>;
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">c</span>.nation, s.nation, d.<span style="color:#ff79c6">year</span>,
+<span style="color:#ff79c6">sum</span>(lo.revenue) <span style="color:#ff79c6">as</span> revenue
+<span style="color:#ff79c6">FROM</span> customer <span style="color:#ff79c6">AS</span> <span style="color:#ff79c6">c</span>, lineorder <span style="color:#ff79c6">AS</span> lo,
+supplier <span style="color:#ff79c6">AS</span> s, dwdate <span style="color:#ff79c6">AS</span> d
+<span style="color:#ff79c6">WHERE</span> lo.custkey <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">c</span>.custkey
+<span style="color:#ff79c6">AND</span> lo.suppkey <span style="color:#ff79c6">=</span> s.suppkey
+<span style="color:#ff79c6">AND</span> lo.orderdate <span style="color:#ff79c6">=</span> d.datekey
+<span style="color:#ff79c6">AND</span> <span style="color:#ff79c6">c</span>.region <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ASIA&#39;</span>
+<span style="color:#ff79c6">AND</span> s.region <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;ASIA&#39;</span>
+<span style="color:#ff79c6">AND</span> d.<span style="color:#ff79c6">year</span> <span style="color:#ff79c6">&gt;=</span> <span style="color:#bd93f9">1992</span> <span style="color:#ff79c6">and</span> d.<span style="color:#ff79c6">year</span> <span style="color:#ff79c6">&lt;=</span> <span style="color:#bd93f9">1997</span>
+<span style="color:#ff79c6">GROUP</span> <span style="color:#ff79c6">BY</span> <span style="color:#ff79c6">c</span>.nation, s.nation, d.<span style="color:#ff79c6">year</span>
+<span style="color:#ff79c6">ORDER</span> <span style="color:#ff79c6">BY</span> d.<span style="color:#ff79c6">year</span> <span style="color:#ff79c6">asc</span>, revenue <span style="color:#ff79c6">desc</span>;
+</code></pre></td></tr></table>
 </div>
 </div><p>两种 传统方式的缺点</p>
 <ul>
@@ -936,7 +936,7 @@ code.has-jax {
     </div>
     <footer id="footer">
     <div>
-        &copy; 2023 <a href="https://find-job.xyz/">找工作中，以下是我的一些个人介绍和技术笔记 By find-job</a>
+        &copy; 2023 <a href="https://find-job.xyz/">gg By find-job</a>
         
     </div>
     <br />
