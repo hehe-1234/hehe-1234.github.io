@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>Posts | 找工作中，以下是我的一些个人介绍和技术笔记</title>
-    <meta property="og:title" content="Posts - 找工作中，以下是我的一些个人介绍和技术笔记">
+    <title>Posts | 找工作中</title>
+    <meta property="og:title" content="Posts - 找工作中">
     <meta property="og:type" content="article">
         
         
@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://find-job.xyz/post/index.xml" title="找工作中，以下是我的一些个人介绍和技术笔记" />
+    <link rel="alternate" type="application/rss+xml" href="https://find-job.xyz/post/index.xml" title="找工作中" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -44,7 +44,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://find-job.xyz/">
-                        找工作中，以下是我的一些个人介绍和技术笔记
+                        找工作中
                     </a>
                 
                 
@@ -75,231 +75,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/02/cpu-and-cache-efficient-management-of-memory-resident-databases/" title="CPU and Cache Efficient Management of Memory-Resident Databases">CPU and Cache Efficient Management of Memory-Resident Databases</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年2月8日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            CPU and Cache Efficient Management of Memory-Resident Databases
-        </div>
-        <p class="readmore"><a href="https://find-job.xyz/post/2023/02/cpu-and-cache-efficient-management-of-memory-resident-databases/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/02/efficiently-compiling-efficient-query-plans-for-modern-hardware/" title="Efficiently Compiling Efficient Query Plans for Modern Hardware">Efficiently Compiling Efficient Query Plans for Modern Hardware</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年2月5日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            这是HyPer的一篇论文(HyPer是由德国莫尼黑大学主导的OLAP、OLTP混合型主内存数据库)，介绍了code-gen的具体实现，最初HyPer的code-gen是生成了C++代码，然后使用gcc编译；但编译时间很长，再加上优化时间就更长了，甚至比查询执行时间还长；于是HyPer做了优化，改用LLVM，将code-gen的核心代码转为了LLVM的IR，这个IR是调用LLVM的API生成的，不是手写的所以相对容易一些，对于一些简单的操作是生成了LLVM，于是复杂的操作，如scan、join、sort需要将LLVM和C++混合执行，LLVM可以直接调用C++，所以不存在性能损失；通过最后执行来看，LLVM的code-gen从编译、优化时间，SQL执行时间，都比其他系统有很大提升
-        </div>
-        <p class="readmore"><a href="https://find-job.xyz/post/2023/02/efficiently-compiling-efficient-query-plans-for-modern-hardware/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/02/generating-code-for-holistic-query-evaluation/" title="Generating code for holistic query evaluation">Generating code for holistic query evaluation</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年2月4日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            英国爱丁堡大学的一篇论文，从传统系统到现代系统的变化一个重要点是：内存增大很多，以前的I/O瓶颈对于现在来说不那么重要了，反而是CPU和内存瓶颈；而之前的火山模型对于CPU利用率来说很不好，大量的虚函数调用，多层级的函数调用增加了cache miss，也会产生更多的指令，不利于并行化和cache局部性；这篇论文提出了一个代码模板，通过识别不同的查询计划算子，来对应的生成不同的代码(对应一个大函数)，不同函数之间通过物化来连接，之后通过编译器GCC来编译这段C代码，还可以对代码最O2级别优化(但会增加运行期执行时间)来达到更好的效果，论文对比了join、sort、聚合，虽然使用的是NSM存储模型，但是执行效果来看跟MonetDB的DSM差不多了；代码生成的缺点是对于小查询会有额外的开销(编译、优化、link时间)
-        </div>
-        <p class="readmore"><a href="https://find-job.xyz/post/2023/02/generating-code-for-holistic-query-evaluation/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/02/implementing-database-operations-using-simd-instructions/" title="Implementing Database Operations Using SIMD Instructions">Implementing Database Operations Using SIMD Instructions</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年2月1日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            介绍了SIMD指令一些基本概念，并行流水线，以及分支预测失败带来的影响；论文中提到了使用SIMD指令的方式，以及不同平台产生的差异；之后用伪代码的方式描述几个数据库常用操作；scan操作详细对比了标量版和SIMD版的区别，以及如何消除分支的方式，还有返回选中的一个元素、多个元素的标量、SIMD方式；聚合的实现方式SIMD有提供相关的操作 SIMD_min、SIMD_max即可，对于索引部分主要是介绍树结构索引，详细讨论了中间节点、叶子节点的实现方式；在有序元素上使用二分效率是非常高的，但也会有分支预测失败问题，论文中给出了混合二分+顺序扫描方式；最后是join处理方式，这里只列出了nested-loop join的SIMD实现，Duplicate-outer、Duplicate-inner、Rotate-inner
-        </div>
-        <p class="readmore"><a href="https://find-job.xyz/post/2023/02/implementing-database-operations-using-simd-instructions/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/01/rethinking-simd-vectorization-for-in-memory-databases/" title="Rethinking SIMD Vectorization for In-Memory Databases">Rethinking SIMD Vectorization for In-Memory Databases</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年1月27日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            这是Oracle联合哥伦比亚大学做的研究，论文中讨重点讨论了数据并行化(线程、指令、数据)，也就是SIMD实现；论文中给出了一些基本的SIMD操作，如selective sotre/load、gather、scatter，在论文发表的时候，这几个操作主流CPU不是全支持，只能通过一些模拟操作来支持，如permutation等；通过定义这四个最基本的操作，再往上就可以定义数据库查询中比较重要的操作了，如：scan、hash-table(horizontal、vertical、build、线性探测、double hash、cuckoo hash)、bloom filter、分区(radix、hash、range)；通过hash、分区等操作，又可以定义出排序、join等更复杂的操作，相当于是层层搭积木；测试结果SIMD会有大幅度性能提升，但也受到cache size的影响
-        </div>
-        <p class="readmore"><a href="https://find-job.xyz/post/2023/01/rethinking-simd-vectorization-for-in-memory-databases/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/01/advanced-database-systems-query-execution-and-processing/" title="Advanced Database Systems: Query Execution &amp; Processing">Advanced Database Systems: Query Execution &amp; Processing</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年1月22日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0'>读书笔记</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            这一部分是属于 执行引擎组件，由于现代系统从I/O变为CPU瓶颈，CPU的指令依赖、分支预测就阻塞了并行优化；MonetDB/X100就指出了火山模型、物化模型的问题，后使用了向量化/批模型来优化，为后续系统提供了方向。查询处理又包括：自顶向下vs字底向上；并行化包括：水平(exchange算子)、垂直、以及混合；worker的分配还包括单核单线程、单核pool；列存重建使用早期物化+SIP达到了早期物化的简单，同时兼具性能；主内存系统中二级索引和scan都有用，但需要综合考虑：选择性；硬件参数、数据布局、并发，优化器也需要配合重构整合；Oracle首创的混合行+列存储，又进一步提供了表达式替换(本质上是语法树子节点替换)
-        </div>
-        <p class="readmore"><a href="https://find-job.xyz/post/2023/01/advanced-database-systems-query-execution-and-processing/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/01/ultra-fast-in-memory-table-scan-using-onchip-vector-processing-units/" title="SIMD-Scan: Ultra Fast in-Memory Table Scan using onChip Vector Processing Units">SIMD-Scan: Ultra Fast in-Memory Table Scan using onChip Vector Processing Units</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年1月19日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            现代数据库由I/O瓶颈转向了CPU瓶颈，利用多核能力加速全表扫描，但是向量化的能力没能充分发挥。使用向量化包括：内嵌汇编、硬件厂商提供的跨平台库函数、编译器指示符、编译器自动优化，每种都是可用性和可控性之间的权衡。论文中引入了两项优化：使用SIMD方式在寄存器中解压 轻量压缩数据(使用concatenate、shift、shuffle、mark等指令完成)；使用SIMD完成等值和范围查找(使用掩码指令，将4个元素加载到寄存器中，再通过min、max比较范围，最后生成索引数组向量位)，通过测试结果都有大幅度提升，并且优化实现可以适用各种数据库
-        </div>
-        <p class="readmore"><a href="https://find-job.xyz/post/2023/01/ultra-fast-in-memory-table-scan-using-onchip-vector-processing-units/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/01/make-the-most-out-of-your-simd-investments/" title="Make the most out of your SIMD investments: counter control flow divergence in compiled query pipelines">Make the most out of your SIMD investments: counter control flow divergence in compiled query pipelines</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年1月17日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            现代数据库很多都采用了向量化执行，也就是利用 SIMD 指令，SIMD指令在碰到分支时，会出现部分元素不满足条件，导致不活跃影响利用率吞吐量下降，论文中利用了 AVX512指令集的：mark指令、permute指令、compress、expand，来实现重填充算法和策略；包括：全消费策略(需增加寄存器，主要利用buffer)，以及部分消费策略(增加新寄存器，利用mark)，在能放入cache的场景中，这两种算法表现的都不错，是scalar的两倍，但对于复杂场景，以及cache放不下的场景则表现退化，另外如何设置 阈值也是一个开放问题
-        </div>
-        <p class="readmore"><a href="https://find-job.xyz/post/2023/01/make-the-most-out-of-your-simd-investments/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/01/accelerating-analytics-with-dynamic-in-memory-expressions/" title="Accelerating Analytics with Dynamic In-Memory Expressions">Accelerating Analytics with Dynamic In-Memory Expressions</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年1月13日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            Oracle12推出了混合行/列的存储格式，磁盘(buffer pool)中按列存储，内存中按列存储加速OLAP场景；而表达式求值在很多场景下是黑盒，不易监控、也占用资源，Oracle捕获了频繁使用的表达式，将表达式物化到内存中，然后在查询计划中，根据代价来改变查询计划，将原始的查询计划的子树，替换为内存中的物化表达式，在OLAP场景中大幅度提升性能，在混合OLTP场景中也非常有效
-        </div>
-        <p class="readmore"><a href="https://find-job.xyz/post/2023/01/accelerating-analytics-with-dynamic-in-memory-expressions/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://find-job.xyz/post/2023/01/materialization-strategies-in-the-vertica-analytic-database-lessons-learned/" title="Materialization Strategies in the Vertica Analytic Database: Lessons Learned">Materialization Strategies in the Vertica Analytic Database: Lessons Learned</a>
             </h1>
         </header>
@@ -322,6 +97,231 @@
     
     
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://find-job.xyz/post/2023/01/monetdbx100-hyper-pipelining-query-execution/" title="MonetDB/X100: Hyper-Pipelining Query Execution">MonetDB/X100: Hyper-Pipelining Query Execution</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年1月5日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            2005年的一篇论文，通过分析MySQL、MonetDB发现这两种没有达到硬件上的预期效果，MySQL是因为经典的火山模型导致编译器没法利用循环流水线，出现大量CPU等待；而MonetDB避免了上述情况但使用了物化，又导致大量的内存带宽拷贝；这篇论文结合了这两者的特点，选择了向量化的执行方式，并配合了合适的cache size，使得执行效率大幅度提升
+        </div>
+        <p class="readmore"><a href="https://find-job.xyz/post/2023/01/monetdbx100-hyper-pipelining-query-execution/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://find-job.xyz/post/2023/01/access-path-selection-in-main-memory-optimized-data-systems-should-i-scan-or-should-i-probe/" title="Access Path Selection in Main-Memory Optimized Data Systems Should I Scan or Should I Probe">Access Path Selection in Main-Memory Optimized Data Systems Should I Scan or Should I Probe</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年1月3日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            CMU Query Execution &amp; Processing课程的一篇论文，现代分析系统中scan越来越重要，但二级索引依然有用，通过对比硬件参数、数据布局、压缩、并发等综合情况考虑之下，来选择：scan执行 或者index执行；通过性能评估发现，调节scan或者index并不是一个固定的值，而是根据不同的参数以及硬件情况，会动态变化的
+        </div>
+        <p class="readmore"><a href="https://find-job.xyz/post/2023/01/access-path-selection-in-main-memory-optimized-data-systems-should-i-scan-or-should-i-probe/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://find-job.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/" title="Photon A Fast Query Engine for Lakehouse Systems">Photon A Fast Query Engine for Lakehouse Systems</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年1月2日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Databricks 2022年在SIGMOD上发表的论文(最佳工业论文奖)，由于I/O方面有很多优化措施，而JVM的对向量化支持较差，之后用C++实现了向量化的执行引擎Photon，来实现进一步的性能提升；首先是从最底层scan开始替换，因为中间替换的代价较高，之后不断往上，直到某个算子Photon不能适配，则由列存转换为Spark的行存，退回到Spark执行，总体看性能可以提升好几倍
+        </div>
+        <p class="readmore"><a href="https://find-job.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://find-job.xyz/post/2023/01/mysql%E7%9A%84%E5%B9%B6%E5%8F%91/" title="MySQL的并发">MySQL的并发</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年1月1日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90'>原理分析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            MVCC的基本概念，读已提交、可重复读隔离级别下的ReadView，MVCC的purage；锁的基本类型，X/S/IX/IS锁；record lock、gap lock、next-key lock、insert intention lock、隐式锁；各种隔离级别下的加锁过程，SHOW ENGINE INNODB STATUS 分析加锁过程，死锁的分析
+        </div>
+        <p class="readmore"><a href="https://find-job.xyz/post/2023/01/mysql%E7%9A%84%E5%B9%B6%E5%8F%91/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://find-job.xyz/post/2022/12/mysql%E7%9A%84%E6%81%A2%E5%A4%8D/" title="MySQL的恢复">MySQL的恢复</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年12月22日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90'>原理分析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            redo log的格式(逻辑+物理混合格式)、Mini-Transaction、redo log写入过程，写入page cache，log_sys结构、redo log的文件格式，如何刷新到磁盘上的，checkpoint过程，恢复过程；   undo log的格式(逻辑格式)、undo log的组织、回滚段、系统表空间的5号page，多个回滚段、rollback的过程；以及源码中的redo log定义、undo log定义
+        </div>
+        <p class="readmore"><a href="https://find-job.xyz/post/2022/12/mysql%E7%9A%84%E6%81%A2%E5%A4%8D/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://find-job.xyz/post/2022/12/mysql%E7%9A%84%E7%BC%93%E5%AD%98/" title="MySQL的缓存">MySQL的缓存</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年12月19日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90'>原理分析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Buffer Pool、Doublewrite Buffer、Redo相关的Log Buffer，自适应Hash索引、change buffer、以及InnoDB相关的参数汇总
+        </div>
+        <p class="readmore"><a href="https://find-job.xyz/post/2022/12/mysql%E7%9A%84%E7%BC%93%E5%AD%98/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://find-job.xyz/post/2022/12/mysql%E6%9F%A5%E8%AF%A2%E5%88%86%E6%9E%90/" title="MySQL查询分析">MySQL查询分析</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年12月15日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90'>原理分析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            一些经典的RBO优化，包括子查询优化；一些CBO优化，统计信息收集，CBO的统计计算方式，常数成本调节；JOIN优化，并详细介绍了EXPLAIN的各个字段含义，其中select_type、type、Extra这几个字段比较重要，另外还有JSON个事的执行计划，optimizer trace
+        </div>
+        <p class="readmore"><a href="https://find-job.xyz/post/2022/12/mysql%E6%9F%A5%E8%AF%A2%E5%88%86%E6%9E%90/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://find-job.xyz/post/2022/12/%E7%94%A8%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90mysql%E5%AD%98%E5%82%A8%E6%96%87%E4%BB%B6/" title="用工具分析MySQL存储文件">用工具分析MySQL存储文件</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年12月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90'>原理分析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            innodb_ruby是专门分析InnoDB的工具，通过这个工具能获取到系统表空间、普通表空间的统计信息，段信息、区信息，以及4个核心的SYS表；；以及索引信息统计，page信息汇总，page信息dump，还可以用图表的方式展示
+        </div>
+        <p class="readmore"><a href="https://find-job.xyz/post/2022/12/%E7%94%A8%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90mysql%E5%AD%98%E5%82%A8%E6%96%87%E4%BB%B6/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://find-job.xyz/post/2022/12/mysql%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/" title="MySQL文件存储结构">MySQL文件存储结构</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年12月2日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90'>原理分析</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            InnoDB架构包含内存、磁盘两种结构；基于磁盘的结构中包括：系统表空间、普通表空间、通用表空间、双写缓冲区、Undo表空间、redo日志；临时表空间；这里最重要的当属系统表空间 和 普通表空间；普通表空间分为段、区、页、行这些概念，256个区一组，第0组包含FSP_HDR、XDES、INODE，存储数据的地方是INDEX；系统表空间则多了Data Dictionary Header部分
+        </div>
+        <p class="readmore"><a href="https://find-job.xyz/post/2022/12/mysql%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/">阅读全文</a></p>
+    </article>
+    
+    
+    
 
 
 
@@ -333,85 +333,53 @@
     
 
     
-
+    <li >
+        <a href="https://find-job.xyz/post/">1</a>
+    </li>
     
-        
-        
+    <li >
+        <a href="https://find-job.xyz/post/page/2/">2</a>
+    </li>
     
+    <li >
+        <a href="https://find-job.xyz/post/page/3/">3</a>
+    </li>
     
-
+    <li  class="current">
+        <a href="https://find-job.xyz/post/page/4/">4</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://find-job.xyz/post/">1</a>
-        </li>
-        
+    <li >
+        <a href="https://find-job.xyz/post/page/5/">5</a>
+    </li>
     
-        
-        <li>
-            <span>...</span>
-        </li>
-        
+    <li >
+        <a href="https://find-job.xyz/post/page/6/">6</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://find-job.xyz/post/page/2/">2</a>
-        </li>
-        
+    <li >
+        <a href="https://find-job.xyz/post/page/7/">7</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://find-job.xyz/post/page/3/">3</a>
-        </li>
-        
+    <li >
+        <a href="https://find-job.xyz/post/page/8/">8</a>
+    </li>
     
-        
-        
-        <li  class="current">
-            <a href="https://find-job.xyz/post/page/4/">4</a>
-        </li>
-        
+    <li >
+        <a href="https://find-job.xyz/post/page/9/">9</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://find-job.xyz/post/page/5/">5</a>
-        </li>
-        
-    
-        
-        
-        <li >
-            <a href="https://find-job.xyz/post/page/6/">6</a>
-        </li>
-        
-    
-        
-        <li>
-            <span>...</span>
-        </li>
-        
-    
-        
-        
-        <li >
-            <a href="https://find-job.xyz/post/page/12/">12</a>
-        </li>
-        
+    <li >
+        <a href="https://find-job.xyz/post/page/10/">10</a>
+    </li>
     
 
     
-    
-
     <li class="next">
         <a href="https://find-job.xyz/post/page/5/">下一页</a>
     </li>
     
 </ol>
-
 
 
 
@@ -459,19 +427,19 @@
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/06/bitweaving/" title="BitWeaving: Fast Scans for Main Memory Data Processing">BitWeaving: Fast Scans for Main Memory Data Processing</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/cache_conscious/" title="Cache Conscious Indexing for Decision-Support in Main Memory">Cache Conscious Indexing for Decision-Support in Main Memory</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/column_imprints/" title="Column Imprints: A Secondary Index Structure">Column Imprints: A Secondary Index Structure</a>
-    </li>
-    
-    <li>
         <a href="https://find-job.xyz/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" title="资源隔离修改配置动态加载">资源隔离修改配置动态加载</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
     </li>
     
 </ul>
@@ -483,19 +451,19 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://find-job.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (6)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (5)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (18)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (15)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (19)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (30)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (21)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (8)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
     
@@ -503,7 +471,7 @@
     
     <li><a href="https://find-job.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (12)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (11)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
     
@@ -514,11 +482,11 @@
         <h3 class="widget-title">归档</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://find-job.xyz/years/2021%E5%B9%B4/">2021年 (20)</a></li>
+    <li><a href="https://find-job.xyz/years/2021%E5%B9%B4/">2021年 (15)</a></li>
     
-    <li><a href="https://find-job.xyz/years/2022%E5%B9%B4/">2022年 (53)</a></li>
+    <li><a href="https://find-job.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
     
-    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (44)</a></li>
+    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (35)</a></li>
     
 </ul>
     </section>
@@ -532,8 +500,6 @@
     <a href="https://find-job.xyz/tags/calcite/">calcite </a>
     
     <a href="https://find-job.xyz/tags/cmu-database/">CMU-Database </a>
-    
-    <a href="https://find-job.xyz/tags/flink/">flink </a>
     
     <a href="https://find-job.xyz/tags/hana/">HANA </a>
     
@@ -550,8 +516,6 @@
     <a href="https://find-job.xyz/tags/leveldb/">LevelDB </a>
     
     <a href="https://find-job.xyz/tags/llvm/">LLVM </a>
-    
-    <a href="https://find-job.xyz/tags/manacher/">Manacher </a>
     
     <a href="https://find-job.xyz/tags/mapreduce/">MapReduce </a>
     
@@ -581,10 +545,6 @@
     
     <a href="https://find-job.xyz/tags/unix/">unix </a>
     
-    <a href="https://find-job.xyz/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找 </a>
-    
-    <a href="https://find-job.xyz/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">二叉树遍历 </a>
-    
     <a href="https://find-job.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
     
     <a href="https://find-job.xyz/tags/%E5%88%97%E5%AD%98/">列存 </a>
@@ -592,8 +552,6 @@
     <a href="https://find-job.xyz/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
     
     <a href="https://find-job.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
-    
-    <a href="https://find-job.xyz/tags/%E5%9B%9E%E6%BA%AF/">回溯 </a>
     
     <a href="https://find-job.xyz/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
     
@@ -621,11 +579,7 @@
     
     <a href="https://find-job.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
     
-    <a href="https://find-job.xyz/tags/%E7%AE%97%E6%B3%95/">算法 </a>
-    
     <a href="https://find-job.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
-    
-    <a href="https://find-job.xyz/tags/%E7%BC%93%E5%AD%98/">缓存 </a>
     
     <a href="https://find-job.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
     
@@ -656,7 +610,7 @@
     </div>
     <footer id="footer">
     <div>
-        &copy; 2023 <a href="https://find-job.xyz/">找工作中，以下是我的一些个人介绍和技术笔记 By find-job</a>
+        &copy; 2023 <a href="https://find-job.xyz/">找工作中 By find-job</a>
         
     </div>
     <br />

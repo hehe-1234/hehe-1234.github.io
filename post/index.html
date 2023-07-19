@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>Posts | 找工作中，以下是我的一些个人介绍和技术笔记</title>
-    <meta property="og:title" content="Posts - 找工作中，以下是我的一些个人介绍和技术笔记">
+    <title>Posts | 找工作中</title>
+    <meta property="og:title" content="Posts - 找工作中">
     <meta property="og:type" content="article">
         
         
@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://find-job.xyz/post/index.xml" title="找工作中，以下是我的一些个人介绍和技术笔记" />
+    <link rel="alternate" type="application/rss+xml" href="https://find-job.xyz/post/index.xml" title="找工作中" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -44,7 +44,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://find-job.xyz/">
-                        找工作中，以下是我的一些个人介绍和技术笔记
+                        找工作中
                     </a>
                 
                 
@@ -225,81 +225,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/06/bitweaving/" title="BitWeaving: Fast Scans for Main Memory Data Processing">BitWeaving: Fast Scans for Main Memory Data Processing</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年6月1日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            基于主内存数据库的 scan 优化，提出的技术：BitWeaving，又分为两种：BitWeaving/V 和 BitWeaving/H；BW/H 相当于是bit 级别的水平分布，将列的数据水平的分布到不同segment 中，通过亦或、以及各种位运算技术，实现了 =、!=、&lt;、&lt;= 的比较操作，比较完之后，每个process word 分隔符bit就会被设置为 1 或者0，然后将上下四组分别做不同的位移在 or，就能得到最终结果；BW/V 实现bit 级别的列存储，一列数据将每个数据的第一个bit存到 process word v1中，第二列存到 v2中，按照这种分布就可以实现早期裁剪，SIMD 再进一步优化，他的scan很快，但是查找需要跨多个processor word，相当于是垂直的从左往右计算，性能会 BW/H要差；而对于 VBP，其真实数据布局可以再优化，比如原先 9个processor word 一个segment，变成一个segment 3个 bit group，每个bit group 3个 processor word，这样做 cut-off的时候可以不用再加载斗鱼的processor word，节省了内存带宽，减少cache miss；从性能对比看，BW 技术在scan方面是最好的，SIMD有打包和对其开销所以效果远不如 BW，而BW 存在选择 BW/V 和 BW/H 布局的问题，也是待研究的问题
-        </div>
-        <p class="readmore"><a href="https://find-job.xyz/post/2023/06/bitweaving/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/05/cache_conscious/" title="Cache Conscious Indexing for Decision-Support in Main Memory">Cache Conscious Indexing for Decision-Support in Main Memory</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年5月28日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            对于主内存 OLAP 场景，提出的针对 cache有效性的优化，如果排序数组远大于 cache line，则二分查找的 cache miss 是很严重的，基本每查找一次就有一次cache miss；T树 看起来是缓存友好的，但每次查找只有 min、max做了匹配，仍然会有很大的 cache miss，B 树虽然是面向磁盘的，但有多个子节点，一次可以做多个匹配，所以cache miss 比 T 树更好一些，hash index需要占用大量空间，当然二分的好处是不用空间；在这些基础上论文提出了针对cache line的 CSS树(Cache Sensitive Search Trees)，他在排序数组基础上，增加了一个字典数组，使得整个树可以被平铺，有点像 树堆，不过它的节点有多个，个数一般跟 cache line有关，它没有子节点指针，而是用数组下标来代替，这样一个 node 内可以放更多的数据，查找起来的cache miss就会小很多；值得注意的是类似满二叉树，CSS树的字典指向的排序数组其 part-1、part-2整合跟正常排序数组是相反的；从测试结果看CSS 树的表现也不错，随着CPU和内存差距越来越大，CSS树可能会变现的更好
-        </div>
-        <p class="readmore"><a href="https://find-job.xyz/post/2023/05/cache_conscious/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/05/column_imprints/" title="Column Imprints: A Secondary Index Structure">Column Imprints: A Secondary Index Structure</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年5月26日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            针对主内存数据库，提出了一种轻量级二级索引技术：imprints column，它是属于bit 向量索引家族的，zone map对于随机值正好落在min、max内的查询就无效了，仍然需要扫描，而 bit map占用的空间更大，imprint 则综合了这两者的优点，它是基于cache line做bit向量分组的，对CPU更友好，而且将一个cache line内的值统一合并为一个bit向量，占用空间更小；通过 counter 和 repeat标志位，可以实现imprint 的压缩，论文中给出了相关的压缩、查询算法，由于是针对读场景的设计，更新主要是append和索引重建；通过实验对比，imprint 对于数据分布随机和有规律的场景，表现的都很好，索引压缩效果不错，压缩后的索引占比看 imprint最少，zonemap也差不多，WAH最高；查询性能看，三个索引基本差不多，imprint略好一些，时间上imprint也略块一些，但随着选择率上升几个都趋同；总体看随选择率上升也跟scan 差不多，但是对于熵低/高的场景表现都比较稳定
-        </div>
-        <p class="readmore"><a href="https://find-job.xyz/post/2023/05/column_imprints/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://find-job.xyz/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
             </h1>
         </header>
@@ -322,6 +247,81 @@
     
     
     
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://find-job.xyz/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年5月21日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0'>读书笔记</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            数据库的发展历史，从复杂模型：网络模型、层次模型，再到简单的关系模型最后胜出，关系模型不止是简单，而且提出了物理、逻辑解耦、高层级别API；所以从1970年代开始，数据库的基本模型，发展方向是定了；后面出现了各种对关系模型的补充，但是大多数只是重复发明，除了code in database，schema last是比较新颖的发明；在这几十年内，商业数据库一直是主导，IBM、Oracle、微软一直是领导者；直到2000年互联网的出现打破了这个局面，数据库面临大量的访问，需要购买大量商业数据库成本太贵，此时开源产品就是更好的选择；同时也出现了各种对关系模型，他们的扩展性、性能都非常好，但他们不支持SQL、不支持事务，十年之后再看这些数据库多多少少都有一些局限性，于是分布式的NewSQL出现，加上云厂商的对象存储，云上数据库也成为主流；现在数据库有很多细分市场，每个主题内都有好几个玩家，这些数据库在巩固自己领地的同时，又在不断扩展自己的能力；他们开始支持SQL，增加事务，从历史角度看，声明式语言、解耦、简单模型一直是有生命力的
+        </div>
+        <p class="readmore"><a href="https://find-job.xyz/post/2023/05/advanced_database_systems-history_of_databases/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" title="资源隔离修改配置动态加载">资源隔离修改配置动态加载</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年5月14日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95'>工作记录</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            在资源隔离大功能的基础上，实现动态加载配置修改功能，当用户 alter 了资源配置表，会动态生效
+        </div>
+        <p class="readmore"><a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年5月13日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95'>工作记录</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            基于高可用的两层调度方式，配合 k8s 实现一套资源隔离机制，并实现自定义的语法
+        </div>
+        <p class="readmore"><a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/">阅读全文</a></p>
+    </article>
+    
+    
+    
 
 
 
@@ -329,57 +329,53 @@
     
 
     
-
+    <li  class="current">
+        <a href="https://find-job.xyz/post/">1</a>
+    </li>
     
-        
+    <li >
+        <a href="https://find-job.xyz/post/page/2/">2</a>
+    </li>
     
+    <li >
+        <a href="https://find-job.xyz/post/page/3/">3</a>
+    </li>
     
-
+    <li >
+        <a href="https://find-job.xyz/post/page/4/">4</a>
+    </li>
     
-        
-        
-        <li  class="current">
-            <a href="https://find-job.xyz/post/">1</a>
-        </li>
-        
+    <li >
+        <a href="https://find-job.xyz/post/page/5/">5</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://find-job.xyz/post/page/2/">2</a>
-        </li>
-        
+    <li >
+        <a href="https://find-job.xyz/post/page/6/">6</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://find-job.xyz/post/page/3/">3</a>
-        </li>
-        
+    <li >
+        <a href="https://find-job.xyz/post/page/7/">7</a>
+    </li>
     
-        
-        <li>
-            <span>...</span>
-        </li>
-        
+    <li >
+        <a href="https://find-job.xyz/post/page/8/">8</a>
+    </li>
     
-        
-        
-        <li >
-            <a href="https://find-job.xyz/post/page/12/">12</a>
-        </li>
-        
+    <li >
+        <a href="https://find-job.xyz/post/page/9/">9</a>
+    </li>
     
-
-    
+    <li >
+        <a href="https://find-job.xyz/post/page/10/">10</a>
+    </li>
     
 
+    
     <li class="next">
         <a href="https://find-job.xyz/post/page/2/">下一页</a>
     </li>
     
 </ol>
-
 
 
 
@@ -427,19 +423,19 @@
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/06/bitweaving/" title="BitWeaving: Fast Scans for Main Memory Data Processing">BitWeaving: Fast Scans for Main Memory Data Processing</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/cache_conscious/" title="Cache Conscious Indexing for Decision-Support in Main Memory">Cache Conscious Indexing for Decision-Support in Main Memory</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/column_imprints/" title="Column Imprints: A Secondary Index Structure">Column Imprints: A Secondary Index Structure</a>
-    </li>
-    
-    <li>
         <a href="https://find-job.xyz/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/" title="资源隔离修改配置动态加载">资源隔离修改配置动态加载</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
     </li>
     
 </ul>
@@ -451,19 +447,19 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://find-job.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (6)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (5)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (18)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (15)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (19)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (30)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (21)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (8)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
     
@@ -471,7 +467,7 @@
     
     <li><a href="https://find-job.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (12)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (11)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
     
@@ -482,11 +478,11 @@
         <h3 class="widget-title">归档</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://find-job.xyz/years/2021%E5%B9%B4/">2021年 (20)</a></li>
+    <li><a href="https://find-job.xyz/years/2021%E5%B9%B4/">2021年 (15)</a></li>
     
-    <li><a href="https://find-job.xyz/years/2022%E5%B9%B4/">2022年 (53)</a></li>
+    <li><a href="https://find-job.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
     
-    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (44)</a></li>
+    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (35)</a></li>
     
 </ul>
     </section>
@@ -500,8 +496,6 @@
     <a href="https://find-job.xyz/tags/calcite/">calcite </a>
     
     <a href="https://find-job.xyz/tags/cmu-database/">CMU-Database </a>
-    
-    <a href="https://find-job.xyz/tags/flink/">flink </a>
     
     <a href="https://find-job.xyz/tags/hana/">HANA </a>
     
@@ -518,8 +512,6 @@
     <a href="https://find-job.xyz/tags/leveldb/">LevelDB </a>
     
     <a href="https://find-job.xyz/tags/llvm/">LLVM </a>
-    
-    <a href="https://find-job.xyz/tags/manacher/">Manacher </a>
     
     <a href="https://find-job.xyz/tags/mapreduce/">MapReduce </a>
     
@@ -549,10 +541,6 @@
     
     <a href="https://find-job.xyz/tags/unix/">unix </a>
     
-    <a href="https://find-job.xyz/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找 </a>
-    
-    <a href="https://find-job.xyz/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">二叉树遍历 </a>
-    
     <a href="https://find-job.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
     
     <a href="https://find-job.xyz/tags/%E5%88%97%E5%AD%98/">列存 </a>
@@ -560,8 +548,6 @@
     <a href="https://find-job.xyz/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
     
     <a href="https://find-job.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
-    
-    <a href="https://find-job.xyz/tags/%E5%9B%9E%E6%BA%AF/">回溯 </a>
     
     <a href="https://find-job.xyz/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
     
@@ -589,11 +575,7 @@
     
     <a href="https://find-job.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
     
-    <a href="https://find-job.xyz/tags/%E7%AE%97%E6%B3%95/">算法 </a>
-    
     <a href="https://find-job.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
-    
-    <a href="https://find-job.xyz/tags/%E7%BC%93%E5%AD%98/">缓存 </a>
     
     <a href="https://find-job.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
     
@@ -624,7 +606,7 @@
     </div>
     <footer id="footer">
     <div>
-        &copy; 2023 <a href="https://find-job.xyz/">找工作中，以下是我的一些个人介绍和技术笔记 By find-job</a>
+        &copy; 2023 <a href="https://find-job.xyz/">找工作中 By find-job</a>
         
     </div>
     <br />

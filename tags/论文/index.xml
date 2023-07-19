@@ -1,39 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>论文 on 找工作中，以下是我的一些个人介绍和技术笔记</title>
+    <title>论文 on 找工作中</title>
     <link>https://find-job.xyz/tags/%E8%AE%BA%E6%96%87/</link>
-    <description>Recent content in 论文 on 找工作中，以下是我的一些个人介绍和技术笔记</description>
+    <description>Recent content in 论文 on 找工作中</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 01 Jun 2023 09:11:07 +0800</lastBuildDate><atom:link href="https://find-job.xyz/tags/%E8%AE%BA%E6%96%87/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>BitWeaving: Fast Scans for Main Memory Data Processing</title>
-      <link>https://find-job.xyz/post/2023/06/bitweaving/</link>
-      <pubDate>Thu, 01 Jun 2023 09:11:07 +0800</pubDate>
-      
-      <guid>https://find-job.xyz/post/2023/06/bitweaving/</guid>
-      <description>基于主内存数据库的 scan 优化，提出的技术：BitWeaving，又分为两种：BitWeaving/V 和 BitWeaving/H；BW/H 相当于是bit 级别的水平分布，将列的数据水平的分布到不同segment 中，通过亦或、以及各种位运算技术，实现了 =、!=、&amp;lt;、&amp;lt;= 的比较操作，比较完之后，每个process word 分隔符bit就会被设置为 1 或者0，然后将上下四组分别做不同的位移在 or，就能得到最终结果；BW/V 实现bit 级别的列存储，一列数据将每个数据的第一个bit存到 process word v1中，第二列存到 v2中，按照这种分布就可以实现早期裁剪，SIMD 再进一步优化，他的scan很快，但是查找需要跨多个processor word，相当于是垂直的从左往右计算，性能会 BW/H要差；而对于 VBP，其真实数据布局可以再优化，比如原先 9个processor word 一个segment，变成一个segment 3个 bit group，每个bit group 3个 processor word，这样做 cut-off的时候可以不用再加载斗鱼的processor word，节省了内存带宽，减少cache miss；从性能对比看，BW 技术在scan方面是最好的，SIMD有打包和对其开销所以效果远不如 BW，而BW 存在选择 BW/V 和 BW/H 布局的问题，也是待研究的问题</description>
-    </item>
-    
-    <item>
-      <title>Cache Conscious Indexing for Decision-Support in Main Memory</title>
-      <link>https://find-job.xyz/post/2023/05/cache_conscious/</link>
-      <pubDate>Sun, 28 May 2023 09:11:07 +0800</pubDate>
-      
-      <guid>https://find-job.xyz/post/2023/05/cache_conscious/</guid>
-      <description>对于主内存 OLAP 场景，提出的针对 cache有效性的优化，如果排序数组远大于 cache line，则二分查找的 cache miss 是很严重的，基本每查找一次就有一次cache miss；T树 看起来是缓存友好的，但每次查找只有 min、max做了匹配，仍然会有很大的 cache miss，B 树虽然是面向磁盘的，但有多个子节点，一次可以做多个匹配，所以cache miss 比 T 树更好一些，hash index需要占用大量空间，当然二分的好处是不用空间；在这些基础上论文提出了针对cache line的 CSS树(Cache Sensitive Search Trees)，他在排序数组基础上，增加了一个字典数组，使得整个树可以被平铺，有点像 树堆，不过它的节点有多个，个数一般跟 cache line有关，它没有子节点指针，而是用数组下标来代替，这样一个 node 内可以放更多的数据，查找起来的cache miss就会小很多；值得注意的是类似满二叉树，CSS树的字典指向的排序数组其 part-1、part-2整合跟正常排序数组是相反的；从测试结果看CSS 树的表现也不错，随着CPU和内存差距越来越大，CSS树可能会变现的更好</description>
-    </item>
-    
-    <item>
-      <title>Column Imprints: A Secondary Index Structure</title>
-      <link>https://find-job.xyz/post/2023/05/column_imprints/</link>
-      <pubDate>Fri, 26 May 2023 18:11:07 +0800</pubDate>
-      
-      <guid>https://find-job.xyz/post/2023/05/column_imprints/</guid>
-      <description>针对主内存数据库，提出了一种轻量级二级索引技术：imprints column，它是属于bit 向量索引家族的，zone map对于随机值正好落在min、max内的查询就无效了，仍然需要扫描，而 bit map占用的空间更大，imprint 则综合了这两者的优点，它是基于cache line做bit向量分组的，对CPU更友好，而且将一个cache line内的值统一合并为一个bit向量，占用空间更小；通过 counter 和 repeat标志位，可以实现imprint 的压缩，论文中给出了相关的压缩、查询算法，由于是针对读场景的设计，更新主要是append和索引重建；通过实验对比，imprint 对于数据分布随机和有规律的场景，表现的都很好，索引压缩效果不错，压缩后的索引占比看 imprint最少，zonemap也差不多，WAH最高；查询性能看，三个索引基本差不多，imprint略好一些，时间上imprint也略块一些，但随着选择率上升几个都趋同；总体看随选择率上升也跟scan 差不多，但是对于熵低/高的场景表现都比较稳定</description>
-    </item>
-    
+    <lastBuildDate>Wed, 24 May 2023 18:11:07 +0800</lastBuildDate><atom:link href="https://find-job.xyz/tags/%E8%AE%BA%E6%96%87/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SQL Server Column Store Indexes</title>
       <link>https://find-job.xyz/post/2023/05/sql_server_column_store_indexes/</link>
@@ -44,39 +17,12 @@
     </item>
     
     <item>
-      <title>Bitmap Index Design and Evaluation </title>
-      <link>https://find-job.xyz/post/2023/05/bitmap_index/</link>
-      <pubDate>Mon, 22 May 2023 09:23:04 +0800</pubDate>
-      
-      <guid>https://find-job.xyz/post/2023/05/bitmap_index/</guid>
-      <description>针对 bitmap 索引提出的一系列指导设计建议，传统方式对于带谓词的查询，一般是：全表scan、B树 索引、每个谓词做scan然后merge；使用 bitmap 后采用第三种方案效果最好，论文中提出了四种时空权衡：空间最优、时间最优、基于空间限制下的时间最优、时空权衡； 在大量数、数据基础范围较小的情况下使用 bitmap 索引效果很好，而 bitmap 可以采用 基于范围的、基于等值的；基于范围的相当于 Value-List set，在这种场景下继续拆分，如基于&amp;lt;3,3&amp;gt;的Value-List，其空间比原始的更小；论文中提出了对 Algorithm RangeEval 改进的 Algorithm RangeEval-Opt 算法，需要处理的谓词更少，只需一次扫描；论文指出 范围编码的时空权衡效果更好，之后又对比了压缩的情况，buffer的增大，对于时空权衡也有帮助</description>
-    </item>
-    
-    <item>
       <title>Advanced Database Systems: History of Databases</title>
       <link>https://find-job.xyz/post/2023/05/advanced_database_systems-history_of_databases/</link>
       <pubDate>Sun, 21 May 2023 09:23:04 +0800</pubDate>
       
       <guid>https://find-job.xyz/post/2023/05/advanced_database_systems-history_of_databases/</guid>
       <description>数据库的发展历史，从复杂模型：网络模型、层次模型，再到简单的关系模型最后胜出，关系模型不止是简单，而且提出了物理、逻辑解耦、高层级别API；所以从1970年代开始，数据库的基本模型，发展方向是定了；后面出现了各种对关系模型的补充，但是大多数只是重复发明，除了code in database，schema last是比较新颖的发明；在这几十年内，商业数据库一直是主导，IBM、Oracle、微软一直是领导者；直到2000年互联网的出现打破了这个局面，数据库面临大量的访问，需要购买大量商业数据库成本太贵，此时开源产品就是更好的选择；同时也出现了各种对关系模型，他们的扩展性、性能都非常好，但他们不支持SQL、不支持事务，十年之后再看这些数据库多多少少都有一些局限性，于是分布式的NewSQL出现，加上云厂商的对象存储，云上数据库也成为主流；现在数据库有很多细分市场，每个主题内都有好几个玩家，这些数据库在巩固自己领地的同时，又在不断扩展自己的能力；他们开始支持SQL，增加事务，从历史角度看，声明式语言、解耦、简单模型一直是有生命力的</description>
-    </item>
-    
-    <item>
-      <title>Column Sketches: A Scan Accelerator for Rapid and Robust Predicate Evaluation</title>
-      <link>https://find-job.xyz/post/2023/05/column_sketches/</link>
-      <pubDate>Wed, 17 May 2023 09:23:04 +0800</pubDate>
-      
-      <guid>https://find-job.xyz/post/2023/05/column_sketches/</guid>
-      <description>B数索引 对于选择率低时效果很好、但选择率一旦上升性能就不行了；轻量级索引 Zone Map、Column Imprints、Feature Based Data Skipping对数据聚集性有要求；早期裁剪 ByteSlicing、Bit-Slicing、Approximate and Refine 在数据倾斜情况下，高位可能都是重复的效果不好。Column Sketches使用直方图统计列数据分布，同时考虑了频繁值和普通值，之后建立映射函数，将频繁值映射成唯一code，非频繁值均匀分布，通过这种映射之后，数值类型的 原先 8bit 的值，映射完只需要 2bit 就可以表示了，对于频繁唯一值也不需要回表检查进一步加速；对于分类型也是类似方式，只是不需要排序，可以直接映射。对比其他方案，Column Sketches在选择率高/低，L1 miss，tuple处理速度，数据倾斜，鲁棒性，数据加载上都很不错；Column Sketches还可以利用 SIMD加速scan，可以跟现有技术做整合</description>
-    </item>
-    
-    <item>
-      <title>Optimal Column Layout for Hybrid Workloads</title>
-      <link>https://find-job.xyz/post/2023/05/optimal_column_layout_for_hybrid_workloads/</link>
-      <pubDate>Sat, 13 May 2023 09:23:04 +0800</pubDate>
-      
-      <guid>https://find-job.xyz/post/2023/05/optimal_column_layout_for_hybrid_workloads/</guid>
-      <description>基于 HTAP 场景的列布局优化，仍然使用列布局，但是对列做水平分区，一个分区内包含多个 block，每个block 的大小是 CPU cache 的数倍，这样更好利用CPU；每个分区根据是否为边界(0 或 1 表示)，输出为一堆的 bit范围，这是一个 NP hard问题，也有相关研究可以解决此问题；工作负载包括：点查询、范围查询、插入、删除、更新；每种场景对应底层 I/O 包括 随机读、随机写、顺序读、顺序写，不同场景对于 block的访问频率也是不同的，论文给出了 10 种统计的直方图；之后收集各种负载的 block 访问情况然后离线分析，再将分析后的结果优化，输出为一堆bit，这样就可以动态调整分区，达到了自适应的效果；从性能分析结果看，可以适用于各种场景，除了读基本不变，其他场景都有大幅度提升，同时吞吐量也保持不变</description>
     </item>
     
     <item>
@@ -152,30 +98,12 @@
     </item>
     
     <item>
-      <title>Rethinking SIMD Vectorization for In-Memory Databases</title>
-      <link>https://find-job.xyz/post/2023/01/rethinking-simd-vectorization-for-in-memory-databases/</link>
-      <pubDate>Fri, 27 Jan 2023 10:35:19 +0800</pubDate>
-      
-      <guid>https://find-job.xyz/post/2023/01/rethinking-simd-vectorization-for-in-memory-databases/</guid>
-      <description>这是Oracle联合哥伦比亚大学做的研究，论文中讨重点讨论了数据并行化(线程、指令、数据)，也就是SIMD实现；论文中给出了一些基本的SIMD操作，如selective sotre/load、gather、scatter，在论文发表的时候，这几个操作主流CPU不是全支持，只能通过一些模拟操作来支持，如permutation等；通过定义这四个最基本的操作，再往上就可以定义数据库查询中比较重要的操作了，如：scan、hash-table(horizontal、vertical、build、线性探测、double hash、cuckoo hash)、bloom filter、分区(radix、hash、range)；通过hash、分区等操作，又可以定义出排序、join等更复杂的操作，相当于是层层搭积木；测试结果SIMD会有大幅度性能提升，但也受到cache size的影响</description>
-    </item>
-    
-    <item>
       <title>SIMD-Scan: Ultra Fast in-Memory Table Scan using onChip Vector Processing Units</title>
       <link>https://find-job.xyz/post/2023/01/ultra-fast-in-memory-table-scan-using-onchip-vector-processing-units/</link>
       <pubDate>Thu, 19 Jan 2023 10:35:19 +0800</pubDate>
       
       <guid>https://find-job.xyz/post/2023/01/ultra-fast-in-memory-table-scan-using-onchip-vector-processing-units/</guid>
       <description>现代数据库由I/O瓶颈转向了CPU瓶颈，利用多核能力加速全表扫描，但是向量化的能力没能充分发挥。使用向量化包括：内嵌汇编、硬件厂商提供的跨平台库函数、编译器指示符、编译器自动优化，每种都是可用性和可控性之间的权衡。论文中引入了两项优化：使用SIMD方式在寄存器中解压 轻量压缩数据(使用concatenate、shift、shuffle、mark等指令完成)；使用SIMD完成等值和范围查找(使用掩码指令，将4个元素加载到寄存器中，再通过min、max比较范围，最后生成索引数组向量位)，通过测试结果都有大幅度提升，并且优化实现可以适用各种数据库</description>
-    </item>
-    
-    <item>
-      <title>Make the most out of your SIMD investments: counter control flow divergence in compiled query pipelines</title>
-      <link>https://find-job.xyz/post/2023/01/make-the-most-out-of-your-simd-investments/</link>
-      <pubDate>Tue, 17 Jan 2023 06:35:19 +0800</pubDate>
-      
-      <guid>https://find-job.xyz/post/2023/01/make-the-most-out-of-your-simd-investments/</guid>
-      <description>现代数据库很多都采用了向量化执行，也就是利用 SIMD 指令，SIMD指令在碰到分支时，会出现部分元素不满足条件，导致不活跃影响利用率吞吐量下降，论文中利用了 AVX512指令集的：mark指令、permute指令、compress、expand，来实现重填充算法和策略；包括：全消费策略(需增加寄存器，主要利用buffer)，以及部分消费策略(增加新寄存器，利用mark)，在能放入cache的场景中，这两种算法表现的都不错，是scalar的两倍，但对于复杂场景，以及cache放不下的场景则表现退化，另外如何设置 阈值也是一个开放问题</description>
     </item>
     
     <item>
@@ -230,15 +158,6 @@
       
       <guid>https://find-job.xyz/post/2022/11/multi-tenant-cloud-data-services/</guid>
       <description>主要挑战：存储计算分离架构，多租户共享资源需要解决的问题，serverless不需要预定资源随用随付费；隔离VS安全，隔离程度高越安全但价格高，整合程度高虚拟化stack高便捷性好便宜；自建机房的SLA基本能确定，但在云共享环境中就不是一个固定值了，一般厂商会提供可用性、吞吐量、延迟这些保证，还有多租户集群管理；开放问题：CPU的扩展和内存之间的结构、缓存的动态迁移、云服务价格优化、自动调优、新硬件的影响、资源评估</description>
-    </item>
-    
-    <item>
-      <title>MillWheel</title>
-      <link>https://find-job.xyz/post/2023/03/millwheel/</link>
-      <pubDate>Fri, 18 Nov 2022 08:35:19 +0800</pubDate>
-      
-      <guid>https://find-job.xyz/post/2023/03/millwheel/</guid>
-      <description>MillWheel: Fault-Tolerant Stream Processing at Internet Scale</description>
     </item>
     
     <item>
@@ -365,15 +284,6 @@
       
       <guid>https://find-job.xyz/post/2022/03/hive%E8%AE%BA%E6%96%87/</guid>
       <description>Hive论文</description>
-    </item>
-    
-    <item>
-      <title>Kudu论文翻译</title>
-      <link>https://find-job.xyz/post/2022/02/kudu%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91/</link>
-      <pubDate>Sun, 20 Feb 2022 10:27:11 +0800</pubDate>
-      
-      <guid>https://find-job.xyz/post/2022/02/kudu%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91/</guid>
-      <description>读Kudu论文</description>
     </item>
     
     <item>
