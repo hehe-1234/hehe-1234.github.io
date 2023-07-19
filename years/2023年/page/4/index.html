@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>2023年 | 找工作中</title>
-    <meta property="og:title" content="2023年 - 找工作中">
+    <title>2023年 | gg</title>
+    <meta property="og:title" content="2023年 - gg">
     <meta property="og:type" content="article">
         
         
@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://find-job.xyz/years/2023%E5%B9%B4/index.xml" title="找工作中" />
+    <link rel="alternate" type="application/rss+xml" href="https://find-job.xyz/years/2023%E5%B9%B4/index.xml" title="gg" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -44,7 +44,7 @@
             <div class="site-name ">
                 
                     <a id="logo" href="https://find-job.xyz/">
-                        找工作中
+                        gg
                     </a>
                 
                 
@@ -72,98 +72,6 @@
 <div class="res-cons">
     
 
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/01/materialization-strategies-in-the-vertica-analytic-database-lessons-learned/">Materialization Strategies in the Vertica Analytic Database: Lessons Learned</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年1月7日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a>
-            
-        </div>
-        
-        <div class="post-content">
-            列存数据库会通过物化的方式来重建tuple，包括早期物化EM、延迟物化LM，延迟物化的性能更好，但实现更难，当出现join溢出时会出现，此时会退回到早期物化；论文在早期物化基础上增加了：边信息传递SIP技术，并给出了实现细节，如何创建SIP，如何做push down；使用EM+SIP技术，比原始的EM性能大幅度提升，并且在很多场景下比延迟物化LM性能更好
-            <p class="readmore"><a href="https://find-job.xyz/post/2023/01/materialization-strategies-in-the-vertica-analytic-database-lessons-learned/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/01/monetdbx100-hyper-pipelining-query-execution/">MonetDB/X100: Hyper-Pipelining Query Execution</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年1月5日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a>
-            
-        </div>
-        
-        <div class="post-content">
-            2005年的一篇论文，通过分析MySQL、MonetDB发现这两种没有达到硬件上的预期效果，MySQL是因为经典的火山模型导致编译器没法利用循环流水线，出现大量CPU等待；而MonetDB避免了上述情况但使用了物化，又导致大量的内存带宽拷贝；这篇论文结合了这两者的特点，选择了向量化的执行方式，并配合了合适的cache size，使得执行效率大幅度提升
-            <p class="readmore"><a href="https://find-job.xyz/post/2023/01/monetdbx100-hyper-pipelining-query-execution/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/01/access-path-selection-in-main-memory-optimized-data-systems-should-i-scan-or-should-i-probe/">Access Path Selection in Main-Memory Optimized Data Systems Should I Scan or Should I Probe</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年1月3日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a>
-            
-        </div>
-        
-        <div class="post-content">
-            CMU Query Execution &amp; Processing课程的一篇论文，现代分析系统中scan越来越重要，但二级索引依然有用，通过对比硬件参数、数据布局、压缩、并发等综合情况考虑之下，来选择：scan执行 或者index执行；通过性能评估发现，调节scan或者index并不是一个固定的值，而是根据不同的参数以及硬件情况，会动态变化的
-            <p class="readmore"><a href="https://find-job.xyz/post/2023/01/access-path-selection-in-main-memory-optimized-data-systems-should-i-scan-or-should-i-probe/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://find-job.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/">Photon A Fast Query Engine for Lakehouse Systems</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年1月2日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
-            
-        </div>
-        
-        <div class="post-content">
-            Databricks 2022年在SIGMOD上发表的论文(最佳工业论文奖)，由于I/O方面有很多优化措施，而JVM的对向量化支持较差，之后用C++实现了向量化的执行引擎Photon，来实现进一步的性能提升；首先是从最底层scan开始替换，因为中间替换的代价较高，之后不断往上，直到某个算子Photon不能适配，则由列存转换为Spark的行存，退回到Spark执行，总体看性能可以提升好几倍
-            <p class="readmore"><a href="https://find-job.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/">阅读全文</a></p>
-        </div>
-    </article>
     
     <article class="post">
         <header>
@@ -247,22 +155,6 @@
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/07/%E6%9F%90%E5%A4%A7%E5%9E%8Btob%E4%BC%81%E4%B8%9A/" title="某大型toB 企业工作介绍">某大型toB 企业工作介绍</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/07/%E6%9F%90%E4%BA%92%E8%81%94%E7%BD%91&#43;%E4%BC%81%E4%B8%9A/" title="大型互联网&#43; 企业工作介绍">大型互联网&#43; 企业工作介绍</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/07/sina%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" title="新浪工作介绍">新浪工作介绍</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/07/borland%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" title="Borland工作介绍">Borland工作介绍</a>
-    </li>
-    
-    <li>
         <a href="https://find-job.xyz/post/2023/07/presto%E5%9C%A8%E5%90%84%E5%A4%A7%E5%85%AC%E5%8F%B8%E7%9A%84%E5%BA%94%E7%94%A8/" title="Presto在各大公司的应用">Presto在各大公司的应用</a>
     </li>
     
@@ -282,6 +174,22 @@
         <a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
     </li>
     
+    <li>
+        <a href="https://find-job.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/" title="镜像合并&amp;配置文件同步">镜像合并&amp;配置文件同步</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/05/column-stores_vs_row-stores_how_different_are_they_really/" title="Column-Stores vs. Row-Stores: How Different Are They Really?">Column-Stores vs. Row-Stores: How Different Are They Really?</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/05/lakehouse-a-new-generation-of-open-platforms-that-unify/" title="Lakehouse A New Generation of Open Platforms that Unify Data Warehousing and Advanced Analytics">Lakehouse A New Generation of Open Platforms that Unify Data Warehousing and Advanced Analytics</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/05/building-an-elastic-query-engine-on-disaggregated-storage/" title="Building An Elastic Query Engine on Disaggregated Storage">Building An Elastic Query Engine on Disaggregated Storage</a>
+    </li>
+    
 </ul>
     </section>
 
@@ -297,7 +205,7 @@
     
     <li><a href="https://find-job.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (15)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (19)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (21)</a></li>
     
@@ -311,7 +219,7 @@
     
     <li><a href="https://find-job.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (11)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (10)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
     
@@ -322,11 +230,11 @@
         <h3 class="widget-title">归档</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://find-job.xyz/years/2021%E5%B9%B4/">2021年 (15)</a></li>
+    <li><a href="https://find-job.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
     
     <li><a href="https://find-job.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
     
-    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (35)</a></li>
+    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
     
 </ul>
     </section>
@@ -382,8 +290,6 @@
     <a href="https://find-job.xyz/tags/spark/">spark </a>
     
     <a href="https://find-job.xyz/tags/teradata/">TeraData </a>
-    
-    <a href="https://find-job.xyz/tags/unix/">unix </a>
     
     <a href="https://find-job.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
     
@@ -450,7 +356,7 @@
     </div>
     <footer id="footer">
     <div>
-        &copy; 2023 <a href="https://find-job.xyz/">找工作中 By find-job</a>
+        &copy; 2023 <a href="https://find-job.xyz/">gg By find-job</a>
         
     </div>
     <br />
