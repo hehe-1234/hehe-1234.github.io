@@ -13,10 +13,10 @@
     <meta property="og:title" content="LevelDB 多版本和压缩 - 找工作中">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2023-04-14T19:20:03&#43;08:00'>
+    <meta property="article:published_time" content='2023-05-13T19:20:03&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2023-04-14T19:20:03&#43;08:00'>
+    <meta property="article:modified_time" content='2023-05-13T19:20:03&#43;08:00'>
         
     <meta name="Keywords" content="">
     <meta name="description" content="LevelDB 多版本和压缩">
@@ -79,7 +79,7 @@
             <h1 class="post-title">LevelDB 多版本和压缩</h1>
         </header>
         <date class="post-meta meta-date">
-            2023年4月14日
+            2023年5月13日
         </date>
 <nav id="TableOfContents">
   <ul>
@@ -113,29 +113,29 @@
         
         <div class="post-content">
             <p>文件类型：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ff79c6">enum</span> <span style="color:#50fa7b">FileType</span> {
-  kLogFile,
-  kDBLockFile,
-  kTableFile,
-  kDescriptorFile,
-  kCurrentFile,
-  kTempFile,
-  kInfoLogFile  <span style="color:#6272a4">// Either the current one, or an old one
-</span><span style="color:#6272a4"></span>};
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">enum</span> <span style="color:#50fa7b">FileType</span> {
+</span></span><span style="display:flex;"><span>  kLogFile,
+</span></span><span style="display:flex;"><span>  kDBLockFile,
+</span></span><span style="display:flex;"><span>  kTableFile,
+</span></span><span style="display:flex;"><span>  kDescriptorFile,
+</span></span><span style="display:flex;"><span>  kCurrentFile,
+</span></span><span style="display:flex;"><span>  kTempFile,
+</span></span><span style="display:flex;"><span>  kInfoLogFile  <span style="color:#6272a4">// Either the current one, or an old one
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>};
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="多版本">多版本</h2>
 <p>版本管理中相关的类</p>
@@ -188,266 +188,266 @@ VersionSet 头结点指向最新的 manifest 文件</p>
 <hr>
 <p><strong>FileMetaData</strong><br>
 sstable的元信息</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">FileMetaData</span> {
-  FileMetaData() <span style="color:#ff79c6">:</span> refs(<span style="color:#bd93f9">0</span>), allowed_seeks(<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">30</span>), file_size(<span style="color:#bd93f9">0</span>) {}
-
-  <span style="color:#8be9fd">int</span> refs;
-  <span style="color:#8be9fd">int</span> allowed_seeks;     <span style="color:#6272a4">// Compaction时会介绍这个字段
-</span><span style="color:#6272a4"></span>  <span style="color:#8be9fd">uint64_t</span> number;
-  <span style="color:#8be9fd">uint64_t</span> file_size;    <span style="color:#6272a4">// 文件大小
-</span><span style="color:#6272a4"></span>  InternalKey smallest;  <span style="color:#6272a4">// 文件里最小的internal key
-</span><span style="color:#6272a4"></span>  InternalKey largest;   <span style="color:#6272a4">// 文件里最大的internal key
-</span><span style="color:#6272a4"></span>};
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">FileMetaData</span> {
+</span></span><span style="display:flex;"><span>  FileMetaData() <span style="color:#ff79c6">:</span> refs(<span style="color:#bd93f9">0</span>), allowed_seeks(<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#bd93f9">30</span>), file_size(<span style="color:#bd93f9">0</span>) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd">int</span> refs;
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd">int</span> allowed_seeks;     <span style="color:#6272a4">// Compaction时会介绍这个字段
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#8be9fd">uint64_t</span> number;
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd">uint64_t</span> file_size;    <span style="color:#6272a4">// 文件大小
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  InternalKey smallest;  <span style="color:#6272a4">// 文件里最小的internal key
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  InternalKey largest;   <span style="color:#6272a4">// 文件里最大的internal key
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>};
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>Version</strong><br>
 位置：db/version_set.h<br>
 读取数据库时，就需要 Version 里面的信息</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Version</span> {
-  VersionSet<span style="color:#ff79c6">*</span> vset_;  <span style="color:#6272a4">// 版本集的引用
-</span><span style="color:#6272a4"></span>  Version<span style="color:#ff79c6">*</span> next_;     <span style="color:#6272a4">// 版本在版本集里的next_指针
-</span><span style="color:#6272a4"></span>  Version<span style="color:#ff79c6">*</span> prev_;     <span style="color:#6272a4">// 版本在版本集里的prev_指针
-</span><span style="color:#6272a4"></span>  <span style="color:#8be9fd">int</span> refs_;          <span style="color:#6272a4">// 引用计数
-</span><span style="color:#6272a4"></span>
-  <span style="color:#6272a4">// SSTable的信息，每一项代表相应Level的SSTable信息
-</span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// 除了Level 0外，每个Level里的文件都是按照最小键的顺序排列的，并且没有重叠
-</span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// 通过这个数据项，搜索SSTable时，就可以从Level 0开始搜索
-</span><span style="color:#6272a4"></span>  std<span style="color:#ff79c6">::</span>vector<span style="color:#ff79c6">&lt;</span>FileMetaData<span style="color:#ff79c6">*&gt;</span> files_[config<span style="color:#ff79c6">::</span>kNumLevels];
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Version</span> {
+</span></span><span style="display:flex;"><span>  VersionSet<span style="color:#ff79c6">*</span> vset_;  <span style="color:#6272a4">// 版本集的引用
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  Version<span style="color:#ff79c6">*</span> next_;     <span style="color:#6272a4">// 版本在版本集里的next_指针
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  Version<span style="color:#ff79c6">*</span> prev_;     <span style="color:#6272a4">// 版本在版本集里的prev_指针
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#8be9fd">int</span> refs_;          <span style="color:#6272a4">// 引用计数
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// SSTable的信息，每一项代表相应Level的SSTable信息
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// 除了Level 0外，每个Level里的文件都是按照最小键的顺序排列的，并且没有重叠
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// 通过这个数据项，搜索SSTable时，就可以从Level 0开始搜索
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  std<span style="color:#ff79c6">::</span>vector<span style="color:#ff79c6">&lt;</span>FileMetaData<span style="color:#ff79c6">*&gt;</span> files_[config<span style="color:#ff79c6">::</span>kNumLevels];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>VersionEdit</strong></p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">VersionEdit</span> {
-    <span style="color:#ff79c6">typedef</span> std<span style="color:#ff79c6">::</span>set<span style="color:#ff79c6">&lt;</span>std<span style="color:#ff79c6">::</span>pair<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">int</span>, <span style="color:#8be9fd">uint64_t</span><span style="color:#ff79c6">&gt;&gt;</span> DeletedFileSet;
-
-    std<span style="color:#ff79c6">::</span>string comparator_;             <span style="color:#6272a4">// 比较器的名称，持久化后，下次打开时需要对比一致
-</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> log_number_;                <span style="color:#6272a4">// 日志文件的编号
-</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> next_file_number_;          <span style="color:#6272a4">// ldb、log和MANIFEST下一个文件的编号
-</span><span style="color:#6272a4"></span>    SequenceNumber last_sequence_;       <span style="color:#6272a4">// 上一个使用的SequenceNumber
-</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">bool</span> has_comparator_;                <span style="color:#6272a4">// 记录上面4个字段是否存在，存在才会持久化的MANIFEST中
-</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">bool</span> has_log_number_;
-    <span style="color:#8be9fd">bool</span> has_next_file_number_;
-    <span style="color:#8be9fd">bool</span> has_last_sequence_
-
-    <span style="color:#6272a4">// 和VersionSet里面的compact_pointers_相同
-</span><span style="color:#6272a4"></span>    std<span style="color:#ff79c6">::</span>vector<span style="color:#ff79c6">&lt;</span>std<span style="color:#ff79c6">::</span>pair<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">int</span>, InternalKey<span style="color:#ff79c6">&gt;&gt;</span> compact_pointers_;
-    <span style="color:#6272a4">// 有哪些文件被删除，就是Version里哪些SSTable被删除
-</span><span style="color:#6272a4"></span>    DeletedFileSet deleted_files_;
-    <span style="color:#6272a4">// 有哪些文件被增加，pair的第一个参数是Level，第二个参数是文件的元信息
-</span><span style="color:#6272a4"></span>    std<span style="color:#ff79c6">::</span>vector<span style="color:#ff79c6">&lt;</span>std<span style="color:#ff79c6">::</span>pair<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">int</span>, FileMetaData<span style="color:#ff79c6">&gt;&gt;</span> new_files_;
-};
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">VersionEdit</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">typedef</span> std<span style="color:#ff79c6">::</span>set<span style="color:#ff79c6">&lt;</span>std<span style="color:#ff79c6">::</span>pair<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">int</span>, <span style="color:#8be9fd">uint64_t</span><span style="color:#ff79c6">&gt;&gt;</span> DeletedFileSet;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#ff79c6">::</span>string comparator_;             <span style="color:#6272a4">// 比较器的名称，持久化后，下次打开时需要对比一致
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> log_number_;                <span style="color:#6272a4">// 日志文件的编号
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> next_file_number_;          <span style="color:#6272a4">// ldb、log和MANIFEST下一个文件的编号
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    SequenceNumber last_sequence_;       <span style="color:#6272a4">// 上一个使用的SequenceNumber
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">bool</span> has_comparator_;                <span style="color:#6272a4">// 记录上面4个字段是否存在，存在才会持久化的MANIFEST中
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">bool</span> has_log_number_;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">bool</span> has_next_file_number_;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">bool</span> has_last_sequence_
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 和VersionSet里面的compact_pointers_相同
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    std<span style="color:#ff79c6">::</span>vector<span style="color:#ff79c6">&lt;</span>std<span style="color:#ff79c6">::</span>pair<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">int</span>, InternalKey<span style="color:#ff79c6">&gt;&gt;</span> compact_pointers_;
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 有哪些文件被删除，就是Version里哪些SSTable被删除
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    DeletedFileSet deleted_files_;
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 有哪些文件被增加，pair的第一个参数是Level，第二个参数是文件的元信息
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    std<span style="color:#ff79c6">::</span>vector<span style="color:#ff79c6">&lt;</span>std<span style="color:#ff79c6">::</span>pair<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">int</span>, FileMetaData<span style="color:#ff79c6">&gt;&gt;</span> new_files_;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>VersionEdit 中包含了两个函数</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Status VersionEdit<span style="color:#ff79c6">::</span>DecodeFrom(<span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> src)
-<span style="color:#8be9fd">void</span> VersionEdit<span style="color:#ff79c6">::</span>EncodeTo(std<span style="color:#ff79c6">::</span>string<span style="color:#ff79c6">*</span> dst) <span style="color:#ff79c6">const</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Status VersionEdit<span style="color:#ff79c6">::</span>DecodeFrom(<span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> src)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> VersionEdit<span style="color:#ff79c6">::</span>EncodeTo(std<span style="color:#ff79c6">::</span>string<span style="color:#ff79c6">*</span> dst) <span style="color:#ff79c6">const</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这个就是一个 编码，一个解码<br>
 将 dst 中的信息，写入到所有变量中，以及从 变量中解码信息到 Slice 中</p>
 <p><strong>VersionSet</strong></p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    Env<span style="color:#ff79c6">*</span> <span style="color:#ff79c6">const</span> env_;                      <span style="color:#6272a4">// 封装部分操作系统调用，包括文件、线程操作等
-</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">const</span> std<span style="color:#ff79c6">::</span>string dbname_;            <span style="color:#6272a4">// 数据库名称，Open时传入
-</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">const</span> Options<span style="color:#ff79c6">*</span> <span style="color:#ff79c6">const</span> options_;        <span style="color:#6272a4">// 数据库选项，Open时传入
-</span><span style="color:#6272a4"></span>    TableCache<span style="color:#ff79c6">*</span> <span style="color:#ff79c6">const</span> table_cache_;       <span style="color:#6272a4">// 打开的SSTable的缓存，Open时创建
-</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">const</span> InternalKeyComparator icmp_;    <span style="color:#6272a4">// 根据User Key生成的Internal Key的Comparator
-</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> next_file_number_;           <span style="color:#6272a4">// ldb、log和MANIFEST生成新文件时都有一个序号单调递增
-</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> manifest_file_number_;       <span style="color:#6272a4">// 当前的MANIFEST的编号
-</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> last_sequence_;              <span style="color:#6272a4">// 上一个使用的SequenceNumber
-</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> log_number_;                 <span style="color:#6272a4">// 当前的日志的编号
-</span><span style="color:#6272a4"></span>
-    WritableFile<span style="color:#ff79c6">*</span> descriptor_file_;       <span style="color:#6272a4">// MANIFEST打开的文件描述符
-</span><span style="color:#6272a4"></span>    log<span style="color:#ff79c6">::</span>Writer<span style="color:#ff79c6">*</span> descriptor_log_;         <span style="color:#6272a4">// MANIFEST实际存储的格式是WAL日志的格式，所以这里用来写入数据
-</span><span style="color:#6272a4"></span>    Version dummy_versions_;              <span style="color:#6272a4">// Version链表的头结点
-</span><span style="color:#6272a4"></span>    Version<span style="color:#ff79c6">*</span> current_;                    <span style="color:#6272a4">// 当前的Version
-</span><span style="color:#6272a4"></span>
-    <span style="color:#6272a4">// 这是用来记录Compact的进度，Compact总是从某一Level的最小的键开始到某个键结束，
-</span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 下次再从下一个键开始，所以这个就是下一次这个Level从哪个键开始Compact
-</span><span style="color:#6272a4"></span>    std<span style="color:#ff79c6">::</span>string compact_pointer_[config<span style="color:#ff79c6">::</span>kNumLevels];
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    Env<span style="color:#ff79c6">*</span> <span style="color:#ff79c6">const</span> env_;                      <span style="color:#6272a4">// 封装部分操作系统调用，包括文件、线程操作等
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">const</span> std<span style="color:#ff79c6">::</span>string dbname_;            <span style="color:#6272a4">// 数据库名称，Open时传入
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">const</span> Options<span style="color:#ff79c6">*</span> <span style="color:#ff79c6">const</span> options_;        <span style="color:#6272a4">// 数据库选项，Open时传入
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    TableCache<span style="color:#ff79c6">*</span> <span style="color:#ff79c6">const</span> table_cache_;       <span style="color:#6272a4">// 打开的SSTable的缓存，Open时创建
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">const</span> InternalKeyComparator icmp_;    <span style="color:#6272a4">// 根据User Key生成的Internal Key的Comparator
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> next_file_number_;           <span style="color:#6272a4">// ldb、log和MANIFEST生成新文件时都有一个序号单调递增
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> manifest_file_number_;       <span style="color:#6272a4">// 当前的MANIFEST的编号
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> last_sequence_;              <span style="color:#6272a4">// 上一个使用的SequenceNumber
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> log_number_;                 <span style="color:#6272a4">// 当前的日志的编号
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>    WritableFile<span style="color:#ff79c6">*</span> descriptor_file_;       <span style="color:#6272a4">// MANIFEST打开的文件描述符
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    log<span style="color:#ff79c6">::</span>Writer<span style="color:#ff79c6">*</span> descriptor_log_;         <span style="color:#6272a4">// MANIFEST实际存储的格式是WAL日志的格式，所以这里用来写入数据
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    Version dummy_versions_;              <span style="color:#6272a4">// Version链表的头结点
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    Version<span style="color:#ff79c6">*</span> current_;                    <span style="color:#6272a4">// 当前的Version
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 这是用来记录Compact的进度，Compact总是从某一Level的最小的键开始到某个键结束，
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#6272a4">// 下次再从下一个键开始，所以这个就是下一次这个Level从哪个键开始Compact
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    std<span style="color:#ff79c6">::</span>string compact_pointer_[config<span style="color:#ff79c6">::</span>kNumLevels];
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>VersionSet::Builder</strong>辅助类<br>
 主要变量：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">  <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">BySmallestKey</span> {
-    <span style="color:#ff79c6">const</span> InternalKeyComparator<span style="color:#ff79c6">*</span> internal_comparator;
-
-    <span style="color:#8be9fd">bool</span> <span style="color:#50fa7b">operator</span>()(FileMetaData<span style="color:#ff79c6">*</span> f1, FileMetaData<span style="color:#ff79c6">*</span> f2) <span style="color:#ff79c6">const</span> {
-      <span style="color:#8be9fd">int</span> r <span style="color:#ff79c6">=</span> internal_comparator<span style="color:#ff79c6">-&gt;</span>Compare(f1<span style="color:#ff79c6">-&gt;</span>smallest, f2<span style="color:#ff79c6">-&gt;</span>smallest);
-      <span style="color:#ff79c6">if</span> (r <span style="color:#ff79c6">!=</span> <span style="color:#bd93f9">0</span>) {
-        <span style="color:#ff79c6">return</span> (r <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">0</span>);
-      } <span style="color:#ff79c6">else</span> {
-        <span style="color:#6272a4">// Break ties by file number
-</span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">return</span> (f1<span style="color:#ff79c6">-&gt;</span>number <span style="color:#ff79c6">&lt;</span> f2<span style="color:#ff79c6">-&gt;</span>number);
-      }
-    }
-  };
-
-  <span style="color:#ff79c6">typedef</span> std<span style="color:#ff79c6">::</span>set<span style="color:#ff79c6">&lt;</span>FileMetaData<span style="color:#ff79c6">*</span>, BySmallestKey<span style="color:#ff79c6">&gt;</span> FileSet;
-  <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">LevelState</span> {
-    std<span style="color:#ff79c6">::</span>set<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">uint64_t</span><span style="color:#ff79c6">&gt;</span> deleted_files;
-    FileSet<span style="color:#ff79c6">*</span> added_files;
-  };
-
-  VersionSet<span style="color:#ff79c6">*</span> vset_;
-  Version<span style="color:#ff79c6">*</span> base_;
-  LevelState levels_[config<span style="color:#ff79c6">::</span>kNumLevels];
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">BySmallestKey</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">const</span> InternalKeyComparator<span style="color:#ff79c6">*</span> internal_comparator;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">bool</span> <span style="color:#50fa7b">operator</span>()(FileMetaData<span style="color:#ff79c6">*</span> f1, FileMetaData<span style="color:#ff79c6">*</span> f2) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#8be9fd">int</span> r <span style="color:#ff79c6">=</span> internal_comparator<span style="color:#ff79c6">-&gt;</span>Compare(f1<span style="color:#ff79c6">-&gt;</span>smallest, f2<span style="color:#ff79c6">-&gt;</span>smallest);
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">if</span> (r <span style="color:#ff79c6">!=</span> <span style="color:#bd93f9">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> (r <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>      } <span style="color:#ff79c6">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">// Break ties by file number
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">return</span> (f1<span style="color:#ff79c6">-&gt;</span>number <span style="color:#ff79c6">&lt;</span> f2<span style="color:#ff79c6">-&gt;</span>number);
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">typedef</span> std<span style="color:#ff79c6">::</span>set<span style="color:#ff79c6">&lt;</span>FileMetaData<span style="color:#ff79c6">*</span>, BySmallestKey<span style="color:#ff79c6">&gt;</span> FileSet;
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">LevelState</span> {
+</span></span><span style="display:flex;"><span>    std<span style="color:#ff79c6">::</span>set<span style="color:#ff79c6">&lt;</span><span style="color:#8be9fd">uint64_t</span><span style="color:#ff79c6">&gt;</span> deleted_files;
+</span></span><span style="display:flex;"><span>    FileSet<span style="color:#ff79c6">*</span> added_files;
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  VersionSet<span style="color:#ff79c6">*</span> vset_;
+</span></span><span style="display:flex;"><span>  Version<span style="color:#ff79c6">*</span> base_;
+</span></span><span style="display:flex;"><span>  LevelState levels_[config<span style="color:#ff79c6">::</span>kNumLevels];
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>LevelFileNumIterator</strong><br>
 主要变量</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">  <span style="color:#ff79c6">const</span> InternalKeyComparator icmp_;
-  <span style="color:#ff79c6">const</span> std<span style="color:#ff79c6">::</span>vector<span style="color:#ff79c6">&lt;</span>FileMetaData<span style="color:#ff79c6">*&gt;*</span> <span style="color:#ff79c6">const</span> flist_;
-  <span style="color:#8be9fd">uint32_t</span> index_;
-
-  <span style="color:#6272a4">// Backing store for value().  Holds the file number and size.
-</span><span style="color:#6272a4"></span>  <span style="color:#ff79c6">mutable</span> <span style="color:#8be9fd">char</span> value_buf_[<span style="color:#bd93f9">16</span>];
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> InternalKeyComparator icmp_;
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">const</span> std<span style="color:#ff79c6">::</span>vector<span style="color:#ff79c6">&lt;</span>FileMetaData<span style="color:#ff79c6">*&gt;*</span> <span style="color:#ff79c6">const</span> flist_;
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd">uint32_t</span> index_;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Backing store for value().  Holds the file number and size.
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#ff79c6">mutable</span> <span style="color:#8be9fd">char</span> value_buf_[<span style="color:#bd93f9">16</span>];
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中 new 出来的 两次迭代器，就使用到了 LevelFileNumIterator</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Iterator<span style="color:#ff79c6">*</span> Version<span style="color:#ff79c6">::</span>NewConcatenatingIterator(<span style="color:#ff79c6">const</span> ReadOptions<span style="color:#ff79c6">&amp;</span> options, <span style="color:#8be9fd">int</span> level) <span style="color:#ff79c6">const</span> {
-  <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">NewTwoLevelIterator</span>(<span style="color:#ff79c6">new</span> LevelFileNumIterator(vset_<span style="color:#ff79c6">-&gt;</span>icmp_, <span style="color:#ff79c6">&amp;</span>files_[level]),
-	<span style="color:#ff79c6">&amp;</span>GetFileIterator, vset_<span style="color:#ff79c6">-&gt;</span>table_cache_, options);
-}
-
-<span style="color:#ff79c6">static</span> Iterator<span style="color:#ff79c6">*</span> <span style="color:#50fa7b">GetFileIterator</span>(<span style="color:#8be9fd">void</span><span style="color:#ff79c6">*</span> arg, <span style="color:#ff79c6">const</span> ReadOptions<span style="color:#ff79c6">&amp;</span> options,
-                                 <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> file_value) {
-	TableCache<span style="color:#ff79c6">*</span> cache <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">reinterpret_cast</span><span style="color:#ff79c6">&lt;</span>TableCache<span style="color:#ff79c6">*&gt;</span>(arg);
-	<span style="color:#ff79c6">return</span> cache<span style="color:#ff79c6">-&gt;</span>NewIterator(options, DecodeFixed64(file_value.data()),
-                              DecodeFixed64(file_value.data() <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">8</span>));
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Iterator<span style="color:#ff79c6">*</span> Version<span style="color:#ff79c6">::</span>NewConcatenatingIterator(<span style="color:#ff79c6">const</span> ReadOptions<span style="color:#ff79c6">&amp;</span> options, <span style="color:#8be9fd">int</span> level) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">NewTwoLevelIterator</span>(<span style="color:#ff79c6">new</span> LevelFileNumIterator(vset_<span style="color:#ff79c6">-&gt;</span>icmp_, <span style="color:#ff79c6">&amp;</span>files_[level]),
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">&amp;</span>GetFileIterator, vset_<span style="color:#ff79c6">-&gt;</span>table_cache_, options);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">static</span> Iterator<span style="color:#ff79c6">*</span> <span style="color:#50fa7b">GetFileIterator</span>(<span style="color:#8be9fd">void</span><span style="color:#ff79c6">*</span> arg, <span style="color:#ff79c6">const</span> ReadOptions<span style="color:#ff79c6">&amp;</span> options,
+</span></span><span style="display:flex;"><span>                                 <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> file_value) {
+</span></span><span style="display:flex;"><span>	TableCache<span style="color:#ff79c6">*</span> cache <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">reinterpret_cast</span><span style="color:#ff79c6">&lt;</span>TableCache<span style="color:#ff79c6">*&gt;</span>(arg);
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">return</span> cache<span style="color:#ff79c6">-&gt;</span>NewIterator(options, DecodeFixed64(file_value.data()),
+</span></span><span style="display:flex;"><span>                              DecodeFixed64(file_value.data() <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">8</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>builder 版本变迁过程<br>
 
@@ -515,88 +515,88 @@ sstable的元信息</p>
         </a>
     </p>
 <p>Compaction类</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#6272a4">// db/version_set.h
-</span><span style="color:#6272a4"></span>
-<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Compaction</span> {
-    <span style="color:#8be9fd">int</span> level_;                      <span style="color:#6272a4">// Compaction文件所在的Level
-</span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> max_output_file_size_;  <span style="color:#6272a4">// 生成的文件的最大值
-</span><span style="color:#6272a4"></span>    Version<span style="color:#ff79c6">*</span> input_version_;         <span style="color:#6272a4">// Compaction发生时的Version
-</span><span style="color:#6272a4"></span>    VersionEdit edit_;               <span style="color:#6272a4">// Compaction结果保存的VersionEdit
-</span><span style="color:#6272a4"></span>
-  <span style="color:#6272a4">// Each compaction reads inputs from &#34;level_&#34; and &#34;level_+1&#34;
-</span><span style="color:#6272a4"></span>  std<span style="color:#ff79c6">::</span>vector<span style="color:#ff79c6">&lt;</span>FileMetaData<span style="color:#ff79c6">*&gt;</span> inputs_[<span style="color:#bd93f9">2</span>];  <span style="color:#6272a4">// The two sets of inputs
-</span><span style="color:#6272a4"></span>
-  <span style="color:#6272a4">// State used to check for number of overlapping grandparent files
-</span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// (parent == level_ + 1, grandparent == level_ + 2)
-</span><span style="color:#6272a4"></span>  std<span style="color:#ff79c6">::</span>vector<span style="color:#ff79c6">&lt;</span>FileMetaData<span style="color:#ff79c6">*&gt;</span> grandparents_;
-  size_t grandparent_index_;  <span style="color:#6272a4">// Index in grandparent_starts_
-</span><span style="color:#6272a4"></span>  <span style="color:#8be9fd">bool</span> seen_key_;             <span style="color:#6272a4">// Some output key has been seen
-</span><span style="color:#6272a4"></span>  <span style="color:#8be9fd">int64_t</span> overlapped_bytes_;  <span style="color:#6272a4">// Bytes of overlap between current output
-</span><span style="color:#6272a4"></span>                              <span style="color:#6272a4">// and grandparent files
-</span><span style="color:#6272a4"></span>
-  <span style="color:#6272a4">// State for implementing IsBaseLevelForKey
-</span><span style="color:#6272a4"></span>
-  <span style="color:#6272a4">// level_ptrs_ holds indices into input_version_-&gt;levels_: our state
-</span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// is that we are positioned at one of the file ranges for each
-</span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// higher level than the ones involved in this compaction (i.e. for
-</span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// all L &gt;= level_ + 2).
-</span><span style="color:#6272a4"></span>  size_t level_ptrs_[config<span style="color:#ff79c6">::</span>kNumLevels];
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#6272a4">// db/version_set.h
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Compaction</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">int</span> level_;                      <span style="color:#6272a4">// Compaction文件所在的Level
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#8be9fd">uint64_t</span> max_output_file_size_;  <span style="color:#6272a4">// 生成的文件的最大值
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    Version<span style="color:#ff79c6">*</span> input_version_;         <span style="color:#6272a4">// Compaction发生时的Version
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    VersionEdit edit_;               <span style="color:#6272a4">// Compaction结果保存的VersionEdit
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// Each compaction reads inputs from &#34;level_&#34; and &#34;level_+1&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  std<span style="color:#ff79c6">::</span>vector<span style="color:#ff79c6">&lt;</span>FileMetaData<span style="color:#ff79c6">*&gt;</span> inputs_[<span style="color:#bd93f9">2</span>];  <span style="color:#6272a4">// The two sets of inputs
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// State used to check for number of overlapping grandparent files
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// (parent == level_ + 1, grandparent == level_ + 2)
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  std<span style="color:#ff79c6">::</span>vector<span style="color:#ff79c6">&lt;</span>FileMetaData<span style="color:#ff79c6">*&gt;</span> grandparents_;
+</span></span><span style="display:flex;"><span>  size_t grandparent_index_;  <span style="color:#6272a4">// Index in grandparent_starts_
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#8be9fd">bool</span> seen_key_;             <span style="color:#6272a4">// Some output key has been seen
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#8be9fd">int64_t</span> overlapped_bytes_;  <span style="color:#6272a4">// Bytes of overlap between current output
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>                              <span style="color:#6272a4">// and grandparent files
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// State for implementing IsBaseLevelForKey
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">// level_ptrs_ holds indices into input_version_-&gt;levels_: our state
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// is that we are positioned at one of the file ranges for each
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// higher level than the ones involved in this compaction (i.e. for
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#6272a4">// all L &gt;= level_ + 2).
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  size_t level_ptrs_[config<span style="color:#ff79c6">::</span>kNumLevels];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>ManualCompaction 类</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">  <span style="color:#6272a4">// Information for a manual compaction
-</span><span style="color:#6272a4"></span>  <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">ManualCompaction</span> {
-    <span style="color:#8be9fd">int</span> level;
-    <span style="color:#8be9fd">bool</span> done;
-    <span style="color:#ff79c6">const</span> InternalKey<span style="color:#ff79c6">*</span> begin;  <span style="color:#6272a4">// null means beginning of key range
-</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">const</span> InternalKey<span style="color:#ff79c6">*</span> end;    <span style="color:#6272a4">// null means end of key range
-</span><span style="color:#6272a4"></span>    InternalKey tmp_storage;   <span style="color:#6272a4">// Used to keep track of compaction progress
-</span><span style="color:#6272a4"></span>  };
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#6272a4">// Information for a manual compaction
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#ff79c6">struct</span> <span style="color:#50fa7b">ManualCompaction</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">int</span> level;
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd">bool</span> done;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">const</span> InternalKey<span style="color:#ff79c6">*</span> begin;  <span style="color:#6272a4">// null means beginning of key range
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">const</span> InternalKey<span style="color:#ff79c6">*</span> end;    <span style="color:#6272a4">// null means end of key range
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    InternalKey tmp_storage;   <span style="color:#6272a4">// Used to keep track of compaction progress
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  };
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Compaction 的触发方式</p>
 <ul>
@@ -605,13 +605,13 @@ sstable的元信息</p>
 <li>Seek Compaction</li>
 </ul>
 <p>手动压缩的触发函数：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#8be9fd">void</span> DBImpl<span style="color:#ff79c6">::</span>TEST_CompactRange(<span style="color:#8be9fd">int</span> level, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">*</span> begin, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">*</span> end)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> DBImpl<span style="color:#ff79c6">::</span>TEST_CompactRange(<span style="color:#8be9fd">int</span> level, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">*</span> begin, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">*</span> end)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Size compation</p>
 <ul>
@@ -815,13 +815,13 @@ code.has-jax {
     <h2>相关文章</h2>
     <ul class="listing">
         
-        <li><a href="/post/2023/04/levedb-%E5%B7%A5%E5%85%B7%E7%B1%BB/">LevelDB 辅助工具类</a></li>
-        
         <li><a href="/post/2023/04/levedb-sstable%E6%A8%A1%E5%9D%97/">LevelDB SSTable模块</a></li>
         
         <li><a href="/post/2023/04/levedb-memtable%E6%A8%A1%E5%9D%97/">LevelDB MemTable模块</a></li>
         
         <li><a href="/post/2023/04/levedb-log%E6%A8%A1%E5%9D%97/">LevelDB Log模块</a></li>
+        
+        <li><a href="/post/2023/04/levedb-%E5%B7%A5%E5%85%B7%E7%B1%BB/">LevelDB 辅助工具类</a></li>
         
         <li><a href="/post/2023/03/levedb-%E5%85%AC%E5%BC%80%E6%8E%A5%E5%8F%A3/">LevelDB 公开的接口</a></li>
         
@@ -878,14 +878,6 @@ code.has-jax {
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/07/presto%E5%9C%A8%E5%90%84%E5%A4%A7%E5%85%AC%E5%8F%B8%E7%9A%84%E5%BA%94%E7%94%A8/" title="Presto在各大公司的应用">Presto在各大公司的应用</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
-    </li>
-    
-    <li>
         <a href="https://find-job.xyz/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
     </li>
     
@@ -894,15 +886,11 @@ code.has-jax {
     </li>
     
     <li>
+        <a href="https://find-job.xyz/post/2023/04/levedb-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%92%8C%E5%8E%8B%E7%BC%A9/" title="LevelDB 多版本和压缩">LevelDB 多版本和压缩</a>
+    </li>
+    
+    <li>
         <a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/" title="镜像合并&amp;配置文件同步">镜像合并&amp;配置文件同步</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/column-stores_vs_row-stores_how_different_are_they_really/" title="Column-Stores vs. Row-Stores: How Different Are They Really?">Column-Stores vs. Row-Stores: How Different Are They Really?</a>
     </li>
     
     <li>
@@ -911,6 +899,18 @@ code.has-jax {
     
     <li>
         <a href="https://find-job.xyz/post/2023/05/building-an-elastic-query-engine-on-disaggregated-storage/" title="Building An Elastic Query Engine on Disaggregated Storage">Building An Elastic Query Engine on Disaggregated Storage</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/05/what-goes-around-comes-around/" title="What Goes Around Comes Around">What Goes Around Comes Around</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/04/levedb-sstable%E6%A8%A1%E5%9D%97/" title="LevelDB SSTable模块">LevelDB SSTable模块</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/" title="Photon A Fast Query Engine for Lakehouse Systems">Photon A Fast Query Engine for Lakehouse Systems</a>
     </li>
     
 </ul>
@@ -930,7 +930,7 @@ code.has-jax {
     
     <li><a href="https://find-job.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (21)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (20)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
@@ -957,7 +957,7 @@ code.has-jax {
     
     <li><a href="https://find-job.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
     
-    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
+    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (30)</a></li>
     
 </ul>
     </section>

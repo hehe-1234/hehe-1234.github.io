@@ -246,13 +246,13 @@ master随后会更新的自己的数据库，将成员列表信息更新，并�
 新的机器从 backup机器上取得base数据，从活跃机器上取得delta数据，将两者合并就得到最新数据了</p>
 <h3 id="文件目录句柄">文件、目录、句柄</h3>
 <p>采用类似 unix 文件目录的形式</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#ff79c6">/</span>ls<span style="color:#ff79c6">/</span>foo<span style="color:#ff79c6">/</span>wombat<span style="color:#ff79c6">/</span>pouch
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#ff79c6">/</span>ls<span style="color:#ff79c6">/</span>foo<span style="color:#ff79c6">/</span>wombat<span style="color:#ff79c6">/</span>pouch
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>ls 是所有的 chubby的共同前缀，foo是通过DNS查询的
 后面的 /wombat/pouch 则是 chubby目录的名称，每个节点要不是一个目录，或者是一个文件<br>
@@ -772,14 +772,6 @@ code.has-jax {
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/07/presto%E5%9C%A8%E5%90%84%E5%A4%A7%E5%85%AC%E5%8F%B8%E7%9A%84%E5%BA%94%E7%94%A8/" title="Presto在各大公司的应用">Presto在各大公司的应用</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
-    </li>
-    
-    <li>
         <a href="https://find-job.xyz/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
     </li>
     
@@ -788,15 +780,11 @@ code.has-jax {
     </li>
     
     <li>
+        <a href="https://find-job.xyz/post/2023/04/levedb-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%92%8C%E5%8E%8B%E7%BC%A9/" title="LevelDB 多版本和压缩">LevelDB 多版本和压缩</a>
+    </li>
+    
+    <li>
         <a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/" title="镜像合并&amp;配置文件同步">镜像合并&amp;配置文件同步</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/column-stores_vs_row-stores_how_different_are_they_really/" title="Column-Stores vs. Row-Stores: How Different Are They Really?">Column-Stores vs. Row-Stores: How Different Are They Really?</a>
     </li>
     
     <li>
@@ -805,6 +793,18 @@ code.has-jax {
     
     <li>
         <a href="https://find-job.xyz/post/2023/05/building-an-elastic-query-engine-on-disaggregated-storage/" title="Building An Elastic Query Engine on Disaggregated Storage">Building An Elastic Query Engine on Disaggregated Storage</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/05/what-goes-around-comes-around/" title="What Goes Around Comes Around">What Goes Around Comes Around</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/04/levedb-sstable%E6%A8%A1%E5%9D%97/" title="LevelDB SSTable模块">LevelDB SSTable模块</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/" title="Photon A Fast Query Engine for Lakehouse Systems">Photon A Fast Query Engine for Lakehouse Systems</a>
     </li>
     
 </ul>
@@ -824,7 +824,7 @@ code.has-jax {
     
     <li><a href="https://find-job.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (21)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (20)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
@@ -851,7 +851,7 @@ code.has-jax {
     
     <li><a href="https://find-job.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
     
-    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
+    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (30)</a></li>
     
 </ul>
     </section>

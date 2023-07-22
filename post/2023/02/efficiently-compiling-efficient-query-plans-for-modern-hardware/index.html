@@ -305,23 +305,21 @@ C++和LLVM汇编是交互执行的，比如sort操作会返回到C++部分，一
 <li>但是如果已50%的概率返回结果，那么会对性能有很大影响</li>
 </ul>
 <p>比如下面这段就不是分支友好的</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Entry<span style="color:#ff79c6">*</span> iter<span style="color:#ff79c6">=</span>hashTable[hash];
-<span style="color:#ff79c6">while</span> (iter) {
-	... <span style="color:#6272a4">// inspect the entry
-</span><span style="color:#6272a4"></span>	iter<span style="color:#ff79c6">=</span>iter<span style="color:#ff79c6">-&gt;</span>next;
-}
-
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Entry<span style="color:#ff79c6">*</span> iter<span style="color:#ff79c6">=</span>hashTable[hash];
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">while</span> (iter) {
+</span></span><span style="display:flex;"><span>	... <span style="color:#6272a4">// inspect the entry
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	iter<span style="color:#ff79c6">=</span>iter<span style="color:#ff79c6">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>上面的代码不好的原因while是混合了两件事</p>
 <ul>
@@ -331,21 +329,21 @@ C++和LLVM汇编是交互执行的，比如sort操作会返回到C++部分，一
 <p>上述第一次检查的时候几乎总是 true(假设hash表被填充了)<br>
 而第二次检查总是为false(hash碰撞的list很短)</p>
 <p>下面是分支友好的</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Entry<span style="color:#ff79c6">*</span> iter<span style="color:#ff79c6">=</span>hashTable[hash];
-<span style="color:#ff79c6">if</span> (iter) <span style="color:#ff79c6">do</span> {
-	... <span style="color:#6272a4">// inspect the entry
-</span><span style="color:#6272a4"></span>	iter<span style="color:#ff79c6">=</span>iter<span style="color:#ff79c6">-&gt;</span>next;
-} <span style="color:#ff79c6">while</span> (iter);
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Entry<span style="color:#ff79c6">*</span> iter<span style="color:#ff79c6">=</span>hashTable[hash];
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span> (iter) <span style="color:#ff79c6">do</span> {
+</span></span><span style="display:flex;"><span>	... <span style="color:#6272a4">// inspect the entry
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	iter<span style="color:#ff79c6">=</span>iter<span style="color:#ff79c6">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>} <span style="color:#ff79c6">while</span> (iter);
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>上面这个小改动，对于hash表探测提升了20%的性能</p>
 <h2 id="高级并行化技术">高级并行化技术</h2>
@@ -408,491 +406,491 @@ D1的miss、L2miss也是比MonetDB少很多(除了Q2)<br>
 在需要的时候注册可用的列，传递tuple到消费算子<br>
 跟关系类型的不同，ScanConsumer可能会创建对C++函数的调研<br>
 由于scan是叶子节点算子，它没有consume部分</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#8be9fd">void</span> TableScanTranslator<span style="color:#ff79c6">::</span>produce(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
-	<span style="color:#6272a4">// Access all relation fragments
-</span><span style="color:#6272a4"></span>	llvm<span style="color:#ff79c6">::</span>Value∗ dbPtr<span style="color:#ff79c6">=</span>codegen.getDatabasePointer();
-	llvm<span style="color:#ff79c6">::</span>Value∗ relationPtr<span style="color:#ff79c6">=</span>codegen.getPtr(dbPtr,db.layout.relations[table]);
-	<span style="color:#ff79c6">auto</span><span style="color:#ff79c6">&amp;</span> required<span style="color:#ff79c6">=</span>scanConsumer.getPartitionPtr();
-	ScanConsumer <span style="color:#50fa7b">scanConsumer</span>(codegen,context)
-	<span style="color:#ff79c6">for</span> (;db.relations[table]−<span style="color:#ff79c6">&gt;</span>generateScan(codegen,relationPtr,scanConsumer);) {
-		<span style="color:#6272a4">// Prepare accessing the current fragment
-</span><span style="color:#6272a4"></span>		llvm<span style="color:#ff79c6">::</span>Value∗ partitionPtr<span style="color:#ff79c6">=</span>required;
-		ColumnAccess <span style="color:#50fa7b">columnAccess</span>(partitionPtr,required);
-
-		<span style="color:#6272a4">// Loop over all tuples
-</span><span style="color:#6272a4"></span>		llvm<span style="color:#ff79c6">::</span>Value∗ tid<span style="color:#ff79c6">=</span>codegen.const64(<span style="color:#bd93f9">0</span>);
-		llvm<span style="color:#ff79c6">::</span>Value∗ limit<span style="color:#ff79c6">=</span>codegen.load(partitionPtr,getLayout().size);
-		Loop <span style="color:#50fa7b">loop</span>(codegen,codegen−<span style="color:#ff79c6">&gt;</span>CreateICmpULT(tid,limit),{{tid,”tid”}}); {
-			tid<span style="color:#ff79c6">=</span>loop.getLoopVar(<span style="color:#bd93f9">0</span>);
-		
-			<span style="color:#6272a4">// Prepare column access code
-</span><span style="color:#6272a4"></span>			PartitionAccess<span style="color:#ff79c6">::</span>ColumnAccess<span style="color:#ff79c6">::</span>Row rowAccess(columnAccess,tid);
-			vector<span style="color:#ff79c6">&lt;</span>ValueAccess<span style="color:#ff79c6">&gt;</span> access;
-			<span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">auto</span> iter<span style="color:#ff79c6">=</span>required.begin(),limit<span style="color:#ff79c6">=</span>required.end();iter<span style="color:#ff79c6">!=</span>limit;<span style="color:#ff79c6">++</span>iter)
-				access.push back(rowAccess.loadAttribute(∗iter));
-			
-				<span style="color:#6272a4">// Register providers in new inner context
-</span><span style="color:#6272a4"></span>				ConsumerContext <span style="color:#50fa7b">consumerContext</span>(context);
-				<span style="color:#8be9fd">unsigned</span> slot<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>;
-				<span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">auto</span> iter<span style="color:#ff79c6">=</span>required.begin(),limit<span style="color:#ff79c6">=</span>required.end();iter<span style="color:#ff79c6">!=</span>limit;<span style="color:#ff79c6">++</span>iter,<span style="color:#ff79c6">++</span>slot)
-					consumerContext.registerIUProvider(<span style="color:#ff79c6">&amp;</span>(getOutput()[∗iter].iu),<span style="color:#ff79c6">&amp;</span>access[slot]);
-
-					<span style="color:#6272a4">// Push results to consuming operators
-</span><span style="color:#6272a4"></span>					getParent()−<span style="color:#ff79c6">&gt;</span>consume(codegen,consumerContext);
-
-					<span style="color:#6272a4">// Go to the next tuple
-</span><span style="color:#6272a4"></span>					tid<span style="color:#ff79c6">=</span>codegen−<span style="color:#ff79c6">&gt;</span>CreateAdd(tid,codegen.const64(<span style="color:#bd93f9">1</span>));
-					loop.loopDone(codegen−<span style="color:#ff79c6">&gt;</span>CreateICmpULT(tid,limit),{tid});
-			}
-		}
-	}
-}	
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> TableScanTranslator<span style="color:#ff79c6">::</span>produce(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Access all relation fragments
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	llvm<span style="color:#ff79c6">::</span>Value∗ dbPtr<span style="color:#ff79c6">=</span>codegen.getDatabasePointer();
+</span></span><span style="display:flex;"><span>	llvm<span style="color:#ff79c6">::</span>Value∗ relationPtr<span style="color:#ff79c6">=</span>codegen.getPtr(dbPtr,db.layout.relations[table]);
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">auto</span><span style="color:#ff79c6">&amp;</span> required<span style="color:#ff79c6">=</span>scanConsumer.getPartitionPtr();
+</span></span><span style="display:flex;"><span>	ScanConsumer <span style="color:#50fa7b">scanConsumer</span>(codegen,context)
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> (;db.relations[table]−<span style="color:#ff79c6">&gt;</span>generateScan(codegen,relationPtr,scanConsumer);) {
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// Prepare accessing the current fragment
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		llvm<span style="color:#ff79c6">::</span>Value∗ partitionPtr<span style="color:#ff79c6">=</span>required;
+</span></span><span style="display:flex;"><span>		ColumnAccess <span style="color:#50fa7b">columnAccess</span>(partitionPtr,required);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// Loop over all tuples
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		llvm<span style="color:#ff79c6">::</span>Value∗ tid<span style="color:#ff79c6">=</span>codegen.const64(<span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>		llvm<span style="color:#ff79c6">::</span>Value∗ limit<span style="color:#ff79c6">=</span>codegen.load(partitionPtr,getLayout().size);
+</span></span><span style="display:flex;"><span>		Loop <span style="color:#50fa7b">loop</span>(codegen,codegen−<span style="color:#ff79c6">&gt;</span>CreateICmpULT(tid,limit),{{tid,”tid”}}); {
+</span></span><span style="display:flex;"><span>			tid<span style="color:#ff79c6">=</span>loop.getLoopVar(<span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>			<span style="color:#6272a4">// Prepare column access code
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>			PartitionAccess<span style="color:#ff79c6">::</span>ColumnAccess<span style="color:#ff79c6">::</span>Row rowAccess(columnAccess,tid);
+</span></span><span style="display:flex;"><span>			vector<span style="color:#ff79c6">&lt;</span>ValueAccess<span style="color:#ff79c6">&gt;</span> access;
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">auto</span> iter<span style="color:#ff79c6">=</span>required.begin(),limit<span style="color:#ff79c6">=</span>required.end();iter<span style="color:#ff79c6">!=</span>limit;<span style="color:#ff79c6">++</span>iter)
+</span></span><span style="display:flex;"><span>				access.push back(rowAccess.loadAttribute(∗iter));
+</span></span><span style="display:flex;"><span>			
+</span></span><span style="display:flex;"><span>				<span style="color:#6272a4">// Register providers in new inner context
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>				ConsumerContext <span style="color:#50fa7b">consumerContext</span>(context);
+</span></span><span style="display:flex;"><span>				<span style="color:#8be9fd">unsigned</span> slot<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span>				<span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">auto</span> iter<span style="color:#ff79c6">=</span>required.begin(),limit<span style="color:#ff79c6">=</span>required.end();iter<span style="color:#ff79c6">!=</span>limit;<span style="color:#ff79c6">++</span>iter,<span style="color:#ff79c6">++</span>slot)
+</span></span><span style="display:flex;"><span>					consumerContext.registerIUProvider(<span style="color:#ff79c6">&amp;</span>(getOutput()[∗iter].iu),<span style="color:#ff79c6">&amp;</span>access[slot]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>					<span style="color:#6272a4">// Push results to consuming operators
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>					getParent()−<span style="color:#ff79c6">&gt;</span>consume(codegen,consumerContext);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>					<span style="color:#6272a4">// Go to the next tuple
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>					tid<span style="color:#ff79c6">=</span>codegen−<span style="color:#ff79c6">&gt;</span>CreateAdd(tid,codegen.const64(<span style="color:#bd93f9">1</span>));
+</span></span><span style="display:flex;"><span>					loop.loopDone(codegen−<span style="color:#ff79c6">&gt;</span>CreateICmpULT(tid,limit),{tid});
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}	
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>Selection</strong><br>
 这里的produce部分很简单，增加需要的属性到谓词上下文中，然后调用输入端的produce<br>
 consume部分会filter做过滤</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#8be9fd">void</span> SelectTranslator<span style="color:#ff79c6">::</span>produce(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
-	<span style="color:#6272a4">// Ask the input operator to produce tuples
-</span><span style="color:#6272a4"></span>	AddRequired <span style="color:#50fa7b">addRequired</span>(context,getCondition().getUsed());
-	input−<span style="color:#ff79c6">&gt;</span>produce(codegen,context);
-}
-
-<span style="color:#8be9fd">void</span> SelectTranslator<span style="color:#ff79c6">::</span>consume(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
-	<span style="color:#6272a4">// Evaluate the predicate
-</span><span style="color:#6272a4"></span>	ResultValue value<span style="color:#ff79c6">=</span>codegen.deriveValue(getCondition(),context);
-
-	<span style="color:#6272a4">// Pass tuple to parent if the predicate is satisfied
-</span><span style="color:#6272a4"></span>	CodeGen<span style="color:#ff79c6">::</span>If checkCond(codegen,value); {
-		getParent()−<span style="color:#ff79c6">&gt;</span>consume(codegen,context);
-	}
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> SelectTranslator<span style="color:#ff79c6">::</span>produce(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Ask the input operator to produce tuples
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	AddRequired <span style="color:#50fa7b">addRequired</span>(context,getCondition().getUsed());
+</span></span><span style="display:flex;"><span>	input−<span style="color:#ff79c6">&gt;</span>produce(codegen,context);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> SelectTranslator<span style="color:#ff79c6">::</span>consume(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Evaluate the predicate
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	ResultValue value<span style="color:#ff79c6">=</span>codegen.deriveValue(getCondition(),context);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Pass tuple to parent if the predicate is satisfied
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	CodeGen<span style="color:#ff79c6">::</span>If checkCond(codegen,value); {
+</span></span><span style="display:flex;"><span>		getParent()−<span style="color:#ff79c6">&gt;</span>consume(codegen,context);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>Projection</strong><br>
 更简单，其consume部分是空的，直接调用其父节点</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#8be9fd">void</span> ProjectTranslator<span style="color:#ff79c6">::</span>produce(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
-	<span style="color:#6272a4">// Ask the input operator to produce tuples
-</span><span style="color:#6272a4"></span>	SetRequired <span style="color:#50fa7b">setRequired</span>(context,getOutput());
-	input−<span style="color:#ff79c6">&gt;</span>produce(codegen,context);
-}
-
-<span style="color:#8be9fd">void</span> ProjectTranslator<span style="color:#ff79c6">::</span>consume(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
-	<span style="color:#6272a4">// No code required here, pass to parent
-</span><span style="color:#6272a4"></span>	getParent()−<span style="color:#ff79c6">&gt;</span>consume(codegen,context);
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> ProjectTranslator<span style="color:#ff79c6">::</span>produce(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Ask the input operator to produce tuples
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	SetRequired <span style="color:#50fa7b">setRequired</span>(context,getOutput());
+</span></span><span style="display:flex;"><span>	input−<span style="color:#ff79c6">&gt;</span>produce(codegen,context);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> ProjectTranslator<span style="color:#ff79c6">::</span>consume(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// No code required here, pass to parent
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	getParent()−<span style="color:#ff79c6">&gt;</span>consume(codegen,context);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>Map</strong><br>
 map操作符通过求值函数计算新列<br>
 计算的位置，映射和选择已经由优化器完成了</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#8be9fd">void</span> MapTranslator<span style="color:#ff79c6">::</span>produce(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
-	<span style="color:#6272a4">// Figure out which columns have to be provided by the input operator
-</span><span style="color:#6272a4"></span>	IUSet required<span style="color:#ff79c6">=</span>context.getRequired();
-	<span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">auto</span> iter<span style="color:#ff79c6">=</span>functions.begin(),limit<span style="color:#ff79c6">=</span>functions.end();iter<span style="color:#ff79c6">!=</span>limit;<span style="color:#ff79c6">++</span>iter) {
-		(<span style="color:#ff79c6">*</span>iter).function−<span style="color:#ff79c6">&gt;</span>getUsed(required);
-		required.erase((∗iter).result);
-	}
-
-	<span style="color:#6272a4">// Ask the input operator to produce tuples
-</span><span style="color:#6272a4"></span>	SetRequired <span style="color:#50fa7b">setRequired</span>(context,required);
-	input−<span style="color:#ff79c6">&gt;</span>produce(codegen,context);
-}
-
-<span style="color:#8be9fd">void</span> MapTranslator<span style="color:#ff79c6">::</span>consume(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
-	<span style="color:#6272a4">// Offer new columns
-</span><span style="color:#6272a4"></span>	vector<span style="color:#ff79c6">&lt;</span>ExpressionAccess<span style="color:#ff79c6">&gt;</span> accessors;
-	<span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">auto</span> iter<span style="color:#ff79c6">=</span>functions.begin(),limit<span style="color:#ff79c6">=</span>functions.end();iter<span style="color:#ff79c6">!=</span>limit;<span style="color:#ff79c6">++</span>iter)
-		accessors.push back(ExpressionAccess(codegen,∗(∗iter).function));
-	<span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">unsigned</span> index<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>,limit<span style="color:#ff79c6">=</span>accessors.size();index<span style="color:#ff79c6">&lt;</span>limit;index<span style="color:#ff79c6">++</span>)
-		context.registerIUProvider(functions[index].result,<span style="color:#ff79c6">&amp;</span>accessors[index]);
-	
-	<span style="color:#6272a4">// Pass to parent
-</span><span style="color:#6272a4"></span>	getParent()−<span style="color:#ff79c6">&gt;</span>consume(codegen,context);
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> MapTranslator<span style="color:#ff79c6">::</span>produce(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Figure out which columns have to be provided by the input operator
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	IUSet required<span style="color:#ff79c6">=</span>context.getRequired();
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">auto</span> iter<span style="color:#ff79c6">=</span>functions.begin(),limit<span style="color:#ff79c6">=</span>functions.end();iter<span style="color:#ff79c6">!=</span>limit;<span style="color:#ff79c6">++</span>iter) {
+</span></span><span style="display:flex;"><span>		(<span style="color:#ff79c6">*</span>iter).function−<span style="color:#ff79c6">&gt;</span>getUsed(required);
+</span></span><span style="display:flex;"><span>		required.erase((∗iter).result);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Ask the input operator to produce tuples
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	SetRequired <span style="color:#50fa7b">setRequired</span>(context,required);
+</span></span><span style="display:flex;"><span>	input−<span style="color:#ff79c6">&gt;</span>produce(codegen,context);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> MapTranslator<span style="color:#ff79c6">::</span>consume(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Offer new columns
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	vector<span style="color:#ff79c6">&lt;</span>ExpressionAccess<span style="color:#ff79c6">&gt;</span> accessors;
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">auto</span> iter<span style="color:#ff79c6">=</span>functions.begin(),limit<span style="color:#ff79c6">=</span>functions.end();iter<span style="color:#ff79c6">!=</span>limit;<span style="color:#ff79c6">++</span>iter)
+</span></span><span style="display:flex;"><span>		accessors.push back(ExpressionAccess(codegen,∗(∗iter).function));
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> (<span style="color:#8be9fd">unsigned</span> index<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>,limit<span style="color:#ff79c6">=</span>accessors.size();index<span style="color:#ff79c6">&lt;</span>limit;index<span style="color:#ff79c6">++</span>)
+</span></span><span style="display:flex;"><span>		context.registerIUProvider(functions[index].result,<span style="color:#ff79c6">&amp;</span>accessors[index]);
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Pass to parent
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	getParent()−<span style="color:#ff79c6">&gt;</span>consume(codegen,context);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>Hash Join</strong><br>
 这部分就很复杂了，LLVM的代码控制流会转回C++<br>
 首先会build hash部分，如果需要会溢出到磁盘，如果内存足够就会调用probe部分<br>
 如果左边build溢出了，则probe部分也要溢出   <br>
 为了简化这里限制为inner join</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#8be9fd">void</span> HashJoin<span style="color:#ff79c6">::</span>Inner<span style="color:#ff79c6">::</span>produce() {
-	<span style="color:#6272a4">// Read the build side
-</span><span style="color:#6272a4"></span>	initMem();
-	produceLeft();
-	<span style="color:#ff79c6">if</span> (inMem) {
-		buildHashTable();
-	} <span style="color:#ff79c6">else</span> {
-		<span style="color:#6272a4">// Spool remaining tuples to disk
-</span><span style="color:#6272a4"></span>		spoolLeft();
-		finishSpoolLeft();
-	}
-
-	<span style="color:#6272a4">// Is a in−memory join possible?
-</span><span style="color:#6272a4"></span>	<span style="color:#ff79c6">if</span> (inMem) {
-		produceRight();
-		<span style="color:#ff79c6">return</span>;
-	}
-
-	<span style="color:#6272a4">// No, spool the right hand side, too
-</span><span style="color:#6272a4"></span>	spoolRight();
-	<span style="color:#6272a4">// Grace hash join
-</span><span style="color:#6272a4"></span>	loadPartition(<span style="color:#bd93f9">0</span>);
-	<span style="color:#ff79c6">while</span> (<span style="color:#8be9fd;font-style:italic">true</span>) {
-		<span style="color:#6272a4">// More tuples on the right?
-</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">for</span> (;rightScanRemaining;) {
-			<span style="color:#ff79c6">const</span> <span style="color:#8be9fd">void</span>∗ rightTuple<span style="color:#ff79c6">=</span>nextRight();
-			<span style="color:#ff79c6">for</span> (LookupHash lookup(rightTuple);lookup;<span style="color:#ff79c6">++</span>lookup) {
-				join(lookup.data(),rightTuple);
-			}
-		}
-
-		<span style="color:#6272a4">// Handle overflow in n:m case
-</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">if</span> (overflow) {
-			loadPartitionLeft();
-			resetRightScan();
-			<span style="color:#ff79c6">continue</span>;
-		}
-
-		<span style="color:#6272a4">// Go to the next partition
-</span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">if</span> ((<span style="color:#ff79c6">++</span>inMemPartition)<span style="color:#ff79c6">&gt;=</span>partitionCount) {
-			<span style="color:#ff79c6">return</span>;
-		} <span style="color:#ff79c6">else</span> {
-			loadPartition(inMemPartition);
-		}
-	}
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> HashJoin<span style="color:#ff79c6">::</span>Inner<span style="color:#ff79c6">::</span>produce() {
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Read the build side
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	initMem();
+</span></span><span style="display:flex;"><span>	produceLeft();
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">if</span> (inMem) {
+</span></span><span style="display:flex;"><span>		buildHashTable();
+</span></span><span style="display:flex;"><span>	} <span style="color:#ff79c6">else</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// Spool remaining tuples to disk
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		spoolLeft();
+</span></span><span style="display:flex;"><span>		finishSpoolLeft();
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Is a in−memory join possible?
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	<span style="color:#ff79c6">if</span> (inMem) {
+</span></span><span style="display:flex;"><span>		produceRight();
+</span></span><span style="display:flex;"><span>		<span style="color:#ff79c6">return</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// No, spool the right hand side, too
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	spoolRight();
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Grace hash join
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	loadPartition(<span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">while</span> (<span style="color:#8be9fd;font-style:italic">true</span>) {
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// More tuples on the right?
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">for</span> (;rightScanRemaining;) {
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">const</span> <span style="color:#8be9fd">void</span>∗ rightTuple<span style="color:#ff79c6">=</span>nextRight();
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">for</span> (LookupHash lookup(rightTuple);lookup;<span style="color:#ff79c6">++</span>lookup) {
+</span></span><span style="display:flex;"><span>				join(lookup.data(),rightTuple);
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// Handle overflow in n:m case
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">if</span> (overflow) {
+</span></span><span style="display:flex;"><span>			loadPartitionLeft();
+</span></span><span style="display:flex;"><span>			resetRightScan();
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">continue</span>;
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// Go to the next partition
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		<span style="color:#ff79c6">if</span> ((<span style="color:#ff79c6">++</span>inMemPartition)<span style="color:#ff79c6">&gt;=</span>partitionCount) {
+</span></span><span style="display:flex;"><span>			<span style="color:#ff79c6">return</span>;
+</span></span><span style="display:flex;"><span>		} <span style="color:#ff79c6">else</span> {
+</span></span><span style="display:flex;"><span>			loadPartition(inMemPartition);
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里包含了三个函数，produce、consume、join<br>
 当溢出到磁盘时，可以直接调用 join函数<br>
 hash表已经在C++中实现了，所以join只可能在连接候选条件的时候调用<br>
 produce将控制流转回给C++，
 consume部分确定相关的寄存器，并将他们物化到hash-table中</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">59
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">60
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">61
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">62
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">63
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">64
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">65
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">66
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">67
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">68
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#8be9fd">void</span> HJTranslatorInner<span style="color:#ff79c6">::</span>produce(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
-	<span style="color:#6272a4">// Construct functions that will be be called from the C++ code
-</span><span style="color:#6272a4"></span>	{
-		AddRequired <span style="color:#50fa7b">addRequired</span>(context,getCondiution().getUsed().limitTo(left));
-		produceLeft<span style="color:#ff79c6">=</span>codegen.derivePlanFunction(left,context);
-	}
-	{
-		AddRequired <span style="color:#50fa7b">addRequired</span>(context,getCondiution().getUsed().limitTo(right));
-		produceRight<span style="color:#ff79c6">=</span>codegen.derivePlanFunction(right,context);
-	}
-	<span style="color:#6272a4">// Call the C++ code
-</span><span style="color:#6272a4"></span>	codegen.call(HashJoinInnerProxy<span style="color:#ff79c6">::</span>produce.getFunction(codegen),
-		{context.getOperator(<span style="color:#ff79c6">this</span>)});
-}
-
-<span style="color:#8be9fd">void</span> HJTranslatorInner<span style="color:#ff79c6">::</span>consume(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
-	llvm<span style="color:#ff79c6">::</span>Value∗ opPtr<span style="color:#ff79c6">=</span>context.getOperator(<span style="color:#ff79c6">this</span>);
-
-	<span style="color:#6272a4">// Left side
-</span><span style="color:#6272a4"></span>	<span style="color:#ff79c6">if</span> (source<span style="color:#ff79c6">==</span>left) {
-		<span style="color:#6272a4">// Collect registers from the left side
-</span><span style="color:#6272a4"></span>		vector<span style="color:#ff79c6">&lt;</span>ResultValue<span style="color:#ff79c6">&gt;</span> materializedValues;
-		matHelperLeft.collectValues(codegen,context,materializedValues);
-
-		<span style="color:#6272a4">// Compute size and hash value
-</span><span style="color:#6272a4"></span>		llvm<span style="color:#ff79c6">::</span>Value∗ size<span style="color:#ff79c6">=</span>matHelperLeft.computeSize(codegen,materializedValues);
-		llvm<span style="color:#ff79c6">::</span>Value∗ hash<span style="color:#ff79c6">=</span>matHelperLeft.computeHash(codegen,materializedValues);
-		<span style="color:#6272a4">// Materialize in hash table, spools to disk if needed
-</span><span style="color:#6272a4"></span>		llvm<span style="color:#ff79c6">::</span>Value∗ ptr<span style="color:#ff79c6">=</span>codegen.callBase(HashJoinProxy<span style="color:#ff79c6">::</span>storeLeftInputTuple,
-		{opPtr,size,hash});
-		matHelperLeft.materialize(codegen,ptr,materializedValues);
-		
-	<span style="color:#6272a4">// Right side
-</span><span style="color:#6272a4"></span>	} <span style="color:#ff79c6">else</span> {
-		<span style="color:#6272a4">// Collect registers from the right side
-</span><span style="color:#6272a4"></span>		vector<span style="color:#ff79c6">&lt;</span>ResultValue<span style="color:#ff79c6">&gt;</span> materializedValues;
-		matHelperRight.collectValues(codegen,context,materializedValues);
-
-		<span style="color:#6272a4">// Compute size and hash value
-</span><span style="color:#6272a4"></span>		llvm<span style="color:#ff79c6">::</span>Value∗ size<span style="color:#ff79c6">=</span>matHelperRight.computeSize(codegen,materializedValues);
-		llvm<span style="color:#ff79c6">::</span>Value∗ hash<span style="color:#ff79c6">=</span>matHelperRight.computeHash(codegen,materializedValues);
-	
-		<span style="color:#6272a4">// Materialize in memory, spools to disk if needed, implicitly joins
-</span><span style="color:#6272a4"></span>		llvm<span style="color:#ff79c6">::</span>Value∗ ptr<span style="color:#ff79c6">=</span>codegen.callBase(HashJoinProxy<span style="color:#ff79c6">::</span>storeRightInputTuple, {opPtr,size});
-		matHelperRight.materialize(codegen,ptr,materializedValues);
-		codegen.call(HashJoinInnerProxy<span style="color:#ff79c6">::</span>storeRightInputTupleDone,{opPtr,hash});
-	}
-}
-
-<span style="color:#8be9fd">void</span> HJTranslatorInner<span style="color:#ff79c6">::</span>join(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
-	llvm<span style="color:#ff79c6">::</span>Value∗ leftPtr<span style="color:#ff79c6">=</span>context.getLeftTuple(),∗rightPtr<span style="color:#ff79c6">=</span>context.getLeftTuple();
-	<span style="color:#6272a4">// Load into registers. Actual load may be delayed by optimizer
-</span><span style="color:#6272a4"></span>	vector<span style="color:#ff79c6">&lt;</span>ResultValue<span style="color:#ff79c6">&gt;</span> leftValues,rightValues;
-	matHelperLeft.dematerialize(codegen,leftPtr,leftValues,context);
-	matHelperRight.dematerialize(codegen,rightPtr,rightValues,context);
-
-	<span style="color:#6272a4">// Check the join condition, return false for mismatches
-</span><span style="color:#6272a4"></span>	llvm<span style="color:#ff79c6">::</span>BasicBlock∗ returnFalseBB<span style="color:#ff79c6">=</span>constructReturnFalseBB(codegen);
-	MaterializationHelper<span style="color:#ff79c6">::</span>testValues(codegen,leftValues,rightValues,
-		joinPredicateIs,returnFalseBB);
-	<span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">auto</span> iter<span style="color:#ff79c6">=</span>residuals.begin(),limit<span style="color:#ff79c6">=</span>residuals.end();iter<span style="color:#ff79c6">!=</span>limit;<span style="color:#ff79c6">++</span>iter) {
-		ResultValue v<span style="color:#ff79c6">=</span>codegen.deriveValue(∗∗iter,context);
-		CodeGen<span style="color:#ff79c6">::</span>If checkCondition(codegen,v,<span style="color:#bd93f9">0</span>,returnFalseBB);
-	}
-
-	<span style="color:#6272a4">// Found a match, propagate up
-</span><span style="color:#6272a4"></span>	getParent()−<span style="color:#ff79c6">&gt;</span>consume(codegen,context);
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> HJTranslatorInner<span style="color:#ff79c6">::</span>produce(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Construct functions that will be be called from the C++ code
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	{
+</span></span><span style="display:flex;"><span>		AddRequired <span style="color:#50fa7b">addRequired</span>(context,getCondiution().getUsed().limitTo(left));
+</span></span><span style="display:flex;"><span>		produceLeft<span style="color:#ff79c6">=</span>codegen.derivePlanFunction(left,context);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		AddRequired <span style="color:#50fa7b">addRequired</span>(context,getCondiution().getUsed().limitTo(right));
+</span></span><span style="display:flex;"><span>		produceRight<span style="color:#ff79c6">=</span>codegen.derivePlanFunction(right,context);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Call the C++ code
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	codegen.call(HashJoinInnerProxy<span style="color:#ff79c6">::</span>produce.getFunction(codegen),
+</span></span><span style="display:flex;"><span>		{context.getOperator(<span style="color:#ff79c6">this</span>)});
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> HJTranslatorInner<span style="color:#ff79c6">::</span>consume(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>	llvm<span style="color:#ff79c6">::</span>Value∗ opPtr<span style="color:#ff79c6">=</span>context.getOperator(<span style="color:#ff79c6">this</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Left side
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	<span style="color:#ff79c6">if</span> (source<span style="color:#ff79c6">==</span>left) {
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// Collect registers from the left side
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		vector<span style="color:#ff79c6">&lt;</span>ResultValue<span style="color:#ff79c6">&gt;</span> materializedValues;
+</span></span><span style="display:flex;"><span>		matHelperLeft.collectValues(codegen,context,materializedValues);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// Compute size and hash value
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		llvm<span style="color:#ff79c6">::</span>Value∗ size<span style="color:#ff79c6">=</span>matHelperLeft.computeSize(codegen,materializedValues);
+</span></span><span style="display:flex;"><span>		llvm<span style="color:#ff79c6">::</span>Value∗ hash<span style="color:#ff79c6">=</span>matHelperLeft.computeHash(codegen,materializedValues);
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// Materialize in hash table, spools to disk if needed
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		llvm<span style="color:#ff79c6">::</span>Value∗ ptr<span style="color:#ff79c6">=</span>codegen.callBase(HashJoinProxy<span style="color:#ff79c6">::</span>storeLeftInputTuple,
+</span></span><span style="display:flex;"><span>		{opPtr,size,hash});
+</span></span><span style="display:flex;"><span>		matHelperLeft.materialize(codegen,ptr,materializedValues);
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Right side
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	} <span style="color:#ff79c6">else</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// Collect registers from the right side
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		vector<span style="color:#ff79c6">&lt;</span>ResultValue<span style="color:#ff79c6">&gt;</span> materializedValues;
+</span></span><span style="display:flex;"><span>		matHelperRight.collectValues(codegen,context,materializedValues);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// Compute size and hash value
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		llvm<span style="color:#ff79c6">::</span>Value∗ size<span style="color:#ff79c6">=</span>matHelperRight.computeSize(codegen,materializedValues);
+</span></span><span style="display:flex;"><span>		llvm<span style="color:#ff79c6">::</span>Value∗ hash<span style="color:#ff79c6">=</span>matHelperRight.computeHash(codegen,materializedValues);
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>		<span style="color:#6272a4">// Materialize in memory, spools to disk if needed, implicitly joins
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>		llvm<span style="color:#ff79c6">::</span>Value∗ ptr<span style="color:#ff79c6">=</span>codegen.callBase(HashJoinProxy<span style="color:#ff79c6">::</span>storeRightInputTuple, {opPtr,size});
+</span></span><span style="display:flex;"><span>		matHelperRight.materialize(codegen,ptr,materializedValues);
+</span></span><span style="display:flex;"><span>		codegen.call(HashJoinInnerProxy<span style="color:#ff79c6">::</span>storeRightInputTupleDone,{opPtr,hash});
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> HJTranslatorInner<span style="color:#ff79c6">::</span>join(CodeGen<span style="color:#ff79c6">&amp;</span> codegen,Context<span style="color:#ff79c6">&amp;</span> context) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>	llvm<span style="color:#ff79c6">::</span>Value∗ leftPtr<span style="color:#ff79c6">=</span>context.getLeftTuple(),∗rightPtr<span style="color:#ff79c6">=</span>context.getLeftTuple();
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Load into registers. Actual load may be delayed by optimizer
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	vector<span style="color:#ff79c6">&lt;</span>ResultValue<span style="color:#ff79c6">&gt;</span> leftValues,rightValues;
+</span></span><span style="display:flex;"><span>	matHelperLeft.dematerialize(codegen,leftPtr,leftValues,context);
+</span></span><span style="display:flex;"><span>	matHelperRight.dematerialize(codegen,rightPtr,rightValues,context);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Check the join condition, return false for mismatches
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	llvm<span style="color:#ff79c6">::</span>BasicBlock∗ returnFalseBB<span style="color:#ff79c6">=</span>constructReturnFalseBB(codegen);
+</span></span><span style="display:flex;"><span>	MaterializationHelper<span style="color:#ff79c6">::</span>testValues(codegen,leftValues,rightValues,
+</span></span><span style="display:flex;"><span>		joinPredicateIs,returnFalseBB);
+</span></span><span style="display:flex;"><span>	<span style="color:#ff79c6">for</span> (<span style="color:#ff79c6">auto</span> iter<span style="color:#ff79c6">=</span>residuals.begin(),limit<span style="color:#ff79c6">=</span>residuals.end();iter<span style="color:#ff79c6">!=</span>limit;<span style="color:#ff79c6">++</span>iter) {
+</span></span><span style="display:flex;"><span>		ResultValue v<span style="color:#ff79c6">=</span>codegen.deriveValue(∗∗iter,context);
+</span></span><span style="display:flex;"><span>		CodeGen<span style="color:#ff79c6">::</span>If checkCondition(codegen,v,<span style="color:#bd93f9">0</span>,returnFalseBB);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6272a4">// Found a match, propagate up
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>	getParent()−<span style="color:#ff79c6">&gt;</span>consume(codegen,context);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="example">Example</h3>
 <p>一个具体的SQL例子<br>
 首先scan warehouse 表，然后filter，再物化到hash表中，然后scan district并做join</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">select</span> d_tax <span style="color:#ff79c6">from</span> warehouse, district
-<span style="color:#ff79c6">where</span> w_id<span style="color:#ff79c6">=</span>d_w_id <span style="color:#ff79c6">and</span> w_zip<span style="color:#ff79c6">=</span>’<span style="color:#bd93f9">137411111</span>’
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">select</span> d_tax <span style="color:#ff79c6">from</span> warehouse, district
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">where</span> w_id<span style="color:#ff79c6">=</span>d_w_id <span style="color:#ff79c6">and</span> w_zip<span style="color:#ff79c6">=</span>’<span style="color:#bd93f9">137411111</span>’
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="微基准测试">微基准测试</h3>
 <p>这里实现了四种不同的场景，都是基于HyPer的，包含以数据为中心的编译、以及迭代风格(编译、解释)，以及块风格的<br>
 数据布局和大小都是完全一样</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">select</span> <span style="color:#ff79c6">count</span>(<span style="color:#ff79c6">*</span>)
-<span style="color:#ff79c6">from</span> orderline
-<span style="color:#ff79c6">where</span> ol_o_id<span style="color:#ff79c6">&gt;</span><span style="color:#bd93f9">0</span> <span style="color:#ff79c6">and</span> ol_d_id<span style="color:#ff79c6">&gt;</span><span style="color:#bd93f9">0</span> <span style="color:#ff79c6">and</span> ol_w_id<span style="color:#ff79c6">&gt;</span><span style="color:#bd93f9">0</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">select</span> <span style="color:#ff79c6">count</span>(<span style="color:#ff79c6">*</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> orderline
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">where</span> ol_o_id<span style="color:#ff79c6">&gt;</span><span style="color:#bd93f9">0</span> <span style="color:#ff79c6">and</span> ol_d_id<span style="color:#ff79c6">&gt;</span><span style="color:#bd93f9">0</span> <span style="color:#ff79c6">and</span> ol_w_id<span style="color:#ff79c6">&gt;</span><span style="color:#bd93f9">0</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>总体来看，迭代的解释非常慢，改成编译方式就快很多了<br>
 块风格的更快，最快的是code-gen<br>
@@ -902,15 +900,15 @@ consume部分确定相关的寄存器，并将他们物化到hash-table中</p>
         </a>
     </p>
 <p>另一个SQL</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">select</span> <span style="color:#ff79c6">sum</span>(ol_o_id<span style="color:#ff79c6">*</span>ol_d_id<span style="color:#ff79c6">*</span>ol_w_id)
-<span style="color:#ff79c6">from</span> orderline
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">select</span> <span style="color:#ff79c6">sum</span>(ol_o_id<span style="color:#ff79c6">*</span>ol_d_id<span style="color:#ff79c6">*</span>ol_w_id)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">from</span> orderline
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>结果如下，code-gen以数据为中心基本达到了内存带宽上限，在不提升硬件的情况下，性能几乎不可能再提升了<br>
 
@@ -920,42 +918,42 @@ consume部分确定相关的寄存器，并将他们物化到hash-table中</p>
     </p>
 <h3 id="优化设置">优化设置</h3>
 <p>使用 g++编译</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">-O3 -fgcse-las -funsafe-loop-optimizations.
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>-O3 -fgcse-las -funsafe-loop-optimizations.
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>MonetDB会加上：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">-ftree-vectorize
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>-ftree-vectorize
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果开启了 -funroll-loops，之后又开启了 -fweb 则会影响寄存器分配</p>
 <p>对于LLVM编译器，我们通过手动调度优化通道来使用自定义优化级别。精确的级联是</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">llvm<span style="color:#ff79c6">::</span>createInstructionCombiningPass()
-llvm<span style="color:#ff79c6">::</span>createReassociatePass()
-llvm<span style="color:#ff79c6">::</span>createGVNPass()
-llvm<span style="color:#ff79c6">::</span>createCFGSimplificationPass()
-llvm<span style="color:#ff79c6">::</span>createAggressiveDCEPass()
-llvm<span style="color:#ff79c6">::</span>createCFGSimplificationPass()
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>llvm<span style="color:#ff79c6">::</span>createInstructionCombiningPass()
+</span></span><span style="display:flex;"><span>llvm<span style="color:#ff79c6">::</span>createReassociatePass()
+</span></span><span style="display:flex;"><span>llvm<span style="color:#ff79c6">::</span>createGVNPass()
+</span></span><span style="display:flex;"><span>llvm<span style="color:#ff79c6">::</span>createCFGSimplificationPass()
+</span></span><span style="display:flex;"><span>llvm<span style="color:#ff79c6">::</span>createAggressiveDCEPass()
+</span></span><span style="display:flex;"><span>llvm<span style="color:#ff79c6">::</span>createCFGSimplificationPass()
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="参考">参考</h2>
 <ul>
@@ -1078,14 +1076,6 @@ code.has-jax {
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/07/presto%E5%9C%A8%E5%90%84%E5%A4%A7%E5%85%AC%E5%8F%B8%E7%9A%84%E5%BA%94%E7%94%A8/" title="Presto在各大公司的应用">Presto在各大公司的应用</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
-    </li>
-    
-    <li>
         <a href="https://find-job.xyz/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
     </li>
     
@@ -1094,15 +1084,11 @@ code.has-jax {
     </li>
     
     <li>
+        <a href="https://find-job.xyz/post/2023/04/levedb-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%92%8C%E5%8E%8B%E7%BC%A9/" title="LevelDB 多版本和压缩">LevelDB 多版本和压缩</a>
+    </li>
+    
+    <li>
         <a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/" title="镜像合并&amp;配置文件同步">镜像合并&amp;配置文件同步</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/column-stores_vs_row-stores_how_different_are_they_really/" title="Column-Stores vs. Row-Stores: How Different Are They Really?">Column-Stores vs. Row-Stores: How Different Are They Really?</a>
     </li>
     
     <li>
@@ -1111,6 +1097,18 @@ code.has-jax {
     
     <li>
         <a href="https://find-job.xyz/post/2023/05/building-an-elastic-query-engine-on-disaggregated-storage/" title="Building An Elastic Query Engine on Disaggregated Storage">Building An Elastic Query Engine on Disaggregated Storage</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/05/what-goes-around-comes-around/" title="What Goes Around Comes Around">What Goes Around Comes Around</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/04/levedb-sstable%E6%A8%A1%E5%9D%97/" title="LevelDB SSTable模块">LevelDB SSTable模块</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/" title="Photon A Fast Query Engine for Lakehouse Systems">Photon A Fast Query Engine for Lakehouse Systems</a>
     </li>
     
 </ul>
@@ -1130,7 +1128,7 @@ code.has-jax {
     
     <li><a href="https://find-job.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (21)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (20)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
@@ -1157,7 +1155,7 @@ code.has-jax {
     
     <li><a href="https://find-job.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
     
-    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
+    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (30)</a></li>
     
 </ul>
     </section>

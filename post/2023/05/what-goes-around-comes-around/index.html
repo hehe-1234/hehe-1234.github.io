@@ -139,17 +139,17 @@
 <li>Semi-structured (XML): late 1990’s to the present</li>
 </ul>
 <p>这里使用一个 供应商、零件、供应量的例子来作为模型</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">Supplier (sno, sname, scity, sstate)
-Part (pno, pname, psize, pcolor)
-Supply (sno, pno, qty, price)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>Supplier (sno, sname, scity, sstate)
+</span></span><span style="display:flex;"><span>Part (pno, pname, psize, pcolor)
+</span></span><span style="display:flex;"><span>Supply (sno, pno, qty, price)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="ims-era">IMS Era</h2>
 <p>IMS (Information Management System) 是 IBM 开发的数据库管理系统<br>
@@ -186,32 +186,32 @@ Supply (sno, pno, qty, price)
 <p>IMS 使用 DL/1 来操作数据，使用层次结构因为操作简单，有点类似于树的遍历
 比如想获取 16号供应商下的 红色零件，可以这么写<br>
 首先获取 供应商，然后遍历其子节点</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">Get</span> <span style="color:#ff79c6">unique</span> Supplier (sno <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">16</span>)
-<span style="color:#ff79c6">Until</span> failure <span style="color:#ff79c6">do</span>
-<span style="color:#ff79c6">Get</span> <span style="color:#ff79c6">next</span> within parent (color <span style="color:#ff79c6">=</span> red)
-Enddo
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">Get</span> <span style="color:#ff79c6">unique</span> Supplier (sno <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">16</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Until</span> failure <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Get</span> <span style="color:#ff79c6">next</span> within parent (color <span style="color:#ff79c6">=</span> red)
+</span></span><span style="display:flex;"><span>Enddo
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>也可以用另一种方式：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">Until</span> failure <span style="color:#ff79c6">do</span>
-<span style="color:#ff79c6">Get</span> <span style="color:#ff79c6">next</span> Part (color <span style="color:#ff79c6">=</span> red)
-Enddo
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">Until</span> failure <span style="color:#ff79c6">do</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Get</span> <span style="color:#ff79c6">next</span> Part (color <span style="color:#ff79c6">=</span> red)
+</span></span><span style="display:flex;"><span>Enddo
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这个相当于每个节点都有一个 key，然后子节点的key是：父节点key + 子节点key 这么拼接出来的<br>
 因为每个节点都key都是唯一，这样拼接出来的key 也是唯一的</p>
@@ -284,25 +284,25 @@ Enddo
      
 所以是用 三个二元关系，来表示三元关系的，这就增加了复杂性，不过它比 IMS 更灵活</p>
 <p>下面是一段遍历算法</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">Find Supplier (SNO <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">16</span>)
-<span style="color:#ff79c6">Until</span> <span style="color:#ff79c6">no</span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">more</span> {
- Find <span style="color:#ff79c6">next</span> Supply record <span style="color:#ff79c6">in</span> Supplies
-Find <span style="color:#ff79c6">owner</span> Part record <span style="color:#ff79c6">in</span> Supplied_by
-<span style="color:#ff79c6">Get</span> <span style="color:#ff79c6">current</span> record
-<span style="color:#ff79c6">-</span><span style="color:#ff79c6">check</span> <span style="color:#ff79c6">for</span> red—
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>Find Supplier (SNO <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">16</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Until</span> <span style="color:#ff79c6">no</span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">more</span> {
+</span></span><span style="display:flex;"><span> Find <span style="color:#ff79c6">next</span> Supply record <span style="color:#ff79c6">in</span> Supplies
+</span></span><span style="display:flex;"><span>Find <span style="color:#ff79c6">owner</span> Part record <span style="color:#ff79c6">in</span> Supplied_by
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Get</span> <span style="color:#ff79c6">current</span> record
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">check</span> <span style="color:#ff79c6">for</span> red—
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>先定位到 Supplier 16</p>
 <ul>
@@ -340,13 +340,13 @@ Charlie Bachman曾在1973年图灵奖颁奖典礼上提出了“导航超空间�
 </ul>
 <p>因为逻辑、物理数据独立，并提供了高级别操作，使得 IMS，CODASYL 的那些问题就不存在了<br>
 此外，关系模型还提供了更灵活的表示，对于 供应商-零件-供应信息，以及新郎-新娘-牧师 这些类型可以很好的表示</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">Ceremony (bride<span style="color:#ff79c6">-</span>id, groom<span style="color:#ff79c6">-</span>id, minister<span style="color:#ff79c6">-</span>id, other<span style="color:#ff79c6">-</span><span style="color:#ff79c6">data</span>)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>Ceremony (bride<span style="color:#ff79c6">-</span>id, groom<span style="color:#ff79c6">-</span>id, minister<span style="color:#ff79c6">-</span>id, other<span style="color:#ff79c6">-</span><span style="color:#ff79c6">data</span>)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>之后 Codd 在 SIGMOD，以及 SIGFIDET 跟 CODASYL 的支持者做了很长时间的辩论<br>
 Codd的观点是</p>
@@ -424,17 +424,17 @@ IBM 当时想采用 SQL作为前端，后端继续对接 IMS，但是发现这�
 比如 Supply (PT, SR, qty, price)，PT来自 part表，SR来自Supplier表<br>
 可以使用如下SQL</li>
 </ul>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">Select</span> Supply.SR.sno
-<span style="color:#ff79c6">From</span> Supply
-<span style="color:#ff79c6">Where</span> Supply.PT.pcolor <span style="color:#ff79c6">=</span> “red”
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">Select</span> Supply.SR.sno
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">From</span> Supply
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Where</span> Supply.PT.pcolor <span style="color:#ff79c6">=</span> “red”
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这种查询方式于 网络语言中的 路径表示方式
 “Supply.SR.sno”指代 Supply 表格和 Supplier 表格之间存在外键关系，并且通过 SR 属性引用了 Supplier 表格中与当前记录相关联的供应商信息<br>
@@ -481,52 +481,52 @@ A merican_oil_ tank ers 继承了 Oil _tank ers 和 A merican_s hips 这两个�
 <p>出现在 1980年代，用来解决程序语言如C++ 和 关系数据库之间的阻抗不匹配问题<br>
 编程语言有他们自己的命名系统，数据类型，这和关系数据库之间并不匹配<br>
 比如用 C++定义的零件</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Struct Part {
-Int number;
-Char<span style="color:#ff79c6">*</span> name;
-Char<span style="color:#ff79c6">*</span> bigness;
-Char<span style="color:#ff79c6">*</span> color;
-} Example_part;
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Struct Part {
+</span></span><span style="display:flex;"><span>Int number;
+</span></span><span style="display:flex;"><span>Char<span style="color:#ff79c6">*</span> name;
+</span></span><span style="display:flex;"><span>Char<span style="color:#ff79c6">*</span> bigness;
+</span></span><span style="display:flex;"><span>Char<span style="color:#ff79c6">*</span> color;
+</span></span><span style="display:flex;"><span>} Example_part;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>之后用关系数据库做查询，然后将结果绑定到 结构体的变量中</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">Define <span style="color:#ff79c6">cursor</span> P <span style="color:#ff79c6">as</span>
-<span style="color:#ff79c6">Select</span> <span style="color:#ff79c6">*</span>
-<span style="color:#ff79c6">From</span> Part
-<span style="color:#ff79c6">Where</span> pno <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">16</span>;
-<span style="color:#ff79c6">Open</span> P <span style="color:#ff79c6">into</span> Example_part
-<span style="color:#ff79c6">Until</span> <span style="color:#ff79c6">no</span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">more</span>{
-<span style="color:#ff79c6">Fetch</span> P (Example_part.<span style="color:#8be9fd;font-style:italic">number</span> <span style="color:#ff79c6">=</span> pno,
-Example_name <span style="color:#ff79c6">=</span> pname
-Example_part.bigness <span style="color:#ff79c6">=</span> psize
-Example_part.color <span style="color:#ff79c6">=</span> pcolor)
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>Define <span style="color:#ff79c6">cursor</span> P <span style="color:#ff79c6">as</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Select</span> <span style="color:#ff79c6">*</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">From</span> Part
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Where</span> pno <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">16</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Open</span> P <span style="color:#ff79c6">into</span> Example_part
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Until</span> <span style="color:#ff79c6">no</span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">more</span>{
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Fetch</span> P (Example_part.<span style="color:#8be9fd;font-style:italic">number</span> <span style="color:#ff79c6">=</span> pno,
+</span></span><span style="display:flex;"><span>Example_name <span style="color:#ff79c6">=</span> pname
+</span></span><span style="display:flex;"><span>Example_part.bigness <span style="color:#ff79c6">=</span> psize
+</span></span><span style="display:flex;"><span>Example_part.color <span style="color:#ff79c6">=</span> pcolor)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>有些语言，允许将 变量持久化，这变成了这样：</p>
 <pre tabindex="0"><code>For P in Part where P.pno = 16{
@@ -557,79 +557,79 @@ Example_part.color <span style="color:#ff79c6">=</span> pcolor)
 <h2 id="the-object-relational-era">The Object-Relational Era</h2>
 <p>这是在 1982 年出现的，来自于一个简单的需求<br>
 假设有一个 GIS系统在表中这么记录的</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">Intersections (I<span style="color:#ff79c6">-</span>id, long, lat, other<span style="color:#ff79c6">-</span><span style="color:#ff79c6">data</span>)
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>Intersections (I<span style="color:#ff79c6">-</span>id, long, lat, other<span style="color:#ff79c6">-</span><span style="color:#ff79c6">data</span>)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果要在一个边界内找到  (X0, Y0, X1, Y1) 的所有交点，则</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">Select</span> I<span style="color:#ff79c6">-</span>id
-<span style="color:#ff79c6">From</span> Intersections
-<span style="color:#ff79c6">Where</span> X0 <span style="color:#ff79c6">&lt;</span> long <span style="color:#ff79c6">&lt;</span> X1 <span style="color:#ff79c6">and</span> Y0 <span style="color:#ff79c6">&lt;</span> lat <span style="color:#ff79c6">&lt;</span> Y1
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">Select</span> I<span style="color:#ff79c6">-</span>id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">From</span> Intersections
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Where</span> X0 <span style="color:#ff79c6">&lt;</span> long <span style="color:#ff79c6">&lt;</span> X1 <span style="color:#ff79c6">and</span> Y0 <span style="color:#ff79c6">&lt;</span> lat <span style="color:#ff79c6">&lt;</span> Y1
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>POSTGRE 是用 B树存储的，是一维的，而这里是多维度的，很难表示，也很难高效的查询</p>
 <p>另一种情况是要查询 土地拥有者<br>
 Parcel (P-id, Xmin, Xmax, Ymin, Ymax) <br>
 找到所有跟这个 矩形有相交的，然后通知他们</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">Select</span> P<span style="color:#ff79c6">-</span>id
-<span style="color:#ff79c6">From</span> Parcel
-<span style="color:#ff79c6">Where</span> Xmax <span style="color:#ff79c6">&gt;</span> X0 <span style="color:#ff79c6">and</span> Ymax <span style="color:#ff79c6">&gt;</span> Y0 <span style="color:#ff79c6">and</span> Xmin <span style="color:#ff79c6">&lt;</span> X1 <span style="color:#ff79c6">and</span> Ymax <span style="color:#ff79c6">&lt;</span> Y1
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">Select</span> P<span style="color:#ff79c6">-</span>id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">From</span> Parcel
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Where</span> Xmax <span style="color:#ff79c6">&gt;</span> X0 <span style="color:#ff79c6">and</span> Ymax <span style="color:#ff79c6">&gt;</span> Y0 <span style="color:#ff79c6">and</span> Xmin <span style="color:#ff79c6">&lt;</span> X1 <span style="color:#ff79c6">and</span> Ymax <span style="color:#ff79c6">&lt;</span> Y1
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这种查询在 SQL 上很难表示，而且性能非常差</p>
 <p>一个 OR提案可能会增加</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">user</span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">defined</span> <span style="color:#ff79c6">data</span> types,
-<span style="color:#ff79c6">user</span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">defined</span> operators,
-<span style="color:#ff79c6">user</span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">defined</span> functions, <span style="color:#ff79c6">and</span>
-<span style="color:#ff79c6">user</span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">defined</span> <span style="color:#ff79c6">access</span> methods
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">user</span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">defined</span> <span style="color:#ff79c6">data</span> types,
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">user</span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">defined</span> operators,
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">user</span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">defined</span> functions, <span style="color:#ff79c6">and</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">user</span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">defined</span> <span style="color:#ff79c6">access</span> methods
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于上述问题，修改后的SQL是</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#ff79c6">Select</span> I<span style="color:#ff79c6">-</span>id
-<span style="color:#ff79c6">From</span> Intersections
-<span style="color:#ff79c6">Where</span> point <span style="color:#ff79c6">!!</span> “X0, X1, Y0, Y1”
-
-<span style="color:#ff79c6">Select</span> P<span style="color:#ff79c6">-</span>id
-<span style="color:#ff79c6">From</span> Parcel
-<span style="color:#ff79c6">Where</span> P<span style="color:#ff79c6">-</span>box <span style="color:#ff79c6">##</span> “X0, X1, Y0, Y1”
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">Select</span> I<span style="color:#ff79c6">-</span>id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">From</span> Intersections
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Where</span> point <span style="color:#ff79c6">!!</span> “X0, X1, Y0, Y1”
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Select</span> P<span style="color:#ff79c6">-</span>id
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">From</span> Parcel
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">Where</span> P<span style="color:#ff79c6">-</span>box <span style="color:#ff79c6">##</span> “X0, X1, Y0, Y1”
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>!! “X0, X1, Y0, Y1” 表示 点范围<br>
 ## “X0, X1, Y0, Y1” 表示矩形范围<br>
@@ -771,15 +771,15 @@ code.has-jax {
     <h2>相关文章</h2>
     <ul class="listing">
         
-        <li><a href="/post/2023/02/cpu-and-cache-efficient-management-of-memory-resident-databases/">CPU and Cache Efficient Management of Memory-Resident Databases</a></li>
+        <li><a href="/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/">Photon A Fast Query Engine for Lakehouse Systems</a></li>
+        
+        <li><a href="/post/2023/05/sql_server_column_store_indexes/">SQL Server Column Store Indexes</a></li>
+        
+        <li><a href="/post/2023/05/column-stores_vs_row-stores_how_different_are_they_really/">Column-Stores vs. Row-Stores: How Different Are They Really?</a></li>
         
         <li><a href="/post/2023/02/efficiently-compiling-efficient-query-plans-for-modern-hardware/">Efficiently Compiling Efficient Query Plans for Modern Hardware</a></li>
         
         <li><a href="/post/2023/02/generating-code-for-holistic-query-evaluation/">Generating code for holistic query evaluation</a></li>
-        
-        <li><a href="/post/2023/02/implementing-database-operations-using-simd-instructions/">Implementing Database Operations Using SIMD Instructions</a></li>
-        
-        <li><a href="/post/2023/01/ultra-fast-in-memory-table-scan-using-onchip-vector-processing-units/">SIMD-Scan: Ultra Fast in-Memory Table Scan using onChip Vector Processing Units</a></li>
         
     </ul>
 </div>
@@ -836,14 +836,6 @@ code.has-jax {
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/07/presto%E5%9C%A8%E5%90%84%E5%A4%A7%E5%85%AC%E5%8F%B8%E7%9A%84%E5%BA%94%E7%94%A8/" title="Presto在各大公司的应用">Presto在各大公司的应用</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
-    </li>
-    
-    <li>
         <a href="https://find-job.xyz/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
     </li>
     
@@ -852,15 +844,11 @@ code.has-jax {
     </li>
     
     <li>
+        <a href="https://find-job.xyz/post/2023/04/levedb-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%92%8C%E5%8E%8B%E7%BC%A9/" title="LevelDB 多版本和压缩">LevelDB 多版本和压缩</a>
+    </li>
+    
+    <li>
         <a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/" title="镜像合并&amp;配置文件同步">镜像合并&amp;配置文件同步</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/column-stores_vs_row-stores_how_different_are_they_really/" title="Column-Stores vs. Row-Stores: How Different Are They Really?">Column-Stores vs. Row-Stores: How Different Are They Really?</a>
     </li>
     
     <li>
@@ -869,6 +857,18 @@ code.has-jax {
     
     <li>
         <a href="https://find-job.xyz/post/2023/05/building-an-elastic-query-engine-on-disaggregated-storage/" title="Building An Elastic Query Engine on Disaggregated Storage">Building An Elastic Query Engine on Disaggregated Storage</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/05/what-goes-around-comes-around/" title="What Goes Around Comes Around">What Goes Around Comes Around</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/04/levedb-sstable%E6%A8%A1%E5%9D%97/" title="LevelDB SSTable模块">LevelDB SSTable模块</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/" title="Photon A Fast Query Engine for Lakehouse Systems">Photon A Fast Query Engine for Lakehouse Systems</a>
     </li>
     
 </ul>
@@ -888,7 +888,7 @@ code.has-jax {
     
     <li><a href="https://find-job.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (21)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (20)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
@@ -915,7 +915,7 @@ code.has-jax {
     
     <li><a href="https://find-job.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
     
-    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
+    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (30)</a></li>
     
 </ul>
     </section>

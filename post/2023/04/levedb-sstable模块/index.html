@@ -13,10 +13,10 @@
     <meta property="og:title" content="LevelDB SSTable模块 - 找工作中">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content='2023-04-09T09:22:11&#43;08:00'>
+    <meta property="article:published_time" content='2023-04-29T09:22:11&#43;08:00'>
         
         
-    <meta property="article:modified_time" content='2023-04-09T09:22:11&#43;08:00'>
+    <meta property="article:modified_time" content='2023-04-29T09:22:11&#43;08:00'>
         
     <meta name="Keywords" content="">
     <meta name="description" content="LevelDB SSTable模块">
@@ -79,7 +79,7 @@
             <h1 class="post-title">LevelDB SSTable模块</h1>
         </header>
         <date class="post-meta meta-date">
-            2023年4月9日
+            2023年4月29日
         </date>
 <nav id="TableOfContents">
   <ul>
@@ -115,35 +115,35 @@
         <div class="post-content">
             <h2 id="文件格式">文件格式</h2>
 <p>doc/table_format.md 中介绍了 表格式</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ff79c6">&lt;</span>beginning_of_file<span style="color:#ff79c6">&gt;</span>
-[data block <span style="color:#bd93f9">1</span>]
-[data block <span style="color:#bd93f9">2</span>]
-...
-[data block N]
-[meta block <span style="color:#bd93f9">1</span>]
-...
-[meta block K]
-[metaindex block]
-[index block]
-[Footer]        (fixed size; starts at file_size <span style="color:#ff79c6">-</span> <span style="color:#ff79c6">sizeof</span>(Footer))
-<span style="color:#ff79c6">&lt;</span>end_of_file<span style="color:#ff79c6">&gt;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">&lt;</span>beginning_of_file<span style="color:#ff79c6">&gt;</span>
+</span></span><span style="display:flex;"><span>[data block <span style="color:#bd93f9">1</span>]
+</span></span><span style="display:flex;"><span>[data block <span style="color:#bd93f9">2</span>]
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>[data block N]
+</span></span><span style="display:flex;"><span>[meta block <span style="color:#bd93f9">1</span>]
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>[meta block K]
+</span></span><span style="display:flex;"><span>[metaindex block]
+</span></span><span style="display:flex;"><span>[index block]
+</span></span><span style="display:flex;"><span>[Footer]        (fixed size; starts at file_size <span style="color:#ff79c6">-</span> <span style="color:#ff79c6">sizeof</span>(Footer))
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">&lt;</span>end_of_file<span style="color:#ff79c6">&gt;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>sstable 按照 4K大小，分为若干个 block，每个block除了数据外，还有压缩类型，CRC<br>
 
@@ -152,21 +152,21 @@
         </a>
     </p>
 <p>footer 固定为 48个字节，因为采用了变长编码，如果不足长度，需要填充 0</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"> <span style="color:#8be9fd;font-style:italic">metaindex_handle</span>: <span style="color:#8be9fd">char</span>[p];     <span style="color:#6272a4">// Block handle for metaindex
-</span><span style="color:#6272a4"></span> <span style="color:#8be9fd;font-style:italic">index_handle</span>:     <span style="color:#8be9fd">char</span>[q];     <span style="color:#6272a4">// Block handle for index
-</span><span style="color:#6272a4"></span> <span style="color:#8be9fd;font-style:italic">padding</span>:          <span style="color:#8be9fd">char</span>[<span style="color:#bd93f9">40</span><span style="color:#ff79c6">-</span>p<span style="color:#ff79c6">-</span>q];<span style="color:#6272a4">// zeroed bytes to make fixed length
-</span><span style="color:#6272a4"></span>                                <span style="color:#6272a4">// (40==2*BlockHandle::kMaxEncodedLength)
-</span><span style="color:#6272a4"></span> <span style="color:#8be9fd;font-style:italic">magic</span>:            fixed64;     <span style="color:#6272a4">// == 0xdb4775248b80fb57 (little-endian)
-</span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span> <span style="color:#8be9fd;font-style:italic">metaindex_handle</span>: <span style="color:#8be9fd">char</span>[p];     <span style="color:#6272a4">// Block handle for metaindex
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span> <span style="color:#8be9fd;font-style:italic">index_handle</span>:     <span style="color:#8be9fd">char</span>[q];     <span style="color:#6272a4">// Block handle for index
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span> <span style="color:#8be9fd;font-style:italic">padding</span>:          <span style="color:#8be9fd">char</span>[<span style="color:#bd93f9">40</span><span style="color:#ff79c6">-</span>p<span style="color:#ff79c6">-</span>q];<span style="color:#6272a4">// zeroed bytes to make fixed length
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>                                <span style="color:#6272a4">// (40==2*BlockHandle::kMaxEncodedLength)
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span> <span style="color:#8be9fd;font-style:italic">magic</span>:            fixed64;     <span style="color:#6272a4">// == 0xdb4775248b80fb57 (little-endian)
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/04/LeveDB-SSTable%E6%A8%A1%E5%9D%97/1.png">
@@ -175,21 +175,21 @@
     <br>
 其中最后的magic number是固定的长度的8字节： 0xdb4775248b80fb57ull</p>
 <p>BlockHandle 指向文件的某个位置和偏移量，用于自解释，一个 varint64 最多10个字节，所以 footer 包含了 4个最多40字节，不够级补 0</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">BlockHandle</span> {
-<span style="color:#ff79c6">private</span><span style="color:#ff79c6">:</span>
-  <span style="color:#8be9fd">uint64_t</span> offset_;
-  <span style="color:#8be9fd">uint64_t</span> size_;
-};
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">BlockHandle</span> {
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">private</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd">uint64_t</span> offset_;
+</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd">uint64_t</span> size_;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>各个文件块的含义</p>
 <ul>
@@ -215,21 +215,21 @@
 <h2 id="数据块的构建">数据块的构建</h2>
 <p>构建数据块的实现在 table/block_builder.cc 中<br>
 主要函数</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#6272a4">// 使用前缀 key 的方式组织，16个 key为一个重启点
-</span><span style="color:#6272a4"></span><span style="color:#8be9fd">void</span> BlockBuilder<span style="color:#ff79c6">::</span>Add(<span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> key, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> value)
-
-<span style="color:#6272a4">// 超过阈值则flush，把所有 重启点也 flush 到磁盘
-</span><span style="color:#6272a4"></span>Slice BlockBuilder<span style="color:#ff79c6">::</span>Finish() 
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#6272a4">// 使用前缀 key 的方式组织，16个 key为一个重启点
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#8be9fd">void</span> BlockBuilder<span style="color:#ff79c6">::</span>Add(<span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> key, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> value)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 超过阈值则flush，把所有 重启点也 flush 到磁盘
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>Slice BlockBuilder<span style="color:#ff79c6">::</span>Finish() 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Add过程</p>
 <ul>
@@ -259,26 +259,26 @@
         </a>
     </p>
 <p>数据的查找</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#6272a4">// 生成一个迭代器，用来查找
-</span><span style="color:#6272a4"></span>Iterator<span style="color:#ff79c6">*</span> Block<span style="color:#ff79c6">::</span>NewIterator(<span style="color:#ff79c6">const</span> Comparator<span style="color:#ff79c6">*</span> comparator)
-<span style="color:#6272a4">// 返回的是 Block::Iter
-</span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#6272a4">// 生成一个迭代器，用来查找
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>Iterator<span style="color:#ff79c6">*</span> Block<span style="color:#ff79c6">::</span>NewIterator(<span style="color:#ff79c6">const</span> Comparator<span style="color:#ff79c6">*</span> comparator)
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 返回的是 Block::Iter
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>查找入口</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#8be9fd">void</span> Seek(<span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> target) <span style="color:#ff79c6">override</span> 
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> Seek(<span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> target) <span style="color:#ff79c6">override</span> 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>这里会在 重启点中，做二分查找</li>
@@ -294,21 +294,21 @@
 <h2 id="索引的构建">索引的构建</h2>
 <p>索引的构建实现，在 table/table_builder.cc 中<br>
 这个文件中的 主要函数为</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#8be9fd">void</span> TableBuilder<span style="color:#ff79c6">::</span>Add(<span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> key, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> value)
-<span style="color:#8be9fd">void</span> TableBuilder<span style="color:#ff79c6">::</span>Flush()
-<span style="color:#8be9fd">void</span> TableBuilder<span style="color:#ff79c6">::</span>WriteBlock(BlockBuilder<span style="color:#ff79c6">*</span> block, BlockHandle<span style="color:#ff79c6">*</span> handle)
-<span style="color:#8be9fd">void</span> TableBuilder<span style="color:#ff79c6">::</span>WriteRawBlock(<span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> block_contents, CompressionType type, BlockHandle<span style="color:#ff79c6">*</span> handle)
-Status TableBuilder<span style="color:#ff79c6">::</span>Finish()
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#8be9fd">void</span> TableBuilder<span style="color:#ff79c6">::</span>Add(<span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> key, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> value)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> TableBuilder<span style="color:#ff79c6">::</span>Flush()
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> TableBuilder<span style="color:#ff79c6">::</span>WriteBlock(BlockBuilder<span style="color:#ff79c6">*</span> block, BlockHandle<span style="color:#ff79c6">*</span> handle)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> TableBuilder<span style="color:#ff79c6">::</span>WriteRawBlock(<span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> block_contents, CompressionType type, BlockHandle<span style="color:#ff79c6">*</span> handle)
+</span></span><span style="display:flex;"><span>Status TableBuilder<span style="color:#ff79c6">::</span>Finish()
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Add流程</p>
 <ul>
@@ -329,19 +329,19 @@ Status TableBuilder<span style="color:#ff79c6">::</span>Finish()
 <li>刷新到磁盘，处理filter 块</li>
 </ul>
 <p>WriteBlock，写入的格式为：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">  <span style="color:#6272a4">// File format contains a sequence of blocks where each block has:
-</span><span style="color:#6272a4"></span>  <span style="color:#6272a4">//    block_data: uint8[n]
-</span><span style="color:#6272a4"></span>  <span style="color:#6272a4">//    type: uint8
-</span><span style="color:#6272a4"></span>  <span style="color:#6272a4">//    crc: uint32
-</span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  <span style="color:#6272a4">// File format contains a sequence of blocks where each block has:
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#6272a4">//    block_data: uint8[n]
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#6272a4">//    type: uint8
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>  <span style="color:#6272a4">//    crc: uint32
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>首先将 重启点写入到 buffer中</li>
@@ -361,47 +361,47 @@ Status TableBuilder<span style="color:#ff79c6">::</span>Finish()
 <h2 id="读取">读取</h2>
 <p>读取相关的实现在 table/table.cc<br>
 重要函数</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Status Table<span style="color:#ff79c6">::</span>Open(<span style="color:#ff79c6">const</span> Options<span style="color:#ff79c6">&amp;</span> options, RandomAccessFile<span style="color:#ff79c6">*</span> file, <span style="color:#8be9fd">uint64_t</span> size, Table<span style="color:#ff79c6">**</span> table)
-<span style="color:#8be9fd">void</span> Table<span style="color:#ff79c6">::</span>ReadMeta(<span style="color:#ff79c6">const</span> Footer<span style="color:#ff79c6">&amp;</span> footer)
-Iterator<span style="color:#ff79c6">*</span> Table<span style="color:#ff79c6">::</span>BlockReader(<span style="color:#8be9fd">void</span><span style="color:#ff79c6">*</span> arg, <span style="color:#ff79c6">const</span> ReadOptions<span style="color:#ff79c6">&amp;</span> options, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> index_value)
-Status Table<span style="color:#ff79c6">::</span>InternalGet(<span style="color:#ff79c6">const</span> ReadOptions<span style="color:#ff79c6">&amp;</span> options, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> k, <span style="color:#8be9fd">void</span><span style="color:#ff79c6">*</span> arg, <span style="color:#8be9fd">void</span> (<span style="color:#ff79c6">*</span>handle_result)(<span style="color:#8be9fd">void</span><span style="color:#ff79c6">*</span>, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span>, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span>))
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Status Table<span style="color:#ff79c6">::</span>Open(<span style="color:#ff79c6">const</span> Options<span style="color:#ff79c6">&amp;</span> options, RandomAccessFile<span style="color:#ff79c6">*</span> file, <span style="color:#8be9fd">uint64_t</span> size, Table<span style="color:#ff79c6">**</span> table)
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">void</span> Table<span style="color:#ff79c6">::</span>ReadMeta(<span style="color:#ff79c6">const</span> Footer<span style="color:#ff79c6">&amp;</span> footer)
+</span></span><span style="display:flex;"><span>Iterator<span style="color:#ff79c6">*</span> Table<span style="color:#ff79c6">::</span>BlockReader(<span style="color:#8be9fd">void</span><span style="color:#ff79c6">*</span> arg, <span style="color:#ff79c6">const</span> ReadOptions<span style="color:#ff79c6">&amp;</span> options, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> index_value)
+</span></span><span style="display:flex;"><span>Status Table<span style="color:#ff79c6">::</span>InternalGet(<span style="color:#ff79c6">const</span> ReadOptions<span style="color:#ff79c6">&amp;</span> options, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span> k, <span style="color:#8be9fd">void</span><span style="color:#ff79c6">*</span> arg, <span style="color:#8be9fd">void</span> (<span style="color:#ff79c6">*</span>handle_result)(<span style="color:#8be9fd">void</span><span style="color:#ff79c6">*</span>, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span>, <span style="color:#ff79c6">const</span> Slice<span style="color:#ff79c6">&amp;</span>))
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>读取返回的是一个 两层的迭代器</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Iterator<span style="color:#ff79c6">*</span> Table<span style="color:#ff79c6">::</span>NewIterator(<span style="color:#ff79c6">const</span> ReadOptions<span style="color:#ff79c6">&amp;</span> options) <span style="color:#ff79c6">const</span> {
-  <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">NewTwoLevelIterator</span>(
-      rep_<span style="color:#ff79c6">-&gt;</span>index_block<span style="color:#ff79c6">-&gt;</span>NewIterator(rep_<span style="color:#ff79c6">-&gt;</span>options.comparator),
-      <span style="color:#ff79c6">&amp;</span>Table<span style="color:#ff79c6">::</span>BlockReader, <span style="color:#ff79c6">const_cast</span><span style="color:#ff79c6">&lt;</span>Table<span style="color:#ff79c6">*&gt;</span>(<span style="color:#ff79c6">this</span>), options);
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Iterator<span style="color:#ff79c6">*</span> Table<span style="color:#ff79c6">::</span>NewIterator(<span style="color:#ff79c6">const</span> ReadOptions<span style="color:#ff79c6">&amp;</span> options) <span style="color:#ff79c6">const</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">return</span> <span style="color:#50fa7b">NewTwoLevelIterator</span>(
+</span></span><span style="display:flex;"><span>      rep_<span style="color:#ff79c6">-&gt;</span>index_block<span style="color:#ff79c6">-&gt;</span>NewIterator(rep_<span style="color:#ff79c6">-&gt;</span>options.comparator),
+</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">&amp;</span>Table<span style="color:#ff79c6">::</span>BlockReader, <span style="color:#ff79c6">const_cast</span><span style="color:#ff79c6">&lt;</span>Table<span style="color:#ff79c6">*&gt;</span>(<span style="color:#ff79c6">this</span>), options);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>两层迭代器中的两个变量</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">  IteratorWrapper index_iter_;
-  IteratorWrapper data_iter_;  <span style="color:#6272a4">// May be nullptr
-</span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>  IteratorWrapper index_iter_;
+</span></span><span style="display:flex;"><span>  IteratorWrapper data_iter_;  <span style="color:#6272a4">// May be nullptr
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Open过程</p>
 <ul>
@@ -509,6 +509,8 @@ code.has-jax {
         
         <li><a href="/post/2023/04/levedb-log%E6%A8%A1%E5%9D%97/">LevelDB Log模块</a></li>
         
+        <li><a href="/post/2023/04/levedb-%E5%B7%A5%E5%85%B7%E7%B1%BB/">LevelDB 辅助工具类</a></li>
+        
         <li><a href="/post/2023/03/levedb-%E5%85%AC%E5%BC%80%E6%8E%A5%E5%8F%A3/">LevelDB 公开的接口</a></li>
         
         <li><a href="/post/2023/03/levedb-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">LevelDB 基本概念</a></li>
@@ -566,14 +568,6 @@ code.has-jax {
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/07/presto%E5%9C%A8%E5%90%84%E5%A4%A7%E5%85%AC%E5%8F%B8%E7%9A%84%E5%BA%94%E7%94%A8/" title="Presto在各大公司的应用">Presto在各大公司的应用</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
-    </li>
-    
-    <li>
         <a href="https://find-job.xyz/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
     </li>
     
@@ -582,15 +576,11 @@ code.has-jax {
     </li>
     
     <li>
+        <a href="https://find-job.xyz/post/2023/04/levedb-%E5%A4%9A%E7%89%88%E6%9C%AC%E5%92%8C%E5%8E%8B%E7%BC%A9/" title="LevelDB 多版本和压缩">LevelDB 多版本和压缩</a>
+    </li>
+    
+    <li>
         <a href="https://find-job.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/" title="资源隔离设计">资源隔离设计</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/" title="镜像合并&amp;配置文件同步">镜像合并&amp;配置文件同步</a>
-    </li>
-    
-    <li>
-        <a href="https://find-job.xyz/post/2023/05/column-stores_vs_row-stores_how_different_are_they_really/" title="Column-Stores vs. Row-Stores: How Different Are They Really?">Column-Stores vs. Row-Stores: How Different Are They Really?</a>
     </li>
     
     <li>
@@ -599,6 +589,18 @@ code.has-jax {
     
     <li>
         <a href="https://find-job.xyz/post/2023/05/building-an-elastic-query-engine-on-disaggregated-storage/" title="Building An Elastic Query Engine on Disaggregated Storage">Building An Elastic Query Engine on Disaggregated Storage</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/05/what-goes-around-comes-around/" title="What Goes Around Comes Around">What Goes Around Comes Around</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/04/levedb-sstable%E6%A8%A1%E5%9D%97/" title="LevelDB SSTable模块">LevelDB SSTable模块</a>
+    </li>
+    
+    <li>
+        <a href="https://find-job.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/" title="Photon A Fast Query Engine for Lakehouse Systems">Photon A Fast Query Engine for Lakehouse Systems</a>
     </li>
     
 </ul>
@@ -618,7 +620,7 @@ code.has-jax {
     
     <li><a href="https://find-job.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (21)</a></li>
+    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (20)</a></li>
     
     <li><a href="https://find-job.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
@@ -645,7 +647,7 @@ code.has-jax {
     
     <li><a href="https://find-job.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
     
-    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
+    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (30)</a></li>
     
 </ul>
     </section>
