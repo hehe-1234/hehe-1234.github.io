@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>The History of Big data | 一个程序员的博客</title>
+    <meta property="og:title" content="The History of Big data - 一个程序员的博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2023-11-19T09:13:07&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2023-11-19T09:13:07&#43;08:00'>
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="The History of Big data">
+        <meta name="author" content="隔壁老王">
+        
+    <meta property="og:url" content="https://hehe-1234.xyz/post/2023/11/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8E%86%E5%8F%B2/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hehe-1234.xyz/">
+                        一个程序员的博客
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hehe-1234.xyz/">首页</a>
+                    
+                    <a  href="https://hehe-1234.xyz/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hehe-1234.xyz/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">The History of Big data</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年11月19日
+        </date>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#20032006-the-beginning">2003–2006: The Beginning</a></li>
+    <li><a href="#20072008-hadoops-early-adopters-and-contributors">2007–2008: Hadoop’s early adopters and contributors</a></li>
+    <li><a href="#20082012-rise-of-the-hadoop-vendors">2008–2012: Rise of the Hadoop vendors</a></li>
+    <li><a href="#20102014--hadoop-20-and-the-spark-revolution">2010–2014 : Hadoop 2.0 and the Spark revolution</a></li>
+    <li><a href="#20142016-reaching-the-apex">2014–2016 Reaching the Apex</a></li>
+    <li><a href="#20162020-the-rise-of-containerisation-and-deep-learning-and-the-downfall-of-hadoop">2016–2020 The rise of containerisation and deep learning, and the downfall of Hadoop</a></li>
+    <li><a href="#20202023-the-modern-era">2020–2023 The modern era</a></li>
+    <li><a href="#2023--who-can-tell-what-the-future-will-be-like-">2023 — Who can tell what the future will be like ?</a></li>
+  </ul>
+</nav>
+        
+        <div class="post-meta">
+            
+            <span class="post-meta meta-tags">
+                <ul class="clearfix">
+                    <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
+                </ul>
+            </span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <blockquote>
+<p>主要参考，翻译整理自这篇文章：<br>
+<a href="https://towardsdatascience.com/2003-2023-a-brief-history-of-big-data-25712351a6bc">https://towardsdatascience.com/2003-2023-a-brief-history-of-big-data-25712351a6bc</a></p>
+</blockquote>
+<h1 id="20032006-the-beginning">2003–2006: The Beginning</h1>
+<p>
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/20/7g7vKB.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/20/7g7vKB.png" />
+        </a>
+    
+当时谷歌在爬取全世界网页时的两个主要问题:</p>
+<blockquote>
+<ul>
+<li>How to store hundreds of terabytes of data, on thousands of disks, across more than a thousand machines, with no downtime, data loss, or even data unavailability ?</li>
+<li>How to parallelize computation in an efficient and resilient way to handle all this data across all these machines ?</li>
+</ul>
+</blockquote>
+<p>于是乎谷歌发表了改变 big data的三篇论文</p>
+<ul>
+<li>The Google File System</li>
+<li>MapReduce: Simplified Data Processing on Large Clusters</li>
+<li>Bigtable: A Distributed Storage System for Structured Data</li>
+</ul>
+<p>这里还有一篇文章，<a href="https://www.newyorker.com/magazine/2018/12/10/the-friendship-that-made-google-huge">The Friendship That Made Google Huge</a><br>
+介绍了 Jeff Dean and Sanjay Ghemawat 的故事</p>
+<p>那会 Doug Cutting 正在做跟谷歌类似的事情，分布式爬虫，需要计算和存储</p>
+<ul>
+<li>Apache Lucene</li>
+<li>Apache Solr、 ElasticSearch 使用了前者</li>
+</ul>
+<p>于是创建了  Apache Nutch，同时参考了谷歌的论文，创建了 Hadoop，包括</p>
+<ul>
+<li>HDFS 文件系统</li>
+<li>MapReduce</li>
+</ul>
+<p>谷歌仍然是保持封闭，最初开源的贡献者是 Yahoo，随后很多公司都跟进了</p>
+<h1 id="20072008-hadoops-early-adopters-and-contributors">2007–2008: Hadoop’s early adopters and contributors</h1>
+<p>
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/20/7g7a1t.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/20/7g7a1t.png" />
+        </a>
+    <br>
+MapReduce 很强大，但是写起来并不容易，于是 Yahoo 就推出了 Apache Pig<br>
+将高层语言解析为 map-reduce</p>
+<p>这段时间还有几个重量级开源项目</p>
+<ul>
+<li>facebook 推出了 Apache Hive</li>
+<li>还是facebook 的 Apache Cassandra</li>
+<li>Powerset 推出了 Apache HBase，后被微软收购并开启了新项目 Bing</li>
+<li>AWS 推出了 Elastic MapReduce，可以免运维的方式开发 MapReduce</li>
+</ul>
+<h1 id="20082012-rise-of-the-hadoop-vendors">2008–2012: Rise of the Hadoop vendors</h1>
+<p>
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/20/7g7c9G.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/20/7g7c9G.png" />
+        </a>
+    <br>
+Hadoop集群大了之后就很难安装、维护，于是出现了很多供应商</p>
+<ul>
+<li>Cloudera，以及他们的 CDH</li>
+<li>Hortonworks</li>
+<li>MapR</li>
+</ul>
+<p>Cassandra 也找到了供应商 Datastax</p>
+<p>在这段时间，人们发现 Hive挺好用的，但是Hive太慢了<br>
+而谷歌又发表了后三驾马车的论文</p>
+<ul>
+<li>Dremel: Interactive Analysis of Web-Scale Datasets</li>
+<li>Pregel，这个是图数据库</li>
+<li>Caffeine，网络搜索引擎</li>
+</ul>
+<p>Dremel的两个创新</p>
+<ul>
+<li>如何在海量数据中快速查询</li>
+<li>新的存储格式</li>
+</ul>
+<p>三大 Hadoop 供应商基于 Dremel 的启发，又发布了各自的产品</p>
+<ul>
+<li>Cloudera 推出了 Apache Impala</li>
+<li>MapR 推出了  Apache Drill</li>
+<li>Hortonworks  推出了 Apache Tez</li>
+</ul>
+<p>Tez 是对MapReduce 的改良，上层的 Hive还是不动<br>
+这种方案的原因是 Hortonworks 本身人力不够，因为他们的客户都是基于Hive的，想提升Hive速度而不是迁移到另一个引擎</p>
+<p>收到 Dremel 文件格式的启发</p>
+<ul>
+<li>Cloudera and Twitter 联合推出了 Apache Parquet</li>
+<li>Hortonworks and Facebook 联合推出了 Apache ORC</li>
+</ul>
+<h1 id="20102014--hadoop-20-and-the-spark-revolution">2010–2014 : Hadoop 2.0 and the Spark revolution</h1>
+<p>
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/20/7g7D6b.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/20/7g7D6b.png" />
+        </a>
+    <br>
+新的 Hadoop 调度框架 Yarn 出现<br>
+之后就是 Spark 的崛起，对整个行业有巨大的推动<br>
+基于Sarpk 创建了Databricks，他们是基于云的，而不是搞发型版本</p>
+<p>之后也证明了 Databricks 的选择是正确的<br>
+这段时间也出现了几个实时处理的项目</p>
+<ul>
+<li>LinkedIn 推出的 Apache Kafka</li>
+<li>Twitter 推出的 Apache Storm</li>
+</ul>
+<p>而 Netflix 的成功也证明了云计算的强大<br>
+之后 微软 Azue在 2010年入局，谷歌 在2011年入局</p>
+<h1 id="20142016-reaching-the-apex">2014–2016 Reaching the Apex</h1>
+<p>
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/20/7g71Iw.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/20/7g71Iw.png" />
+        </a>
+    <br>
+出现了几个试图统一底层流批的框架<br>
+目前还活跃的是 Apache Beam，谷歌搞的<br>
+目前是将底层的 Apache Spark, Apache Flink or Google’s DataFlow 做统一</p>
+<p>然后就是调度系统，这个其实也挺复杂的，几个开源产品</p>
+<ul>
+<li>Yahoo!’s Apache Oozie</li>
+<li>Linkedin’s Azkaban</li>
+<li>Airbnb 的 Apache Airflow</li>
+<li>Spotify 的 Luigi</li>
+</ul>
+<p>Apache Airflow 还推出了 谷歌云、AWS 的产品</p>
+<p>SQL 层面，还有 Presto</p>
+<ul>
+<li>Amazon 的 Athena 基于它重塑了品牌</li>
+<li>Presto 创始团队新搞的 Trino</li>
+</ul>
+<p>还有几个基于 云的产品</p>
+<ul>
+<li>Google 的 BigQuery  2011</li>
+<li>Amazon’s Redshift 2012</li>
+<li>Snowflake, founded in 2012</li>
+</ul>
+<p><a href="https://hadoopecosystemtable.github.io/">The Hadoop Ecosystem Table</a></p>
+<h1 id="20162020-the-rise-of-containerisation-and-deep-learning-and-the-downfall-of-hadoop">2016–2020 The rise of containerisation and deep learning, and the downfall of Hadoop</h1>
+<p>
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/20/7g7UvP.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/20/7g7UvP.png" />
+        </a>
+    <br>
+这段时间的几个大趋势</p>
+<ol>
+<li>HDFS替换，迁移到云环境，Amazon S3, Google Storage or Azure Blob Storage</li>
+<li>Docker，K8S 容器化出现，Hadoop 在 3.0才支持Docker</li>
+<li>全托管的海量并行SQL数据仓库，也叫做：Modern Data Stack</li>
+<li>深度学习的出现</li>
+</ol>
+<p>深度学习需要 GPU，以及 Tensorflow or Keras的多个版本同时运行<br>
+这些Hadoop都么有，当时只能用VM 启动多个GPU 跑任务 <br>
+于是 Cloudera 在2017年 IPO 之后就基于容器化推出了他们的 Data Science Workbench</p>
+<p>Hadoop 供应商的大事件</p>
+<ul>
+<li>2018年 Cloudera 跟 Hortonworks 合并，前者保留品牌</li>
+<li>MapR 被 Hewlett Packard Entreprise (HPE) 收购</li>
+<li>CD&amp;R 以低于发行价 收购了 Cloudera</li>
+</ul>
+<p>但这些并不代表 Hadoop 死了，它还在运行<br>
+之后又出现一些开放表格的技术</p>
+<ul>
+<li>Uber 2016年推出的 Apache Hudi</li>
+<li>Netflix 2017年推出的 Apache Iceberg</li>
+<li>Databricks 2019年推出的 Delta Lake</li>
+</ul>
+<p>这三个项目其实都是为了解决一个问题，从Hadoop迁移到云后，HDFS的那些功能和性能都无法保证了<br>
+需要用新的方案来兼容云存储环境，实现事务</p>
+<p><a href="https://medium.com/insiderengineering/apache-iceberg-reduced-our-amazon-s3-cost-by-90-997cde5ce931">Apache Iceberg Reduced Our Amazon S3 Cost by 90%</a></p>
+<h1 id="20202023-the-modern-era">2020–2023 The modern era</h1>
+<p>
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/20/7g7SQe.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/20/7g7SQe.png" />
+        </a>
+    
+Hadoop云化依然是大趋势，而且每年都在增加<br>
+当然企业内部还是有不少部署 私有化 Hadoop 的<br>
+新一代启动都是基于 Modern Data Stack 来开发他们的SQL 分析数据仓库产品<br>
+如：BigQuery, Databricks-SQL, Athena or Snowflake<br>
+目标是低代码、零代码</p>
+<p>几个元数据管理产品</p>
+<ul>
+<li>Apache Atlas, started by Hortonworks in 2015</li>
+<li>Amundsen, open-source by Lyft in 2019</li>
+<li>DataHub, open-sourced by Linkedin in 2020</li>
+</ul>
+<p>新的调度框架</p>
+<ul>
+<li><a href="https://www.prefect.io/">Prefect</a></li>
+<li><a href="https://dagster.io/">Dagster</a></li>
+<li><a href="https://flyte.org/">Flyte</a></li>
+</ul>
+<p>开始调整 Airflow的地位</p>
+<p>lakehouse 开始出现，结合了数据湖、数据仓库的优点<br>
+最初是 Databricks 提出的，这个平台也方便了数据科学、BI 用户共享数据<br>
+因此 数据治理、安全、知识分享页更简单</p>
+<p>之后 Snowflake 跟进推出了 Snowpark<br>
+然后是 Azure Synapse<br>
+Google with BigLake</p>
+<p>开源方面，Dremio provides a lakehouse architecture since 2017</p>
+<p><a href="https://towardsdatascience.com/modern-data-stack-which-place-for-spark-8e10365a8772">Modern Data Stack: Which Place for Spark ?</a></p>
+<h1 id="2023--who-can-tell-what-the-future-will-be-like-">2023 — Who can tell what the future will be like ?</h1>
+<p>
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/20/7g7RL6.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/20/7g7RL6.png" />
+        </a>
+    <br>
+对未来的一些猜想</p>
+<ul>
+<li>主要的数据平台玩家：Databricks, Snowflake, BigQuery, Azure Synapse 会继续发力，缩小彼此差距，增加更多的功能和连接更多的组件</li>
+<li>新项目会越来越少，主要不是缺乏 ideas，而是资金</li>
+<li>公司更多是缺乏熟练的劳动力，他们更愿意花钱迁移到新方案而不是优化，可能因为低效的数据管理，使的企业会寻找更好的方案，类似Hadoop的新周期又诞生</li>
+<li>云厂商 Google, Amazon, Microsoft才是真正的赢家，找到风向标然后拷贝整合到自己的环境中</li>
+</ul>
+<p><a href="https://thesequel.substack.com/p/snowbricks-and-dataflake">Snowbricks &amp; Dataflake</a><br>
+<a href="https://medium.com/@laurengreerbalik/how-fivetran-dbt-actually-fail-3a20083b2506">How Fivetran + dbt actually fail</a></p>
+
+			<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>相关文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2022/11/flumejava%E8%AE%BA%E6%96%87/">FlumeJava: Easy, Efficient Data-Parallel Pipelines</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "hehe-1234/hugoblogtalks"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hehe-1234.xyz/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hehe-1234.xyz/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/08/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/" title="个人工作简介">个人工作简介</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/07/open_log_replicator/" title="Oracle的CDC工具OpenLogReplicator原理">Oracle的CDC工具OpenLogReplicator原理</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/06/open_log/" title="Oracle的CDC工具OpenLogReplicator编译">Oracle的CDC工具OpenLogReplicator编译</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/03/the_life_of_iceberg/" title="The Life of a Read/Write Query for Apache Iceberg Tables">The Life of a Read/Write Query for Apache Iceberg Tables</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/02/data_ingestion_architectural_patterns/" title="Data Ingestion: Architectural Patterns">Data Ingestion: Architectural Patterns</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/01/hms/" title="Hive MetaStore的实现和优化">Hive MetaStore的实现和优化</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/01/lakehouse_storage_systems/" title="Analyzing and Comparing Lakehouse Storage Systems">Analyzing and Comparing Lakehouse Storage Systems</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2023/11/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8E%86%E5%8F%B2/" title="The History of Big data">The History of Big data</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="TPCx-HS优化总结">TPCx-HS优化总结</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (5)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (21)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (22)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (10)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">归档</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/years/2024%E5%B9%B4/">2024年 (7)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hehe-1234.xyz/tags/b%E6%A0%91/">B树 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/calcite/">calcite </a>
+    
+    <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
+    
+    <a href="https://hehe-1234.xyz/tags/data_ingestion/">Data_Ingestion </a>
+    
+    <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
+    
+    <a href="https://hehe-1234.xyz/tags/hive/">Hive </a>
+    
+    <a href="https://hehe-1234.xyz/tags/iceberg/">iceberg </a>
+    
+    <a href="https://hehe-1234.xyz/tags/k8s/">k8s </a>
+    
+    <a href="https://hehe-1234.xyz/tags/kudu/">kudu </a>
+    
+    <a href="https://hehe-1234.xyz/tags/kyuubi/">Kyuubi </a>
+    
+    <a href="https://hehe-1234.xyz/tags/lakehouse/">Lakehouse </a>
+    
+    <a href="https://hehe-1234.xyz/tags/leveldb/">LevelDB </a>
+    
+    <a href="https://hehe-1234.xyz/tags/llvm/">LLVM </a>
+    
+    <a href="https://hehe-1234.xyz/tags/mapreduce/">MapReduce </a>
+    
+    <a href="https://hehe-1234.xyz/tags/mysql/">MySQL </a>
+    
+    <a href="https://hehe-1234.xyz/tags/newsql/">NewSQL </a>
+    
+    <a href="https://hehe-1234.xyz/tags/oceanbase/">OceanBase </a>
+    
+    <a href="https://hehe-1234.xyz/tags/openlogreplicator/">OpenLogReplicator </a>
+    
+    <a href="https://hehe-1234.xyz/tags/paxos/">paxos </a>
+    
+    <a href="https://hehe-1234.xyz/tags/presto/">Presto </a>
+    
+    <a href="https://hehe-1234.xyz/tags/quick-sql/">quick-sql </a>
+    
+    <a href="https://hehe-1234.xyz/tags/raft/">raft </a>
+    
+    <a href="https://hehe-1234.xyz/tags/scala/">scala </a>
+    
+    <a href="https://hehe-1234.xyz/tags/simd/">SIMD </a>
+    
+    <a href="https://hehe-1234.xyz/tags/snowflake/">snowflake </a>
+    
+    <a href="https://hehe-1234.xyz/tags/spark/">spark </a>
+    
+    <a href="https://hehe-1234.xyz/tags/teradata/">TeraData </a>
+    
+    <a href="https://hehe-1234.xyz/tags/tpcx-hs/">TPCx-HS </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%88%97%E5%AD%98/">列存 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%AD%98%E5%82%A8/">存储 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E8%AE%BA%E6%96%87/">论文 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">RSS</h3>
+        <ul class="widget-list">
+            <li><a href="https://hehe-1234.xyz/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div>
+        &copy; 2024 <a href="https://hehe-1234.xyz/">一个程序员的博客 By find-job</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'GA ID', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+
+</html>

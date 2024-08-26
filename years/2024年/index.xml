@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2024年 on 一个程序员的博客</title>
+    <link>https://hehe-1234.xyz/years/2024%E5%B9%B4/</link>
+    <description>Recent content in 2024年 on 一个程序员的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 25 Aug 2024 09:13:07 +0800</lastBuildDate>
+    <atom:link href="https://hehe-1234.xyz/years/2024%E5%B9%B4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>个人工作简介</title>
+      <link>https://hehe-1234.xyz/post/2024/08/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/</link>
+      <pubDate>Sun, 25 Aug 2024 09:13:07 +0800</pubDate>
+      <guid>https://hehe-1234.xyz/post/2024/08/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/</guid>
+      <description>工作简介，包括几份工作的主要工作内容、详细工作内容的链接、产品的架构设计图等</description>
+    </item>
+    <item>
+      <title>Oracle的CDC工具OpenLogReplicator原理</title>
+      <link>https://hehe-1234.xyz/post/2024/07/open_log_replicator/</link>
+      <pubDate>Mon, 15 Jul 2024 09:08:07 +0800</pubDate>
+      <guid>https://hehe-1234.xyz/post/2024/07/open_log_replicator/</guid>
+      <description>open log replicator 使用</description>
+    </item>
+    <item>
+      <title>Oracle的CDC工具OpenLogReplicator编译</title>
+      <link>https://hehe-1234.xyz/post/2024/06/open_log/</link>
+      <pubDate>Sat, 15 Jun 2024 09:08:07 +0800</pubDate>
+      <guid>https://hehe-1234.xyz/post/2024/06/open_log/</guid>
+      <description>open log replicator 编译</description>
+    </item>
+    <item>
+      <title>The Life of a Read/Write Query for Apache Iceberg Tables</title>
+      <link>https://hehe-1234.xyz/post/2024/03/the_life_of_iceberg/</link>
+      <pubDate>Mon, 26 Feb 2024 09:08:07 +0800</pubDate>
+      <guid>https://hehe-1234.xyz/post/2024/03/the_life_of_iceberg/</guid>
+      <description>介绍了存储的结构，元数据层包括：manifest files、manifest list, metadata files，catalog指向最新的 metadata files；每一层都可以做裁减，包括数据层，介绍了读取、time travel过程，是自上往下的读取和裁减过程；写入过程：插入、删除、merge过程，写 过程是自下而上的，通过 切换catalog指向，利用OCC控制并发，实现ACID</description>
+    </item>
+    <item>
+      <title>Data Ingestion: Architectural Patterns</title>
+      <link>https://hehe-1234.xyz/post/2024/02/data_ingestion_architectural_patterns/</link>
+      <pubDate>Mon, 15 Jan 2024 09:08:07 +0800</pubDate>
+      <guid>https://hehe-1234.xyz/post/2024/02/data_ingestion_architectural_patterns/</guid>
+      <description>data ingestion 的几种架构：Unified Data Repository、Data Virtualization、ETL、ELT、Stream Processing</description>
+    </item>
+    <item>
+      <title>Hive MetaStore的实现和优化</title>
+      <link>https://hehe-1234.xyz/post/2024/01/hms/</link>
+      <pubDate>Sun, 14 Jan 2024 09:08:07 +0800</pubDate>
+      <guid>https://hehe-1234.xyz/post/2024/01/hms/</guid>
+      <description>Hive MetaStore的实现原理，Hive Thrift 客户端和服务端的实现，MetaCat对 HMS 的兼容以及优化，Spark调用 HMS 的逻辑</description>
+    </item>
+    <item>
+      <title>Analyzing and Comparing Lakehouse Storage Systems</title>
+      <link>https://hehe-1234.xyz/post/2024/01/lakehouse_storage_systems/</link>
+      <pubDate>Wed, 10 Jan 2024 09:08:07 +0800</pubDate>
+      <guid>https://hehe-1234.xyz/post/2024/01/lakehouse_storage_systems/</guid>
+      <description>讨论了 LakeHouse 系统设计的难点，在不可变高延迟的对象存储之上，增加事务特性，三大系统都使用了OCC做隔离，事务实现都用了MVCC，源数据库管理delta和hudi用了表格式，iceberg用了层次存储(单节点处理)，数据更新三者都支持CoW(适合读多写少场景)，hudi和iceberg支持MoR(适合写多的场景)</description>
+    </item>
+  </channel>
+</rss>
