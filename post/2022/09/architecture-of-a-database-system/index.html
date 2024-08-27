@@ -22,7 +22,7 @@
     <meta name="description" content="Architecture of a Database System论文翻译">
         <meta name="author" content="隔壁老王">
         
-    <meta property="og:url" content="https://hehe-1234.github.io/post/2022/09/architecture-of-a-database-system/">
+    <meta property="og:url" content="https://hehe-1234.xyz/post/2022/09/architecture-of-a-database-system/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -46,7 +46,7 @@
         <div class="col-group">
             <div class="site-name ">
                 
-                    <a id="logo" href="https://hehe-1234.github.io/">
+                    <a id="logo" href="https://hehe-1234.xyz/">
                         一个程序员的博客
                     </a>
                 
@@ -54,11 +54,11 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://hehe-1234.github.io/">首页</a>
+                    <a class="current" href="https://hehe-1234.xyz/">首页</a>
                     
-                    <a  href="https://hehe-1234.github.io/archives/" title="归档">归档</a>
+                    <a  href="https://hehe-1234.xyz/archives/" title="归档">归档</a>
                     
-                    <a  href="https://hehe-1234.github.io/about/" title="关于">关于</a>
+                    <a  href="https://hehe-1234.xyz/about/" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -652,7 +652,7 @@ Informix在 6.0版本实现了这个功能</p>
 但是访问处理器之外的内存、磁盘仍然存在很多瓶颈<br>
 结果就是，在磁盘和处理器之间的内存路径，出现了新的补平衡和瓶颈
 这肯定需要重新检查DBMS架构，以满足硬件的性能潜力</p>
-<p>某些相关架构正转移到可以预见的，更宏观的尺度 在面向服务计算领域
+<p>某些相关架构正转移到可以预见的，更宏观的尺度 在面向服务计算领域 
 这里，这个想法在有一万个计算机的大型数据中心，为用户提供处理(包含软件和硬件)  <br>
 如果是高度自动化的，那么这种规模下的应用和服务的管理就是可以接受的<br>
 非管理任务不能随着服务数量的增加而扩展，因为通常使用的是小于可靠性的商用服务器，失败会更常见<br>
@@ -927,12 +927,12 @@ SQLServer也有高端用户了</p>
 迭代模型在面向对象风格中可以简单表示 ，下面就是一个迭代模型的伪代码</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">iterator</span> {
@@ -1027,9 +1027,9 @@ tuple 描述符通常是一个 列引用数组，每个列引用下面组成：<
 <p>查询的SQL:</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">UPDATE</span> EMP
@@ -1151,7 +1151,7 @@ ETL厂商还扩展了他们的ETL产品，比如去重工具，面向质量的�
 bitmap还对于联合的filter条件也有利：</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>Customer.sex <span style="color:#ff79c6">=</span> “F” <span style="color:#ff79c6">and</span> Customer.<span style="color:#ff79c6">state</span> <span style="color:#ff79c6">=</span> “California”
@@ -1845,9 +1845,9 @@ PostgreSQL通用搜索
 比如，B+树page在插入事务执行中被split，而后事务被终止；在中止处理期间，不迫切需要撤消split     <br>
 这就提出了将一些日志记录标记为 redo-only 的挑战，在日志的任何undo处理过程中，都可以保留redo-only的更改</p>
 <p>ARIES为这些场景提供了一种优雅的机制，称为nested top actions，它允许恢复过程在恢复期间“跳过”物理结构修改的日志记录，而不需要任何特殊情况代码</p>
-<p>在其他上下文中也使用了相同的思想，包括堆文件，插入堆文件可能需要在磁盘上扩展该文件   	
-为了捕获这个，必须对文件的extent map.进行更改，这是磁盘上的一个数据结构，指向构成文件的连续块的运行	
-如果插入事务终止，则不需要撤消对区段映射的这些更改   
+<p>在其他上下文中也使用了相同的思想，包括堆文件，插入堆文件可能需要在磁盘上扩展该文件   	 
+为了捕获这个，必须对文件的extent map.进行更改，这是磁盘上的一个数据结构，指向构成文件的连续块的运行	 
+如果插入事务终止，则不需要撤消对区段映射的这些更改   	
 文件变大这一事实是事务不可见的副作用，实际上可能有助于吸收未来的插入流量</p>
 <h4 id="next-key-locking-physical-surrogates-for-logical-properties">Next-Key Locking: Physical Surrogates for Logical Properties</h4>
 <p>现在接近本章的最后了，讨论索引并发问题，这是一个不易差距但是非常重要的问题<br>
@@ -1922,7 +1922,7 @@ B+树索引在所有数据库中都是标准的，大多数商业数据库都提
 mysql也支持内存和集群的存储引擎，一些第三方厂商宣称支持mysq兼容的存储引擎，不过大多数用于还是选择myisam或者innodb</p>
 <h3 id="discussion-and-additional-material-4">Discussion and Additional Material</h3>
 <p>事务机制如今是一个非常成熟的话题，多年来各种可能的技巧都被一种或另一种方式尝试过，新的设计方案趋向于：基于现有方案的 排列组和或者联合使用<br>
-这一领域最大的变化是内存价格下降，于是产生了这样的动机：把数据库中大部分热数据放到内存中加速运行
+这一领域最大的变化是内存价格下降，于是产生了这样的动机：把数据库中大部分热数据放到内存中加速运行 
 这使的经常将数据flush到持久设备以保持更低的重启时间的挑战更复杂 <br>
 闪存在事务管理中的作用是这种不断发展的平衡行为的一部分</p>
 <p>这些年一个有趣的发展是，OS圈子内广泛的采用了WAL机制，通常是文件日志系统，今天基本是所有OS系统的标准选项了<br>
@@ -2249,10 +2249,10 @@ code.has-jax {
 
                 <div id="secondary">
     <section class="widget">
-        <form id="search" action='https://hehe-1234.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='https://hehe-1234.xyz/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://hehe-1234.github.io/">
+      <input type="hidden" name="sitesearch" value="https://hehe-1234.xyz/">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
@@ -2262,43 +2262,43 @@ code.has-jax {
 <ul class="widget-list">
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2024/08/me/" title="个人工作简介">个人工作简介</a>
+        <a href="https://hehe-1234.xyz/post/2024/08/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/" title="个人工作简介">个人工作简介</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2024/08/open_log_rac/" title="OpenLogReplicator的一些改动">OpenLogReplicator的一些改动</a>
+        <a href="https://hehe-1234.xyz/post/2024/08/open_log_rac/" title="OpenLogReplicator的一些改动">OpenLogReplicator的一些改动</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2024/07/open_log_replicator/" title="Oracle的CDC工具OpenLogReplicator原理">Oracle的CDC工具OpenLogReplicator原理</a>
+        <a href="https://hehe-1234.xyz/post/2024/07/open_log_replicator/" title="Oracle的CDC工具OpenLogReplicator原理">Oracle的CDC工具OpenLogReplicator原理</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2024/06/open_log/" title="Oracle的CDC工具OpenLogReplicator编译">Oracle的CDC工具OpenLogReplicator编译</a>
+        <a href="https://hehe-1234.xyz/post/2024/06/open_log/" title="Oracle的CDC工具OpenLogReplicator编译">Oracle的CDC工具OpenLogReplicator编译</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2024/03/the_life_of_iceberg/" title="The Life of a Read/Write Query for Apache Iceberg Tables">The Life of a Read/Write Query for Apache Iceberg Tables</a>
+        <a href="https://hehe-1234.xyz/post/2024/03/the_life_of_iceberg/" title="The Life of a Read/Write Query for Apache Iceberg Tables">The Life of a Read/Write Query for Apache Iceberg Tables</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2024/02/data_ingestion_architectural_patterns/" title="Data Ingestion: Architectural Patterns">Data Ingestion: Architectural Patterns</a>
+        <a href="https://hehe-1234.xyz/post/2024/02/data_ingestion_architectural_patterns/" title="Data Ingestion: Architectural Patterns">Data Ingestion: Architectural Patterns</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2024/01/hms/" title="Hive MetaStore的实现和优化">Hive MetaStore的实现和优化</a>
+        <a href="https://hehe-1234.xyz/post/2024/01/hms/" title="Hive MetaStore的实现和优化">Hive MetaStore的实现和优化</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2024/01/lakehouse_storage_systems/" title="Analyzing and Comparing Lakehouse Storage Systems">Analyzing and Comparing Lakehouse Storage Systems</a>
+        <a href="https://hehe-1234.xyz/post/2024/01/lakehouse_storage_systems/" title="Analyzing and Comparing Lakehouse Storage Systems">Analyzing and Comparing Lakehouse Storage Systems</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2023/11/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8E%86%E5%8F%B2/" title="The History of Big data">The History of Big data</a>
+        <a href="https://hehe-1234.xyz/post/2023/11/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8E%86%E5%8F%B2/" title="The History of Big data">The History of Big data</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.github.io/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="TPCx-HS优化总结">TPCx-HS优化总结</a>
+        <a href="https://hehe-1234.xyz/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="TPCx-HS优化总结">TPCx-HS优化总结</a>
     </li>
     
 </ul>
@@ -2310,29 +2310,29 @@ code.has-jax {
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://hehe-1234.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (5)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (5)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (21)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (21)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (23)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (23)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (10)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (10)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
     
 </ul>
     </section>
@@ -2341,13 +2341,13 @@ code.has-jax {
         <h3 class="widget-title">归档</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://hehe-1234.github.io/years/2021%E5%B9%B4/">2021年 (14)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/years/2022%E5%B9%B4/">2022年 (46)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/years/2023%E5%B9%B4/">2023年 (31)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
     
-    <li><a href="https://hehe-1234.github.io/years/2024%E5%B9%B4/">2024年 (8)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2024%E5%B9%B4/">2024年 (8)</a></li>
     
 </ul>
     </section>
@@ -2356,109 +2356,109 @@ code.has-jax {
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
     
-    <a href="https://hehe-1234.github.io/tags/b%E6%A0%91/">B树 </a>
+    <a href="https://hehe-1234.xyz/tags/b%E6%A0%91/">B树 </a>
     
-    <a href="https://hehe-1234.github.io/tags/calcite/">calcite </a>
+    <a href="https://hehe-1234.xyz/tags/calcite/">calcite </a>
     
-    <a href="https://hehe-1234.github.io/tags/cmu-database/">CMU-Database </a>
+    <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
     
-    <a href="https://hehe-1234.github.io/tags/data_ingestion/">Data_Ingestion </a>
+    <a href="https://hehe-1234.xyz/tags/data_ingestion/">Data_Ingestion </a>
     
-    <a href="https://hehe-1234.github.io/tags/hana/">HANA </a>
+    <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
     
-    <a href="https://hehe-1234.github.io/tags/hive/">Hive </a>
+    <a href="https://hehe-1234.xyz/tags/hive/">Hive </a>
     
-    <a href="https://hehe-1234.github.io/tags/iceberg/">iceberg </a>
+    <a href="https://hehe-1234.xyz/tags/iceberg/">iceberg </a>
     
-    <a href="https://hehe-1234.github.io/tags/k8s/">k8s </a>
+    <a href="https://hehe-1234.xyz/tags/k8s/">k8s </a>
     
-    <a href="https://hehe-1234.github.io/tags/kudu/">kudu </a>
+    <a href="https://hehe-1234.xyz/tags/kudu/">kudu </a>
     
-    <a href="https://hehe-1234.github.io/tags/kyuubi/">Kyuubi </a>
+    <a href="https://hehe-1234.xyz/tags/kyuubi/">Kyuubi </a>
     
-    <a href="https://hehe-1234.github.io/tags/lakehouse/">Lakehouse </a>
+    <a href="https://hehe-1234.xyz/tags/lakehouse/">Lakehouse </a>
     
-    <a href="https://hehe-1234.github.io/tags/leveldb/">LevelDB </a>
+    <a href="https://hehe-1234.xyz/tags/leveldb/">LevelDB </a>
     
-    <a href="https://hehe-1234.github.io/tags/llvm/">LLVM </a>
+    <a href="https://hehe-1234.xyz/tags/llvm/">LLVM </a>
     
-    <a href="https://hehe-1234.github.io/tags/mapreduce/">MapReduce </a>
+    <a href="https://hehe-1234.xyz/tags/mapreduce/">MapReduce </a>
     
-    <a href="https://hehe-1234.github.io/tags/mysql/">MySQL </a>
+    <a href="https://hehe-1234.xyz/tags/mysql/">MySQL </a>
     
-    <a href="https://hehe-1234.github.io/tags/newsql/">NewSQL </a>
+    <a href="https://hehe-1234.xyz/tags/newsql/">NewSQL </a>
     
-    <a href="https://hehe-1234.github.io/tags/oceanbase/">OceanBase </a>
+    <a href="https://hehe-1234.xyz/tags/oceanbase/">OceanBase </a>
     
-    <a href="https://hehe-1234.github.io/tags/openlogreplicator/">OpenLogReplicator </a>
+    <a href="https://hehe-1234.xyz/tags/openlogreplicator/">OpenLogReplicator </a>
     
-    <a href="https://hehe-1234.github.io/tags/paxos/">paxos </a>
+    <a href="https://hehe-1234.xyz/tags/paxos/">paxos </a>
     
-    <a href="https://hehe-1234.github.io/tags/presto/">Presto </a>
+    <a href="https://hehe-1234.xyz/tags/presto/">Presto </a>
     
-    <a href="https://hehe-1234.github.io/tags/quick-sql/">quick-sql </a>
+    <a href="https://hehe-1234.xyz/tags/quick-sql/">quick-sql </a>
     
-    <a href="https://hehe-1234.github.io/tags/raft/">raft </a>
+    <a href="https://hehe-1234.xyz/tags/raft/">raft </a>
     
-    <a href="https://hehe-1234.github.io/tags/scala/">scala </a>
+    <a href="https://hehe-1234.xyz/tags/scala/">scala </a>
     
-    <a href="https://hehe-1234.github.io/tags/simd/">SIMD </a>
+    <a href="https://hehe-1234.xyz/tags/simd/">SIMD </a>
     
-    <a href="https://hehe-1234.github.io/tags/snowflake/">snowflake </a>
+    <a href="https://hehe-1234.xyz/tags/snowflake/">snowflake </a>
     
-    <a href="https://hehe-1234.github.io/tags/spark/">spark </a>
+    <a href="https://hehe-1234.xyz/tags/spark/">spark </a>
     
-    <a href="https://hehe-1234.github.io/tags/teradata/">TeraData </a>
+    <a href="https://hehe-1234.xyz/tags/teradata/">TeraData </a>
     
-    <a href="https://hehe-1234.github.io/tags/tpcx-hs/">TPCx-HS </a>
+    <a href="https://hehe-1234.xyz/tags/tpcx-hs/">TPCx-HS </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%88%97%E5%AD%98/">列存 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%88%97%E5%AD%98/">列存 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%AD%98%E5%82%A8/">存储 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%AD%98%E5%82%A8/">存储 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
+    <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
+    <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
+    <a href="https://hehe-1234.xyz/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
+    <a href="https://hehe-1234.xyz/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E8%AE%BA%E6%96%87/">论文 </a>
+    <a href="https://hehe-1234.xyz/tags/%E8%AE%BA%E6%96%87/">论文 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
+    <a href="https://hehe-1234.xyz/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
     
-    <a href="https://hehe-1234.github.io/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
+    <a href="https://hehe-1234.xyz/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
     
 </div>
     </section>
@@ -2468,7 +2468,7 @@ code.has-jax {
     <section class="widget">
         <h3 class="widget-title">RSS</h3>
         <ul class="widget-list">
-            <li><a href="https://hehe-1234.github.io/index.xml">文章 RSS</a></li>
+            <li><a href="https://hehe-1234.xyz/index.xml">文章 RSS</a></li>
         </ul>
     </section>
 </div>
@@ -2477,7 +2477,7 @@ code.has-jax {
     </div>
     <footer id="footer">
     <div>
-        &copy; 2024 <a href="https://hehe-1234.github.io/">一个程序员的博客 By find-job</a>
+        &copy; 2024 <a href="https://hehe-1234.xyz/">一个程序员的博客 By find-job</a>
         
     </div>
     <br />
@@ -2506,7 +2506,7 @@ code.has-jax {
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
