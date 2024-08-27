@@ -9,21 +9,24 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>大数据 | 一个程序员的博客</title>
-    <meta property="og:title" content="大数据 - 一个程序员的博客">
+    <title>个人工作简介 | 一个程序员的博客</title>
+    <meta property="og:title" content="个人工作简介 - 一个程序员的博客">
     <meta property="og:type" content="article">
         
+    <meta property="article:published_time" content='2024-08-27T09:13:07&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2024-08-27T09:13:07&#43;08:00'>
         
     <meta name="Keywords" content="">
-    <meta name="description" content="大数据">
+    <meta name="description" content="个人工作简介">
+        <meta name="author" content="隔壁老王">
         
-    <meta name="author" content="find-job">
-    <meta property="og:url" content="https://hehe-1234.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">
+    <meta property="og:url" content="https://hehe-1234.github.io/post/2024/08/me/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://hehe-1234.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/index.xml" title="一个程序员的博客" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -51,7 +54,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://hehe-1234.github.io/">首页</a>
+                    <a class="current" href="https://hehe-1234.github.io/">首页</a>
                     
                     <a  href="https://hehe-1234.github.io/archives/" title="归档">归档</a>
                     
@@ -71,68 +74,266 @@
                     
 <div class="res-cons">
     
-    <h3 class="archive-title">
-        分类
-        <span class="keyword">大数据</span>
-        中的文章
-    </h3>
-    
-
-    
     <article class="post">
         <header>
-            <h1 class="post-title">
-                <a href="https://hehe-1234.github.io/post/2021/11/spark%E8%AE%BA%E6%96%87/">Spark论文</a>
-            </h1>
+            <h1 class="post-title">个人工作简介</h1>
         </header>
         <date class="post-meta meta-date">
-            2021年11月6日
+            2024年8月27日
         </date>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#某大型-tob-企业">某大型 toB 企业</a></li>
+    <li><a href="#某大型互联网-企业">某大型互联网+ 企业</a></li>
+    <li><a href="#pass-平台">PASS 平台</a></li>
+    <li><a href="#web中间件">Web中间件</a></li>
+  </ul>
+</nav>
         
-        <div class="post-meta meta-category">
-            |
+        <div class="post-meta">
             
-            <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
+            <span class="post-meta meta-tags">
+                <ul class="clearfix">
+                    <a href='/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95'>工作记录</a>
+                </ul>
+            </span>
             
         </div>
         
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
         <div class="post-content">
-            读Spark论文
-            <p class="readmore"><a href="https://hehe-1234.github.io/post/2021/11/spark%E8%AE%BA%E6%96%87/">阅读全文</a></p>
+            <blockquote>
+<p>14 年工作经验，主要偏底层、中间件<br>
+有 JavaEE 应用服务器、PAAS 平台、大数据存储、大数据计算等开发经验<br>
+11 项国家发明专利</p>
+</blockquote>
+<h1 id="某大型-tob-企业">某大型 toB 企业</h1>
+<p>公司主打的湖仓一体查询引擎，作为其他产品的底座支撑<br>
+主要工作</p>
+<ul>
+<li>参与初期版本设计(参考QuickSQL)</li>
+<li>设计并开发 统一查询引擎(基于Spark和Delta Lake)，支持云原生、存储计算分离架构、对接 10+ 数据源</li>
+<li>扩展Spark，开发了元数据管理功能</li>
+<li>设计开发 HiveServer 功能，客户端可以用 Hive JDBC 连接</li>
+<li>设计开发 高可用功能(参考Kyuubi)，和资源隔离功能，增加产品稳定性和多租户隔离性</li>
+<li>几次客户现场支持</li>
+<li>调研一些商业数据库的迁移方案 和迁移工具</li>
+<li>跟 某大厂 合作，参与深度OEM合作</li>
+<li>参与POC环境搭建和测试，参与数据库赛宝评测，个人通过 数据库 中级认证</li>
+</ul>
+<p>按模块划分</p>
+<ul>
+<li>扩展了 Spark，增加了元数据管理、对接各种数据源，以及自定义的一些优化规则</li>
+<li>按照集群的规模分为小、中、大版本，配合资源控制实现隔离机制</li>
+<li>可以自己管理存储，存储格式为 Delta-Lake，也可以将数据存储在外部
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/08/18/7G6zXt.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/08/18/7G6zXt.jpg" />
+        </a>
+    </li>
+</ul>
+<p>架构</p>
+<ul>
+<li>参考了 Kyuubi，使用了两层调度，实现可高可用</li>
+<li>不同集群被划分到 不同的 k8s namespace 下</li>
+<li>支持权限认证，SQL 下推
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/08/18/7G6tWB.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/08/18/7G6tWB.jpg" />
+        </a>
+    </li>
+</ul>
+<p>Oracle CDC 同步工具</p>
+<ul>
+<li>基于C++实现的开源项目OpenLogReplicator 做了改造</li>
+<li>支持读取ASM文件，支持RAC架构，支持高可用
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/08/27/7x0pQb.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/08/27/7x0pQb.png" />
+        </a>
+    </li>
+</ul>
+<h1 id="某大型互联网-企业">某大型互联网+ 企业</h1>
+<p>一款企业内部的数据同步产品<br>
+为公司多个大业务部门内，部门间提供数据同步功能<br>
+主要工作内容</p>
+<ul>
+<li>开发了适应公司业务需求的同步系统，大幅度减轻了之前错乱复杂的同步流程</li>
+<li>持续迭代维护了系统的稳定性</li>
+<li>跟其他部门的实时同步整合成一个更大的系统，之后开源出去了</li>
+</ul>
+<p>产品架构</p>
+<ul>
+<li>用户可以通过浏览器访问，也可以通过 API 的方式调用</li>
+<li>Proxy 前面还有一个负载均衡，请求落到 Proxy 之后，会读取源数据库，根据数据量大小做适当拆分</li>
+<li>将整个任务拆分成多个子任务，然后调用不同的 DataX 节点来读取、写入数据</li>
+<li>DataX 节点在写入过程中，会不断监控源节点/目标阶段状态(通过调用监控接口)，来调整自身的流量
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/08/18/7G6r7G.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/08/18/7G6r7G.jpg" />
+        </a>
+    </li>
+</ul>
+<h1 id="pass-平台">PASS 平台</h1>
+<p>仿造谷歌 GAE 做的一款 PAAS 产品，是国内最早的 PAAS 产品<br>
+主要工作内容</p>
+<ul>
+<li>作为核心人员，参与了从无到有的 Java 平台发展过程，是 Java 平台的最主要贡献者</li>
+<li>维护了 KV 存储系统，保证了系统的稳定性</li>
+<li>在经历了 10 年一见的故障后，找回了很多丢失数据，帮助平台挽回很大损失</li>
+<li>工作期间有过两个创新的技术，帮助平台实现了易用性和稳定性，后将这两个创新申请了专利</li>
+</ul>
+<p>产品架构</p>
+<ul>
+<li>基于物理机之上，部署多个 JVM，每个 JVM 之上再运行一个 Jetty，Jetty 上面部署了多个用户的应用</li>
+<li>隔离策略包括了多层，每个用户单独账号读写路径分离</li>
+<li>使用 Cgroup 控制资源，使用 LD_PRELOAD 给系统库打桩，JVM 方面使用 Java 自己的安全管理器</li>
+<li>再往上层的 Jetty 定义了一堆安全策略，同时增加一些门面类，通过禁止对这些门面类调用放射，隔离用户和 Jetty</li>
+<li>Jetty 中有平台的 SDK，通过 SDK 来访问各种服务</li>
+<li>运行期间会日志写入到 日志中心，将监控信息写入到监控中心，调用信息汇总到计费中心，用户 WAR 通过分布式代码管理系统导入</li>
+<li>多个 APP 由 Keeper 来管理，负责启动/停止等
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/08/18/7G6RiJ.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/08/18/7G6RiJ.jpg" />
+        </a>
+    </li>
+</ul>
+<p>专利 1 原理描述</p>
+<ul>
+<li>通过扫描hbase的索引(包括一级索引和多级索引)然后统计出某个key范围内的数据大致占用情况</li>
+<li>根索引、中间索引只占文件总量的 5% 不到，剩下都是数据部分，而数据不会被扫描到</li>
+<li>扫描的是 HBase 的 HFile 文件，多个 HFile 之间不相关，并且是只读的</li>
+<li>通过并行扫描多个文件并汇总统计，可以在几分钟内统计几百G 数据，误差可以控制在 5% 左右   <br>
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/08/18/7G6PSL.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/08/18/7G6PSL.jpg" />
+        </a>
+    </li>
+</ul>
+<p>专利 2 原理描述:</p>
+<ul>
+<li>通过修改class文件常量池中的import类名称</li>
+<li>比如将java.lang.FileInputStraem 改为了saex.lang.FileInputStream</li>
+<li>替换后实际调用的是 saex 类，这个类再调用 平台的分布式文件存储</li>
+<li>这样用户不用修改代码，可以平滑迁移<br>
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/08/18/7G61wV.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/08/18/7G61wV.jpg" />
+        </a>
+    </li>
+</ul>
+<h1 id="web中间件">Web中间件</h1>
+<p>toB 项目，用户主要是县一级的电信、移动 <br>
+这些企业将他们的 计费系统 就运行在我们的服务器上面<br>
+主要工作内容</p>
+<ul>
+<li>测试选型，基于开源应用服务器做二次开发</li>
+<li>开发 Web 管理界面，深入研究 Web 模块</li>
+</ul>
+<p>产品架构</p>
+<ul>
+<li>Web 容器这个组件类似于 Tomcat、Jetty</li>
+<li>EJB 这个组件现在用的很少，尤其互联网企业几乎不会用，他相当于是现在的 RPC 框架</li>
+<li>其他的包括 JMS(类似于现在的消息队列)、安全、事务、JNDI，也是应用服务器内很重要的组件</li>
+<li>最底层的是一套框架支持可插拔组件，用来管理上述的各种大小模块
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/08/18/7G6SdI.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/08/18/7G6SdI.jpg" />
+        </a>
+    </li>
+</ul>
+
+			<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+        </div>
+
+        
+
+
+        
+
+<div class="post-archive">
+    <h2>相关文章</h2>
+    <ul class="listing">
+        
+        <li><a href="/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/">TPCx-HS优化总结</a></li>
+        
+        <li><a href="/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/">资源隔离修改配置动态加载</a></li>
+        
+        <li><a href="/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/">资源隔离设计</a></li>
+        
+        <li><a href="/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/">镜像合并&amp;配置文件同步</a></li>
+        
+        <li><a href="/post/2022/09/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/">高可用设计</a></li>
+        
+    </ul>
+</div>
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95'>工作记录</a></li>
+                
+            </ul>
+            
         </div>
     </article>
     
-
-    
-
-
-
-<ol class="page-navigator">
-    
-    <li class="prev">
-        <a href="https://hehe-1234.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/page/2/">上一页</a>
-    </li>
     
 
     
-    <li >
-        <a href="https://hehe-1234.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">1</a>
-    </li>
     
-    <li >
-        <a href="https://hehe-1234.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/page/2/">2</a>
-    </li>
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "hehe-1234/hugoblogtalks"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
     
-    <li  class="current">
-        <a href="https://hehe-1234.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/page/3/">3</a>
-    </li>
-    
-
-    
-</ol>
-
-
-
 </div>
 
 
@@ -383,6 +584,16 @@
 </footer>
 
 
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
