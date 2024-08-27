@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>向量化 on 一个程序员的博客</title>
-    <link>https://hehe-1234.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/</link>
+    <link>https://hehe-1234.github.io/tags/%E5%90%91%E9%87%8F%E5%8C%96/</link>
     <description>Recent content in 向量化 on 一个程序员的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 01 Feb 2023 07:35:19 +0800</lastBuildDate>
-    <atom:link href="https://hehe-1234.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hehe-1234.github.io/tags/%E5%90%91%E9%87%8F%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Implementing Database Operations Using SIMD Instructions</title>
-      <link>https://hehe-1234.xyz/post/2023/02/implementing-database-operations-using-simd-instructions/</link>
+      <link>https://hehe-1234.github.io/post/2023/02/implementing-database-operations-using-simd-instructions/</link>
       <pubDate>Wed, 01 Feb 2023 07:35:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/post/2023/02/implementing-database-operations-using-simd-instructions/</guid>
+      <guid>https://hehe-1234.github.io/post/2023/02/implementing-database-operations-using-simd-instructions/</guid>
       <description>介绍了SIMD指令一些基本概念，并行流水线，以及分支预测失败带来的影响；论文中提到了使用SIMD指令的方式，以及不同平台产生的差异；之后用伪代码的方式描述几个数据库常用操作；scan操作详细对比了标量版和SIMD版的区别，以及如何消除分支的方式，还有返回选中的一个元素、多个元素的标量、SIMD方式；聚合的实现方式SIMD有提供相关的操作 SIMD_min、SIMD_max即可，对于索引部分主要是介绍树结构索引，详细讨论了中间节点、叶子节点的实现方式；在有序元素上使用二分效率是非常高的，但也会有分支预测失败问题，论文中给出了混合二分+顺序扫描方式；最后是join处理方式，这里只列出了nested-loop join的SIMD实现，Duplicate-outer、Duplicate-inner、Rotate-inner</description>
     </item>
     <item>
       <title>SIMD-Scan: Ultra Fast in-Memory Table Scan using onChip Vector Processing Units</title>
-      <link>https://hehe-1234.xyz/post/2023/01/ultra-fast-in-memory-table-scan-using-onchip-vector-processing-units/</link>
+      <link>https://hehe-1234.github.io/post/2023/01/ultra-fast-in-memory-table-scan-using-onchip-vector-processing-units/</link>
       <pubDate>Thu, 19 Jan 2023 10:35:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/post/2023/01/ultra-fast-in-memory-table-scan-using-onchip-vector-processing-units/</guid>
+      <guid>https://hehe-1234.github.io/post/2023/01/ultra-fast-in-memory-table-scan-using-onchip-vector-processing-units/</guid>
       <description>现代数据库由I/O瓶颈转向了CPU瓶颈，利用多核能力加速全表扫描，但是向量化的能力没能充分发挥。使用向量化包括：内嵌汇编、硬件厂商提供的跨平台库函数、编译器指示符、编译器自动优化，每种都是可用性和可控性之间的权衡。论文中引入了两项优化：使用SIMD方式在寄存器中解压 轻量压缩数据(使用concatenate、shift、shuffle、mark等指令完成)；使用SIMD完成等值和范围查找(使用掩码指令，将4个元素加载到寄存器中，再通过min、max比较范围，最后生成索引数组向量位)，通过测试结果都有大幅度提升，并且优化实现可以适用各种数据库</description>
     </item>
   </channel>

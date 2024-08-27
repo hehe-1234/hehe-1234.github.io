@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>系统 on 一个程序员的博客</title>
-    <link>https://hehe-1234.xyz/categories/%E7%B3%BB%E7%BB%9F/</link>
+    <link>https://hehe-1234.github.io/categories/%E7%B3%BB%E7%BB%9F/</link>
     <description>Recent content in 系统 on 一个程序员的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 17 Nov 2022 08:35:19 +0800</lastBuildDate>
-    <atom:link href="https://hehe-1234.xyz/categories/%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hehe-1234.github.io/categories/%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to Read a Paper</title>
-      <link>https://hehe-1234.xyz/post/2022/11/how-to-read-a-paper/</link>
+      <link>https://hehe-1234.github.io/post/2022/11/how-to-read-a-paper/</link>
       <pubDate>Thu, 17 Nov 2022 08:35:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/post/2022/11/how-to-read-a-paper/</guid>
+      <guid>https://hehe-1234.github.io/post/2022/11/how-to-read-a-paper/</guid>
       <description>一篇论文要读三遍，第一遍读摘要和所有标题，对论文有大概的了解，这是什么类型的论文、测试的？还是分析型的？根据其他哪些论文有关？论文的主要贡献是什么？第二遍仔细阅读，对于共识和非常细节的地方可以略过；第三遍，要站在作者的角度去理解这篇论文，甚至要反推论文中的实现</description>
     </item>
     <item>
       <title>容器网络</title>
-      <link>https://hehe-1234.xyz/post/2022/10/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/</link>
+      <link>https://hehe-1234.github.io/post/2022/10/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/</link>
       <pubDate>Sun, 16 Oct 2022 12:12:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/post/2022/10/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/</guid>
+      <guid>https://hehe-1234.github.io/post/2022/10/%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C/</guid>
       <description>容器网络原理</description>
     </item>
     <item>
       <title>k8s POD使用总结</title>
-      <link>https://hehe-1234.xyz/post/2022/09/k8s%E4%BD%BF%E7%94%A8/</link>
+      <link>https://hehe-1234.github.io/post/2022/09/k8s%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sun, 18 Sep 2022 12:12:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/post/2022/09/k8s%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://hehe-1234.github.io/post/2022/09/k8s%E4%BD%BF%E7%94%A8/</guid>
       <description>k8s使用的一些记录</description>
     </item>
     <item>
       <title>用javacc实现四则运算</title>
-      <link>https://hehe-1234.xyz/post/2022/02/%E7%94%A8javacc%E5%AE%9E%E7%8E%B0%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97/</link>
+      <link>https://hehe-1234.github.io/post/2022/02/%E7%94%A8javacc%E5%AE%9E%E7%8E%B0%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97/</link>
       <pubDate>Sat, 26 Feb 2022 15:15:11 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/post/2022/02/%E7%94%A8javacc%E5%AE%9E%E7%8E%B0%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97/</guid>
+      <guid>https://hehe-1234.github.io/post/2022/02/%E7%94%A8javacc%E5%AE%9E%E7%8E%B0%E5%9B%9B%E5%88%99%E8%BF%90%E7%AE%97/</guid>
       <description>用javacc实现四则运算</description>
     </item>
     <item>
       <title>从汇编角度看程序的执行</title>
-      <link>https://hehe-1234.xyz/post/2021/10/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C/</link>
+      <link>https://hehe-1234.github.io/post/2021/10/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C/</link>
       <pubDate>Sun, 10 Oct 2021 14:09:03 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/post/2021/10/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C/</guid>
+      <guid>https://hehe-1234.github.io/post/2021/10/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C/</guid>
       <description>分析一段程序的汇编代码，循环、函数调用、浮点执行等</description>
     </item>
   </channel>

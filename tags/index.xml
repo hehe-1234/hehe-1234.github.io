@@ -2,374 +2,374 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 一个程序员的博客</title>
-    <link>https://hehe-1234.xyz/tags/</link>
+    <link>https://hehe-1234.github.io/tags/</link>
     <description>Recent content in Tags on 一个程序员的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 25 Aug 2024 09:13:07 +0800</lastBuildDate>
-    <atom:link href="https://hehe-1234.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Aug 2024 09:13:07 +0800</lastBuildDate>
+    <atom:link href="https://hehe-1234.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>工作记录</title>
-      <link>https://hehe-1234.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/</link>
-      <pubDate>Sun, 25 Aug 2024 09:13:07 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/</guid>
+      <link>https://hehe-1234.github.io/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Tue, 27 Aug 2024 09:13:07 +0800</pubDate>
+      <guid>https://hehe-1234.github.io/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/</guid>
       <description></description>
     </item>
     <item>
       <title>OpenLogReplicator</title>
-      <link>https://hehe-1234.xyz/tags/openlogreplicator/</link>
-      <pubDate>Mon, 15 Jul 2024 09:08:07 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/openlogreplicator/</guid>
+      <link>https://hehe-1234.github.io/tags/openlogreplicator/</link>
+      <pubDate>Sun, 25 Aug 2024 09:08:07 +0800</pubDate>
+      <guid>https://hehe-1234.github.io/tags/openlogreplicator/</guid>
       <description></description>
     </item>
     <item>
       <title>iceberg</title>
-      <link>https://hehe-1234.xyz/tags/iceberg/</link>
+      <link>https://hehe-1234.github.io/tags/iceberg/</link>
       <pubDate>Mon, 26 Feb 2024 09:08:07 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/iceberg/</guid>
+      <guid>https://hehe-1234.github.io/tags/iceberg/</guid>
       <description></description>
     </item>
     <item>
       <title>Data_Ingestion</title>
-      <link>https://hehe-1234.xyz/tags/data_ingestion/</link>
+      <link>https://hehe-1234.github.io/tags/data_ingestion/</link>
       <pubDate>Mon, 15 Jan 2024 09:08:07 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/data_ingestion/</guid>
+      <guid>https://hehe-1234.github.io/tags/data_ingestion/</guid>
       <description></description>
     </item>
     <item>
       <title>Hive</title>
-      <link>https://hehe-1234.xyz/tags/hive/</link>
+      <link>https://hehe-1234.github.io/tags/hive/</link>
       <pubDate>Sun, 14 Jan 2024 09:08:07 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/hive/</guid>
+      <guid>https://hehe-1234.github.io/tags/hive/</guid>
       <description></description>
     </item>
     <item>
       <title>Lakehouse</title>
-      <link>https://hehe-1234.xyz/tags/lakehouse/</link>
+      <link>https://hehe-1234.github.io/tags/lakehouse/</link>
       <pubDate>Wed, 10 Jan 2024 09:08:07 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/lakehouse/</guid>
+      <guid>https://hehe-1234.github.io/tags/lakehouse/</guid>
       <description></description>
     </item>
     <item>
       <title>大数据</title>
-      <link>https://hehe-1234.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</link>
+      <link>https://hehe-1234.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</link>
       <pubDate>Sun, 19 Nov 2023 09:13:07 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/</guid>
       <description></description>
     </item>
     <item>
       <title>TPCx-HS</title>
-      <link>https://hehe-1234.xyz/tags/tpcx-hs/</link>
+      <link>https://hehe-1234.github.io/tags/tpcx-hs/</link>
       <pubDate>Thu, 09 Nov 2023 09:13:07 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/tpcx-hs/</guid>
+      <guid>https://hehe-1234.github.io/tags/tpcx-hs/</guid>
       <description></description>
     </item>
     <item>
       <title>CMU-Database</title>
-      <link>https://hehe-1234.xyz/tags/cmu-database/</link>
+      <link>https://hehe-1234.github.io/tags/cmu-database/</link>
       <pubDate>Wed, 21 Jun 2023 09:23:04 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/cmu-database/</guid>
+      <guid>https://hehe-1234.github.io/tags/cmu-database/</guid>
       <description></description>
     </item>
     <item>
       <title>论文</title>
-      <link>https://hehe-1234.xyz/tags/%E8%AE%BA%E6%96%87/</link>
+      <link>https://hehe-1234.github.io/tags/%E8%AE%BA%E6%96%87/</link>
       <pubDate>Wed, 21 Jun 2023 09:23:04 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E8%AE%BA%E6%96%87/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E8%AE%BA%E6%96%87/</guid>
       <description></description>
     </item>
     <item>
       <title>LevelDB</title>
-      <link>https://hehe-1234.xyz/tags/leveldb/</link>
+      <link>https://hehe-1234.github.io/tags/leveldb/</link>
       <pubDate>Sat, 13 May 2023 19:20:03 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/leveldb/</guid>
+      <guid>https://hehe-1234.github.io/tags/leveldb/</guid>
       <description></description>
     </item>
     <item>
       <title>snowflake</title>
-      <link>https://hehe-1234.xyz/tags/snowflake/</link>
+      <link>https://hehe-1234.github.io/tags/snowflake/</link>
       <pubDate>Thu, 04 May 2023 09:23:04 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/snowflake/</guid>
+      <guid>https://hehe-1234.github.io/tags/snowflake/</guid>
       <description></description>
     </item>
     <item>
       <title>数据模型</title>
-      <link>https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/</link>
+      <link>https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Wed, 03 May 2023 11:23:04 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/</guid>
       <description></description>
     </item>
     <item>
       <title>spark</title>
-      <link>https://hehe-1234.xyz/tags/spark/</link>
+      <link>https://hehe-1234.github.io/tags/spark/</link>
       <pubDate>Thu, 27 Apr 2023 10:35:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/spark/</guid>
+      <guid>https://hehe-1234.github.io/tags/spark/</guid>
       <description></description>
     </item>
     <item>
       <title>索引</title>
-      <link>https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/</link>
+      <link>https://hehe-1234.github.io/tags/%E7%B4%A2%E5%BC%95/</link>
       <pubDate>Sun, 23 Apr 2023 18:11:07 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E7%B4%A2%E5%BC%95/</guid>
       <description></description>
     </item>
     <item>
       <title>Presto</title>
-      <link>https://hehe-1234.xyz/tags/presto/</link>
+      <link>https://hehe-1234.github.io/tags/presto/</link>
       <pubDate>Wed, 12 Apr 2023 09:11:07 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/presto/</guid>
+      <guid>https://hehe-1234.github.io/tags/presto/</guid>
       <description></description>
     </item>
     <item>
       <title>列存</title>
-      <link>https://hehe-1234.xyz/tags/%E5%88%97%E5%AD%98/</link>
+      <link>https://hehe-1234.github.io/tags/%E5%88%97%E5%AD%98/</link>
       <pubDate>Tue, 11 Apr 2023 13:23:04 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E5%88%97%E5%AD%98/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E5%88%97%E5%AD%98/</guid>
       <description></description>
     </item>
     <item>
       <title>OceanBase</title>
-      <link>https://hehe-1234.xyz/tags/oceanbase/</link>
+      <link>https://hehe-1234.github.io/tags/oceanbase/</link>
       <pubDate>Sun, 26 Mar 2023 11:32:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/oceanbase/</guid>
+      <guid>https://hehe-1234.github.io/tags/oceanbase/</guid>
       <description></description>
     </item>
     <item>
       <title>LLVM</title>
-      <link>https://hehe-1234.xyz/tags/llvm/</link>
+      <link>https://hehe-1234.github.io/tags/llvm/</link>
       <pubDate>Sun, 05 Feb 2023 17:35:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/llvm/</guid>
+      <guid>https://hehe-1234.github.io/tags/llvm/</guid>
       <description></description>
     </item>
     <item>
       <title>查询编译</title>
-      <link>https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/</link>
+      <link>https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/</link>
       <pubDate>Sun, 05 Feb 2023 17:35:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/</guid>
       <description></description>
     </item>
     <item>
       <title>SIMD</title>
-      <link>https://hehe-1234.xyz/tags/simd/</link>
+      <link>https://hehe-1234.github.io/tags/simd/</link>
       <pubDate>Wed, 01 Feb 2023 07:35:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/simd/</guid>
+      <guid>https://hehe-1234.github.io/tags/simd/</guid>
       <description></description>
     </item>
     <item>
       <title>向量化</title>
-      <link>https://hehe-1234.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/</link>
+      <link>https://hehe-1234.github.io/tags/%E5%90%91%E9%87%8F%E5%8C%96/</link>
       <pubDate>Wed, 01 Feb 2023 07:35:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E5%90%91%E9%87%8F%E5%8C%96/</guid>
       <description></description>
     </item>
     <item>
       <title>查询优化</title>
-      <link>https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/</link>
+      <link>https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/</link>
       <pubDate>Fri, 13 Jan 2023 14:05:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/</guid>
       <description></description>
     </item>
     <item>
       <title>MySQL</title>
-      <link>https://hehe-1234.xyz/tags/mysql/</link>
+      <link>https://hehe-1234.github.io/tags/mysql/</link>
       <pubDate>Sun, 01 Jan 2023 08:15:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/mysql/</guid>
+      <guid>https://hehe-1234.github.io/tags/mysql/</guid>
       <description></description>
     </item>
     <item>
       <title>数据库</title>
-      <link>https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+      <link>https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
       <pubDate>Sun, 20 Nov 2022 08:35:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
       <description></description>
     </item>
     <item>
       <title>多租户</title>
-      <link>https://hehe-1234.xyz/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/</link>
+      <link>https://hehe-1234.github.io/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/</link>
       <pubDate>Fri, 18 Nov 2022 18:35:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/</guid>
       <description></description>
     </item>
     <item>
       <title>网络</title>
-      <link>https://hehe-1234.xyz/tags/%E7%BD%91%E7%BB%9C/</link>
+      <link>https://hehe-1234.github.io/tags/%E7%BD%91%E7%BB%9C/</link>
       <pubDate>Sun, 16 Oct 2022 12:12:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E7%BD%91%E7%BB%9C/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E7%BD%91%E7%BB%9C/</guid>
       <description></description>
     </item>
     <item>
       <title>B树</title>
-      <link>https://hehe-1234.xyz/tags/b%E6%A0%91/</link>
+      <link>https://hehe-1234.github.io/tags/b%E6%A0%91/</link>
       <pubDate>Sat, 15 Oct 2022 12:12:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/b%E6%A0%91/</guid>
+      <guid>https://hehe-1234.github.io/tags/b%E6%A0%91/</guid>
       <description></description>
     </item>
     <item>
       <title>k8s</title>
-      <link>https://hehe-1234.xyz/tags/k8s/</link>
+      <link>https://hehe-1234.github.io/tags/k8s/</link>
       <pubDate>Sun, 18 Sep 2022 12:12:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/k8s/</guid>
+      <guid>https://hehe-1234.github.io/tags/k8s/</guid>
       <description></description>
     </item>
     <item>
       <title>Kyuubi</title>
-      <link>https://hehe-1234.xyz/tags/kyuubi/</link>
+      <link>https://hehe-1234.github.io/tags/kyuubi/</link>
       <pubDate>Mon, 01 Aug 2022 12:12:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/kyuubi/</guid>
+      <guid>https://hehe-1234.github.io/tags/kyuubi/</guid>
       <description></description>
     </item>
     <item>
       <title>NewSQL</title>
-      <link>https://hehe-1234.xyz/tags/newsql/</link>
+      <link>https://hehe-1234.github.io/tags/newsql/</link>
       <pubDate>Sun, 03 Jul 2022 20:32:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/newsql/</guid>
+      <guid>https://hehe-1234.github.io/tags/newsql/</guid>
       <description></description>
     </item>
     <item>
       <title>湖仓一体</title>
-      <link>https://hehe-1234.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/</link>
+      <link>https://hehe-1234.github.io/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/</link>
       <pubDate>Fri, 24 Jun 2022 21:45:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/</guid>
       <description></description>
     </item>
     <item>
       <title>paxos</title>
-      <link>https://hehe-1234.xyz/tags/paxos/</link>
+      <link>https://hehe-1234.github.io/tags/paxos/</link>
       <pubDate>Thu, 16 Jun 2022 09:43:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/paxos/</guid>
+      <guid>https://hehe-1234.github.io/tags/paxos/</guid>
       <description></description>
     </item>
     <item>
       <title>raft</title>
-      <link>https://hehe-1234.xyz/tags/raft/</link>
+      <link>https://hehe-1234.github.io/tags/raft/</link>
       <pubDate>Sun, 05 Jun 2022 09:43:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/raft/</guid>
+      <guid>https://hehe-1234.github.io/tags/raft/</guid>
       <description></description>
     </item>
     <item>
       <title>动态注入</title>
-      <link>https://hehe-1234.xyz/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/</link>
+      <link>https://hehe-1234.github.io/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/</link>
       <pubDate>Mon, 02 May 2022 10:43:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/</guid>
       <description></description>
     </item>
     <item>
       <title>计算框架</title>
-      <link>https://hehe-1234.xyz/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/</link>
+      <link>https://hehe-1234.github.io/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/</link>
       <pubDate>Wed, 20 Apr 2022 12:43:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/</guid>
       <description></description>
     </item>
     <item>
       <title>分布式</title>
-      <link>https://hehe-1234.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</link>
+      <link>https://hehe-1234.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</link>
       <pubDate>Wed, 13 Apr 2022 08:54:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</guid>
       <description></description>
     </item>
     <item>
       <title>存储</title>
-      <link>https://hehe-1234.xyz/tags/%E5%AD%98%E5%82%A8/</link>
+      <link>https://hehe-1234.github.io/tags/%E5%AD%98%E5%82%A8/</link>
       <pubDate>Wed, 13 Apr 2022 08:54:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E5%AD%98%E5%82%A8/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E5%AD%98%E5%82%A8/</guid>
       <description></description>
     </item>
     <item>
       <title>MapReduce</title>
-      <link>https://hehe-1234.xyz/tags/mapreduce/</link>
+      <link>https://hehe-1234.github.io/tags/mapreduce/</link>
       <pubDate>Sat, 26 Mar 2022 11:38:31 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/mapreduce/</guid>
+      <guid>https://hehe-1234.github.io/tags/mapreduce/</guid>
       <description></description>
     </item>
     <item>
       <title>编译原理</title>
-      <link>https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</link>
+      <link>https://hehe-1234.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</link>
       <pubDate>Sat, 26 Feb 2022 15:15:11 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</guid>
       <description></description>
     </item>
     <item>
       <title>scala</title>
-      <link>https://hehe-1234.xyz/tags/scala/</link>
+      <link>https://hehe-1234.github.io/tags/scala/</link>
       <pubDate>Thu, 24 Feb 2022 18:35:31 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/scala/</guid>
+      <guid>https://hehe-1234.github.io/tags/scala/</guid>
       <description></description>
     </item>
     <item>
       <title>kudu</title>
-      <link>https://hehe-1234.xyz/tags/kudu/</link>
+      <link>https://hehe-1234.github.io/tags/kudu/</link>
       <pubDate>Sun, 13 Feb 2022 14:28:17 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/kudu/</guid>
+      <guid>https://hehe-1234.github.io/tags/kudu/</guid>
       <description></description>
     </item>
     <item>
       <title>数据迁移</title>
-      <link>https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/</link>
+      <link>https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/</link>
       <pubDate>Thu, 30 Dec 2021 13:07:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/</guid>
       <description></description>
     </item>
     <item>
       <title>HANA</title>
-      <link>https://hehe-1234.xyz/tags/hana/</link>
+      <link>https://hehe-1234.github.io/tags/hana/</link>
       <pubDate>Wed, 29 Dec 2021 13:07:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/hana/</guid>
+      <guid>https://hehe-1234.github.io/tags/hana/</guid>
       <description></description>
     </item>
     <item>
       <title>TeraData</title>
-      <link>https://hehe-1234.xyz/tags/teradata/</link>
+      <link>https://hehe-1234.github.io/tags/teradata/</link>
       <pubDate>Tue, 28 Dec 2021 13:07:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/teradata/</guid>
+      <guid>https://hehe-1234.github.io/tags/teradata/</guid>
       <description></description>
     </item>
     <item>
       <title>calcite</title>
-      <link>https://hehe-1234.xyz/tags/calcite/</link>
+      <link>https://hehe-1234.github.io/tags/calcite/</link>
       <pubDate>Mon, 27 Dec 2021 13:07:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/calcite/</guid>
+      <guid>https://hehe-1234.github.io/tags/calcite/</guid>
       <description></description>
     </item>
     <item>
       <title>quick-sql</title>
-      <link>https://hehe-1234.xyz/tags/quick-sql/</link>
+      <link>https://hehe-1234.github.io/tags/quick-sql/</link>
       <pubDate>Sun, 26 Dec 2021 13:06:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/quick-sql/</guid>
+      <guid>https://hehe-1234.github.io/tags/quick-sql/</guid>
       <description></description>
     </item>
     <item>
       <title>读书笔记</title>
-      <link>https://hehe-1234.xyz/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
+      <link>https://hehe-1234.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Sun, 19 Dec 2021 20:53:31 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
       <description></description>
     </item>
     <item>
       <title>测试</title>
-      <link>https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/</link>
+      <link>https://hehe-1234.github.io/tags/%E6%B5%8B%E8%AF%95/</link>
       <pubDate>Fri, 26 Nov 2021 17:46:21 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E6%B5%8B%E8%AF%95/</guid>
       <description></description>
     </item>
     <item>
       <title>汇编</title>
-      <link>https://hehe-1234.xyz/tags/%E6%B1%87%E7%BC%96/</link>
+      <link>https://hehe-1234.github.io/tags/%E6%B1%87%E7%BC%96/</link>
       <pubDate>Sun, 10 Oct 2021 14:09:03 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E6%B1%87%E7%BC%96/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E6%B1%87%E7%BC%96/</guid>
       <description></description>
     </item>
     <item>
       <title>微服务</title>
-      <link>https://hehe-1234.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
+      <link>https://hehe-1234.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</link>
       <pubDate>Mon, 27 Sep 2021 18:34:37 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</guid>
       <description></description>
     </item>
     <item>
       <title>随便写写</title>
-      <link>https://hehe-1234.xyz/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/</link>
+      <link>https://hehe-1234.github.io/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/</link>
       <pubDate>Wed, 22 Sep 2021 13:58:33 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/</guid>
+      <guid>https://hehe-1234.github.io/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/</guid>
       <description></description>
     </item>
   </channel>

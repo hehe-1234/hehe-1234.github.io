@@ -18,12 +18,12 @@
     <meta name="description" content="Posts">
         
     <meta name="author" content="find-job">
-    <meta property="og:url" content="https://hehe-1234.xyz/post/">
+    <meta property="og:url" content="https://hehe-1234.github.io/post/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
     <link rel="stylesheet" href='/css/style.css'>
-    <link rel="alternate" type="application/rss+xml" href="https://hehe-1234.xyz/post/index.xml" title="一个程序员的博客" />
+    <link rel="alternate" type="application/rss+xml" href="https://hehe-1234.github.io/post/index.xml" title="一个程序员的博客" />
     <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     
@@ -43,7 +43,7 @@
         <div class="col-group">
             <div class="site-name ">
                 
-                    <a id="logo" href="https://hehe-1234.xyz/">
+                    <a id="logo" href="https://hehe-1234.github.io/">
                         一个程序员的博客
                     </a>
                 
@@ -51,11 +51,11 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://hehe-1234.xyz/">首页</a>
+                    <a class="current" href="https://hehe-1234.github.io/">首页</a>
                     
-                    <a  href="https://hehe-1234.xyz/archives/" title="归档">归档</a>
+                    <a  href="https://hehe-1234.github.io/archives/" title="归档">归档</a>
                     
-                    <a  href="https://hehe-1234.xyz/about/" title="关于">关于</a>
+                    <a  href="https://hehe-1234.github.io/about/" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -75,7 +75,32 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-5/" title="卡内基梅隆的数据库课程-5">卡内基梅隆的数据库课程-5</a>
+                <a href="https://hehe-1234.github.io/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-3/" title="卡内基梅隆的数据库课程-3">卡内基梅隆的数据库课程-3</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2022年7月4日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0'>读书笔记</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            卡内基梅隆的数据库课程，包括：事务的定义和ACID，隔离性(并发场景下的交错执行)，RW、WR、WW冲突，可串行化、Conflict Serializability(交换、优先图)、View Serializability(NP完全问题)；lock VS latch，lock类型，锁管理器，2PL，S2PL，SS2PL；死锁检测(是否有环)，根据各种条件打破循环，死锁预防(基于时间戳分配)，锁粒度(层级锁，支持更高并发)，IS、IX、SIX锁； 时间戳排序并发控制，W-TS(X)、R-TS(X)，可恢复性；OCC，三个方面阶段：读/写、校验、写入，backward validation，forward validation；幻读，重新执行，谓词锁，索引锁，事务隔离级别，基于2PL方式的各种隔离级别；MVCC并发控制，TO、OCC、2PL，版本存储append-only、time-travel、delta-storage；垃圾收集：Tuple-level(Background Vacuuming vs. Cooperative Cleaning)、Transaction-level；索引管理，主索引管理，二级索引管理(Logical Pointers、Physical Pointers)、MVCC index；MVCC delete(Deleted Flag、Tombstone Tuple)
+        </div>
+        <p class="readmore"><a href="https://hehe-1234.github.io/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-3/">阅读全文</a></p>
+    </article>
+    
+    
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hehe-1234.github.io/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-5/" title="卡内基梅隆的数据库课程-5">卡内基梅隆的数据库课程-5</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -92,7 +117,7 @@
         <div class="post-content">
             卡内基梅隆的数据库课程，包括：分布式数据库，并行vs分布式，分布式数据库架构，shared-everything、shared-memory、shared-disk、shared-nothing；同质化节点vs非同质化节点；数据的透明传输，单节点vs分布式节点；协调事务，hash分区，range分区；OLTP，非拜占庭环境，原子提交协议，2PC，3PC、paxos、raft、zab、viewstamped，2PC的优化，multi-paxos，2PC vs paxos；复制配置：主-副本、多主，k-safety，传播时机：continuous、on commit，主动 vs 被动；CAP理论联邦数据库；OLAP，星型模型vs雪花模型，push vs pull，查询计划片段 vs SQL重写，分布式join算法，云系统，组件分解：系统catalog、节点管理、query优化；统一的访问格式
         </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-5/">阅读全文</a></p>
+        <p class="readmore"><a href="https://hehe-1234.github.io/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-5/">阅读全文</a></p>
     </article>
     
     
@@ -100,7 +125,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2022/07/whats-really-new-with-newsql%E8%AE%BA%E6%96%87/" title="What&#39;s Really New with NewSQL论文">What&#39;s Really New with NewSQL论文</a>
+                <a href="https://hehe-1234.github.io/post/2022/07/whats-really-new-with-newsql%E8%AE%BA%E6%96%87/" title="What&#39;s Really New with NewSQL论文">What&#39;s Really New with NewSQL论文</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -117,7 +142,7 @@
         <div class="post-content">
             What’s Really New with NewSQL? 论文 2016年发表在 sigmod上的
         </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2022/07/whats-really-new-with-newsql%E8%AE%BA%E6%96%87/">阅读全文</a></p>
+        <p class="readmore"><a href="https://hehe-1234.github.io/post/2022/07/whats-really-new-with-newsql%E8%AE%BA%E6%96%87/">阅读全文</a></p>
     </article>
     
     
@@ -125,7 +150,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2023/03/snowflake%E8%AE%BA%E6%96%87/" title="Snowflake论文">Snowflake论文</a>
+                <a href="https://hehe-1234.github.io/post/2023/03/snowflake%E8%AE%BA%E6%96%87/" title="Snowflake论文">Snowflake论文</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -142,7 +167,7 @@
         <div class="post-content">
             The Snowflake Elastic Data Warehouse 论文 2015年发表在 sigmod上的
         </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/03/snowflake%E8%AE%BA%E6%96%87/">阅读全文</a></p>
+        <p class="readmore"><a href="https://hehe-1234.github.io/post/2023/03/snowflake%E8%AE%BA%E6%96%87/">阅读全文</a></p>
     </article>
     
     
@@ -150,7 +175,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2022/07/pingcap%E6%8F%90%E4%BE%9B%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/" title="PingCAP提供的数据库学习资料">PingCAP提供的数据库学习资料</a>
+                <a href="https://hehe-1234.github.io/post/2022/07/pingcap%E6%8F%90%E4%BE%9B%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/" title="PingCAP提供的数据库学习资料">PingCAP提供的数据库学习资料</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -167,7 +192,7 @@
         <div class="post-content">
             PingCAP提供的数据库学习资料
         </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2022/07/pingcap%E6%8F%90%E4%BE%9B%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">阅读全文</a></p>
+        <p class="readmore"><a href="https://hehe-1234.github.io/post/2022/07/pingcap%E6%8F%90%E4%BE%9B%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">阅读全文</a></p>
     </article>
     
     
@@ -175,7 +200,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2022/07/spark-sql%E8%AE%BA%E6%96%87/" title="Spark SQL论文">Spark SQL论文</a>
+                <a href="https://hehe-1234.github.io/post/2022/07/spark-sql%E8%AE%BA%E6%96%87/" title="Spark SQL论文">Spark SQL论文</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -192,7 +217,7 @@
         <div class="post-content">
             Spark SQL: Relational Data Processing in Spark 论文
         </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2022/07/spark-sql%E8%AE%BA%E6%96%87/">阅读全文</a></p>
+        <p class="readmore"><a href="https://hehe-1234.github.io/post/2022/07/spark-sql%E8%AE%BA%E6%96%87/">阅读全文</a></p>
     </article>
     
     
@@ -200,7 +225,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2022/06/delta-lake%E8%AE%BA%E6%96%87/" title="Delta Lake论文">Delta Lake论文</a>
+                <a href="https://hehe-1234.github.io/post/2022/06/delta-lake%E8%AE%BA%E6%96%87/" title="Delta Lake论文">Delta Lake论文</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -217,7 +242,7 @@
         <div class="post-content">
             Delta Lake: High-Performance ACID Table Storage over Cloud Object Stores 论文
         </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2022/06/delta-lake%E8%AE%BA%E6%96%87/">阅读全文</a></p>
+        <p class="readmore"><a href="https://hehe-1234.github.io/post/2022/06/delta-lake%E8%AE%BA%E6%96%87/">阅读全文</a></p>
     </article>
     
     
@@ -225,7 +250,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2022/06/chubby%E8%AE%BA%E6%96%87/" title="Chubby论文">Chubby论文</a>
+                <a href="https://hehe-1234.github.io/post/2022/06/chubby%E8%AE%BA%E6%96%87/" title="Chubby论文">Chubby论文</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -242,7 +267,7 @@
         <div class="post-content">
             The Chubby lock service for loosely-coupled distributed systems 论文
         </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2022/06/chubby%E8%AE%BA%E6%96%87/">阅读全文</a></p>
+        <p class="readmore"><a href="https://hehe-1234.github.io/post/2022/06/chubby%E8%AE%BA%E6%96%87/">阅读全文</a></p>
     </article>
     
     
@@ -250,7 +275,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2022/06/%E8%87%AA%E5%AE%9A%E4%B9%89hiveserver%E8%AE%BE%E8%AE%A1/" title="自定义HiveServer设计">自定义HiveServer设计</a>
+                <a href="https://hehe-1234.github.io/post/2022/06/%E8%87%AA%E5%AE%9A%E4%B9%89hiveserver%E8%AE%BE%E8%AE%A1/" title="自定义HiveServer设计">自定义HiveServer设计</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -267,7 +292,7 @@
         <div class="post-content">
             实现一套自己定义的Hive RPC服务
         </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2022/06/%E8%87%AA%E5%AE%9A%E4%B9%89hiveserver%E8%AE%BE%E8%AE%A1/">阅读全文</a></p>
+        <p class="readmore"><a href="https://hehe-1234.github.io/post/2022/06/%E8%87%AA%E5%AE%9A%E4%B9%89hiveserver%E8%AE%BE%E8%AE%A1/">阅读全文</a></p>
     </article>
     
     
@@ -275,7 +300,7 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2022/06/raft-a-consensus-algorithm-for-replicated-logs%E8%AE%B0%E5%BD%95/" title="Raft A Consensus Algorithm for Replicated Logs记录">Raft A Consensus Algorithm for Replicated Logs记录</a>
+                <a href="https://hehe-1234.github.io/post/2022/06/raft-a-consensus-algorithm-for-replicated-logs%E8%AE%B0%E5%BD%95/" title="Raft A Consensus Algorithm for Replicated Logs记录">Raft A Consensus Algorithm for Replicated Logs记录</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
@@ -292,32 +317,7 @@
         <div class="post-content">
             Raft A Consensus Algorithm for Replicated Logs总结
         </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2022/06/raft-a-consensus-algorithm-for-replicated-logs%E8%AE%B0%E5%BD%95/">阅读全文</a></p>
-    </article>
-    
-    
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2022/05/raft%E8%AE%BA%E6%96%87/" title="Raft论文">Raft论文</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2022年5月16日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E5%88%86%E5%B8%83%E5%BC%8F'>分布式</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            In Search of an Understandable Consensus Algorithm
-        </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2022/05/raft%E8%AE%BA%E6%96%87/">阅读全文</a></p>
+        <p class="readmore"><a href="https://hehe-1234.github.io/post/2022/06/raft-a-consensus-algorithm-for-replicated-logs%E8%AE%B0%E5%BD%95/">阅读全文</a></p>
     </article>
     
     
@@ -328,55 +328,55 @@
 <ol class="page-navigator">
     
     <li class="prev">
-        <a href="https://hehe-1234.xyz/post/page/6/">上一页</a>
+        <a href="https://hehe-1234.github.io/post/page/6/">上一页</a>
     </li>
     
 
     
     <li >
-        <a href="https://hehe-1234.xyz/post/">1</a>
+        <a href="https://hehe-1234.github.io/post/">1</a>
     </li>
     
     <li >
-        <a href="https://hehe-1234.xyz/post/page/2/">2</a>
+        <a href="https://hehe-1234.github.io/post/page/2/">2</a>
     </li>
     
     <li >
-        <a href="https://hehe-1234.xyz/post/page/3/">3</a>
+        <a href="https://hehe-1234.github.io/post/page/3/">3</a>
     </li>
     
     <li >
-        <a href="https://hehe-1234.xyz/post/page/4/">4</a>
+        <a href="https://hehe-1234.github.io/post/page/4/">4</a>
     </li>
     
     <li >
-        <a href="https://hehe-1234.xyz/post/page/5/">5</a>
+        <a href="https://hehe-1234.github.io/post/page/5/">5</a>
     </li>
     
     <li >
-        <a href="https://hehe-1234.xyz/post/page/6/">6</a>
+        <a href="https://hehe-1234.github.io/post/page/6/">6</a>
     </li>
     
     <li  class="current">
-        <a href="https://hehe-1234.xyz/post/page/7/">7</a>
+        <a href="https://hehe-1234.github.io/post/page/7/">7</a>
     </li>
     
     <li >
-        <a href="https://hehe-1234.xyz/post/page/8/">8</a>
+        <a href="https://hehe-1234.github.io/post/page/8/">8</a>
     </li>
     
     <li >
-        <a href="https://hehe-1234.xyz/post/page/9/">9</a>
+        <a href="https://hehe-1234.github.io/post/page/9/">9</a>
     </li>
     
     <li >
-        <a href="https://hehe-1234.xyz/post/page/10/">10</a>
+        <a href="https://hehe-1234.github.io/post/page/10/">10</a>
     </li>
     
 
     
     <li class="next">
-        <a href="https://hehe-1234.xyz/post/page/8/">下一页</a>
+        <a href="https://hehe-1234.github.io/post/page/8/">下一页</a>
     </li>
     
 </ol>
@@ -390,10 +390,10 @@
 
                 <div id="secondary">
     <section class="widget">
-        <form id="search" action='https://hehe-1234.xyz/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='https://hehe-1234.github.io/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://hehe-1234.xyz/">
+      <input type="hidden" name="sitesearch" value="https://hehe-1234.github.io/">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
@@ -403,43 +403,43 @@
 <ul class="widget-list">
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2024/08/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/" title="个人工作简介">个人工作简介</a>
+        <a href="https://hehe-1234.github.io/post/2024/08/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/" title="个人工作简介">个人工作简介</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2024/07/open_log_replicator/" title="Oracle的CDC工具OpenLogReplicator原理">Oracle的CDC工具OpenLogReplicator原理</a>
+        <a href="https://hehe-1234.github.io/post/2024/08/open_log_rac/" title="OpenLogReplicator的一些改动">OpenLogReplicator的一些改动</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2024/06/open_log/" title="Oracle的CDC工具OpenLogReplicator编译">Oracle的CDC工具OpenLogReplicator编译</a>
+        <a href="https://hehe-1234.github.io/post/2024/07/open_log_replicator/" title="Oracle的CDC工具OpenLogReplicator原理">Oracle的CDC工具OpenLogReplicator原理</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2024/03/the_life_of_iceberg/" title="The Life of a Read/Write Query for Apache Iceberg Tables">The Life of a Read/Write Query for Apache Iceberg Tables</a>
+        <a href="https://hehe-1234.github.io/post/2024/06/open_log/" title="Oracle的CDC工具OpenLogReplicator编译">Oracle的CDC工具OpenLogReplicator编译</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2024/02/data_ingestion_architectural_patterns/" title="Data Ingestion: Architectural Patterns">Data Ingestion: Architectural Patterns</a>
+        <a href="https://hehe-1234.github.io/post/2024/03/the_life_of_iceberg/" title="The Life of a Read/Write Query for Apache Iceberg Tables">The Life of a Read/Write Query for Apache Iceberg Tables</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2024/01/hms/" title="Hive MetaStore的实现和优化">Hive MetaStore的实现和优化</a>
+        <a href="https://hehe-1234.github.io/post/2024/02/data_ingestion_architectural_patterns/" title="Data Ingestion: Architectural Patterns">Data Ingestion: Architectural Patterns</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2024/01/lakehouse_storage_systems/" title="Analyzing and Comparing Lakehouse Storage Systems">Analyzing and Comparing Lakehouse Storage Systems</a>
+        <a href="https://hehe-1234.github.io/post/2024/01/hms/" title="Hive MetaStore的实现和优化">Hive MetaStore的实现和优化</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2023/11/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8E%86%E5%8F%B2/" title="The History of Big data">The History of Big data</a>
+        <a href="https://hehe-1234.github.io/post/2024/01/lakehouse_storage_systems/" title="Analyzing and Comparing Lakehouse Storage Systems">Analyzing and Comparing Lakehouse Storage Systems</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="TPCx-HS优化总结">TPCx-HS优化总结</a>
+        <a href="https://hehe-1234.github.io/post/2023/11/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8E%86%E5%8F%B2/" title="The History of Big data">The History of Big data</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2023/05/advanced_database_systems-history_of_databases/" title="Advanced Database Systems: History of Databases">Advanced Database Systems: History of Databases</a>
+        <a href="https://hehe-1234.github.io/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="TPCx-HS优化总结">TPCx-HS优化总结</a>
     </li>
     
 </ul>
@@ -451,29 +451,29 @@
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (5)</a></li>
+    <li><a href="https://hehe-1234.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (5)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
+    <li><a href="https://hehe-1234.github.io/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (21)</a></li>
+    <li><a href="https://hehe-1234.github.io/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (21)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
+    <li><a href="https://hehe-1234.github.io/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (22)</a></li>
+    <li><a href="https://hehe-1234.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (23)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
+    <li><a href="https://hehe-1234.github.io/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
+    <li><a href="https://hehe-1234.github.io/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
+    <li><a href="https://hehe-1234.github.io/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
+    <li><a href="https://hehe-1234.github.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
+    <li><a href="https://hehe-1234.github.io/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (10)</a></li>
+    <li><a href="https://hehe-1234.github.io/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (10)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
+    <li><a href="https://hehe-1234.github.io/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
     
 </ul>
     </section>
@@ -482,13 +482,13 @@
         <h3 class="widget-title">归档</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
+    <li><a href="https://hehe-1234.github.io/years/2021%E5%B9%B4/">2021年 (14)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
+    <li><a href="https://hehe-1234.github.io/years/2022%E5%B9%B4/">2022年 (46)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
+    <li><a href="https://hehe-1234.github.io/years/2023%E5%B9%B4/">2023年 (31)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2024%E5%B9%B4/">2024年 (7)</a></li>
+    <li><a href="https://hehe-1234.github.io/years/2024%E5%B9%B4/">2024年 (8)</a></li>
     
 </ul>
     </section>
@@ -497,109 +497,109 @@
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
     
-    <a href="https://hehe-1234.xyz/tags/b%E6%A0%91/">B树 </a>
+    <a href="https://hehe-1234.github.io/tags/b%E6%A0%91/">B树 </a>
     
-    <a href="https://hehe-1234.xyz/tags/calcite/">calcite </a>
+    <a href="https://hehe-1234.github.io/tags/calcite/">calcite </a>
     
-    <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
+    <a href="https://hehe-1234.github.io/tags/cmu-database/">CMU-Database </a>
     
-    <a href="https://hehe-1234.xyz/tags/data_ingestion/">Data_Ingestion </a>
+    <a href="https://hehe-1234.github.io/tags/data_ingestion/">Data_Ingestion </a>
     
-    <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
+    <a href="https://hehe-1234.github.io/tags/hana/">HANA </a>
     
-    <a href="https://hehe-1234.xyz/tags/hive/">Hive </a>
+    <a href="https://hehe-1234.github.io/tags/hive/">Hive </a>
     
-    <a href="https://hehe-1234.xyz/tags/iceberg/">iceberg </a>
+    <a href="https://hehe-1234.github.io/tags/iceberg/">iceberg </a>
     
-    <a href="https://hehe-1234.xyz/tags/k8s/">k8s </a>
+    <a href="https://hehe-1234.github.io/tags/k8s/">k8s </a>
     
-    <a href="https://hehe-1234.xyz/tags/kudu/">kudu </a>
+    <a href="https://hehe-1234.github.io/tags/kudu/">kudu </a>
     
-    <a href="https://hehe-1234.xyz/tags/kyuubi/">Kyuubi </a>
+    <a href="https://hehe-1234.github.io/tags/kyuubi/">Kyuubi </a>
     
-    <a href="https://hehe-1234.xyz/tags/lakehouse/">Lakehouse </a>
+    <a href="https://hehe-1234.github.io/tags/lakehouse/">Lakehouse </a>
     
-    <a href="https://hehe-1234.xyz/tags/leveldb/">LevelDB </a>
+    <a href="https://hehe-1234.github.io/tags/leveldb/">LevelDB </a>
     
-    <a href="https://hehe-1234.xyz/tags/llvm/">LLVM </a>
+    <a href="https://hehe-1234.github.io/tags/llvm/">LLVM </a>
     
-    <a href="https://hehe-1234.xyz/tags/mapreduce/">MapReduce </a>
+    <a href="https://hehe-1234.github.io/tags/mapreduce/">MapReduce </a>
     
-    <a href="https://hehe-1234.xyz/tags/mysql/">MySQL </a>
+    <a href="https://hehe-1234.github.io/tags/mysql/">MySQL </a>
     
-    <a href="https://hehe-1234.xyz/tags/newsql/">NewSQL </a>
+    <a href="https://hehe-1234.github.io/tags/newsql/">NewSQL </a>
     
-    <a href="https://hehe-1234.xyz/tags/oceanbase/">OceanBase </a>
+    <a href="https://hehe-1234.github.io/tags/oceanbase/">OceanBase </a>
     
-    <a href="https://hehe-1234.xyz/tags/openlogreplicator/">OpenLogReplicator </a>
+    <a href="https://hehe-1234.github.io/tags/openlogreplicator/">OpenLogReplicator </a>
     
-    <a href="https://hehe-1234.xyz/tags/paxos/">paxos </a>
+    <a href="https://hehe-1234.github.io/tags/paxos/">paxos </a>
     
-    <a href="https://hehe-1234.xyz/tags/presto/">Presto </a>
+    <a href="https://hehe-1234.github.io/tags/presto/">Presto </a>
     
-    <a href="https://hehe-1234.xyz/tags/quick-sql/">quick-sql </a>
+    <a href="https://hehe-1234.github.io/tags/quick-sql/">quick-sql </a>
     
-    <a href="https://hehe-1234.xyz/tags/raft/">raft </a>
+    <a href="https://hehe-1234.github.io/tags/raft/">raft </a>
     
-    <a href="https://hehe-1234.xyz/tags/scala/">scala </a>
+    <a href="https://hehe-1234.github.io/tags/scala/">scala </a>
     
-    <a href="https://hehe-1234.xyz/tags/simd/">SIMD </a>
+    <a href="https://hehe-1234.github.io/tags/simd/">SIMD </a>
     
-    <a href="https://hehe-1234.xyz/tags/snowflake/">snowflake </a>
+    <a href="https://hehe-1234.github.io/tags/snowflake/">snowflake </a>
     
-    <a href="https://hehe-1234.xyz/tags/spark/">spark </a>
+    <a href="https://hehe-1234.github.io/tags/spark/">spark </a>
     
-    <a href="https://hehe-1234.xyz/tags/teradata/">TeraData </a>
+    <a href="https://hehe-1234.github.io/tags/teradata/">TeraData </a>
     
-    <a href="https://hehe-1234.xyz/tags/tpcx-hs/">TPCx-HS </a>
+    <a href="https://hehe-1234.github.io/tags/tpcx-hs/">TPCx-HS </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
+    <a href="https://hehe-1234.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E5%88%97%E5%AD%98/">列存 </a>
+    <a href="https://hehe-1234.github.io/tags/%E5%88%97%E5%AD%98/">列存 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
+    <a href="https://hehe-1234.github.io/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
+    <a href="https://hehe-1234.github.io/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
+    <a href="https://hehe-1234.github.io/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
+    <a href="https://hehe-1234.github.io/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E5%AD%98%E5%82%A8/">存储 </a>
+    <a href="https://hehe-1234.github.io/tags/%E5%AD%98%E5%82%A8/">存储 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
+    <a href="https://hehe-1234.github.io/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
+    <a href="https://hehe-1234.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
+    <a href="https://hehe-1234.github.io/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
+    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
+    <a href="https://hehe-1234.github.io/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
+    <a href="https://hehe-1234.github.io/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
+    <a href="https://hehe-1234.github.io/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
+    <a href="https://hehe-1234.github.io/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
+    <a href="https://hehe-1234.github.io/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
+    <a href="https://hehe-1234.github.io/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
+    <a href="https://hehe-1234.github.io/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
+    <a href="https://hehe-1234.github.io/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E8%AE%BA%E6%96%87/">论文 </a>
+    <a href="https://hehe-1234.github.io/tags/%E8%AE%BA%E6%96%87/">论文 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
+    <a href="https://hehe-1234.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
+    <a href="https://hehe-1234.github.io/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
     
 </div>
     </section>
@@ -609,7 +609,7 @@
     <section class="widget">
         <h3 class="widget-title">RSS</h3>
         <ul class="widget-list">
-            <li><a href="https://hehe-1234.xyz/index.xml">文章 RSS</a></li>
+            <li><a href="https://hehe-1234.github.io/index.xml">文章 RSS</a></li>
         </ul>
     </section>
 </div>
@@ -618,7 +618,7 @@
     </div>
     <footer id="footer">
     <div>
-        &copy; 2024 <a href="https://hehe-1234.xyz/">一个程序员的博客 By find-job</a>
+        &copy; 2024 <a href="https://hehe-1234.github.io/">一个程序员的博客 By find-job</a>
         
     </div>
     <br />

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>k8s on 一个程序员的博客</title>
-    <link>https://hehe-1234.xyz/tags/k8s/</link>
+    <link>https://hehe-1234.github.io/tags/k8s/</link>
     <description>Recent content in k8s on 一个程序员的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sun, 18 Sep 2022 12:12:19 +0800</lastBuildDate>
-    <atom:link href="https://hehe-1234.xyz/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://hehe-1234.github.io/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>k8s POD使用总结</title>
-      <link>https://hehe-1234.xyz/post/2022/09/k8s%E4%BD%BF%E7%94%A8/</link>
+      <link>https://hehe-1234.github.io/post/2022/09/k8s%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sun, 18 Sep 2022 12:12:19 +0800</pubDate>
-      <guid>https://hehe-1234.xyz/post/2022/09/k8s%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://hehe-1234.github.io/post/2022/09/k8s%E4%BD%BF%E7%94%A8/</guid>
       <description>k8s使用的一些记录</description>
     </item>
   </channel>
