@@ -135,6 +135,18 @@
         </a>
     </li>
 </ul>
+<p>同步工具的内部细节</p>
+<ul>
+<li>多个 reader 线程，每个线程对应于一个活跃的 redo log</li>
+<li>单个解析线程，会解析archive、online redo log，然后交由 Parser类做真正的解析</li>
+<li>checkpoint 线程会定期记录元数据，位点信息</li>
+<li>写线程拿到解析线程生成的格式化数据(json)后，推到指定的目标
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/08/31/7xwibe.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/08/31/7xwibe.png" />
+        </a>
+    </li>
+</ul>
 <h1 id="某大型互联网-企业">某大型互联网+ 企业</h1>
 <p>一款企业内部的数据同步产品<br>
 为公司多个大业务部门内，部门间提供数据同步功能<br>
