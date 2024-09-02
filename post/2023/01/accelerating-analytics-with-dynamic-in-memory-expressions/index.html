@@ -132,10 +132,10 @@
 比如下面SQL</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> item_name,
@@ -295,7 +295,7 @@ Figure 4. Columns A and B in an IMCU with n-rows and expressions A+B and A*B in 
 <li>后台模块会从磁盘上数据块中读取行，转为列格式，并应用压缩模式</li>
 <li>之后IMCU就变为在线状态，就可以跟踪这些状态，然后应用IMEU</li>
 <li>由于IMCU 和 IMEU创建的时间有延迟，这里时间闪回技术，来保证数据的一致性</li>
-<li>这里的闪回利用的是 SCN，也就是undo log来实现的 
+<li>这里的闪回利用的是 SCN，也就是undo log来实现的
 
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/p1437-mishra/5.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/p1437-mishra/5.jpg" />
@@ -316,7 +316,7 @@ Figure 5. Top-level IMEU population (with IMCU and SMU)</li>
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/p1437-mishra/6.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/p1437-mishra/6.jpg" />
         </a>
-     
+    
 Figure 6. Repopulation of IMCU-IMEU</li>
 </ul>
 <h2 id="利用idme加速查询">利用IDME加速查询</h2>
@@ -327,9 +327,9 @@ Figure 6. Repopulation of IMCU-IMEU</li>
 比如对于下面这个SQL</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#ff79c6">SELECT</span> <span style="color:#ff79c6">UPPER</span>(item_name) <span style="color:#ff79c6">FROM</span> sales
@@ -344,7 +344,7 @@ WHERE中的表达式：price * (1-discount) &gt; 1000<br>
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/p1437-mishra/7.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/p1437-mishra/7.jpg" />
         </a>
-     
+    
 Figure 7. Logical expression tree showing top-level expression <code>price*(1-discount)</code> as <code>DIME#1</code> and sub-expression <code>(1-discount)</code> as <code>DIME#2</code></p>
 <p>之后会评估 DIME是否在内存中，是否内存执行开销更小等<br>
 如果都满足则替换子树，否则还是按照原始的执行计划执行，如下：<br>
@@ -615,7 +615,7 @@ CPU使用率为 28.6%，而没有DIME时，吞吐量下降，CPU使用率达到1
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/p1437-mishra/13.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/p1437-mishra/13.jpg" />
         </a>
-     
+    
 Figure 13. Speed-up in minimum, median and maximum response times of queries in OLTAP workload with DIMEs</p>
 
 			<script type="text/javascript"
@@ -940,7 +940,7 @@ code.has-jax {
     </div>
     <footer id="footer">
     <div>
-        &copy; 2024 <a href="https://hehe-1234.xyz/">一个程序员的博客 By find-job</a>
+        &copy; 2024 <a href="https://hehe-1234.xyz/">一个程序员的博客 By 一个程序员</a>
         
     </div>
     <br />
@@ -969,7 +969,7 @@ code.has-jax {
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;

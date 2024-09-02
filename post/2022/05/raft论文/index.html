@@ -388,7 +388,7 @@ leader会跟踪它知道的最高的 committed 索引，也包含了将要将要
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/6.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/6.jpg" />
         </a>
-     
+    
 Figure 6: Logs are composed of entries, which are numbered<br>
 sequentially. Each entry contains the term in which it was<br>
 created (the number in each box) and a command for the state<br>
@@ -461,12 +461,12 @@ leader绝不会覆盖或者删除它自己的日志，它只会做append 操作<
 <li>如果candidate的日志跟多数派的日志，至少一样新，它才能赢得选举</li>
 <li>request vote RPC的月数为：RPC包含了candidate的日志信息，如果它的日志比candidate的更新，则拒绝投票</li>
 <li>Raft通过比较index和term来决定两个日志谁更新</li>
-<li>如果两个日志的最后条目有不同的term，则最晚的那个更新；如果日志以相同的term结束，则较长的日志是最新的 
+<li>如果两个日志的最后条目有不同的term，则最晚的那个更新；如果日志以相同的term结束，则较长的日志是最新的
 
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/7.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/7.jpg" />
         </a>
-     
+    
 Figure 7: When the leader at the top comes to power, it is<br>
 possible that any of scenarios (a–f) could occur in follower <br>
 logs. Each box represents one log entry; the number in the <br>
@@ -497,7 +497,7 @@ server crashed again and remained down for several terms.</li>
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/8.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/8.jpg" />
         </a>
-     
+    
 Figure 8: A time sequence showing why a leader cannot determine commitment using log entries from older terms. <br>
 In (a) S1 is leader and partially replicates the log entry at index   2. <br>
 In (b) S1 crashes; S5 is elected leader for term 3 with votes from S3, S4, and itself, and accepts a different entry at log index 2. <br>
@@ -530,7 +530,7 @@ Raft要求服务器按照日志index顺序应用条目，结合状态机的安�
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/9.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/9.jpg" />
         </a>
-     
+    
 Figure 9: If S1 (leader for term T) commits a new log entry<br>
 from its term, and S5 is elected leader for a later term U, then<br>
 there must be at least one server (S3) that accepted the log <br>
@@ -548,7 +548,7 @@ Raft的RPC是冥等的，比如一个follower收到了一个append entries请求
 leader选举是Raft的一方面，时机则是最关键的，Raft有能力选举并维持一个稳定的leader，只要满足下面的时间需求：</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>broadcastTime ≪ electionTimeout ≪ MTBF
@@ -588,7 +588,7 @@ Raft的RPC要求接受者将信息持久化，所以广播时间大致是 0.5ms 
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/10.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/10.jpg" />
         </a>
-     
+    
 Figure 10: Switching directly from one configuration to another is unsafe because different servers will switch at different times. In this example, the cluster grows from three <br>
 servers to five. Unfortunately, there is a point in time where<br>
 two different leaders can be elected for the same term, one<br>
@@ -606,7 +606,7 @@ with a majority of the new configuration (Cnew).</p>
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/11.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/11.jpg" />
         </a>
-     
+    
 Figure 11: Timeline for a configuration change. Dashed lines<br>
 show configuration entries that have been created but not<br>
 committed, and solid lines show the latest committed configuration entry. The leader first creates the Cold,new configuration<br>
@@ -654,7 +654,7 @@ which Cold and Cnew can both make decisions independently.</p>
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/12.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/12.jpg" />
         </a>
-     
+    
 Figure 12: A server replaces the committed entries in its log<br>
 (indexes 1 through 5) with a new snapshot, which stores just <br>
 the current state (variables x and y in this example). The snapshot’s last included index and term serve to position the snapshot in the log preceding entry 6.</p>
@@ -680,7 +680,7 @@ the current state (variables x and y in this example). The snapshot’s last inc
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/13.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/13.jpg" />
         </a>
-     
+    
 Figure 13: A summary of the InstallSnapshot RPC. Snapshots are split into chunks for transmission; this gives the follower a sign of life with each chunk, so it can reset its election<br>
 timer.</p>
 <h2 id="client-interaction">Client interaction</h2>
@@ -742,7 +742,7 @@ Paxof的课程包含了足够多的材料，如创建等价的复制状态机、
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/14.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/14.jpg" />
         </a>
-     
+    
 Figure 14: A scatter plot comparing 43 participants’ performance on the Raft and Paxos quizzes. Points above the diagonal (33) represent participants who scored higher for Raft.</p>
 <p>我们在测试之后也做了调查，看看哪种算法更容易实现，更容易解释，结果显示为 figure 15<br>
 大部分参与者表示Raft更容易实现、更容易理解<br>
@@ -790,7 +790,7 @@ leader在心跳间隔内均匀的崩溃，心跳间隔是所有测试中最小�
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/16.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Raft%E8%AE%BA%E6%96%87/16.jpg" />
         </a>
-     
+    
 Figure 16: The time to detect and replace a crashed leader.<br>
 The top graph varies the amount of randomness in election<br>
 timeouts, and the bottom graph scales the minimum election<br>
@@ -1211,7 +1211,7 @@ code.has-jax {
     </div>
     <footer id="footer">
     <div>
-        &copy; 2024 <a href="https://hehe-1234.xyz/">一个程序员的博客 By find-job</a>
+        &copy; 2024 <a href="https://hehe-1234.xyz/">一个程序员的博客 By 一个程序员</a>
         
     </div>
     <br />
@@ -1240,7 +1240,7 @@ code.has-jax {
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;

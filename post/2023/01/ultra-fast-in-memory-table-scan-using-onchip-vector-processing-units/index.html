@@ -142,7 +142,7 @@ SIMD技术如下，利用一个指令，来实现并行化数据处理</p>
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/willhalm-vldb2009/1.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/willhalm-vldb2009/1.jpg" />
         </a>
-     
+    
 Figure 1. SIMD execution model: In (a) scalar mode: one operation produces one result. In (b) SIMD mode: one operation produces multiple results</p>
 <p>全表扫描是主内存列式数据库中一个很重要的操作，它可以避免创建索引减少内存消耗<br>
 论文中提出了两项改进操作</p>
@@ -225,7 +225,7 @@ Figure 3. System model: (a) the SIMD register model, (b) the memory layout model
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/willhalm-vldb2009/code_1.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/willhalm-vldb2009/code_1.jpg" />
         </a>
-     
+    
 上述算法中几个重要变量介绍</p>
 <ul>
 <li><code>n</code>是最大的bit数，计算公式为：$n = \lfloor log_{2}m \rfloor$</li>
@@ -270,7 +270,7 @@ Figure 6. Copying four 9-bit values to separate DWs</p>
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/willhalm-vldb2009/7.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/willhalm-vldb2009/7.jpg" />
         </a>
-     
+    
 Figure 7. Spanning-value issue with 27-bit compression</p>
 <p><strong>Bit Alignment</strong><br>
 目标是对其四个值，并屏蔽掉尾部的无效位<br>
@@ -287,7 +287,7 @@ Figure 8. Extracting the four 9-bit values</p>
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/willhalm-vldb2009/9.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/willhalm-vldb2009/9.jpg" />
         </a>
-     
+    
 Figure 9. Storing the decompressed integer values</p>
 <h3 id="vectorized-predicate-handling">Vectorized Predicate Handling</h3>
 <p>表扫描操作中，用于决定一个值，或者一个值范围<br>
@@ -299,7 +299,7 @@ Figure 9. Storing the decompressed integer values</p>
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/willhalm-vldb2009/10.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/willhalm-vldb2009/10.jpg" />
         </a>
-     
+    
 Figure 10. Vectorized scan-value search with predicate<br>
 如上，通过对RC做 min值 的比较指令，结果寄存器会保持4个结果，如果对应的结果为0，表示没有落在这个范围内<br>
 这样就可以生成一个索引数组的位向量   <br>
@@ -308,7 +308,7 @@ Figure 10. Vectorized scan-value search with predicate<br>
         <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/willhalm-vldb2009/code_2.jpg">
             <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/01/willhalm-vldb2009/code_2.jpg" />
         </a>
-     
+    
 n 的值是通过公式 $n = \lfloor log_{2}m \rfloor$ 计算出来的<br>
 $min_{a}$、$min_{b}$、$max_{a}$、$max_{b}$、$b_{a}$、$c_{a}$、$b_{b}$、$c_{b}$ 是向量变量，用来存储4个整数</p>
 <h3 id="实现和评估">实现和评估</h3>
@@ -712,7 +712,7 @@ code.has-jax {
     </div>
     <footer id="footer">
     <div>
-        &copy; 2024 <a href="https://hehe-1234.xyz/">一个程序员的博客 By find-job</a>
+        &copy; 2024 <a href="https://hehe-1234.xyz/">一个程序员的博客 By 一个程序员</a>
         
     </div>
     <br />
@@ -741,7 +741,7 @@ code.has-jax {
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
-<script type="application/javascript">
+<script>
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
