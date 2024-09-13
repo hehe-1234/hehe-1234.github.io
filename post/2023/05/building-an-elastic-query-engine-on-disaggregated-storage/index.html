@@ -190,8 +190,8 @@ snowflake 为了克服这些问题，提出了 存储计算分离的架构<br>
 <li>每个文件内，独立的值和列被分组到一起，按照 PAX存储</li>
 <li>每个文件的头包含了每个列的起始offset，方便S3 的部分读取
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/1.jpg">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/1.jpg" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/01/7KXvEO.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/01/7KXvEO.jpg" />
         </a>
     </li>
 </ul>
@@ -209,8 +209,8 @@ CS 控制节点会监控 VM 的状态，收集他们的数据，一旦执行完�
 右边是读写趋势，读明显是工作日的白天很高，晚上就降低了 <br>
 28%是只读的，13%是只写的，59%是读写的<br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/2.jpg">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/2.jpg" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/01/7KXDjf.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/01/7KXDjf.jpg" />
         </a>
     </p>
 <h2 id="临时存储系统">临时存储系统</h2>
@@ -231,8 +231,8 @@ CS 控制节点会监控 VM 的状态，收集他们的数据，一旦执行完�
 <li>具有相同总CPU时间的查询交换的中间数据量相差很大</li>
 <li>读取相同持久化数据量的查询交换的中间数据量相差很大<br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/3.jpg">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/3.jpg" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/01/7KXUG3.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/01/7KXUG3.jpg" />
         </a>
     </li>
 </ul>
@@ -244,14 +244,14 @@ CS 控制节点会监控 VM 的状态，收集他们的数据，一旦执行完�
 另一个设计要点是，要保持临时存储的数据，持久缓存的数据一致，这是通过缓存透写实现的    write-through cache<br>
 下图是 临时存储和持久存储的 I/O 流量分布<br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/4.jpg">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/4.jpg" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/01/7KXWs6.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/01/7KXWs6.jpg" />
         </a>
     </p>
 <p>从下图可以看到，大约75%的 只读查询有 超过80% 的命中率  <br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/5.jpg">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/5.jpg" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/01/7KXacQ.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/01/7KXacQ.jpg" />
         </a>
     </p>
 <p>另一些未来要做的优化策略</p>
@@ -268,8 +268,8 @@ CS 控制节点会监控 VM 的状态，收集他们的数据，一旦执行完�
 <li>为了最大化本地性，这里也是用一致性hash，将任务分配给 持久文件所在的节点上</li>
 <li>下图解释了持久文件读、写，中间文件交互的查询特点
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/6.jpg">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/6.jpg" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/01/7KXSpc.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/01/7KXSpc.jpg" />
         </a>
     </li>
 </ul>
@@ -295,21 +295,21 @@ CS 控制节点会监控 VM 的状态，收集他们的数据，一旦执行完�
 <li>此时节点 1上的缓存仍然还在，但不会被读取了，之后就自动失效了</li>
 <li>节点6 在使用的时候，获取了远端的 缓存文件
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/7.jpg">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/7.jpg" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/01/7KX1tj.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/01/7KX1tj.jpg" />
         </a>
     </li>
 </ul>
 <p>下图是 20% 的用户使用了 VM弹性伸缩机制<br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/8.jpg">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/8.jpg" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/01/7KXPo5.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/01/7KXPo5.jpg" />
         </a>
     </p>
 <p>对比 VM resize 和请求到达内部的时间<br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/9.jpg">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/9.jpg" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/01/7KXYHm.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/01/7KXYHm.jpg" />
         </a>
     </p>
 <p>未来工作</p>
@@ -327,15 +327,15 @@ CS 控制节点会监控 VM 的状态，收集他们的数据，一旦执行完�
 预先预热的话，只要一小时内有人使用就可以扣费，现在按秒计费，这段周期内可能没人用就没法收费了<br>
 这就要调整架构策略，使用完全共享的资源架构<br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/10.jpg">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/10.jpg" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/01/7KXt2h.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/01/7KXt2h.jpg" />
         </a>
     </p>
 <p>从这个图看，客户端使用的资源是突发的，也不好预测<br>
 如何在 细粒度的控制之上，实现更好的资源利用率<br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/11.jpg">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2023/05/Building_An_Elastic_Query_Engine_on_Disaggregated_Storage/11.jpg" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/01/7KXrU4.jpg">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/01/7KXrU4.jpg" />
         </a>
     </p>
 <p>两个挑战
@@ -415,11 +415,11 @@ code.has-jax {
         
         <li><a href="/post/2023/05/what-goes-around-comes-around/">What Goes Around Comes Around</a></li>
         
-        <li><a href="/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/">Photon A Fast Query Engine for Lakehouse Systems</a></li>
+        <li><a href="/post/2023/02/efficiently-compiling-efficient-query-plans-for-modern-hardware/">Efficiently Compiling Efficient Query Plans for Modern Hardware</a></li>
         
-        <li><a href="/post/2023/05/sql_server_column_store_indexes/">SQL Server Column Store Indexes</a></li>
+        <li><a href="/post/2023/02/generating-code-for-holistic-query-evaluation/">Generating code for holistic query evaluation</a></li>
         
-        <li><a href="/post/2023/05/column-stores_vs_row-stores_how_different_are_they_really/">Column-Stores vs. Row-Stores: How Different Are They Really?</a></li>
+        <li><a href="/post/2023/02/implementing-database-operations-using-simd-instructions/">Implementing Database Operations Using SIMD Instructions</a></li>
         
     </ul>
 </div>
@@ -524,11 +524,11 @@ code.has-jax {
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (21)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (30)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (1)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (23)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (27)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
@@ -553,7 +553,7 @@ code.has-jax {
     
     <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (45)</a></li>
     
     <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
     
@@ -573,6 +573,8 @@ code.has-jax {
     <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
     
     <a href="https://hehe-1234.xyz/tags/data_ingestion/">Data_Ingestion </a>
+    
+    <a href="https://hehe-1234.xyz/tags/deltalake/">DeltaLake </a>
     
     <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
     
@@ -654,8 +656,6 @@ code.has-jax {
     
     <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
-    
     <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
@@ -716,7 +716,7 @@ code.has-jax {
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;

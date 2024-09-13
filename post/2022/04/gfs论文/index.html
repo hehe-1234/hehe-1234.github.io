@@ -171,8 +171,8 @@ master维护了系统的元数据，功能包括：</p>
 因为文件都比较大，而且是顺序读取的，缓存意义不大<br>
 另外底层使用的是linxu文件系统，对于频繁读取的文件，本身就会被放入到 cache 中</p>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/1.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/1.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/31/7gaTlP.png">
+            <img class="mx-auto" alt="1" src="https://v1.ax1x.com/2024/05/31/7gaTlP.png" />
         </a>
     </p>
 <p>客户端首先根据文件名，offset，转换为 chunk index，然后跟master通讯(发送文件名和chunk index)，获得具体的chunk-server信息</p>
@@ -298,8 +298,8 @@ master也可能会回收租约，比如租约超时，rename，通讯中断
 租约可能会超时，也可能因为rename被master主动关闭</p>
 <p>写入流程如下：<br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/2.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/2.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/31/7ga9Ob.png">
+            <img class="mx-auto" alt="2" src="https://v1.ax1x.com/2024/05/31/7ga9Ob.png" />
         </a>
     </p>
 <p>执行步骤如下：</p>
@@ -472,8 +472,8 @@ master也可能会回收租约，比如租约超时，rename，通讯中断
 <li>不同客户端可能写一个chunk-server的不同文件</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/4.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/4.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/31/7gakfe.png">
+            <img class="mx-auto" alt="4 before 3" src="https://v1.ax1x.com/2024/05/31/7gakfe.png" />
         </a>
       <br>
 Figure 3: Aggregate Throughputs. Top curves show theoretical limits imposed by our networktopology. Bottom curves<br>
@@ -495,14 +495,14 @@ because of low variance in measurements.</p>
 <li>对于丢失两个副本的，会有更高优先级，266个chunk只有一个副本，可以在 2分钟内复制完</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/3.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/3.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/31/7gvddB.png">
+            <img class="mx-auto" alt="3" src="https://v1.ax1x.com/2024/05/31/7gvddB.png" />
         </a>
     <br>
 Table 2: Characteristics of two GFS clusters</p>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/5.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/5.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/31/7gvout.png">
+            <img class="mx-auto" alt="5" src="https://v1.ax1x.com/2024/05/31/7gvout.png" />
         </a>
     <br>
 Table 3: Performance Metrics for Two GFS Clusters</p>
@@ -515,8 +515,8 @@ Table 3: Performance Metrics for Two GFS Clusters</p>
 <li>覆盖占变更数量的0.0001%以下</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/6.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/6.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/31/7gamVw.png">
+            <img class="mx-auto" alt="6" src="https://v1.ax1x.com/2024/05/31/7gamVw.png" />
         </a>
     </p>
 <p>master</p>
@@ -524,8 +524,8 @@ Table 3: Performance Metrics for Two GFS Clusters</p>
 <li>大多是查找chunk位置的</li>
 <li>FindMatchingFiles 是一个模式匹配操作，比较耗费资源
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/7.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2021/11/GFS%E8%AE%BA%E6%96%87/7.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/31/7gapJ6.png">
+            <img class="mx-auto" alt="7" src="https://v1.ax1x.com/2024/05/31/7gapJ6.png" />
         </a>
     </li>
 </ul>
@@ -720,11 +720,11 @@ code.has-jax {
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (21)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (30)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (1)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (23)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (27)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
@@ -749,7 +749,7 @@ code.has-jax {
     
     <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (45)</a></li>
     
     <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
     
@@ -769,6 +769,8 @@ code.has-jax {
     <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
     
     <a href="https://hehe-1234.xyz/tags/data_ingestion/">Data_Ingestion </a>
+    
+    <a href="https://hehe-1234.xyz/tags/deltalake/">DeltaLake </a>
     
     <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
     
@@ -850,8 +852,6 @@ code.has-jax {
     
     <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
-    
     <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
@@ -912,7 +912,7 @@ code.has-jax {
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;

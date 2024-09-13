@@ -82,29 +82,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2023/01/ultra-fast-in-memory-table-scan-using-onchip-vector-processing-units/">SIMD-Scan: Ultra Fast in-Memory Table Scan using onChip Vector Processing Units</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年1月19日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a>
-            
-        </div>
-        
-        <div class="post-content">
-            现代数据库由I/O瓶颈转向了CPU瓶颈，利用多核能力加速全表扫描，但是向量化的能力没能充分发挥。使用向量化包括：内嵌汇编、硬件厂商提供的跨平台库函数、编译器指示符、编译器自动优化，每种都是可用性和可控性之间的权衡。论文中引入了两项优化：使用SIMD方式在寄存器中解压 轻量压缩数据(使用concatenate、shift、shuffle、mark等指令完成)；使用SIMD完成等值和范围查找(使用掩码指令，将4个元素加载到寄存器中，再通过min、max比较范围，最后生成索引数组向量位)，通过测试结果都有大幅度提升，并且优化实现可以适用各种数据库
-            <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/01/ultra-fast-in-memory-table-scan-using-onchip-vector-processing-units/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://hehe-1234.xyz/post/2023/01/accelerating-analytics-with-dynamic-in-memory-expressions/">Accelerating Analytics with Dynamic In-Memory Expressions</a>
             </h1>
         </header>
@@ -191,6 +168,29 @@
         <div class="post-content">
             CMU Query Execution &amp; Processing课程的一篇论文，现代分析系统中scan越来越重要，但二级索引依然有用，通过对比硬件参数、数据布局、压缩、并发等综合情况考虑之下，来选择：scan执行 或者index执行；通过性能评估发现，调节scan或者index并不是一个固定的值，而是根据不同的参数以及硬件情况，会动态变化的
             <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/01/access-path-selection-in-main-memory-optimized-data-systems-should-i-scan-or-should-i-probe/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hehe-1234.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/">Photon A Fast Query Engine for Lakehouse Systems</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年1月2日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
+            
+        </div>
+        
+        <div class="post-content">
+            Databricks 2022年在SIGMOD上发表的论文(最佳工业论文奖)，由于I/O方面有很多优化措施，而JVM的对向量化支持较差，之后用C++实现了向量化的执行引擎Photon，来实现进一步的性能提升；首先是从最底层scan开始替换，因为中间替换的代价较高，之后不断往上，直到某个算子Photon不能适配，则由列存转换为Spark的行存，退回到Spark执行，总体看性能可以提升好几倍
+            <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/">阅读全文</a></p>
         </div>
     </article>
     
@@ -420,11 +420,11 @@
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (21)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (30)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (1)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (23)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (27)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
@@ -449,7 +449,7 @@
     
     <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (45)</a></li>
     
     <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
     
@@ -469,6 +469,8 @@
     <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
     
     <a href="https://hehe-1234.xyz/tags/data_ingestion/">Data_Ingestion </a>
+    
+    <a href="https://hehe-1234.xyz/tags/deltalake/">DeltaLake </a>
     
     <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
     
@@ -550,8 +552,6 @@
     
     <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
-    
     <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
@@ -602,7 +602,7 @@
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;

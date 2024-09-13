@@ -121,8 +121,8 @@
 </blockquote>
 <h2 id="the-basic-paxos">The Basic Paxos</h2>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/1.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/1.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHL7U.png">
+            <img class="mx-auto" alt="1" src="https://v1.ax1x.com/2024/05/23/7gHL7U.png" />
         </a>
     <br>
 通过实现复制系统的方式来实现Paxos，目标就是维持各个服务器副本相同，从而实现分布式一致性 <br>
@@ -141,15 +141,15 @@
 <li>但是所有消息都会正确的传递，不会出现 拜占庭错误</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/2.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/2.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gH9e9.png">
+            <img class="mx-auto" alt="2" src="https://v1.ax1x.com/2024/05/23/7gH9e9.png" />
         </a>
-    
+     
 如果将问题分析，那么 multi-paxos 其实就是执行多次的 basic paxos<br>
 而 basic paxos需要有多台机器参与，最多只能选择一个值</p>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/3.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/3.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHmiZ.png">
+            <img class="mx-auto" alt="3" src="https://v1.ax1x.com/2024/05/23/7gHmiZ.png" />
         </a>
     <br>
 Basic Paxos必须满足两个要求</p>
@@ -168,8 +168,8 @@ Basic Paxos必须满足两个要求</p>
 </li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/4.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/4.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHBwY.png">
+            <img class="mx-auto" alt="4" src="https://v1.ax1x.com/2024/05/23/7gHBwY.png" />
         </a>
     
 在Paxos论文中，实际是有三个角色</p>
@@ -180,8 +180,8 @@ Basic Paxos必须满足两个要求</p>
 </ul>
 <p>为了简化实现，假设只有两个角色，提案者和接受者，并且每个实例都可以同时为这两个角色</p>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/5.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/5.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHTSH.png">
+            <img class="mx-auto" alt="5" src="https://v1.ax1x.com/2024/05/23/7gHTSH.png" />
         </a>
     
 单个acceptor实现非常简单，接受多个proposer的提案后做出选择即可<br>
@@ -189,8 +189,8 @@ Basic Paxos必须满足两个要求</p>
 所以为了应对可靠性，必须要有多个acceptor，比如3、5、7等等<br>
 这样的话，即使部分节点失效，整个集群仍然可以工作</p>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/6.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/6.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gH0Wq.png">
+            <img class="mx-auto" alt="6" src="https://v1.ax1x.com/2024/05/23/7gH0Wq.png" />
         </a>
     
 split votes问题</p>
@@ -201,8 +201,8 @@ split votes问题</p>
 <li>所以，acceptor必须能接受多个值，也就不同的value</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/7.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/7.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gH3Xs.png">
+            <img class="mx-auto" alt="7" src="https://v1.ax1x.com/2024/05/23/7gH3Xs.png" />
         </a>
     
 conflicting choices</p>
@@ -214,8 +214,8 @@ conflicting choices</p>
 <li>从split votes、conflicting choices可以发现，必须使用<strong>两阶段</strong>协议</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/8.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/8.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gH7ma.png">
+            <img class="mx-auto" alt="8" src="https://v1.ax1x.com/2024/05/23/7gH7ma.png" />
         </a>
     
 两阶段提交的问题</p>
@@ -228,8 +228,8 @@ conflicting choices</p>
 <li>这就需将 提案号排序，拒绝掉 旧的提案号</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/9.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/9.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHQrI.png">
+            <img class="mx-auto" alt="9" src="https://v1.ax1x.com/2024/05/23/7gHQrI.png" />
         </a>
     
 为了能对proposal排序，我们就要生成一个唯一的ID</p>
@@ -243,8 +243,8 @@ conflicting choices</p>
 <li>ID: Round Number + Server Id</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/10.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/10.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHE87.png">
+            <img class="mx-auto" alt="10" src="https://v1.ax1x.com/2024/05/23/7gHE87.png" />
         </a>
     
 Basic Paxos要做的事情</p>
@@ -259,8 +259,8 @@ Basic Paxos要做的事情</p>
 </ul>
 <h3 id="basic-paxos-算法执行过程">Basic Paxos 算法执行过程</h3>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/11.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/11.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHwSJ.png">
+            <img class="mx-auto" alt="11" src="https://v1.ax1x.com/2024/05/23/7gHwSJ.png" />
         </a>
     
 Basix Paxos算法执行过程</p>
@@ -306,82 +306,82 @@ Basix Paxos算法执行过程</p>
 proposer部分：</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#6272a4">// prepare   
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>send <span style="color:#50fa7b">PREPARE</span>(<span style="color:#ff79c6">++</span>n)   
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>send PREPARE(<span style="color:#ff79c6">++</span>n)   
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#6272a4">// prepare receive and send accept request
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>did I receive PROMISE responses from a majority of acceptors<span style="color:#ff79c6">?</span>
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">if</span> yes
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">do</span> any responses contain accepted <span style="color:#50fa7b">values</span> (from other proposals)<span style="color:#ff79c6">?</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">do</span> any responses contain accepted values (from other proposals)<span style="color:#ff79c6">?</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> yes
 </span></span><span style="display:flex;"><span>        val <span style="color:#ff79c6">=</span> accepted_VALUE    <span style="color:#6272a4">// value from PROMISE message with the highest accepted ID
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">if</span> no
 </span></span><span style="display:flex;"><span>        val <span style="color:#ff79c6">=</span> VALUE     <span style="color:#6272a4">// we can use our proposed value
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    send <span style="color:#50fa7b">Accept</span>(ID, val) to at least a majority of acceptors
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    send Accept(ID, val) to at least a majority of acceptors
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>acceptor部分：</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#6272a4">// response prepare
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">if</span> (n <span style="color:#ff79c6">&gt;</span> max_n)
 </span></span><span style="display:flex;"><span>    max_n <span style="color:#ff79c6">=</span> n     <span style="color:#6272a4">// save highest n we&#39;ve seen so far
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">if</span> (proposal_accepted <span style="color:#ff79c6">==</span> <span style="color:#8be9fd;font-style:italic">true</span>) <span style="color:#6272a4">// was a proposal already accepted?
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        <span style="color:#8be9fd;font-style:italic">respond</span>: <span style="color:#50fa7b">PROMISE</span>(n, accepted_N, accepted_VALUE)
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        <span style="color:#8be9fd;font-style:italic">respond</span>: PROMISE(n, accepted_N, accepted_VALUE)
 </span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">respond</span>: <span style="color:#50fa7b">PROMISE</span>(n)
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd;font-style:italic">respond</span>: PROMISE(n)
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">do</span> not <span style="color:#50fa7b">respond</span> (or respond with a <span style="color:#f1fa8c">&#34;fail&#34;</span> message)
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">do</span> not respond (or respond with a <span style="color:#f1fa8c">&#34;fail&#34;</span> message)
 </span></span><span style="display:flex;"><span>	
 </span></span><span style="display:flex;"><span><span style="color:#6272a4">// response accept 
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span><span style="color:#ff79c6">if</span> (n <span style="color:#ff79c6">&gt;=</span> max_n) <span style="color:#6272a4">// is the n the largest I have seen so far?
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    proposal_accepted <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">true</span>     <span style="color:#6272a4">// note that we accepted a proposal
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    accepted_N <span style="color:#ff79c6">=</span> n             <span style="color:#6272a4">// save the accepted proposal number
 </span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    accepted_VALUE <span style="color:#ff79c6">=</span> VALUE       <span style="color:#6272a4">// save the accepted proposal data
-</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#8be9fd;font-style:italic">respond</span>: <span style="color:#50fa7b">Accepted</span>(N, VALUE) to the proposer and all learners
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>    <span style="color:#8be9fd;font-style:italic">respond</span>: Accepted(N, VALUE) to the proposer and all learners
 </span></span><span style="display:flex;"><span><span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">do</span> not <span style="color:#50fa7b">respond</span> (or respond with a <span style="color:#f1fa8c">&#34;fail&#34;</span> message)	
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">do</span> not respond (or respond with a <span style="color:#f1fa8c">&#34;fail&#34;</span> message)	
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="example">example</h3>
 <p><strong>这里展示了 三种冲突情况</strong><br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/12.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/12.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHuyL.png">
+            <img class="mx-auto" alt="12" src="https://v1.ax1x.com/2024/05/23/7gHuyL.png" />
         </a>
     
 <strong>值已经被chosen</strong><br>
@@ -399,8 +399,8 @@ n=4.5,value=x 就被chosen了</p>
 <li>这样就会将 这3台机器的编号做更新，于是他们又保持一样了</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/13.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/13.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHNeV.png">
+            <img class="mx-auto" alt="13" src="https://v1.ax1x.com/2024/05/23/7gHNeV.png" />
         </a>
     
 <strong>之前的值没有被chosen，但是新的proposer看到了</strong></p>
@@ -413,8 +413,8 @@ n=4.5,value=x 就被chosen了</p>
 <li>即使出现s3、s4宕机，编号最高的仍然是4.5，等下次proposer时这个编号就会被纠正</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/14.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/14.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHysG.png">
+            <img class="mx-auto" alt="14" src="https://v1.ax1x.com/2024/05/23/7gHysG.png" />
         </a>
     
 <strong>前面的值没有被chosen，新的proposer也没看到</strong></p>
@@ -431,8 +431,8 @@ n=4.5,value=x 就被chosen了</p>
 <li>虽然短时间内可能不同的acceptor值不同，不过再次提案后，他们的值会变成一致</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/15.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/15.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHKEB.png">
+            <img class="mx-auto" alt="15" src="https://v1.ax1x.com/2024/05/23/7gHKEB.png" />
         </a>
     
 活锁问题</p>
@@ -445,8 +445,8 @@ n=4.5,value=x 就被chosen了</p>
 <li>另一个方式是使用multi-paox，也就是只有一个 proposer</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/16.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/05/Implemening%20Replicated%20Logs%20with%20Paxos%E8%AE%B0%E5%BD%95/16.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHbWt.png">
+            <img class="mx-auto" alt="16" src="https://v1.ax1x.com/2024/05/23/7gHbWt.png" />
         </a>
     
 注意事项</p>
@@ -477,6 +477,7 @@ system. Communications of the ACM, 21(7):558–565, July 1978.</li>
 <li><a href="https://zhuanlan.zhihu.com/p/268921711">Introduction to DDIA &amp; 6.824（七）：Raft作者眼中的Paxos</a></li>
 <li><a href="https://mp.weixin.qq.com/s/lbauCATMesqTEeIQuCsz9A">理解 Paxos（含伪代码）</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/341122718">分布式算法：Paxos及Multi-Paxos</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/420565644">Joint Consensus两阶段成员变更的单步实现</a></li>
 </ul>
 
 			<script type="text/javascript"
@@ -619,11 +620,11 @@ code.has-jax {
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (21)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (30)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (1)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (23)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (27)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
@@ -648,7 +649,7 @@ code.has-jax {
     
     <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (45)</a></li>
     
     <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
     
@@ -668,6 +669,8 @@ code.has-jax {
     <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
     
     <a href="https://hehe-1234.xyz/tags/data_ingestion/">Data_Ingestion </a>
+    
+    <a href="https://hehe-1234.xyz/tags/deltalake/">DeltaLake </a>
     
     <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
     
@@ -749,8 +752,6 @@ code.has-jax {
     
     <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
-    
     <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
@@ -811,7 +812,7 @@ code.has-jax {
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;

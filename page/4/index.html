@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-	<meta name="generator" content="Hugo 0.121.1">
+	<meta name="generator" content="Hugo 0.96.0" />
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -69,29 +69,6 @@
                 <div class="col-8" id="main">
                     
 <div class="res-cons">
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2023/02/generating-code-for-holistic-query-evaluation/" title="Generating code for holistic query evaluation">Generating code for holistic query evaluation</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年2月4日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            英国爱丁堡大学的一篇论文，从传统系统到现代系统的变化一个重要点是：内存增大很多，以前的I/O瓶颈对于现在来说不那么重要了，反而是CPU和内存瓶颈；而之前的火山模型对于CPU利用率来说很不好，大量的虚函数调用，多层级的函数调用增加了cache miss，也会产生更多的指令，不利于并行化和cache局部性；这篇论文提出了一个代码模板，通过识别不同的查询计划算子，来对应的生成不同的代码(对应一个大函数)，不同函数之间通过物化来连接，之后通过编译器GCC来编译这段C代码，还可以对代码最O2级别优化(但会增加运行期执行时间)来达到更好的效果，论文对比了join、sort、聚合，虽然使用的是NSM存储模型，但是执行效果来看跟MonetDB的DSM差不多了；代码生成的缺点是对于小查询会有额外的开销(编译、优化、link时间)
-        </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/02/generating-code-for-holistic-query-evaluation/">阅读全文</a></p>
-    </article>
     
     <article class="post">
         <header>
@@ -252,6 +229,29 @@
             CMU Query Execution &amp; Processing课程的一篇论文，现代分析系统中scan越来越重要，但二级索引依然有用，通过对比硬件参数、数据布局、压缩、并发等综合情况考虑之下，来选择：scan执行 或者index执行；通过性能评估发现，调节scan或者index并不是一个固定的值，而是根据不同的参数以及硬件情况，会动态变化的
         </div>
         <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/01/access-path-selection-in-main-memory-optimized-data-systems-should-i-scan-or-should-i-probe/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hehe-1234.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/" title="Photon A Fast Query Engine for Lakehouse Systems">Photon A Fast Query Engine for Lakehouse Systems</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年1月2日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Databricks 2022年在SIGMOD上发表的论文(最佳工业论文奖)，由于I/O方面有很多优化措施，而JVM的对向量化支持较差，之后用C++实现了向量化的执行引擎Photon，来实现进一步的性能提升；首先是从最底层scan开始替换，因为中间替换的代价较高，之后不断往上，直到某个算子Photon不能适配，则由列存转换为Spark的行存，退回到Spark执行，总体看性能可以提升好几倍
+        </div>
+        <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/">阅读全文</a></p>
     </article>
     
     <article class="post">
@@ -434,11 +434,11 @@
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (21)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (30)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (1)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (23)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (27)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
@@ -463,7 +463,7 @@
     
     <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (45)</a></li>
     
     <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
     
@@ -483,6 +483,8 @@
     <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
     
     <a href="https://hehe-1234.xyz/tags/data_ingestion/">Data_Ingestion </a>
+    
+    <a href="https://hehe-1234.xyz/tags/deltalake/">DeltaLake </a>
     
     <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
     
@@ -564,8 +566,6 @@
     
     <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
-    
     <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
@@ -616,7 +616,7 @@
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;

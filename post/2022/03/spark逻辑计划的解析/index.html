@@ -88,6 +88,7 @@
         <li><a href="#相关逻辑和类">相关逻辑和类</a></li>
         <li><a href="#sql解析">SQL解析</a></li>
         <li><a href="#解析逻辑计划">解析逻辑计划</a></li>
+        <li><a href="#其他">其他</a></li>
       </ul>
     </li>
   </ul>
@@ -113,13 +114,13 @@
         <div class="post-content">
             <h2 id="相关逻辑和类">相关逻辑和类</h2>
 <p>
-        <a data-fancybox="gallery" href="http://woquhaha.gitee.io/pic_tech_1//post/2022/03/Spark%E9%80%BB%E8%BE%91%E8%AE%A1%E5%88%92%E7%9A%84%E8%A7%A3%E6%9E%90/1.png">
-            <img class="mx-auto" alt="" src="http://woquhaha.gitee.io/pic_tech_1//post/2022/03/Spark%E9%80%BB%E8%BE%91%E8%AE%A1%E5%88%92%E7%9A%84%E8%A7%A3%E6%9E%90/1.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHRoh.png">
+            <img class="mx-auto" alt="1" src="https://v1.ax1x.com/2024/05/23/7gHRoh.png" />
         </a>
     </p>
 <p>
-        <a data-fancybox="gallery" href="http://woquhaha.gitee.io/pic_tech_1//post/2022/03/Spark%E9%80%BB%E8%BE%91%E8%AE%A1%E5%88%92%E7%9A%84%E8%A7%A3%E6%9E%90/20.png">
-            <img class="mx-auto" alt="" src="http://woquhaha.gitee.io/pic_tech_1//post/2022/03/Spark%E9%80%BB%E8%BE%91%E8%AE%A1%E5%88%92%E7%9A%84%E8%A7%A3%E6%9E%90/20.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHtUY.png">
+            <img class="mx-auto" alt="2" src="https://v1.ax1x.com/2024/05/23/7gHtUY.png" />
         </a>
     </p>
 <h2 id="sql解析">SQL解析</h2>
@@ -128,13 +129,13 @@
 <p>入口点是 SparkSession#sql：</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> sql<span style="color:#ff79c6">(</span>sqlText<span style="color:#ff79c6">:</span> <span style="color:#8be9fd">String</span><span style="color:#ff79c6">)</span><span style="color:#ff79c6">:</span> <span style="color:#8be9fd">DataFrame</span> <span style="color:#ff79c6">=</span> withActive <span style="color:#ff79c6">{</span>
@@ -161,12 +162,12 @@
 </ul>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span>  <span style="color:#ff79c6">def</span> ofRows<span style="color:#ff79c6">(</span>sparkSession<span style="color:#ff79c6">:</span> <span style="color:#8be9fd">SparkSession</span><span style="color:#ff79c6">,</span> logicalPlan<span style="color:#ff79c6">:</span> <span style="color:#8be9fd">LogicalPlan</span><span style="color:#ff79c6">,</span> tracker<span style="color:#ff79c6">:</span> <span style="color:#8be9fd">QueryPlanningTracker</span><span style="color:#ff79c6">)</span>
@@ -180,10 +181,10 @@
 </div><p>这里将 Analyzer 绑定到 SessionState中，后者属于SparkSession</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span>  <span style="color:#ff79c6">lazy</span> <span style="color:#ff79c6">val</span> analyzed<span style="color:#ff79c6">:</span> <span style="color:#8be9fd">LogicalPlan</span> <span style="color:#ff79c6">=</span> executePhase<span style="color:#ff79c6">(</span><span style="color:#50fa7b">QueryPlanningTracker</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">ANALYSIS</span><span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
@@ -195,10 +196,10 @@
 </div><p>SessionState 中也绑定了其他一些对象：</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span>  <span style="color:#ff79c6">lazy</span> <span style="color:#ff79c6">val</span> catalog<span style="color:#ff79c6">:</span> <span style="color:#8be9fd">SessionCatalog</span> <span style="color:#ff79c6">=</span> catalogBuilder<span style="color:#ff79c6">()</span>
@@ -213,18 +214,18 @@
 而 ResolveTables 规则，是 Analyzed 的众多内置规则中的一个</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span>  <span style="color:#ff79c6">object</span> <span style="color:#50fa7b">ResolveTables</span> <span style="color:#ff79c6">extends</span> <span style="color:#50fa7b">Rule</span><span style="color:#ff79c6">[</span><span style="color:#8be9fd">LogicalPlan</span><span style="color:#ff79c6">]</span> <span style="color:#ff79c6">{</span>
@@ -244,13 +245,114 @@
 </div><p>而 lookupV2Relation 的主要内容如下：</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scala" data-lang="scala"><span style="display:flex;"><span><span style="color:#50fa7b">CatalogV2Util</span><span style="color:#ff79c6">.</span>loadTable<span style="color:#ff79c6">(</span>catalog<span style="color:#ff79c6">,</span> ident<span style="color:#ff79c6">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>这会触发到 我们自定义的 Catalog#loadTable，去获取真实的表的元数据信息</p>
+<h2 id="其他">其他</h2>
+<p>
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHrH9.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHrH9.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gH1Gm.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gH1Gm.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHPt4.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHPt4.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHz2H.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHz2H.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHJcU.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHJcU.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHCEZ.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHCEZ.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHXnq.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHXnq.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHnps.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHnps.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHfoI.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHfoI.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHIGa.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHIGa.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHMz7.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHMz7.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHsHV.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHsHV.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gH21L.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gH21L.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHdvB.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHdvB.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHZQG.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHZQG.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gH62J.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gH62J.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gK9Lb.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gK9Lb.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gHent.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gHent.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gKkGe.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gKkGe.png" />
+        </a>
+    
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gKBzP.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/05/23/7gKBzP.png" />
+        </a>
+    </p>
 
 			<script type="text/javascript"
         async
@@ -403,11 +505,11 @@ code.has-jax {
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (21)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (30)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (1)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (23)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (27)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
@@ -432,7 +534,7 @@ code.has-jax {
     
     <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (45)</a></li>
     
     <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
     
@@ -452,6 +554,8 @@ code.has-jax {
     <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
     
     <a href="https://hehe-1234.xyz/tags/data_ingestion/">Data_Ingestion </a>
+    
+    <a href="https://hehe-1234.xyz/tags/deltalake/">DeltaLake </a>
     
     <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
     
@@ -533,8 +637,6 @@ code.has-jax {
     
     <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
-    
     <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
@@ -595,7 +697,7 @@ code.has-jax {
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;

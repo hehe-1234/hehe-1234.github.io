@@ -104,7 +104,7 @@
             
             <span class="post-meta meta-tags">
                 <ul class="clearfix">
-                    <a href='/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95'>工作记录</a>
+                    <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
                 </ul>
             </span>
             
@@ -125,8 +125,8 @@
 <h3 id="整体架构">整体架构</h3>
 <p>总体的架构如下：<br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/1.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/1.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/22/7guZQ3.png">
+            <img class="mx-auto" alt="1" src="https://v1.ax1x.com/2024/05/22/7guZQ3.png" />
         </a>
       <br>
 对上述名词做一个解释：</p>
@@ -153,8 +153,8 @@
 </ul>
 <p>一个更完整的调用关系：<br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/2.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/2.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/22/7guen5.png">
+            <img class="mx-auto" alt="2" src="https://v1.ax1x.com/2024/05/22/7guen5.png" />
         </a>
         <br>
 从上图可以看到，proxy 和 engine是多对多的关系</p>
@@ -165,8 +165,8 @@
 </ul>
 <h3 id="动态启动">动态启动</h3>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/3.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/3.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/22/7gudcj.png">
+            <img class="mx-auto" alt="3" src="https://v1.ax1x.com/2024/05/22/7gudcj.png" />
         </a>
     </p>
 <p>上述的执行流程是：</p>
@@ -191,8 +191,8 @@
 <h3 id="engine的动态创建过程">engine的动态创建过程</h3>
 <p>执行过程：<br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/4.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/4.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/22/7gu62c.png">
+            <img class="mx-auto" alt="4" src="https://v1.ax1x.com/2024/05/22/7gu62c.png" />
         </a>
       <br>
 1、proxy通过api-server动态启动engine<br>
@@ -203,8 +203,8 @@
 <p>proxy 创建engine时，是通过 env的方式，将spark的参数传递给engine的<br>
 这样engine在启动的时候，通过env就可以拿到对应的参数了</p>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/5.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/5.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/22/7gu2Uf.png">
+            <img class="mx-auto" alt="5" src="https://v1.ax1x.com/2024/05/22/7gu2Uf.png" />
         </a>
       <br>
 如上，proxy会调用 spark-submit程序，来启动一个新pod<br>
@@ -221,8 +221,8 @@
 <li>proxy 到 engine，可以采用 SASL方式，因为客户端到proxy已经验证一次了，后面没必要再验证了，而SASL本身也是加密的</li>
 </ul>
 <p>
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/6.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/6.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/22/7gw9Lm.png">
+            <img class="mx-auto" alt="6" src="https://v1.ax1x.com/2024/05/22/7gw9Lm.png" />
         </a>
     </p>
 <h2 id="基于负载的选择">基于负载的选择</h2>
@@ -235,8 +235,8 @@
 </ul>
 <p>等节点变化，job变化时候，变更Zookeeper下的 固定节点<br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/7.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1/post/2022/08/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/7.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/22/7gwkG4.png">
+            <img class="mx-auto" alt="7" src="https://v1.ax1x.com/2024/05/22/7gwkG4.png" />
         </a>
     </p>
 <p>/扩展spar-driver/my-test/engine/172.16.18.99 这个znode 节点中存储的信息为：</p>
@@ -262,7 +262,7 @@
 <p>负载计算公式：</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#ff79c6">(</span>driver的核数 + driver的内存 + executor数量 * <span style="color:#ff79c6">(</span>executor的核数 + executor的内存<span style="color:#ff79c6">))</span>  / job数量
@@ -447,11 +447,11 @@ code.has-jax {
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (21)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (30)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (1)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (23)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (27)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
@@ -476,7 +476,7 @@ code.has-jax {
     
     <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (45)</a></li>
     
     <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
     
@@ -496,6 +496,8 @@ code.has-jax {
     <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
     
     <a href="https://hehe-1234.xyz/tags/data_ingestion/">Data_Ingestion </a>
+    
+    <a href="https://hehe-1234.xyz/tags/deltalake/">DeltaLake </a>
     
     <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
     
@@ -577,8 +579,6 @@ code.has-jax {
     
     <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
-    
     <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
@@ -639,7 +639,7 @@ code.has-jax {
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;

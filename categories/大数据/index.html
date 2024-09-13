@@ -220,34 +220,11 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/">Photon A Fast Query Engine for Lakehouse Systems</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年4月27日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
-            
-        </div>
-        
-        <div class="post-content">
-            Databricks 2022年在SIGMOD上发表的论文(最佳工业论文奖)，由于I/O方面有很多优化措施，而JVM的对向量化支持较差，之后用C++实现了向量化的执行引擎Photon，来实现进一步的性能提升；首先是从最底层scan开始替换，因为中间替换的代价较高，之后不断往上，直到某个算子Photon不能适配，则由列存转换为Spark的行存，退回到Spark执行，总体看性能可以提升好几倍
-            <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://hehe-1234.xyz/post/2023/07/presto%E5%9C%A8%E5%90%84%E5%A4%A7%E5%85%AC%E5%8F%B8%E7%9A%84%E5%BA%94%E7%94%A8/">Presto在各大公司的应用</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
-            2023年4月12日
+            2023年7月12日
         </date>
         
         <div class="post-meta meta-category">
@@ -258,7 +235,7 @@
         </div>
         
         <div class="post-content">
-            Presto在各大公司的应用
+            Presto在 B站、字节跳动等 各大公司的应用
             <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/07/presto%E5%9C%A8%E5%90%84%E5%A4%A7%E5%85%AC%E5%8F%B8%E7%9A%84%E5%BA%94%E7%94%A8/">阅读全文</a></p>
         </div>
     </article>
@@ -266,11 +243,11 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2022/11/flumejava%E8%AE%BA%E6%96%87/">FlumeJava: Easy, Efficient Data-Parallel Pipelines</a>
+                <a href="https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/">资源隔离修改配置动态加载</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
-            2022年11月10日
+            2023年5月14日
         </date>
         
         <div class="post-meta meta-category">
@@ -281,19 +258,19 @@
         </div>
         
         <div class="post-content">
-            FlumeJava论文:《FlumeJava: Easy, Efficient Data-Parallel Pipelines》翻译
-            <p class="readmore"><a href="https://hehe-1234.xyz/post/2022/11/flumejava%E8%AE%BA%E6%96%87/">阅读全文</a></p>
+            在资源隔离大功能的基础上，实现动态加载配置修改功能，当用户 alter 了资源配置表，会动态生效
+            <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/">阅读全文</a></p>
         </div>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2023/03/snowflake%E8%AE%BA%E6%96%87/">Snowflake论文</a>
+                <a href="https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/">资源隔离设计</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
-            2022年7月2日
+            2023年5月13日
         </date>
         
         <div class="post-meta meta-category">
@@ -304,8 +281,31 @@
         </div>
         
         <div class="post-content">
-            The Snowflake Elastic Data Warehouse 论文 2015年发表在 sigmod上的
-            <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/03/snowflake%E8%AE%BA%E6%96%87/">阅读全文</a></p>
+            基于高可用的两层调度方式，配合 k8s 实现一套资源隔离机制，并实现自定义的语法
+            <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hehe-1234.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/">镜像合并&amp;配置文件同步</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年5月12日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
+            
+        </div>
+        
+        <div class="post-content">
+            将业务镜像和底层基础镜像合并，去掉spark的k8s模板配置文件，通过init容器 + env + volumn方式实现
+            <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/">阅读全文</a></p>
         </div>
     </article>
     
@@ -412,11 +412,11 @@
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (21)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (30)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (15)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (1)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (23)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (27)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
     
@@ -441,7 +441,7 @@
     
     <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (46)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (45)</a></li>
     
     <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
     
@@ -461,6 +461,8 @@
     <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
     
     <a href="https://hehe-1234.xyz/tags/data_ingestion/">Data_Ingestion </a>
+    
+    <a href="https://hehe-1234.xyz/tags/deltalake/">DeltaLake </a>
     
     <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
     
@@ -542,8 +544,6 @@
     
     <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
-    
     <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
@@ -594,7 +594,7 @@
 <a id="rocket" href="#top"></a>
 <script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
 
-<script>
+<script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
 	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
