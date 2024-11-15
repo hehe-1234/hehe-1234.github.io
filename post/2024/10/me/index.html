@@ -83,10 +83,10 @@
         </date>
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#某大型-tob-企业">某大型 toB 企业</a></li>
-    <li><a href="#某大型互联网-企业">某大型互联网+ 企业</a></li>
+    <li><a href="#统一查询引擎">统一查询引擎</a></li>
+    <li><a href="#实时同步">实时同步</a></li>
+    <li><a href="#离线同步">离线同步</a></li>
     <li><a href="#paas-平台">PaaS 平台</a></li>
-    <li><a href="#web中间件">Web中间件</a></li>
   </ul>
 </nav>
         
@@ -108,13 +108,8 @@
         
         
         <div class="post-content">
-            <blockquote>
-<p>15 年工作经验，主要偏底层、中间件<br>
-有 JavaEE 应用服务器、PAAS 平台、大数据存储、大数据计算、ETL 等开发经验  <br>
-13 项国家发明专利</p>
-</blockquote>
-<h1 id="某大型-tob-企业">某大型 toB 企业</h1>
-<p>公司主打的湖仓一体查询引擎，作为其他产品的底座支撑<br>
+            <h1 id="统一查询引擎">统一查询引擎</h1>
+<p>公司主打的统一查询引擎，作为其他产品的底座支撑<br>
 主要工作</p>
 <ul>
 <li>参与初期版本设计(参考QuickSQL)</li>
@@ -131,7 +126,7 @@
 <ul>
 <li>扩展了 Spark，增加了元数据管理、对接各种数据源，以及自定义的一些优化规则</li>
 <li>按照集群的规模分为小、中、大版本，配合资源控制实现隔离机制</li>
-<li>可以自己管理存储，存储格式为 Delta-Lake，也可以将数据存储在外部
+<li>元数据存储在 Delta-Lake/ice-berg等、也可以存储在 关系DB 中
 
         <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/08/18/7G6zXt.jpg">
             <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/08/18/7G6zXt.jpg" />
@@ -149,10 +144,12 @@
         </a>
     </li>
 </ul>
+<h1 id="实时同步">实时同步</h1>
 <p>Oracle CDC 同步工具</p>
 <ul>
 <li>基于C++实现的开源项目OpenLogReplicator 做了改造</li>
-<li>支持读取ASM文件，支持RAC架构，支持高可用
+<li>支持读取ASM文件，支持RAC架构，支持高可用</li>
+<li>原始开源项目：https://github.com/bersler/OpenLogReplicator
 
         <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/09/20/7xriI9.png">
             <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/09/20/7xriI9.png" />
@@ -177,7 +174,7 @@
         </a>
     </li>
 </ul>
-<h1 id="某大型互联网-企业">某大型互联网+ 企业</h1>
+<h1 id="离线同步">离线同步</h1>
 <p>一款企业内部的数据同步产品<br>
 为公司多个大业务部门内，部门间提供数据同步功能<br>
 主要工作内容</p>
@@ -202,10 +199,9 @@
 <p>仿造谷歌 GAE 做的一款 PAAS 产品，是国内最早的 PAAS 产品<br>
 主要工作内容</p>
 <ul>
-<li>作为核心人员，参与了从无到有的 Java 平台发展过程，是 Java 平台的最主要贡献者</li>
+<li>作为核心人员，参与了从无到有的 Java 平台发展过程</li>
 <li>维护了 KV 存储系统，保证了系统的稳定性</li>
 <li>在经历了 10 年一见的故障后，找回了很多丢失数据，帮助平台挽回很大损失</li>
-<li>工作期间有过两个创新的技术，帮助平台实现了易用性和稳定性，后将这两个创新申请了专利</li>
 </ul>
 <p>整个平台的视角<br>
 
@@ -249,24 +245,6 @@
 
         <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/08/18/7G61wV.jpg">
             <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/08/18/7G61wV.jpg" />
-        </a>
-    </li>
-</ul>
-<h1 id="web中间件">Web中间件</h1>
-<p>主要工作内容</p>
-<ul>
-<li>测试选型，基于开源应用服务器做二次开发</li>
-<li>开发 Web 管理界面，深入研究 Web 模块</li>
-</ul>
-<p>产品架构</p>
-<ul>
-<li>Web 容器这个组件类似于 Tomcat、Jetty</li>
-<li>EJB 这个组件现在用的很少，尤其互联网企业几乎不会用，他相当于是现在的 RPC 框架</li>
-<li>其他的包括 JMS(类似于现在的消息队列)、安全、事务、JNDI，也是应用服务器内很重要的组件</li>
-<li>最底层的是一套框架支持可插拔组件，用来管理上述的各种大小模块
-
-        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/08/18/7G6SdI.jpg">
-            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2024/08/18/7G6SdI.jpg" />
         </a>
     </li>
 </ul>
