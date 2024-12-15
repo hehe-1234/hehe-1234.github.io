@@ -6,7 +6,25 @@
     <description>Recent content in 编程语言 on 一个程序员的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 02 May 2022 10:43:19 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Oct 2024 09:08:07 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>scala总结</title>
+      <link>https://hehe-1234.xyz/post/2024/10/scala_summary/</link>
+      <pubDate>Tue, 15 Oct 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2024/10/scala_summary/</guid>
+      <description>高阶函数、函数柯里化、隐式转换(类型，对象)，lazy延迟计算、最后一行默认返回return。内置的可变 不可变集合、自动类型推导、操作符重载、模式匹配、内部函数、对象的apply和unapply、None和Some以及Option。foldLeft ，增强的for 循环，协变、逆变，上界 和 下界</description>
+    </item>
+    
+    <item>
+      <title>Janino简单使用</title>
+      <link>https://hehe-1234.xyz/post/2024/05/janino/</link>
+      <pubDate>Sun, 05 May 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2024/05/janino/</guid>
+      <description>Janino的一些例子，Expression Evaluator，Script Evaluator，Class Body Evaluator，Simple Compiler，as a Source Code Class Loader，jsh - the Java shell，Compiler Plugin for Tomcat，code analysisi，debug</description>
+    </item>
+    
     <item>
       <title>Java的APM工具原理</title>
       <link>https://hehe-1234.xyz/post/2022/05/java%E7%9A%84apm%E5%B7%A5%E5%85%B7%E5%8E%9F%E7%90%86/</link>

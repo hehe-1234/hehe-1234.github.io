@@ -82,6 +82,75 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://hehe-1234.xyz/post/2024/10/parquet_4_spark/">Parquet for Spark</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2024年10月2日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
+            
+        </div>
+        
+        <div class="post-content">
+            Spark执行Delta的过程，通过自定义的format格式，到DataFrameWriter.saveToV1Source，在是到DeltaDataSource#createRealation，写入做优化事务处理，再用FileFormatWriter创建多个Task并行写入，之后就是到Parquet内部执行阶段。Parquet包含Row Groups，往下是Column Chunk，再往下是Page，文件尾部包含Footer和一些元数据信息。Spark是按行写入的，一次写一行，每行写对应的 column。Parquet编码包括Dictionary Encoding、Run Length Encoding (RLE)、Delta Encoding。读取的主要类是VectorizedParquetRecordReader执行一批读取，调用VectorizedColumnReaders(对应每个column)，再调用VectorizedValuesReader(读取一个column中的一段数据)，返回由上层应用消费 。
+            <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/10/parquet_4_spark/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hehe-1234.xyz/post/2024/09/spark_streaming/">Spark-Streaming 原理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2024年9月9日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
+            
+        </div>
+        
+        <div class="post-content">
+            spark streaming的基本原理，包括MicroBatchExecution，ContinuousExecution，通过IncrementalExecution + 状态实现micro-batch 并复用了spark 的所有查询逻辑；Source接口支持 getOffset，commit，可以自定义各种扩展实现；Sink包括：FileStreamSink、KafkaSink、DeltaSink、、ForeachBatchSink，ForeachWriteTable；Stateful将信息存如StateStoreRDD，保存到 HDFSBackedStateStoreProvider、RocksDBStateStoreProvider 中；Stream-Stream Join使用了StreamingSymmetricHashJoin，需要保证状态；Session Window同样也是通过插入一些流相关的算子 + 状态保存实现的
+            <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/09/spark_streaming/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hehe-1234.xyz/post/2024/03/compaction-_in_apache_iceberg/">Compaction in Apache Iceberg</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2024年2月29日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
+            
+        </div>
+        
+        <div class="post-content">
+            压缩，可以将多个小文件合并为大文件提高读性能，几种压缩策略：binpack（简单合并）、sort、z-order（适合多列查询），Expire Snapshots 可以删除过期的数据文件，还提供了参数可以自动删除manifest 文件、保留多少manifest文件，以及清除orphan 文件
+            <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/03/compaction-_in_apache_iceberg/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://hehe-1234.xyz/post/2024/03/the_life_of_iceberg/">The Life of a Read/Write Query for Apache Iceberg Tables</a>
             </h1>
         </header>
@@ -240,75 +309,6 @@
         </div>
     </article>
     
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/">资源隔离修改配置动态加载</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年5月14日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
-            
-        </div>
-        
-        <div class="post-content">
-            在资源隔离大功能的基础上，实现动态加载配置修改功能，当用户 alter 了资源配置表，会动态生效
-            <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/">资源隔离设计</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年5月13日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
-            
-        </div>
-        
-        <div class="post-content">
-            基于高可用的两层调度方式，配合 k8s 实现一套资源隔离机制，并实现自定义的语法
-            <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/">镜像合并&amp;配置文件同步</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年5月12日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a>
-            
-        </div>
-        
-        <div class="post-content">
-            将业务镜像和底层基础镜像合并，去掉spark的k8s模板配置文件，通过init容器 + env + volumn方式实现
-            <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/">阅读全文</a></p>
-        </div>
-    </article>
-    
 
     
 
@@ -328,6 +328,10 @@
     
     <li >
         <a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/page/3/">3</a>
+    </li>
+    
+    <li >
+        <a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/page/4/">4</a>
     </li>
     
 
@@ -360,7 +364,23 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://hehe-1234.xyz/post/2024/11/k8s_networks/" title="k8s 网络">k8s 网络</a>
+    </li>
+    
+    <li>
         <a href="https://hehe-1234.xyz/post/2024/10/me/" title="个人工作简介">个人工作简介</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/10/scala_summary/" title="scala总结">scala总结</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/10/parquet_4_spark/" title="Parquet for Spark">Parquet for Spark</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/09/spark_streaming/" title="Spark-Streaming 原理">Spark-Streaming 原理</a>
     </li>
     
     <li>
@@ -376,27 +396,11 @@
     </li>
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2024/03/the_life_of_iceberg/" title="The Life of a Read/Write Query for Apache Iceberg Tables">The Life of a Read/Write Query for Apache Iceberg Tables</a>
+        <a href="https://hehe-1234.xyz/post/2024/05/janino/" title="Janino简单使用">Janino简单使用</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2024/02/data_ingestion_architectural_patterns/" title="Data Ingestion: Architectural Patterns">Data Ingestion: Architectural Patterns</a>
-    </li>
-    
-    <li>
-        <a href="https://hehe-1234.xyz/post/2024/01/hms/" title="Hive MetaStore的实现和优化">Hive MetaStore的实现和优化</a>
-    </li>
-    
-    <li>
-        <a href="https://hehe-1234.xyz/post/2024/01/lakehouse_storage_systems/" title="Analyzing and Comparing Lakehouse Storage Systems">Analyzing and Comparing Lakehouse Storage Systems</a>
-    </li>
-    
-    <li>
-        <a href="https://hehe-1234.xyz/post/2023/11/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8E%86%E5%8F%B2/" title="The History of Big data">The History of Big data</a>
-    </li>
-    
-    <li>
-        <a href="https://hehe-1234.xyz/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="TPCx-HS优化总结">TPCx-HS优化总结</a>
+        <a href="https://hehe-1234.xyz/post/2024/03/spark_internal/" title="Spark原理-解析过程和Catalog">Spark原理-解析过程和Catalog</a>
     </li>
     
 </ul>
@@ -410,23 +414,23 @@
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (5)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (14)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (30)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (33)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (1)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (27)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (3)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (4)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (2)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (10)</a></li>
     
@@ -445,7 +449,7 @@
     
     <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2024%E5%B9%B4/">2024年 (8)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2024%E5%B9%B4/">2024年 (16)</a></li>
     
 </ul>
     </section>
@@ -464,11 +468,15 @@
     
     <a href="https://hehe-1234.xyz/tags/deltalake/">DeltaLake </a>
     
+    <a href="https://hehe-1234.xyz/tags/facebook/">Facebook </a>
+    
     <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
     
     <a href="https://hehe-1234.xyz/tags/hive/">Hive </a>
     
     <a href="https://hehe-1234.xyz/tags/iceberg/">iceberg </a>
+    
+    <a href="https://hehe-1234.xyz/tags/janino/">janino </a>
     
     <a href="https://hehe-1234.xyz/tags/k8s/">k8s </a>
     
@@ -491,6 +499,8 @@
     <a href="https://hehe-1234.xyz/tags/oceanbase/">OceanBase </a>
     
     <a href="https://hehe-1234.xyz/tags/openlogreplicator/">OpenLogReplicator </a>
+    
+    <a href="https://hehe-1234.xyz/tags/parquet/">parquet </a>
     
     <a href="https://hehe-1234.xyz/tags/paxos/">paxos </a>
     

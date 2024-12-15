@@ -6,7 +6,25 @@
     <description>Recent content in spark on 一个程序员的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 02 Jan 2023 10:35:19 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/tags/spark/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 09 Sep 2024 09:08:07 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/tags/spark/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spark-Streaming 原理</title>
+      <link>https://hehe-1234.xyz/post/2024/09/spark_streaming/</link>
+      <pubDate>Mon, 09 Sep 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2024/09/spark_streaming/</guid>
+      <description>spark streaming的基本原理，包括MicroBatchExecution，ContinuousExecution，通过IncrementalExecution + 状态实现micro-batch 并复用了spark 的所有查询逻辑；Source接口支持 getOffset，commit，可以自定义各种扩展实现；Sink包括：FileStreamSink、KafkaSink、DeltaSink、、ForeachBatchSink，ForeachWriteTable；Stateful将信息存如StateStoreRDD，保存到 HDFSBackedStateStoreProvider、RocksDBStateStoreProvider 中；Stream-Stream Join使用了StreamingSymmetricHashJoin，需要保证状态；Session Window同样也是通过插入一些流相关的算子 + 状态保存实现的</description>
+    </item>
+    
+    <item>
+      <title>Spark原理-解析过程和Catalog</title>
+      <link>https://hehe-1234.xyz/post/2024/03/spark_internal/</link>
+      <pubDate>Sat, 02 Mar 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2024/03/spark_internal/</guid>
+      <description>Spark解析过程和catalog</description>
+    </item>
+    
     <item>
       <title>Photon A Fast Query Engine for Lakehouse Systems</title>
       <link>https://hehe-1234.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/</link>

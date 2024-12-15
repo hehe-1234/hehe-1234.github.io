@@ -73,6 +73,29 @@
     <article class="post">
         <header>
             <h1 class="post-title">
+                <a href="https://hehe-1234.xyz/post/2024/11/k8s_networks/" title="k8s 网络">k8s 网络</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2024年11月4日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E6%9E%B6%E6%9E%84'>架构</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            覆盖网络，Flannel 的 UDP模式、xvlan模式、host-gw，Calico 采用了BGP做三层转发，为防止退化为 IPIP，需要设置 BGP 的跳数。 使用 Network Policy 做网络隔离，k8s 的网络本质都是连通的，像是弱多租户。CNI 插件 的网络插件。Service 是由 kube-proxy 组件，加上 iptables 来共同实现的；所谓 Ingress，就是 Service 的“Service”。 调度：根据 etcd 的变化选择合适的 Node 做调度，Priorities为节点打分；Pod 调度失败的情况(抢占、优先级)；K8S 中两个不可替代的组件：kube-apiserver、kubelet；核心是循环控制器检查，容器运行时：CRI，除了docker还有containerd，基于虚拟化的：Kata Containers、gVisor
+        </div>
+        <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/11/k8s_networks/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
                 <a href="https://hehe-1234.xyz/post/2024/10/me/" title="个人工作简介">个人工作简介</a>
             </h1>
         </header>
@@ -91,6 +114,75 @@
             工作简介，包括几份工作的主要工作内容、详细工作内容的链接、产品的架构设计图等
         </div>
         <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/10/me/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hehe-1234.xyz/post/2024/10/scala_summary/" title="scala总结">scala总结</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2024年10月15日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80'>编程语言</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            高阶函数、函数柯里化、隐式转换(类型，对象)，lazy延迟计算、最后一行默认返回return。内置的可变 不可变集合、自动类型推导、操作符重载、模式匹配、内部函数、对象的apply和unapply、None和Some以及Option。foldLeft ，增强的for 循环，协变、逆变，上界 和 下界
+        </div>
+        <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/10/scala_summary/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hehe-1234.xyz/post/2024/10/parquet_4_spark/" title="Parquet for Spark">Parquet for Spark</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2024年10月2日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            Spark执行Delta的过程，通过自定义的format格式，到DataFrameWriter.saveToV1Source，在是到DeltaDataSource#createRealation，写入做优化事务处理，再用FileFormatWriter创建多个Task并行写入，之后就是到Parquet内部执行阶段。Parquet包含Row Groups，往下是Column Chunk，再往下是Page，文件尾部包含Footer和一些元数据信息。Spark是按行写入的，一次写一行，每行写对应的 column。Parquet编码包括Dictionary Encoding、Run Length Encoding (RLE)、Delta Encoding。读取的主要类是VectorizedParquetRecordReader执行一批读取，调用VectorizedColumnReaders(对应每个column)，再调用VectorizedValuesReader(读取一个column中的一段数据)，返回由上层应用消费 。
+        </div>
+        <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/10/parquet_4_spark/">阅读全文</a></p>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hehe-1234.xyz/post/2024/09/spark_streaming/" title="Spark-Streaming 原理">Spark-Streaming 原理</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2024年9月9日
+        </date>
+        
+        <div class="post-meta">
+            <span>|</span>
+            
+            <span class="meta-category"><a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a></span>
+            
+        </div>
+        
+        <div class="post-content">
+            spark streaming的基本原理，包括MicroBatchExecution，ContinuousExecution，通过IncrementalExecution + 状态实现micro-batch 并复用了spark 的所有查询逻辑；Source接口支持 getOffset，commit，可以自定义各种扩展实现；Sink包括：FileStreamSink、KafkaSink、DeltaSink、、ForeachBatchSink，ForeachWriteTable；Stateful将信息存如StateStoreRDD，保存到 HDFSBackedStateStoreProvider、RocksDBStateStoreProvider 中；Stream-Stream Join使用了StreamingSymmetricHashJoin，需要保证状态；Session Window同样也是通过插入一些流相关的算子 + 状态保存实现的
+        </div>
+        <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/09/spark_streaming/">阅读全文</a></p>
     </article>
     
     <article class="post">
@@ -165,139 +257,47 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2024/03/the_life_of_iceberg/" title="The Life of a Read/Write Query for Apache Iceberg Tables">The Life of a Read/Write Query for Apache Iceberg Tables</a>
+                <a href="https://hehe-1234.xyz/post/2024/05/janino/" title="Janino简单使用">Janino简单使用</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
-            2024年2月26日
+            2024年5月5日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a></span>
+            <span class="meta-category"><a href='/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80'>编程语言</a></span>
             
         </div>
         
         <div class="post-content">
-            介绍了存储的结构，元数据层包括：manifest files、manifest list, metadata files，catalog指向最新的 metadata files；每一层都可以做裁减，包括数据层，介绍了读取、time travel过程，是自上往下的读取和裁减过程；写入过程：插入、删除、merge过程，写 过程是自下而上的，通过 切换catalog指向，利用OCC控制并发，实现ACID
+            Janino的一些例子，Expression Evaluator，Script Evaluator，Class Body Evaluator，Simple Compiler，as a Source Code Class Loader，jsh - the Java shell，Compiler Plugin for Tomcat，code analysisi，debug
         </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/03/the_life_of_iceberg/">阅读全文</a></p>
+        <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/05/janino/">阅读全文</a></p>
     </article>
     
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2024/02/data_ingestion_architectural_patterns/" title="Data Ingestion: Architectural Patterns">Data Ingestion: Architectural Patterns</a>
+                <a href="https://hehe-1234.xyz/post/2024/03/spark_internal/" title="Spark原理-解析过程和Catalog">Spark原理-解析过程和Catalog</a>
             </h1>
         </header>
         <date class="post-meta meta-date">
-            2024年1月15日
+            2024年3月2日
         </date>
         
         <div class="post-meta">
             <span>|</span>
             
-            <span class="meta-category"><a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a></span>
+            <span class="meta-category"><a href='/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90'>原理分析</a></span>
             
         </div>
         
         <div class="post-content">
-            data ingestion 的几种架构：Unified Data Repository、Data Virtualization、ETL、ELT、Stream Processing
+            Spark解析过程和catalog
         </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/02/data_ingestion_architectural_patterns/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2024/01/hms/" title="Hive MetaStore的实现和优化">Hive MetaStore的实现和优化</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2024年1月14日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            Hive MetaStore的实现原理，Hive Thrift 客户端和服务端的实现，MetaCat对 HMS 的兼容以及优化，Spark调用 HMS 的逻辑
-        </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/01/hms/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2024/01/lakehouse_storage_systems/" title="Analyzing and Comparing Lakehouse Storage Systems">Analyzing and Comparing Lakehouse Storage Systems</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2024年1月10日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            讨论了 LakeHouse 系统设计的难点，在不可变高延迟的对象存储之上，增加事务特性，三大系统都使用了OCC做隔离，事务实现都用了MVCC，源数据库管理delta和hudi用了表格式，iceberg用了层次存储(单节点处理)，数据更新三者都支持CoW(适合读多写少场景)，hudi和iceberg支持MoR(适合写多的场景)
-        </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/01/lakehouse_storage_systems/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2023/11/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8E%86%E5%8F%B2/" title="The History of Big data">The History of Big data</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年11月19日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            从谷歌的三篇论文到Hadoop的诞生，再是各种开源产品依次出现，Hive对MapReduce的易用性改进，三大Hadoop 供应商，谷歌新三篇论文诞生了交互式查询（三大供应商推出）以及各种开源存储格式，Spark的出现和各种流处理系统，Netflix也证明了云的强大，流批一体以及各种分布式调度系统，基于云的数仓产品出现，HDFS替换上云、容器化出现、全托管数仓Modern Data Stack、深度学习对Hadoop的影响，三大供应商被收购，三大开放表格存储的出现，几个元数据管理产品，几个新的调度框架，LakeHouse的出现以及相关类似云产品
-        </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/11/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8E%86%E5%8F%B2/">阅读全文</a></p>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="TPCx-HS优化总结">TPCx-HS优化总结</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年11月9日
-        </date>
-        
-        <div class="post-meta">
-            <span>|</span>
-            
-            <span class="meta-category"><a href='/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE'>大数据</a></span>
-            
-        </div>
-        
-        <div class="post-content">
-            TPCx-HS优化总结
-        </div>
-        <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/">阅读全文</a></p>
+        <p class="readmore"><a href="https://hehe-1234.xyz/post/2024/03/spark_internal/">阅读全文</a></p>
     </article>
     
     
@@ -308,53 +308,57 @@
     
 
     
-    <li  class="current">
-        <a href="https://hehe-1234.xyz/">1</a>
-    </li>
+
     
-    <li >
-        <a href="https://hehe-1234.xyz/page/2/">2</a>
-    </li>
+        
     
-    <li >
-        <a href="https://hehe-1234.xyz/page/3/">3</a>
-    </li>
-    
-    <li >
-        <a href="https://hehe-1234.xyz/page/4/">4</a>
-    </li>
-    
-    <li >
-        <a href="https://hehe-1234.xyz/page/5/">5</a>
-    </li>
-    
-    <li >
-        <a href="https://hehe-1234.xyz/page/6/">6</a>
-    </li>
-    
-    <li >
-        <a href="https://hehe-1234.xyz/page/7/">7</a>
-    </li>
-    
-    <li >
-        <a href="https://hehe-1234.xyz/page/8/">8</a>
-    </li>
-    
-    <li >
-        <a href="https://hehe-1234.xyz/page/9/">9</a>
-    </li>
-    
-    <li >
-        <a href="https://hehe-1234.xyz/page/10/">10</a>
-    </li>
     
 
     
+        
+        
+        <li  class="current">
+            <a href="https://hehe-1234.xyz/">1</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://hehe-1234.xyz/page/2/">2</a>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://hehe-1234.xyz/page/3/">3</a>
+        </li>
+        
+    
+        
+        <li>
+            <span>...</span>
+        </li>
+        
+    
+        
+        
+        <li >
+            <a href="https://hehe-1234.xyz/page/11/">11</a>
+        </li>
+        
+    
+
+    
+    
+
     <li class="next">
         <a href="https://hehe-1234.xyz/page/2/">下一页</a>
     </li>
     
 </ol>
+
 
 
 
@@ -378,7 +382,23 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://hehe-1234.xyz/post/2024/11/k8s_networks/" title="k8s 网络">k8s 网络</a>
+    </li>
+    
+    <li>
         <a href="https://hehe-1234.xyz/post/2024/10/me/" title="个人工作简介">个人工作简介</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/10/scala_summary/" title="scala总结">scala总结</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/10/parquet_4_spark/" title="Parquet for Spark">Parquet for Spark</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/09/spark_streaming/" title="Spark-Streaming 原理">Spark-Streaming 原理</a>
     </li>
     
     <li>
@@ -394,27 +414,11 @@
     </li>
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2024/03/the_life_of_iceberg/" title="The Life of a Read/Write Query for Apache Iceberg Tables">The Life of a Read/Write Query for Apache Iceberg Tables</a>
+        <a href="https://hehe-1234.xyz/post/2024/05/janino/" title="Janino简单使用">Janino简单使用</a>
     </li>
     
     <li>
-        <a href="https://hehe-1234.xyz/post/2024/02/data_ingestion_architectural_patterns/" title="Data Ingestion: Architectural Patterns">Data Ingestion: Architectural Patterns</a>
-    </li>
-    
-    <li>
-        <a href="https://hehe-1234.xyz/post/2024/01/hms/" title="Hive MetaStore的实现和优化">Hive MetaStore的实现和优化</a>
-    </li>
-    
-    <li>
-        <a href="https://hehe-1234.xyz/post/2024/01/lakehouse_storage_systems/" title="Analyzing and Comparing Lakehouse Storage Systems">Analyzing and Comparing Lakehouse Storage Systems</a>
-    </li>
-    
-    <li>
-        <a href="https://hehe-1234.xyz/post/2023/11/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8E%86%E5%8F%B2/" title="The History of Big data">The History of Big data</a>
-    </li>
-    
-    <li>
-        <a href="https://hehe-1234.xyz/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/" title="TPCx-HS优化总结">TPCx-HS优化总结</a>
+        <a href="https://hehe-1234.xyz/post/2024/03/spark_internal/" title="Spark原理-解析过程和Catalog">Spark原理-解析过程和Catalog</a>
     </li>
     
 </ul>
@@ -428,23 +432,23 @@
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (5)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (14)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (30)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (33)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (1)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (27)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (3)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (4)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (2)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (10)</a></li>
     
@@ -463,7 +467,7 @@
     
     <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2024%E5%B9%B4/">2024年 (8)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2024%E5%B9%B4/">2024年 (16)</a></li>
     
 </ul>
     </section>
@@ -482,11 +486,15 @@
     
     <a href="https://hehe-1234.xyz/tags/deltalake/">DeltaLake </a>
     
+    <a href="https://hehe-1234.xyz/tags/facebook/">Facebook </a>
+    
     <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
     
     <a href="https://hehe-1234.xyz/tags/hive/">Hive </a>
     
     <a href="https://hehe-1234.xyz/tags/iceberg/">iceberg </a>
+    
+    <a href="https://hehe-1234.xyz/tags/janino/">janino </a>
     
     <a href="https://hehe-1234.xyz/tags/k8s/">k8s </a>
     
@@ -509,6 +517,8 @@
     <a href="https://hehe-1234.xyz/tags/oceanbase/">OceanBase </a>
     
     <a href="https://hehe-1234.xyz/tags/openlogreplicator/">OpenLogReplicator </a>
+    
+    <a href="https://hehe-1234.xyz/tags/parquet/">parquet </a>
     
     <a href="https://hehe-1234.xyz/tags/paxos/">paxos </a>
     

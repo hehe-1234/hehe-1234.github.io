@@ -6,13 +6,49 @@
     <description>Recent content in Tags on 一个程序员的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 24 Oct 2024 09:13:07 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Nov 2024 09:08:07 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>k8s</title>
+      <link>https://hehe-1234.xyz/tags/k8s/</link>
+      <pubDate>Mon, 04 Nov 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/tags/k8s/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>工作记录</title>
       <link>https://hehe-1234.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/</link>
       <pubDate>Thu, 24 Oct 2024 09:13:07 +0800</pubDate>
       
       <guid>https://hehe-1234.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>scala</title>
+      <link>https://hehe-1234.xyz/tags/scala/</link>
+      <pubDate>Tue, 15 Oct 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/tags/scala/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>parquet</title>
+      <link>https://hehe-1234.xyz/tags/parquet/</link>
+      <pubDate>Wed, 02 Oct 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/tags/parquet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>spark</title>
+      <link>https://hehe-1234.xyz/tags/spark/</link>
+      <pubDate>Mon, 09 Sep 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/tags/spark/</guid>
       <description></description>
     </item>
     
@@ -26,11 +62,29 @@
     </item>
     
     <item>
+      <title>janino</title>
+      <link>https://hehe-1234.xyz/tags/janino/</link>
+      <pubDate>Sun, 05 May 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/tags/janino/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>iceberg</title>
       <link>https://hehe-1234.xyz/tags/iceberg/</link>
-      <pubDate>Mon, 26 Feb 2024 09:08:07 +0800</pubDate>
+      <pubDate>Thu, 29 Feb 2024 09:08:07 +0800</pubDate>
       
       <guid>https://hehe-1234.xyz/tags/iceberg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Facebook</title>
+      <link>https://hehe-1234.xyz/tags/facebook/</link>
+      <pubDate>Fri, 02 Feb 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/tags/facebook/</guid>
       <description></description>
     </item>
     
@@ -206,15 +260,6 @@
     </item>
     
     <item>
-      <title>spark</title>
-      <link>https://hehe-1234.xyz/tags/spark/</link>
-      <pubDate>Mon, 02 Jan 2023 10:35:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/tags/spark/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>MySQL</title>
       <link>https://hehe-1234.xyz/tags/mysql/</link>
       <pubDate>Sun, 01 Jan 2023 08:15:19 +0800</pubDate>
@@ -256,15 +301,6 @@
       <pubDate>Sat, 15 Oct 2022 12:12:19 +0800</pubDate>
       
       <guid>https://hehe-1234.xyz/tags/b%E6%A0%91/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>k8s</title>
-      <link>https://hehe-1234.xyz/tags/k8s/</link>
-      <pubDate>Sun, 18 Sep 2022 12:12:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/tags/k8s/</guid>
       <description></description>
     </item>
     
@@ -364,15 +400,6 @@
       <pubDate>Sat, 26 Feb 2022 15:15:11 +0800</pubDate>
       
       <guid>https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>scala</title>
-      <link>https://hehe-1234.xyz/tags/scala/</link>
-      <pubDate>Thu, 24 Feb 2022 18:35:31 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/tags/scala/</guid>
       <description></description>
     </item>
     

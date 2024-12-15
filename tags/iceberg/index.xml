@@ -6,7 +6,16 @@
     <description>Recent content in iceberg on 一个程序员的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 26 Feb 2024 09:08:07 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/tags/iceberg/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Feb 2024 09:08:07 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/tags/iceberg/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Compaction in Apache Iceberg</title>
+      <link>https://hehe-1234.xyz/post/2024/03/compaction-_in_apache_iceberg/</link>
+      <pubDate>Thu, 29 Feb 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2024/03/compaction-_in_apache_iceberg/</guid>
+      <description>压缩，可以将多个小文件合并为大文件提高读性能，几种压缩策略：binpack（简单合并）、sort、z-order（适合多列查询），Expire Snapshots 可以删除过期的数据文件，还提供了参数可以自动删除manifest 文件、保留多少manifest文件，以及清除orphan 文件</description>
+    </item>
+    
     <item>
       <title>The Life of a Read/Write Query for Apache Iceberg Tables</title>
       <link>https://hehe-1234.xyz/post/2024/03/the_life_of_iceberg/</link>

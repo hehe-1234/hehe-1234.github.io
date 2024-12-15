@@ -6,7 +6,16 @@
     <description>Recent content in 2024年 on 一个程序员的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 24 Oct 2024 09:13:07 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/years/2024%E5%B9%B4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Nov 2024 09:08:07 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/years/2024%E5%B9%B4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>k8s 网络</title>
+      <link>https://hehe-1234.xyz/post/2024/11/k8s_networks/</link>
+      <pubDate>Mon, 04 Nov 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2024/11/k8s_networks/</guid>
+      <description>覆盖网络，Flannel 的 UDP模式、xvlan模式、host-gw，Calico 采用了BGP做三层转发，为防止退化为 IPIP，需要设置 BGP 的跳数。 使用 Network Policy 做网络隔离，k8s 的网络本质都是连通的，像是弱多租户。CNI 插件 的网络插件。Service 是由 kube-proxy 组件，加上 iptables 来共同实现的；所谓 Ingress，就是 Service 的“Service”。 调度：根据 etcd 的变化选择合适的 Node 做调度，Priorities为节点打分；Pod 调度失败的情况(抢占、优先级)；K8S 中两个不可替代的组件：kube-apiserver、kubelet；核心是循环控制器检查，容器运行时：CRI，除了docker还有containerd，基于虚拟化的：Kata Containers、gVisor</description>
+    </item>
+    
     <item>
       <title>个人工作简介</title>
       <link>https://hehe-1234.xyz/post/2024/10/me/</link>
@@ -14,6 +23,33 @@
       
       <guid>https://hehe-1234.xyz/post/2024/10/me/</guid>
       <description>工作简介，包括几份工作的主要工作内容、详细工作内容的链接、产品的架构设计图等</description>
+    </item>
+    
+    <item>
+      <title>scala总结</title>
+      <link>https://hehe-1234.xyz/post/2024/10/scala_summary/</link>
+      <pubDate>Tue, 15 Oct 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2024/10/scala_summary/</guid>
+      <description>高阶函数、函数柯里化、隐式转换(类型，对象)，lazy延迟计算、最后一行默认返回return。内置的可变 不可变集合、自动类型推导、操作符重载、模式匹配、内部函数、对象的apply和unapply、None和Some以及Option。foldLeft ，增强的for 循环，协变、逆变，上界 和 下界</description>
+    </item>
+    
+    <item>
+      <title>Parquet for Spark</title>
+      <link>https://hehe-1234.xyz/post/2024/10/parquet_4_spark/</link>
+      <pubDate>Wed, 02 Oct 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2024/10/parquet_4_spark/</guid>
+      <description>Spark执行Delta的过程，通过自定义的format格式，到DataFrameWriter.saveToV1Source，在是到DeltaDataSource#createRealation，写入做优化事务处理，再用FileFormatWriter创建多个Task并行写入，之后就是到Parquet内部执行阶段。Parquet包含Row Groups，往下是Column Chunk，再往下是Page，文件尾部包含Footer和一些元数据信息。Spark是按行写入的，一次写一行，每行写对应的 column。Parquet编码包括Dictionary Encoding、Run Length Encoding (RLE)、Delta Encoding。读取的主要类是VectorizedParquetRecordReader执行一批读取，调用VectorizedColumnReaders(对应每个column)，再调用VectorizedValuesReader(读取一个column中的一段数据)，返回由上层应用消费 。</description>
+    </item>
+    
+    <item>
+      <title>Spark-Streaming 原理</title>
+      <link>https://hehe-1234.xyz/post/2024/09/spark_streaming/</link>
+      <pubDate>Mon, 09 Sep 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2024/09/spark_streaming/</guid>
+      <description>spark streaming的基本原理，包括MicroBatchExecution，ContinuousExecution，通过IncrementalExecution + 状态实现micro-batch 并复用了spark 的所有查询逻辑；Source接口支持 getOffset，commit，可以自定义各种扩展实现；Sink包括：FileStreamSink、KafkaSink、DeltaSink、、ForeachBatchSink，ForeachWriteTable；Stateful将信息存如StateStoreRDD，保存到 HDFSBackedStateStoreProvider、RocksDBStateStoreProvider 中；Stream-Stream Join使用了StreamingSymmetricHashJoin，需要保证状态；Session Window同样也是通过插入一些流相关的算子 + 状态保存实现的</description>
     </item>
     
     <item>
@@ -44,12 +80,48 @@
     </item>
     
     <item>
+      <title>Janino简单使用</title>
+      <link>https://hehe-1234.xyz/post/2024/05/janino/</link>
+      <pubDate>Sun, 05 May 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2024/05/janino/</guid>
+      <description>Janino的一些例子，Expression Evaluator，Script Evaluator，Class Body Evaluator，Simple Compiler，as a Source Code Class Loader，jsh - the Java shell，Compiler Plugin for Tomcat，code analysisi，debug</description>
+    </item>
+    
+    <item>
+      <title>Spark原理-解析过程和Catalog</title>
+      <link>https://hehe-1234.xyz/post/2024/03/spark_internal/</link>
+      <pubDate>Sat, 02 Mar 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2024/03/spark_internal/</guid>
+      <description>Spark解析过程和catalog</description>
+    </item>
+    
+    <item>
+      <title>Compaction in Apache Iceberg</title>
+      <link>https://hehe-1234.xyz/post/2024/03/compaction-_in_apache_iceberg/</link>
+      <pubDate>Thu, 29 Feb 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2024/03/compaction-_in_apache_iceberg/</guid>
+      <description>压缩，可以将多个小文件合并为大文件提高读性能，几种压缩策略：binpack（简单合并）、sort、z-order（适合多列查询），Expire Snapshots 可以删除过期的数据文件，还提供了参数可以自动删除manifest 文件、保留多少manifest文件，以及清除orphan 文件</description>
+    </item>
+    
+    <item>
       <title>The Life of a Read/Write Query for Apache Iceberg Tables</title>
       <link>https://hehe-1234.xyz/post/2024/03/the_life_of_iceberg/</link>
       <pubDate>Mon, 26 Feb 2024 09:08:07 +0800</pubDate>
       
       <guid>https://hehe-1234.xyz/post/2024/03/the_life_of_iceberg/</guid>
       <description>介绍了存储的结构，元数据层包括：manifest files、manifest list, metadata files，catalog指向最新的 metadata files；每一层都可以做裁减，包括数据层，介绍了读取、time travel过程，是自上往下的读取和裁减过程；写入过程：插入、删除、merge过程，写 过程是自下而上的，通过 切换catalog指向，利用OCC控制并发，实现ACID</description>
+    </item>
+    
+    <item>
+      <title>Data engineering at Meta</title>
+      <link>https://hehe-1234.xyz/post/2024/02/data-engineering-at-meta/</link>
+      <pubDate>Fri, 02 Feb 2024 09:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2024/02/data-engineering-at-meta/</guid>
+      <description>High-Level Overview of the internal tech stack</description>
     </item>
     
     <item>
