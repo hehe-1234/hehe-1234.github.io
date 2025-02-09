@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+
+    <title>云环境中的日志收集和处理方案 | 一个程序员的博客</title>
+    <meta property="og:title" content="云环境中的日志收集和处理方案 - 一个程序员的博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content='2025-01-27T01:08:07&#43;08:00'>
+        
+        
+    <meta property="article:modified_time" content='2025-01-27T01:08:07&#43;08:00'>
+        
+    <meta name="Keywords" content="">
+    <meta name="description" content="云环境中的日志收集和处理方案">
+        <meta name="author" content="隔壁老王">
+        
+    <meta property="og:url" content="https://hehe-1234.xyz/post/2025/01/logs_collection_based_cloud/">
+    <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
+
+    <link rel="stylesheet" href='/css/normalize.css'>
+    <link rel="stylesheet" href='/css/style.css'>
+    <script type="text/javascript" src="//cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+    
+    
+        <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" rel="stylesheet">
+    
+    
+    
+    
+</head>
+
+
+<body>
+    <header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://hehe-1234.xyz/">
+                        一个程序员的博客
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://hehe-1234.xyz/">首页</a>
+                    
+                    <a  href="https://hehe-1234.xyz/archives/" title="归档">归档</a>
+                    
+                    <a  href="https://hehe-1234.xyz/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div id="body">
+        <div class="container">
+            <div class="col-group">
+
+                <div class="col-8" id="main">
+                    
+<div class="res-cons">
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">云环境中的日志收集和处理方案</h1>
+        </header>
+        <date class="post-meta meta-date">
+            2025年1月27日
+        </date>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#日志收集">日志收集</a>
+      <ul>
+        <li><a href="#两种方式">两种方式</a></li>
+      </ul>
+    </li>
+    <li><a href="#处理日志">处理日志</a>
+      <ul>
+        <li><a href="#写-kafka">写 kafka</a></li>
+        <li><a href="#直接写共享存储">直接写共享存储</a></li>
+        <li><a href="#直接写-s3">直接写 S3</a></li>
+        <li><a href="#使用raft-组日志集群">使用raft 组日志集群</a></li>
+        <li><a href="#使用-newsql">使用 NewSQL</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ul>
+    </li>
+    <li><a href="#调度">调度</a>
+      <ul>
+        <li><a href="#spark端">Spark端</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        
+        <div class="post-meta">
+            
+            <span class="post-meta meta-tags">
+                <ul class="clearfix">
+                    <a href='/categories/%E6%9E%B6%E6%9E%84'>架构</a>
+                </ul>
+            </span>
+            
+        </div>
+        
+        
+        <div class="post-meta">
+            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span>
+                    阅读</span></span>
+        </div>
+        
+        
+        <div class="post-content">
+            <h1 id="日志收集">日志收集</h1>
+<h2 id="两种方式">两种方式</h2>
+<p>这里是将<code>pod</code>中的日志收集，放到一个指定的地方<br>
+首先是将程序中的日志能采集到，大致有两种方式</p>
+<ul>
+<li>通过插件将日志重定向到指定目的地</li>
+<li>用辅助程序采集<strong>pod</strong>中日志，并重定向</li>
+</ul>
+<p>两种方式处理如下</p>
+<ul>
+<li>都是将日志写到一个指定的地方</li>
+<li>区别是由程序本身去做，还是由额外的程序去捕获
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2025/01/27/7WP3EP.png">
+            <img class="mx-auto" alt="0-a" src="https://v1.ax1x.com/2025/01/27/7WP3EP.png" />
+        </a>
+    </li>
+</ul>
+<p>日志扩展</p>
+<ul>
+<li>比如 log4j，需要实现一个自定义的 appender</li>
+<li>修改配置文件，用 log4j 的自定义扩展，写入指定的目的地</li>
+</ul>
+<p>配置如下：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>rootLogger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">level</span> <span style="color:#ff79c6">=</span> info
+</span></span><span style="display:flex;"><span>rootLogger<span style="color:#ff79c6">.</span><span style="color:#50fa7b">appenderRef</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">customRolling</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">ref</span> <span style="color:#ff79c6">=</span> myRollingFileAppender
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Define the custom rolling appender
+</span></span><span style="display:flex;"><span>appender<span style="color:#ff79c6">.</span><span style="color:#50fa7b">myRollingFileAppender</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">type</span> <span style="color:#ff79c6">=</span> MyRollingFile
+</span></span><span style="display:flex;"><span>appender<span style="color:#ff79c6">.</span><span style="color:#50fa7b">myRollingFileAppender</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">name</span> <span style="color:#ff79c6">=</span> myRollingFileAppender
+</span></span><span style="display:flex;"><span>appender<span style="color:#ff79c6">.</span><span style="color:#50fa7b">myRollingFileAppender</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">fileName</span> <span style="color:#ff79c6">=</span> cyber<span style="color:#ff79c6">.</span><span style="color:#50fa7b">log</span>
+</span></span><span style="display:flex;"><span>appender<span style="color:#ff79c6">.</span><span style="color:#50fa7b">myRollingFileAppender</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">filePattern</span> <span style="color:#ff79c6">=</span> cyber<span style="color:#ff79c6">-%</span>d<span style="color:#ff79c6">{</span>yyyy<span style="color:#ff79c6">-</span>MM<span style="color:#ff79c6">-</span>dd<span style="color:#ff79c6">}.%</span>i<span style="color:#ff79c6">.</span><span style="color:#50fa7b">log</span>
+</span></span><span style="display:flex;"><span>appender<span style="color:#ff79c6">.</span><span style="color:#50fa7b">myRollingFileAppender</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">layout</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">type</span> <span style="color:#ff79c6">=</span> PatternLayout
+</span></span><span style="display:flex;"><span>appender<span style="color:#ff79c6">.</span><span style="color:#50fa7b">myRollingFileAppender</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">layout</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">pattern</span> <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">%</span>d<span style="color:#ff79c6">{</span>yyyy<span style="color:#ff79c6">-</span>MM<span style="color:#ff79c6">-</span>dd HH<span style="color:#ff79c6">:</span>mm<span style="color:#ff79c6">:</span>ss<span style="color:#ff79c6">}</span> <span style="color:#ff79c6">%-</span>5p <span style="color:#ff79c6">%</span>c<span style="color:#ff79c6">{</span>1<span style="color:#ff79c6">}:%</span>L <span style="color:#ff79c6">-</span> <span style="color:#ff79c6">%</span>m<span style="color:#ff79c6">%</span>n
+</span></span><span style="display:flex;"><span>appender<span style="color:#ff79c6">.</span><span style="color:#50fa7b">myRollingFileAppender</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">policies</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">type</span> <span style="color:#ff79c6">=</span> Policies
+</span></span><span style="display:flex;"><span>appender<span style="color:#ff79c6">.</span><span style="color:#50fa7b">myRollingFileAppender</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">policies</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">type</span> <span style="color:#ff79c6">=</span> SizeBasedTriggeringPolicy
+</span></span><span style="display:flex;"><span>appender<span style="color:#ff79c6">.</span><span style="color:#50fa7b">myRollingFileAppender</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">policies</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">size</span> <span style="color:#ff79c6">=</span> 10MB
+</span></span><span style="display:flex;"><span>appender<span style="color:#ff79c6">.</span><span style="color:#50fa7b">myRollingFileAppender</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">strategy</span><span style="color:#ff79c6">.</span><span style="color:#50fa7b">type</span> <span style="color:#ff79c6">=</span> DefaultRolloverStrategy
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于应用程序来说，需要增加一些启动参数</p>
+<ul>
+<li>记录角色， -Drole=spark，或者 flink</li>
+<li>记录 application_id、executor_id</li>
+<li>以及路径前缀(将日志写入到哪里)</li>
+<li>注意这种模式下，一般需要将日志写入到 NFS 这种共享存储</li>
+<li>当程序退出后，在这个目录下写一个标志文件，表示文件退出了</li>
+<li>当然，程序启动的时候，如果有这个标志文件，需要先清理掉</li>
+<li>对于 System.out 和 err ，需要做重定向</li>
+</ul>
+<h1 id="处理日志">处理日志</h1>
+<h2 id="写-kafka">写 kafka</h2>
+<p>这里是将日志通过插件写入到kafka<br>
+log-service</p>
+<ul>
+<li>消费kafka，将日志写入到内部的buffer</li>
+<li>后面有 writer 写入到 NFS，注意这里还要有 ack 机制</li>
+<li>其他还有 日志定期清理日志，迁移到 s3 模块
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2025/01/27/7WPktG.png">
+            <img class="mx-auto" alt="1-a" src="https://v1.ax1x.com/2025/01/27/7WPktG.png" />
+        </a>
+    </li>
+</ul>
+<p>log-sumer</p>
+<ul>
+<li>从kafka 读取日志，写入到内部的 channel 中</li>
+<li>这里的 channel 可以做限流，记录等额外的功能</li>
+<li>之后有另外一个 writer 负责读取 channel，将日志写入 NFS</li>
+<li>同时还需要做日志轮转处理，以及 迁移到 s3
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2025/01/27/7W1opL.png">
+            <img class="mx-auto" alt="1-b" src="https://v1.ax1x.com/2025/01/27/7W1opL.png" />
+        </a>
+    </li>
+</ul>
+<h2 id="直接写共享存储">直接写共享存储</h2>
+<p>跟第一种差不多，但是少了 kafka 的处理部分<br>
+log-service</p>
+<ul>
+<li>有一个日志查询服务，用户可以通过 application_id 来查询日志文件内容</li>
+<li>为了解决单个目录下小文件过多问题，需要增加一个 hash 前缀</li>
+<li>可以设置为 20,003，这是一个质数，也就是一个目录下最多有2W文件</li>
+<li>目录为: hash/application_id/executor_id/xx.log</li>
+<li>hash 最多2W个，一天产生 10W个应用，算算可以用几十年了
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2025/01/27/7WPBoB.png">
+            <img class="mx-auto" alt="2-a" src="https://v1.ax1x.com/2025/01/27/7WPBoB.png" />
+        </a>
+    </li>
+</ul>
+<p>日志清理</p>
+<ul>
+<li>一个日志清理模块，可以清理disk，NFS</li>
+<li>以及清理策略，根据时间戳，可以目录下是否包括一个 标志文件来清理</li>
+<li>比如: /data/spark/cluster_logs/14937/app-12345/executor-17</li>
+<li>路径前缀是：/data/spark/cluster_logs，产生了 14937 这个 hash 目录</li>
+<li>然后是 app-12345，清理程序根据app-12345 是否空了，来决定是否删除 app-12345</li>
+<li>同样逻辑，清理下面的 driver 和 executor</li>
+<li>最后将日志复制到 S3、或者 minio；这里需要先复制到 s3，再清理</li>
+<li>如果复制成功，没删除，下一次处理的时候会覆盖 s3并清理文件</li>
+<li>最后删除目录下的标志文件
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2025/01/27/7WPmyt.png">
+            <img class="mx-auto" alt="2-b" src="https://v1.ax1x.com/2025/01/27/7WPmyt.png" />
+        </a>
+    </li>
+</ul>
+<p>多个节点处理</p>
+<ul>
+<li>为防止日志太多单个节点处理不过来，可以启动多个节点</li>
+<li>但多个节点可能会重复处理一个文件，所以每个节点处理前</li>
+<li>先获取文件列表，然后 shuffle一次，这样每个节点处理的目录就不一样了，这种方式最简单</li>
+<li>也可以将文件写入 红黑树，然后转换成 一致性hash 的环形</li>
+<li>根据当前的节点 hash，定位到环的一个为止，然后顺时针处理，这样每段由不同节点处理</li>
+<li>虽然每个节点都遍历了全部目录，但是非自己处理的基本都是空的(被别人处理过了)，所以效率会提升</li>
+</ul>
+<h2 id="直接写-s3">直接写 S3</h2>
+<p>这种方式比较简单</p>
+<ul>
+<li>日志直接写入到 s3，但是会产生很多小文件</li>
+<li>需要定期将小文件合并</li>
+<li>同理提供query 服务，可以查询 s3 上的日志文件</li>
+<li>这里查询的话会麻烦一些了，可能需要查多个 日志小文件
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2025/01/27/7WP98J.png">
+            <img class="mx-auto" alt="3" src="https://v1.ax1x.com/2025/01/27/7WP98J.png" />
+        </a>
+    </li>
+</ul>
+<h2 id="使用raft-组日志集群">使用raft 组日志集群</h2>
+<p>这里不需要写 共享存储</p>
+<ul>
+<li>日志写入到 log-service，这是包含一主-两从的三节点服务</li>
+<li>通过 raft 实现强一致，主从同步，当主节点挂了，从节点晋升为主节点</li>
+<li>这种方式不需要共享存储了，直接写本地磁盘就行了，三副本保证高可用</li>
+<li>同时定期写 s3，这种方式需要处理好选主，可以用 apache 的 raft 实现
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2025/01/27/7WPLse.png">
+            <img class="mx-auto" alt="4" src="https://v1.ax1x.com/2025/01/27/7WPLse.png" />
+        </a>
+    </li>
+</ul>
+<h2 id="使用-newsql">使用 NewSQL</h2>
+<p>使用 newsql</p>
+<ul>
+<li>比如写入到 TiDB，mysql</li>
+<li>或者写入到 ES，直接用这个中间设备做查询，还可以做模糊匹配查询</li>
+<li>这种模式的查询能力强了，但是强依赖了一个中间件</li>
+<li>同样也需要定期写入到 s3
+
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2025/01/27/7WPlcw.png">
+            <img class="mx-auto" alt="" src="https://v1.ax1x.com/2025/01/27/7WPlcw.png" />
+        </a>
+    </li>
+</ul>
+<h2 id="总结">总结</h2>
+<p>对比</p>
+<ul>
+<li>实际每种方案最终都会写 s3，但方案-3，会带来很多延迟，并不好</li>
+<li>方案-4 使用了三个节点，成本会升高，另外开发难度很大</li>
+<li>方案-5 需要强使用一个中间件，依赖性太大了</li>
+<li>综合来说，方案-1、方案-2更合适</li>
+<li>方案1、方案2实际都是写入了共享存储，所以后面都是类似的</li>
+<li>方案1 先写 kafka，而其他程序如分析类的，可以读kafka 做更多事情，所以方案-1的扩展性可能更强</li>
+</ul>
+<h1 id="调度">调度</h1>
+<h2 id="spark端">Spark端</h2>
+<p>一个完整的 spark-submit 参数：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span> ./spark-submit                                                                                                    <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --master k8s://https://&lt;k8s-address&gt;:&lt;k8s-port&gt;                                                                          <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --deploy-mode cluster                                                                                             <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --name spark-pi                                                                                                   <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --class org.apache.spark.examples.SparkPi                                                                         <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.executor.instances<span style="color:#ff79c6">=</span><span style="color:#bd93f9">5</span>                                                                                 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.container.image<span style="color:#ff79c6">=</span>spark-image:3.5.0-log4jext                                                <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.authenticate.submission.caCertFile<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/ca.crt                             <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.authenticate.submission.clientKeyFile<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/apiserver-kubelet-client.key    <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.authenticate.submission.clientCertFile<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/apiserver-kubelet-client.crt   <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.authenticate.driver.caCertFile<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/ca.crt                                 <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.authenticate.driver.clientKeyFile<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/apiserver-kubelet-client.key        <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.authenticate.driver.clientCertFile<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/apiserver-kubelet-client.crt       <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.namespace<span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">test</span>                                                                            <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.driverEnv.SPARK_PREFIX_DIR<span style="color:#ff79c6">=</span>/custom/path                                                   <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.executorEnv.SPARK_PREFIX_DIR<span style="color:#ff79c6">=</span>/custom/path                                                            <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.driverEnv.SPARK_EXECUTOR_ID<span style="color:#ff79c6">=</span>driver                                                        <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.driver.volumes.persistentVolumeClaim.data.options.claimName<span style="color:#ff79c6">=</span>my-pvc                        <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.driver.volumes.persistentVolumeClaim.data.mount.path<span style="color:#ff79c6">=</span>/custom/path                         <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.driver.volumes.persistentVolumeClaim.data.mount.readOnly<span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">false</span>                            <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.executor.volumes.persistentVolumeClaim.data.options.claimName<span style="color:#ff79c6">=</span>my-pvc                      <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.executor.volumes.persistentVolumeClaim.data.mount.path<span style="color:#ff79c6">=</span>/custom/path                       <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.executor.volumes.persistentVolumeClaim.data.mount.readOnly<span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">false</span>                          <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.driver.extraJavaOptions<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"> -Dlog4j.configurationFile=/opt/spark/work-dir/log4j2.properties&#39;</span>        <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.executor.extraJavaOptions<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;-Dlog4j.configurationFile=/opt/spark/work-dir/log4j2.properties&#39;</span>              <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> --conf spark.kubernetes.container.image.pullPolicy<span style="color:#ff79c6">=</span>Always                                                         <span style="color:#f1fa8c">\
+</span></span></span><span style="display:flex;"><span><span style="color:#f1fa8c"></span> local:///opt/spark/examples/jars/spark-examples_2.12-3.5.2.jar
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Spark 的 driver 和 executor 都需要设置一些 ENV 参数：</p>
+<ul>
+<li>SPARK_EXECUTOR_ID       ，driver端需要手动设置，executor 是自动设置上的</li>
+<li>SPARK_APPLICATION_ID    ，driver 和 executor 都是自动设置上的</li>
+<li>SPARK_PREFIX_DIR        ，driver 和 executor 都需要手动设置上</li>
+</ul>
+
+			<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+        </div>
+
+        
+
+
+        
+
+
+        <div class="post-meta meta-tags">
+            
+            <ul class="clearfix">
+                
+                <li><a href='/tags/log4j'>log4j</a></li>
+                
+            </ul>
+            
+        </div>
+    </article>
+    
+    
+
+    
+    
+    <div class="post bg-white">
+      <script src="https://utteranc.es/client.js"
+            repo= "hehe-1234/hugoblogtalks"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+      </script>
+    </div>
+    
+</div>
+
+
+                </div>
+
+                <div id="secondary">
+    <section class="widget">
+        <form id="search" action='https://hehe-1234.xyz/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://hehe-1234.xyz/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2025/01/logs_collection_based_cloud/" title="云环境中的日志收集和处理方案">云环境中的日志收集和处理方案</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2025/01/btrace/" title="BTrace">BTrace</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/11/k8s_networks/" title="k8s 网络">k8s 网络</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/10/me/" title="个人工作简介">个人工作简介</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/10/scala_summary/" title="scala总结">scala总结</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/10/parquet_4_spark/" title="Parquet for Spark">Parquet for Spark</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/09/spark_streaming/" title="Spark-Streaming 原理">Spark-Streaming 原理</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/08/open_log_rac/" title="OpenLogReplicator的一些改动">OpenLogReplicator的一些改动</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/07/open_log_replicator/" title="Oracle的CDC工具OpenLogReplicator原理">Oracle的CDC工具OpenLogReplicator原理</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2024/06/open_log/" title="Oracle的CDC工具OpenLogReplicator编译">Oracle的CDC工具OpenLogReplicator编译</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (5)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (14)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (33)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (1)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (27)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (4)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (5)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (2)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (10)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">归档</a></h3>
+<ul class="widget-list">
+    
+    <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (45)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/years/2024%E5%B9%B4/">2024年 (16)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/years/2025%E5%B9%B4/">2025年 (2)</a></li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
+<div class="tagcloud">
+    
+    <a href="https://hehe-1234.xyz/tags/btrace/">BTrace </a>
+    
+    <a href="https://hehe-1234.xyz/tags/b%E6%A0%91/">B树 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/calcite/">calcite </a>
+    
+    <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
+    
+    <a href="https://hehe-1234.xyz/tags/data_ingestion/">Data_Ingestion </a>
+    
+    <a href="https://hehe-1234.xyz/tags/deltalake/">DeltaLake </a>
+    
+    <a href="https://hehe-1234.xyz/tags/facebook/">Facebook </a>
+    
+    <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
+    
+    <a href="https://hehe-1234.xyz/tags/hive/">Hive </a>
+    
+    <a href="https://hehe-1234.xyz/tags/iceberg/">iceberg </a>
+    
+    <a href="https://hehe-1234.xyz/tags/janino/">janino </a>
+    
+    <a href="https://hehe-1234.xyz/tags/k8s/">k8s </a>
+    
+    <a href="https://hehe-1234.xyz/tags/kudu/">kudu </a>
+    
+    <a href="https://hehe-1234.xyz/tags/kyuubi/">Kyuubi </a>
+    
+    <a href="https://hehe-1234.xyz/tags/lakehouse/">Lakehouse </a>
+    
+    <a href="https://hehe-1234.xyz/tags/leveldb/">LevelDB </a>
+    
+    <a href="https://hehe-1234.xyz/tags/llvm/">LLVM </a>
+    
+    <a href="https://hehe-1234.xyz/tags/log4j/">log4j </a>
+    
+    <a href="https://hehe-1234.xyz/tags/mapreduce/">MapReduce </a>
+    
+    <a href="https://hehe-1234.xyz/tags/mysql/">MySQL </a>
+    
+    <a href="https://hehe-1234.xyz/tags/newsql/">NewSQL </a>
+    
+    <a href="https://hehe-1234.xyz/tags/oceanbase/">OceanBase </a>
+    
+    <a href="https://hehe-1234.xyz/tags/openlogreplicator/">OpenLogReplicator </a>
+    
+    <a href="https://hehe-1234.xyz/tags/parquet/">parquet </a>
+    
+    <a href="https://hehe-1234.xyz/tags/paxos/">paxos </a>
+    
+    <a href="https://hehe-1234.xyz/tags/presto/">Presto </a>
+    
+    <a href="https://hehe-1234.xyz/tags/quick-sql/">quick-sql </a>
+    
+    <a href="https://hehe-1234.xyz/tags/raft/">raft </a>
+    
+    <a href="https://hehe-1234.xyz/tags/scala/">scala </a>
+    
+    <a href="https://hehe-1234.xyz/tags/simd/">SIMD </a>
+    
+    <a href="https://hehe-1234.xyz/tags/snowflake/">snowflake </a>
+    
+    <a href="https://hehe-1234.xyz/tags/spark/">spark </a>
+    
+    <a href="https://hehe-1234.xyz/tags/teradata/">TeraData </a>
+    
+    <a href="https://hehe-1234.xyz/tags/tpcx-hs/">TPCx-HS </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%88%97%E5%AD%98/">列存 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%AD%98%E5%82%A8/">存储 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E8%AE%BA%E6%96%87/">论文 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">RSS</h3>
+        <ul class="widget-list">
+            <li><a href="https://hehe-1234.xyz/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer">
+    <div>
+        &copy; 2025 <a href="https://hehe-1234.xyz/">一个程序员的博客 By 一个程序员</a>
+        
+    </div>
+    <br />
+    <div>
+        <div class="github-badge">
+            <a href="https://gohugo.io/" target="_black" rel="nofollow"><span class="badge-subject">Powered by</span><span class="badge-value bg-blue">Hugo</span></a>
+        </div>
+        <div class="github-badge">
+            <a href="https://github.com/flysnow-org/maupassant-hugo" target="_black"><span class="badge-subject">Theme</span><span class="badge-value bg-yellowgreen">Maupassant</span></a>
+        </div>
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src='/js/totop.js?v=0.0.0' async=""></script>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'GA ID', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+
+</html>
