@@ -9,8 +9,8 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
     
 
-    <title>用DFA验证字符串中的数字 | 找工作中，以下是我的一些个人介绍和技术笔记</title>
-    <meta property="og:title" content="用DFA验证字符串中的数字 - 找工作中，以下是我的一些个人介绍和技术笔记">
+    <title>用DFA验证字符串中的数字 | 一个程序员的博客</title>
+    <meta property="og:title" content="用DFA验证字符串中的数字 - 一个程序员的博客">
     <meta property="og:type" content="article">
         
     <meta property="article:published_time" content='2022-01-08T09:11:12&#43;08:00'>
@@ -22,7 +22,7 @@
     <meta name="description" content="一个字符串，包含小数和指数部分，采用DFA的方式做验证其有效性">
         <meta name="author" content="隔壁老王">
         
-    <meta property="og:url" content="https://find-job.xyz/post/2022/01/%E7%94%A8dfa%E9%AA%8C%E8%AF%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%97/">
+    <meta property="og:url" content="https://hehe-1234.xyz/post/2022/01/%E7%94%A8dfa%E9%AA%8C%E8%AF%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%97/">
     <link rel="shortcut icon" href='/favicon.ico'  type="image/x-icon">
 
     <link rel="stylesheet" href='/css/normalize.css'>
@@ -46,19 +46,19 @@
         <div class="col-group">
             <div class="site-name ">
                 
-                    <a id="logo" href="https://find-job.xyz/">
-                        找工作中，以下是我的一些个人介绍和技术笔记
+                    <a id="logo" href="https://hehe-1234.xyz/">
+                        一个程序员的博客
                     </a>
                 
                 
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="current" href="https://find-job.xyz/">首页</a>
+                    <a class="current" href="https://hehe-1234.xyz/">首页</a>
                     
-                    <a  href="https://find-job.xyz/archives/" title="归档">归档</a>
+                    <a  href="https://hehe-1234.xyz/archives/" title="归档">归档</a>
                     
-                    <a  href="https://find-job.xyz/about/" title="关于">关于</a>
+                    <a  href="https://hehe-1234.xyz/about/" title="关于">关于</a>
                     
                 </nav>
             </div>
@@ -97,7 +97,7 @@
             
             <span class="post-meta meta-tags">
                 <ul class="clearfix">
-                    <a href='/categories/%E7%AE%97%E6%B3%95'>算法</a>
+                    <a href='/categories/%E7%AE%97%E6%B3%95%E5%92%8Cai'>算法和AI</a>
                 </ul>
             </span>
             
@@ -115,11 +115,11 @@
 <p><strong>有效数字</strong>（按顺序）可以分成以下几个部分：</p>
 <ol>
 <li>一个 <strong>小数</strong> 或者 <strong>整数</strong></li>
-<li>（可选）一个 &lsquo;e&rsquo; 或 &lsquo;E&rsquo; ，后面跟着一个 <strong>整数</strong></li>
+<li>（可选）一个 &rsquo;e&rsquo; 或 &lsquo;E&rsquo; ，后面跟着一个 <strong>整数</strong></li>
 </ol>
 <p><strong>小数</strong>（按顺序）可以分成以下几个部分：</p>
 <ul>
-<li>（可选）一个符号字符（'+' 或 &lsquo;-'）</li>
+<li>（可选）一个符号字符（&rsquo;+&rsquo; 或 &lsquo;-&rsquo;）</li>
 <li>下述格式之一：
 <ol>
 <li>至少一位数字，后面跟着一个点 &lsquo;.&rsquo;</li>
@@ -130,7 +130,7 @@
 </ul>
 <p><strong>整数</strong>（按顺序）可以分成以下几个部分：</p>
 <ul>
-<li>（可选）一个符号字符（'+&rsquo; 或 &lsquo;-'）</li>
+<li>（可选）一个符号字符（&rsquo;+&rsquo; 或 &lsquo;-&rsquo;）</li>
 <li>至少一位数字</li>
 </ul>
 <p>部分有效数字列举如下：<br>
@@ -163,140 +163,140 @@ s 仅含英文字母（大写和小写），数字（0-9），加号 &lsquo;+&rs
 </li>
 </ol>
 <p>代码如下：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">48
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">49
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">50
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">51
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">52
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">53
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">54
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">55
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">56
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">57
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">58
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Solution</span>(<span style="color:#8be9fd;font-style:italic">object</span>):
-    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">isNumber</span>(self, s):
-        <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">not</span> s:
-            <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
-        n <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">len</span>(s)
-        i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-        j <span style="color:#ff79c6">=</span> n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>
-        <span style="color:#ff79c6">while</span> i<span style="color:#ff79c6">&lt;</span>n <span style="color:#ff79c6">and</span> s[i]<span style="color:#ff79c6">==</span><span style="color:#f1fa8c">&#34; &#34;</span>:
-            i <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-        <span style="color:#ff79c6">while</span> j<span style="color:#ff79c6">&gt;=</span><span style="color:#bd93f9">0</span> <span style="color:#ff79c6">and</span> s[j]<span style="color:#ff79c6">==</span><span style="color:#f1fa8c">&#34; &#34;</span>:
-            j <span style="color:#ff79c6">-=</span> <span style="color:#bd93f9">1</span>
-        s <span style="color:#ff79c6">=</span> s[i:j<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>]
-        <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">not</span> s:
-            <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
-        letter <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">set</span>([<span style="color:#f1fa8c">&#39;0&#39;</span>, <span style="color:#f1fa8c">&#39;1&#39;</span>, <span style="color:#f1fa8c">&#39;2&#39;</span>, <span style="color:#f1fa8c">&#39;3&#39;</span>, <span style="color:#f1fa8c">&#39;4&#39;</span>, <span style="color:#f1fa8c">&#39;5&#39;</span>, <span style="color:#f1fa8c">&#39;6&#39;</span>, <span style="color:#f1fa8c">&#39;7&#39;</span>, <span style="color:#f1fa8c">&#39;8&#39;</span>, <span style="color:#f1fa8c">&#39;9&#39;</span>])
-        n <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">len</span>(s)
-        i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-        <span style="color:#ff79c6">if</span> s[i] <span style="color:#ff79c6">in</span> (<span style="color:#f1fa8c">&#34;-&#34;</span>,<span style="color:#f1fa8c">&#34;+&#34;</span>):
-            i <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-            <span style="color:#ff79c6">if</span> i<span style="color:#ff79c6">==</span>n:
-                <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
-        letter<span style="color:#ff79c6">.</span>add(<span style="color:#f1fa8c">&#34;.&#34;</span>)
-        dot_num <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-        digit_num <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-        <span style="color:#ff79c6">while</span> i<span style="color:#ff79c6">&lt;</span>n <span style="color:#ff79c6">and</span> s[i] <span style="color:#ff79c6">in</span> letter:
-            <span style="color:#ff79c6">if</span> s[i]<span style="color:#ff79c6">==</span><span style="color:#f1fa8c">&#34;.&#34;</span>:
-                dot_num <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-            <span style="color:#ff79c6">else</span>:
-                digit_num <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-            i <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-        <span style="color:#ff79c6">if</span> i<span style="color:#ff79c6">==</span>n:
-            <span style="color:#ff79c6">if</span> dot_num<span style="color:#ff79c6">&lt;=</span><span style="color:#bd93f9">1</span>:
-                <span style="color:#ff79c6">return</span> digit_num<span style="color:#ff79c6">&gt;</span><span style="color:#bd93f9">0</span>
-            <span style="color:#ff79c6">else</span>:
-                <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
-        letter<span style="color:#ff79c6">.</span>remove(<span style="color:#f1fa8c">&#34;.&#34;</span>)
-        <span style="color:#ff79c6">if</span> s[i]<span style="color:#ff79c6">==</span><span style="color:#f1fa8c">&#34;e&#34;</span>:
-            <span style="color:#ff79c6">if</span> dot_num<span style="color:#ff79c6">&gt;</span><span style="color:#bd93f9">1</span> <span style="color:#ff79c6">or</span> digit_num<span style="color:#ff79c6">==</span><span style="color:#bd93f9">0</span>:
-                <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
-            i <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-            <span style="color:#ff79c6">if</span> i<span style="color:#ff79c6">==</span>n:
-                <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
-            <span style="color:#ff79c6">if</span> s[i] <span style="color:#ff79c6">in</span> (<span style="color:#f1fa8c">&#34;-&#34;</span>,<span style="color:#f1fa8c">&#34;+&#34;</span>):
-                i <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-                <span style="color:#ff79c6">if</span> i<span style="color:#ff79c6">==</span>n:
-                    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
-            digit_num <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-            <span style="color:#ff79c6">while</span> i<span style="color:#ff79c6">&lt;</span>n <span style="color:#ff79c6">and</span> s[i] <span style="color:#ff79c6">in</span> letter:
-                digit_num <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-                i <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-            <span style="color:#ff79c6">if</span> i<span style="color:#ff79c6">==</span>n:
-                <span style="color:#ff79c6">if</span> digit_num<span style="color:#ff79c6">==</span><span style="color:#bd93f9">0</span>:
-                    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
-                <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">True</span>
-            <span style="color:#ff79c6">else</span>:
-                <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
-        <span style="color:#ff79c6">else</span>:
-            <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Solution</span>(<span style="color:#8be9fd;font-style:italic">object</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">isNumber</span>(self, s):
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">not</span> s:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
+</span></span><span style="display:flex;"><span>        n <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">len</span>(s)
+</span></span><span style="display:flex;"><span>        i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>        j <span style="color:#ff79c6">=</span> n<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">while</span> i<span style="color:#ff79c6">&lt;</span>n <span style="color:#ff79c6">and</span> s[i]<span style="color:#ff79c6">==</span><span style="color:#f1fa8c">&#34; &#34;</span>:
+</span></span><span style="display:flex;"><span>            i <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">while</span> j<span style="color:#ff79c6">&gt;=</span><span style="color:#bd93f9">0</span> <span style="color:#ff79c6">and</span> s[j]<span style="color:#ff79c6">==</span><span style="color:#f1fa8c">&#34; &#34;</span>:
+</span></span><span style="display:flex;"><span>            j <span style="color:#ff79c6">-=</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>        s <span style="color:#ff79c6">=</span> s[i:j<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">not</span> s:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
+</span></span><span style="display:flex;"><span>        letter <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">set</span>([<span style="color:#f1fa8c">&#39;0&#39;</span>, <span style="color:#f1fa8c">&#39;1&#39;</span>, <span style="color:#f1fa8c">&#39;2&#39;</span>, <span style="color:#f1fa8c">&#39;3&#39;</span>, <span style="color:#f1fa8c">&#39;4&#39;</span>, <span style="color:#f1fa8c">&#39;5&#39;</span>, <span style="color:#f1fa8c">&#39;6&#39;</span>, <span style="color:#f1fa8c">&#39;7&#39;</span>, <span style="color:#f1fa8c">&#39;8&#39;</span>, <span style="color:#f1fa8c">&#39;9&#39;</span>])
+</span></span><span style="display:flex;"><span>        n <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">len</span>(s)
+</span></span><span style="display:flex;"><span>        i <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> s[i] <span style="color:#ff79c6">in</span> (<span style="color:#f1fa8c">&#34;-&#34;</span>,<span style="color:#f1fa8c">&#34;+&#34;</span>):
+</span></span><span style="display:flex;"><span>            i <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">if</span> i<span style="color:#ff79c6">==</span>n:
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
+</span></span><span style="display:flex;"><span>        letter<span style="color:#ff79c6">.</span>add(<span style="color:#f1fa8c">&#34;.&#34;</span>)
+</span></span><span style="display:flex;"><span>        dot_num <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>        digit_num <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">while</span> i<span style="color:#ff79c6">&lt;</span>n <span style="color:#ff79c6">and</span> s[i] <span style="color:#ff79c6">in</span> letter:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">if</span> s[i]<span style="color:#ff79c6">==</span><span style="color:#f1fa8c">&#34;.&#34;</span>:
+</span></span><span style="display:flex;"><span>                dot_num <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">else</span>:
+</span></span><span style="display:flex;"><span>                digit_num <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>            i <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> i<span style="color:#ff79c6">==</span>n:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">if</span> dot_num<span style="color:#ff79c6">&lt;=</span><span style="color:#bd93f9">1</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">return</span> digit_num<span style="color:#ff79c6">&gt;</span><span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">else</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
+</span></span><span style="display:flex;"><span>        letter<span style="color:#ff79c6">.</span>remove(<span style="color:#f1fa8c">&#34;.&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">if</span> s[i]<span style="color:#ff79c6">==</span><span style="color:#f1fa8c">&#34;e&#34;</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">if</span> dot_num<span style="color:#ff79c6">&gt;</span><span style="color:#bd93f9">1</span> <span style="color:#ff79c6">or</span> digit_num<span style="color:#ff79c6">==</span><span style="color:#bd93f9">0</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
+</span></span><span style="display:flex;"><span>            i <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">if</span> i<span style="color:#ff79c6">==</span>n:
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">if</span> s[i] <span style="color:#ff79c6">in</span> (<span style="color:#f1fa8c">&#34;-&#34;</span>,<span style="color:#f1fa8c">&#34;+&#34;</span>):
+</span></span><span style="display:flex;"><span>                i <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">if</span> i<span style="color:#ff79c6">==</span>n:
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
+</span></span><span style="display:flex;"><span>            digit_num <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">while</span> i<span style="color:#ff79c6">&lt;</span>n <span style="color:#ff79c6">and</span> s[i] <span style="color:#ff79c6">in</span> letter:
+</span></span><span style="display:flex;"><span>                digit_num <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>                i <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">if</span> i<span style="color:#ff79c6">==</span>n:
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">if</span> digit_num<span style="color:#ff79c6">==</span><span style="color:#bd93f9">0</span>:
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">True</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">else</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">False</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>也可以用正则来实现</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Solution</span>(<span style="color:#8be9fd;font-style:italic">object</span>):
-    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">isNumber</span>(self, s):
-        <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">bool</span>(re<span style="color:#ff79c6">.</span>match(<span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;[+-]?(\d+)?\.?(?(1)\d*|\d+)([eE][+-]?\d+)?$&#39;</span>, s))
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">Solution</span>(<span style="color:#8be9fd;font-style:italic">object</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">isNumber</span>(self, s):
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">return</span> <span style="color:#8be9fd;font-style:italic">bool</span>(re<span style="color:#ff79c6">.</span>match(<span style="color:#f1fa8c">r</span><span style="color:#f1fa8c">&#39;[+-]?(\d+)?\.?(?(1)\d*|\d+)([eE][+-]?\d+)?$&#39;</span>, s))
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="dfa">DFA</h2>
 <p>这里需要用到编译原理的知识，用状态机来解析一个个的<code>token</code><br>
@@ -309,8 +309,8 @@ s 仅含英文字母（大写和小写），数字（0-9），加号 &lsquo;+&rs
 DFA占用内存大，但是效率高，不会有回溯</p>
 <p>我们来构造出DFA状态机(可以根据正则表达式构造)，如下图：<br>
 
-        <a data-fancybox="gallery" href="https://woquhaha.gitee.io/pic_tech_1//post/2022/01/%E7%94%A8DFA%E9%AA%8C%E8%AF%81%E6%95%B0%E5%AD%97/1.png">
-            <img class="mx-auto" alt="" src="https://woquhaha.gitee.io/pic_tech_1//post/2022/01/%E7%94%A8DFA%E9%AA%8C%E8%AF%81%E6%95%B0%E5%AD%97/1.png" />
+        <a data-fancybox="gallery" href="https://v1.ax1x.com/2024/05/23/7gKr4e.png">
+            <img class="mx-auto" alt="1" src="https://v1.ax1x.com/2024/05/23/7gKr4e.png" />
         </a>
     
 上图中橙色节点是终止状态，也就当字符串遍历完后，位于这个状态下，就表示正确结束，返回<code>true</code><br>
@@ -422,89 +422,89 @@ DFA占用内存大，但是效率高，不会有回溯</p>
 <li>字符串遍历结束，当前状态为<code>7</code>，是终止状态，匹配成功</li>
 </ol>
 <p>代码如下：</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Solution</span> <span style="color:#ff79c6">{</span>
-    <span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd;font-style:italic">final</span> <span style="color:#8be9fd">int</span><span style="color:#ff79c6">[][]</span> transformTable <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> <span style="color:#8be9fd">int</span><span style="color:#ff79c6">[][]{</span>
-            <span style="color:#6272a4">//跳转表，第0对应&#39;+-&#39;、第1列对应&#39;0-9&#39;、第2列对应&#39;.&#39;   
-</span><span style="color:#6272a4"></span>            <span style="color:#6272a4">//第三列对应&#39;eE&#39;，第4列对应其他字符
-</span><span style="color:#6272a4"></span>            <span style="color:#ff79c6">{</span>1<span style="color:#ff79c6">,</span>2<span style="color:#ff79c6">,</span>3<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
-            <span style="color:#ff79c6">{-</span>1<span style="color:#ff79c6">,</span>2<span style="color:#ff79c6">,</span>3<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
-            <span style="color:#ff79c6">{-</span>1<span style="color:#ff79c6">,</span>2<span style="color:#ff79c6">,</span>4<span style="color:#ff79c6">,</span>5<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
-            <span style="color:#ff79c6">{-</span>1<span style="color:#ff79c6">,</span>4<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
-            <span style="color:#ff79c6">{-</span>1<span style="color:#ff79c6">,</span>4<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,</span>5<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
-            <span style="color:#ff79c6">{</span>6<span style="color:#ff79c6">,</span>7<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
-            <span style="color:#ff79c6">{-</span>1<span style="color:#ff79c6">,</span>7<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
-            <span style="color:#ff79c6">{-</span>1<span style="color:#ff79c6">,</span>7<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">}</span>
-    <span style="color:#ff79c6">};</span>
-
-    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">boolean</span> <span style="color:#50fa7b">isNumber</span><span style="color:#ff79c6">(</span>String s<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-        <span style="color:#8be9fd">char</span><span style="color:#ff79c6">[]</span> charArray <span style="color:#ff79c6">=</span> s<span style="color:#ff79c6">.</span><span style="color:#50fa7b">toCharArray</span><span style="color:#ff79c6">();</span>
-        <span style="color:#8be9fd">int</span> stateID <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span>
-        <span style="color:#8be9fd">int</span> tokenID <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">;</span>
-        <span style="color:#ff79c6">for</span><span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> i <span style="color:#ff79c6">&lt;</span> charArray<span style="color:#ff79c6">.</span><span style="color:#50fa7b">length</span><span style="color:#ff79c6">;</span> <span style="color:#ff79c6">++</span>i<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-            <span style="color:#8be9fd">char</span> c <span style="color:#ff79c6">=</span> charArray<span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">];</span>
-            <span style="color:#6272a4">//当前字符 c 对应到二维数组中的哪一列
-</span><span style="color:#6272a4"></span>            <span style="color:#ff79c6">switch</span><span style="color:#ff79c6">(</span>c<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
-                <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;+&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;-&#39;</span><span style="color:#ff79c6">:</span> tokenID <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> <span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
-                <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;.&#39;</span><span style="color:#ff79c6">:</span> tokenID <span style="color:#ff79c6">=</span> 2<span style="color:#ff79c6">;</span> <span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
-                <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;e&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;E&#39;</span><span style="color:#ff79c6">:</span> tokenID <span style="color:#ff79c6">=</span> 3<span style="color:#ff79c6">;</span> <span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
-                <span style="color:#ff79c6">default</span><span style="color:#ff79c6">:</span>
-                    <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span>c <span style="color:#ff79c6">&gt;=</span> <span style="color:#f1fa8c">&#39;0&#39;</span> <span style="color:#ff79c6">&amp;&amp;</span> c <span style="color:#ff79c6">&lt;=</span> <span style="color:#f1fa8c">&#39;9&#39;</span><span style="color:#ff79c6">)</span> tokenID <span style="color:#ff79c6">=</span> 1<span style="color:#ff79c6">;</span>
-                    <span style="color:#ff79c6">else</span> tokenID <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">;</span>
-            <span style="color:#ff79c6">}</span>
-            <span style="color:#6272a4">//当前的token为-1，或者下一步跳转的状态为-1时，可以提前返回false
-</span><span style="color:#6272a4"></span>            <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span>tokenID <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span><span style="color:#ff79c6">;</span>
-            <span style="color:#6272a4">//根据当前状态，当前的字符类型，去二维表格中查询下一步跳转到哪个状态
-</span><span style="color:#6272a4"></span>            stateID <span style="color:#ff79c6">=</span> transformTable<span style="color:#ff79c6">[</span>stateID<span style="color:#ff79c6">][</span>tokenID<span style="color:#ff79c6">];</span>
-            <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span>stateID <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span><span style="color:#ff79c6">;</span>
-        <span style="color:#ff79c6">}</span>
-        <span style="color:#6272a4">//字符串遍历结束，看当前状态是否为终止状态
-</span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">return</span> stateID <span style="color:#ff79c6">==</span> 2 <span style="color:#ff79c6">||</span> stateID <span style="color:#ff79c6">==</span> 4 <span style="color:#ff79c6">||</span> stateID <span style="color:#ff79c6">==</span> 7<span style="color:#ff79c6">;</span>
-    <span style="color:#ff79c6">}</span>
-<span style="color:#ff79c6">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">class</span> <span style="color:#50fa7b">Solution</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">private</span> <span style="color:#8be9fd;font-style:italic">static</span> <span style="color:#8be9fd;font-style:italic">final</span> <span style="color:#8be9fd">int</span><span style="color:#ff79c6">[][]</span> transformTable <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">new</span> <span style="color:#8be9fd">int</span><span style="color:#ff79c6">[][]{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4">//跳转表，第0对应&#39;+-&#39;、第1列对应&#39;0-9&#39;、第2列对应&#39;.&#39;   
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>            <span style="color:#6272a4">//第三列对应&#39;eE&#39;，第4列对应其他字符
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>            <span style="color:#ff79c6">{</span>1<span style="color:#ff79c6">,</span>2<span style="color:#ff79c6">,</span>3<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">{-</span>1<span style="color:#ff79c6">,</span>2<span style="color:#ff79c6">,</span>3<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">{-</span>1<span style="color:#ff79c6">,</span>2<span style="color:#ff79c6">,</span>4<span style="color:#ff79c6">,</span>5<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">{-</span>1<span style="color:#ff79c6">,</span>4<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">{-</span>1<span style="color:#ff79c6">,</span>4<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,</span>5<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">{</span>6<span style="color:#ff79c6">,</span>7<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">{-</span>1<span style="color:#ff79c6">,</span>7<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">},</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">{-</span>1<span style="color:#ff79c6">,</span>7<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">,-</span>1<span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">public</span> <span style="color:#8be9fd">boolean</span> <span style="color:#50fa7b">isNumber</span><span style="color:#ff79c6">(</span>String s<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd">char</span><span style="color:#ff79c6">[]</span> charArray <span style="color:#ff79c6">=</span> s<span style="color:#ff79c6">.</span><span style="color:#50fa7b">toCharArray</span><span style="color:#ff79c6">();</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd">int</span> stateID <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#8be9fd">int</span> tokenID <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span><span style="color:#ff79c6">(</span><span style="color:#8be9fd">int</span> i <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> i <span style="color:#ff79c6">&lt;</span> charArray<span style="color:#ff79c6">.</span><span style="color:#50fa7b">length</span><span style="color:#ff79c6">;</span> <span style="color:#ff79c6">++</span>i<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#8be9fd">char</span> c <span style="color:#ff79c6">=</span> charArray<span style="color:#ff79c6">[</span>i<span style="color:#ff79c6">];</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4">//当前字符 c 对应到二维数组中的哪一列
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>            <span style="color:#ff79c6">switch</span><span style="color:#ff79c6">(</span>c<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;+&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;-&#39;</span><span style="color:#ff79c6">:</span> tokenID <span style="color:#ff79c6">=</span> 0<span style="color:#ff79c6">;</span> <span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;.&#39;</span><span style="color:#ff79c6">:</span> tokenID <span style="color:#ff79c6">=</span> 2<span style="color:#ff79c6">;</span> <span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;e&#39;</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">case</span> <span style="color:#f1fa8c">&#39;E&#39;</span><span style="color:#ff79c6">:</span> tokenID <span style="color:#ff79c6">=</span> 3<span style="color:#ff79c6">;</span> <span style="color:#ff79c6">break</span><span style="color:#ff79c6">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#ff79c6">default</span><span style="color:#ff79c6">:</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span>c <span style="color:#ff79c6">&gt;=</span> <span style="color:#f1fa8c">&#39;0&#39;</span> <span style="color:#ff79c6">&amp;&amp;</span> c <span style="color:#ff79c6">&lt;=</span> <span style="color:#f1fa8c">&#39;9&#39;</span><span style="color:#ff79c6">)</span> tokenID <span style="color:#ff79c6">=</span> 1<span style="color:#ff79c6">;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff79c6">else</span> tokenID <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4">//当前的token为-1，或者下一步跳转的状态为-1时，可以提前返回false
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>            <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span>tokenID <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span><span style="color:#ff79c6">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#6272a4">//根据当前状态，当前的字符类型，去二维表格中查询下一步跳转到哪个状态
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>            stateID <span style="color:#ff79c6">=</span> transformTable<span style="color:#ff79c6">[</span>stateID<span style="color:#ff79c6">][</span>tokenID<span style="color:#ff79c6">];</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">if</span><span style="color:#ff79c6">(</span>stateID <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">-</span>1<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">return</span> <span style="color:#ff79c6">false</span><span style="color:#ff79c6">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#6272a4">//字符串遍历结束，看当前状态是否为终止状态
+</span></span></span><span style="display:flex;"><span><span style="color:#6272a4"></span>        <span style="color:#ff79c6">return</span> stateID <span style="color:#ff79c6">==</span> 2 <span style="color:#ff79c6">||</span> stateID <span style="color:#ff79c6">==</span> 4 <span style="color:#ff79c6">||</span> stateID <span style="color:#ff79c6">==</span> 7<span style="color:#ff79c6">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
 			<script type="text/javascript"
@@ -584,10 +584,10 @@ code.has-jax {
 
                 <div id="secondary">
     <section class="widget">
-        <form id="search" action='https://find-job.xyz/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+        <form id="search" action='https://hehe-1234.xyz/search/' method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
       
       <input type="text" name="q" maxlength="20" placeholder="Search">
-      <input type="hidden" name="sitesearch" value="https://find-job.xyz/">
+      <input type="hidden" name="sitesearch" value="https://hehe-1234.xyz/">
       <button type="submit" class="submit icon-search"></button>
 </form>
     </section>
@@ -597,43 +597,43 @@ code.has-jax {
 <ul class="widget-list">
     
     <li>
-        <a href="https://find-job.xyz/post/2023/07/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D/" title="个人工作简介">个人工作简介</a>
+        <a href="https://hehe-1234.xyz/post/2025/04/ldap/" title="OpenLDAP研究">OpenLDAP研究</a>
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/07/%E6%9F%90%E5%A4%A7%E5%9E%8Btob%E4%BC%81%E4%B8%9A/" title="某大型toB 企业工作介绍">某大型toB 企业工作介绍</a>
+        <a href="https://hehe-1234.xyz/post/2025/02/py_torch/" title="PyTorch">PyTorch</a>
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/07/%E6%9F%90%E4%BA%92%E8%81%94%E7%BD%91&#43;%E4%BC%81%E4%B8%9A/" title="大型互联网&#43; 企业工作介绍">大型互联网&#43; 企业工作介绍</a>
+        <a href="https://hehe-1234.xyz/post/2025/01/logs_collection_based_cloud/" title="云环境中的日志收集和处理方案">云环境中的日志收集和处理方案</a>
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/07/sina%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" title="新浪工作介绍">新浪工作介绍</a>
+        <a href="https://hehe-1234.xyz/post/2025/01/btrace/" title="BTrace">BTrace</a>
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/07/borland%E5%B7%A5%E4%BD%9C%E6%80%BB%E7%BB%93/" title="Borland工作介绍">Borland工作介绍</a>
+        <a href="https://hehe-1234.xyz/post/2024/11/k8s_networks/" title="k8s 网络">k8s 网络</a>
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/07/presto%E5%9C%A8%E5%90%84%E5%A4%A7%E5%85%AC%E5%8F%B8%E7%9A%84%E5%BA%94%E7%94%A8/" title="Presto在各大公司的应用">Presto在各大公司的应用</a>
+        <a href="https://hehe-1234.xyz/post/2024/10/me/" title="个人工作简介">个人工作简介</a>
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/06/bitweaving/" title="BitWeaving: Fast Scans for Main Memory Data Processing">BitWeaving: Fast Scans for Main Memory Data Processing</a>
+        <a href="https://hehe-1234.xyz/post/2024/10/scala_summary/" title="scala总结">scala总结</a>
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/05/cache_conscious/" title="Cache Conscious Indexing for Decision-Support in Main Memory">Cache Conscious Indexing for Decision-Support in Main Memory</a>
+        <a href="https://hehe-1234.xyz/post/2024/10/parquet_4_spark/" title="Parquet for Spark">Parquet for Spark</a>
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/05/column_imprints/" title="Column Imprints: A Secondary Index Structure">Column Imprints: A Secondary Index Structure</a>
+        <a href="https://hehe-1234.xyz/post/2024/09/spark_streaming/" title="Spark-Streaming 原理">Spark-Streaming 原理</a>
     </li>
     
     <li>
-        <a href="https://find-job.xyz/post/2023/05/sql_server_column_store_indexes/" title="SQL Server Column Store Indexes">SQL Server Column Store Indexes</a>
+        <a href="https://hehe-1234.xyz/post/2024/08/open_log_rac/" title="OpenLogReplicator的一些改动">OpenLogReplicator的一些改动</a>
     </li>
     
 </ul>
@@ -645,29 +645,29 @@ code.has-jax {
         <h3 class="widget-title"><a href='/categories/'>分类</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://find-job.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (6)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (5)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (13)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (9)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (18)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (27)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (19)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (1)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (30)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (26)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (2)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (4)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (8)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E7%AE%97%E6%B3%95%E5%92%8Cai/">算法和AI (4)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (2)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (5)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (12)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
     
-    <li><a href="https://find-job.xyz/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (3)</a></li>
     
 </ul>
     </section>
@@ -676,11 +676,15 @@ code.has-jax {
         <h3 class="widget-title">归档</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://find-job.xyz/years/2021%E5%B9%B4/">2021年 (20)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (11)</a></li>
     
-    <li><a href="https://find-job.xyz/years/2022%E5%B9%B4/">2022年 (53)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (36)</a></li>
     
-    <li><a href="https://find-job.xyz/years/2023%E5%B9%B4/">2023年 (44)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (24)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/years/2024%E5%B9%B4/">2024年 (16)</a></li>
+    
+    <li><a href="https://hehe-1234.xyz/years/2025%E5%B9%B4/">2025年 (4)</a></li>
     
 </ul>
     </section>
@@ -689,117 +693,117 @@ code.has-jax {
         <h3 class="widget-title"><a href='/tags/'>标签</a></h3>
 <div class="tagcloud">
     
-    <a href="https://find-job.xyz/tags/b%E6%A0%91/">B树 </a>
+    <a href="https://hehe-1234.xyz/tags/btrace/">BTrace </a>
     
-    <a href="https://find-job.xyz/tags/calcite/">calcite </a>
+    <a href="https://hehe-1234.xyz/tags/b%E6%A0%91/">B树 </a>
     
-    <a href="https://find-job.xyz/tags/cmu-database/">CMU-Database </a>
+    <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
     
-    <a href="https://find-job.xyz/tags/flink/">flink </a>
+    <a href="https://hehe-1234.xyz/tags/data_ingestion/">Data_Ingestion </a>
     
-    <a href="https://find-job.xyz/tags/hana/">HANA </a>
+    <a href="https://hehe-1234.xyz/tags/deltalake/">DeltaLake </a>
     
-    <a href="https://find-job.xyz/tags/hive/">Hive </a>
+    <a href="https://hehe-1234.xyz/tags/facebook/">Facebook </a>
     
-    <a href="https://find-job.xyz/tags/k8s/">k8s </a>
+    <a href="https://hehe-1234.xyz/tags/hana/">HANA </a>
     
-    <a href="https://find-job.xyz/tags/kudu/">kudu </a>
+    <a href="https://hehe-1234.xyz/tags/hive/">Hive </a>
     
-    <a href="https://find-job.xyz/tags/kyuubi/">Kyuubi </a>
+    <a href="https://hehe-1234.xyz/tags/iceberg/">iceberg </a>
     
-    <a href="https://find-job.xyz/tags/lakehouse/">Lakehouse </a>
+    <a href="https://hehe-1234.xyz/tags/janino/">janino </a>
     
-    <a href="https://find-job.xyz/tags/leveldb/">LevelDB </a>
+    <a href="https://hehe-1234.xyz/tags/k8s/">k8s </a>
     
-    <a href="https://find-job.xyz/tags/llvm/">LLVM </a>
+    <a href="https://hehe-1234.xyz/tags/kudu/">kudu </a>
     
-    <a href="https://find-job.xyz/tags/manacher/">Manacher </a>
+    <a href="https://hehe-1234.xyz/tags/kyuubi/">Kyuubi </a>
     
-    <a href="https://find-job.xyz/tags/mapreduce/">MapReduce </a>
+    <a href="https://hehe-1234.xyz/tags/lakehouse/">Lakehouse </a>
     
-    <a href="https://find-job.xyz/tags/mysql/">MySQL </a>
+    <a href="https://hehe-1234.xyz/tags/leveldb/">LevelDB </a>
     
-    <a href="https://find-job.xyz/tags/newsql/">NewSQL </a>
+    <a href="https://hehe-1234.xyz/tags/llvm/">LLVM </a>
     
-    <a href="https://find-job.xyz/tags/oceanbase/">OceanBase </a>
+    <a href="https://hehe-1234.xyz/tags/log4j/">log4j </a>
     
-    <a href="https://find-job.xyz/tags/paxos/">paxos </a>
+    <a href="https://hehe-1234.xyz/tags/manacher/">Manacher </a>
     
-    <a href="https://find-job.xyz/tags/presto/">Presto </a>
+    <a href="https://hehe-1234.xyz/tags/mapreduce/">MapReduce </a>
     
-    <a href="https://find-job.xyz/tags/quick-sql/">quick-sql </a>
+    <a href="https://hehe-1234.xyz/tags/mysql/">MySQL </a>
     
-    <a href="https://find-job.xyz/tags/raft/">raft </a>
+    <a href="https://hehe-1234.xyz/tags/newsql/">NewSQL </a>
     
-    <a href="https://find-job.xyz/tags/scala/">scala </a>
+    <a href="https://hehe-1234.xyz/tags/openldap/">OpenLDAP </a>
     
-    <a href="https://find-job.xyz/tags/simd/">SIMD </a>
+    <a href="https://hehe-1234.xyz/tags/openlogreplicator/">OpenLogReplicator </a>
     
-    <a href="https://find-job.xyz/tags/snowflake/">snowflake </a>
+    <a href="https://hehe-1234.xyz/tags/parquet/">parquet </a>
     
-    <a href="https://find-job.xyz/tags/spark/">spark </a>
+    <a href="https://hehe-1234.xyz/tags/paxos/">paxos </a>
     
-    <a href="https://find-job.xyz/tags/teradata/">TeraData </a>
+    <a href="https://hehe-1234.xyz/tags/presto/">Presto </a>
     
-    <a href="https://find-job.xyz/tags/unix/">unix </a>
+    <a href="https://hehe-1234.xyz/tags/pytorch/">PyTorch </a>
     
-    <a href="https://find-job.xyz/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/">二分查找 </a>
+    <a href="https://hehe-1234.xyz/tags/quick-sql/">quick-sql </a>
     
-    <a href="https://find-job.xyz/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">二叉树遍历 </a>
+    <a href="https://hehe-1234.xyz/tags/raft/">raft </a>
     
-    <a href="https://find-job.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
+    <a href="https://hehe-1234.xyz/tags/scala/">scala </a>
     
-    <a href="https://find-job.xyz/tags/%E5%88%97%E5%AD%98/">列存 </a>
+    <a href="https://hehe-1234.xyz/tags/simd/">SIMD </a>
     
-    <a href="https://find-job.xyz/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
+    <a href="https://hehe-1234.xyz/tags/snowflake/">snowflake </a>
     
-    <a href="https://find-job.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
+    <a href="https://hehe-1234.xyz/tags/spark/">spark </a>
     
-    <a href="https://find-job.xyz/tags/%E5%9B%9E%E6%BA%AF/">回溯 </a>
+    <a href="https://hehe-1234.xyz/tags/teradata/">TeraData </a>
     
-    <a href="https://find-job.xyz/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
     
-    <a href="https://find-job.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%88%97%E5%AD%98/">列存 </a>
     
-    <a href="https://find-job.xyz/tags/%E5%AD%98%E5%82%A8/">存储 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
     
-    <a href="https://find-job.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
     
-    <a href="https://find-job.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%9B%9E%E6%BA%AF/">回溯 </a>
     
-    <a href="https://find-job.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
     
-    <a href="https://find-job.xyz/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 </a>
     
-    <a href="https://find-job.xyz/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%AD%98%E5%82%A8/">存储 </a>
     
-    <a href="https://find-job.xyz/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 </a>
     
-    <a href="https://find-job.xyz/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
+    <a href="https://hehe-1234.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/">微服务 </a>
     
-    <a href="https://find-job.xyz/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
     
-    <a href="https://find-job.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
     
-    <a href="https://find-job.xyz/tags/%E6%B9%96%E4%BB%93%E4%B8%80%E4%BD%93/">湖仓一体 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
     
-    <a href="https://find-job.xyz/tags/%E7%AE%97%E6%B3%95/">算法 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E7%BC%96%E8%AF%91/">查询编译 </a>
     
-    <a href="https://find-job.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%B1%87%E7%BC%96/">汇编 </a>
     
-    <a href="https://find-job.xyz/tags/%E7%BC%93%E5%AD%98/">缓存 </a>
+    <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
     
-    <a href="https://find-job.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
+    <a href="https://hehe-1234.xyz/tags/%E7%AE%97%E6%B3%95/">算法 </a>
     
-    <a href="https://find-job.xyz/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
+    <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
     
-    <a href="https://find-job.xyz/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
+    <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
     
-    <a href="https://find-job.xyz/tags/%E8%AE%BA%E6%96%87/">论文 </a>
+    <a href="https://hehe-1234.xyz/tags/%E7%BD%91%E7%BB%9C/">网络 </a>
     
-    <a href="https://find-job.xyz/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
+    <a href="https://hehe-1234.xyz/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
     
-    <a href="https://find-job.xyz/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
+    <a href="https://hehe-1234.xyz/tags/%E8%AE%BA%E6%96%87/">论文 </a>
     
 </div>
     </section>
@@ -809,7 +813,7 @@ code.has-jax {
     <section class="widget">
         <h3 class="widget-title">RSS</h3>
         <ul class="widget-list">
-            <li><a href="https://find-job.xyz/index.xml">文章 RSS</a></li>
+            <li><a href="https://hehe-1234.xyz/index.xml">文章 RSS</a></li>
         </ul>
     </section>
 </div>
@@ -818,7 +822,7 @@ code.has-jax {
     </div>
     <footer id="footer">
     <div>
-        &copy; 2023 <a href="https://find-job.xyz/">找工作中，以下是我的一些个人介绍和技术笔记 By find-job</a>
+        &copy; 2025 <a href="https://hehe-1234.xyz/">一个程序员的博客 By 一个程序员</a>
         
     </div>
     <br />

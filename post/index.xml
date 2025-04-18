@@ -6,7 +6,25 @@
     <description>Recent content in Posts on 一个程序员的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 27 Jan 2025 01:08:07 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Apr 2025 10:10:12 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenLDAP研究</title>
+      <link>https://hehe-1234.xyz/post/2025/04/ldap/</link>
+      <pubDate>Sun, 13 Apr 2025 10:10:12 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2025/04/ldap/</guid>
+      <description>OpenLDAP研究</description>
+    </item>
+    
+    <item>
+      <title>PyTorch</title>
+      <link>https://hehe-1234.xyz/post/2025/02/py_torch/</link>
+      <pubDate>Thu, 30 Jan 2025 01:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2025/02/py_torch/</guid>
+      <description>哈哈</description>
+    </item>
+    
     <item>
       <title>云环境中的日志收集和处理方案</title>
       <link>https://hehe-1234.xyz/post/2025/01/logs_collection_based_cloud/</link>
@@ -179,15 +197,6 @@
     </item>
     
     <item>
-      <title>TPCx-HS优化总结</title>
-      <link>https://hehe-1234.xyz/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/</link>
-      <pubDate>Thu, 09 Nov 2023 09:13:07 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/</guid>
-      <description>TPCx-HS优化总结</description>
-    </item>
-    
-    <item>
       <title>Presto在各大公司的应用</title>
       <link>https://hehe-1234.xyz/post/2023/07/presto%E5%9C%A8%E5%90%84%E5%A4%A7%E5%85%AC%E5%8F%B8%E7%9A%84%E5%BA%94%E7%94%A8/</link>
       <pubDate>Wed, 12 Jul 2023 09:11:07 +0800</pubDate>
@@ -215,33 +224,6 @@
     </item>
     
     <item>
-      <title>资源隔离修改配置动态加载</title>
-      <link>https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</link>
-      <pubDate>Sun, 14 May 2023 11:23:04 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</guid>
-      <description>在资源隔离大功能的基础上，实现动态加载配置修改功能，当用户 alter 了资源配置表，会动态生效</description>
-    </item>
-    
-    <item>
-      <title>资源隔离设计</title>
-      <link>https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/</link>
-      <pubDate>Sat, 13 May 2023 11:23:04 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/</guid>
-      <description>基于高可用的两层调度方式，配合 k8s 实现一套资源隔离机制，并实现自定义的语法</description>
-    </item>
-    
-    <item>
-      <title>镜像合并&amp;配置文件同步</title>
-      <link>https://hehe-1234.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/</link>
-      <pubDate>Fri, 12 May 2023 11:23:04 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/</guid>
-      <description>将业务镜像和底层基础镜像合并，去掉spark的k8s模板配置文件，通过init容器 + env + volumn方式实现</description>
-    </item>
-    
-    <item>
       <title>Column-Stores vs. Row-Stores: How Different Are They Really?</title>
       <link>https://hehe-1234.xyz/post/2023/05/column-stores_vs_row-stores_how_different_are_they_really/</link>
       <pubDate>Sun, 07 May 2023 13:23:04 +0800</pubDate>
@@ -266,15 +248,6 @@
       
       <guid>https://hehe-1234.xyz/post/2023/05/building-an-elastic-query-engine-on-disaggregated-storage/</guid>
       <description>SnowFlake的一篇论文，目前的架构包含四层：中心化的服务处理端到端的查询、计算层、临时存储层、对象存储层，并讨论了设计临时存储这一层的原因，通过访问数据指标能发现，临时存储的需求变化很大，跟计算层，远端持久存储层都不同。为更好的提高利用率需要计算层跟 临时存储层解耦。调度方面包括：工作窃取、延迟的一致性hash。由于云厂商的计费方式支持到秒级别，原先的预热VM 方式不好使了需要采用共享资源的方式来支持多租户，带来的挑战是，重新设计临时存储层(这层缓存了持久数据和中间数据，扩容会影响其他租户)，需要提供私有地址。三个开放问题：临时存和计算层解耦、内存-SSD-远端存储三层机制的有效管理、亚秒计费策略的共享资源架构挑战</description>
-    </item>
-    
-    <item>
-      <title>What Goes Around Comes Around</title>
-      <link>https://hehe-1234.xyz/post/2023/05/what-goes-around-comes-around/</link>
-      <pubDate>Wed, 03 May 2023 11:23:04 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2023/05/what-goes-around-comes-around/</guid>
-      <description>Stonebraker的论文，介绍了 9个不同时代的数据模型；层次数据库IMS，以及网络数据库CODASYL，这两者都是逻辑数据、物理数据耦合，之后出现了关系模型，有了数据独立；再往后就是各种对关系模型的补充，如实体-关系模型、关系模型++、语义数据模型、OO模型、对象关系模型、半结构模型等；从中我们可以总结到：查询优化器很有用、技术的争论通常由市场和其他因素决定，简单模型比复制模型更容易实现数据独立、KISS 保持简单是很重要的、除非用户使用中出现很大问题否则他们不会买单、没有编程语言社区的支持想在语言上做改进突破很难、新技术的推广，需要标准化，或者大力度的推广、schema-last 可能只合适小部分场景</description>
     </item>
     
     <item>
@@ -338,15 +311,6 @@
       
       <guid>https://hehe-1234.xyz/post/2023/03/levedb-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</guid>
       <description>LevelDB的架构，各个组件的基本原理，一些基本操作(open、增删改)，高级特性(options、自定义比较器)</description>
-    </item>
-    
-    <item>
-      <title>OceanBase开发者大会分享</title>
-      <link>https://hehe-1234.xyz/post/2023/03/oceanbase%E5%BC%80%E5%8F%91%E8%80%85%E5%A4%A7%E4%BC%9A/</link>
-      <pubDate>Sun, 26 Mar 2023 11:32:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2023/03/oceanbase%E5%BC%80%E5%8F%91%E8%80%85%E5%A4%A7%E4%BC%9A/</guid>
-      <description>看了几位大佬的分享，总结一下</description>
     </item>
     
     <item>
@@ -440,57 +404,12 @@
     </item>
     
     <item>
-      <title>MySQL的并发</title>
-      <link>https://hehe-1234.xyz/post/2023/01/mysql%E7%9A%84%E5%B9%B6%E5%8F%91/</link>
-      <pubDate>Sun, 01 Jan 2023 08:15:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2023/01/mysql%E7%9A%84%E5%B9%B6%E5%8F%91/</guid>
-      <description>MVCC的基本概念，读已提交、可重复读隔离级别下的ReadView，MVCC的purage；锁的基本类型，X/S/IX/IS锁；record lock、gap lock、next-key lock、insert intention lock、隐式锁；各种隔离级别下的加锁过程，SHOW ENGINE INNODB STATUS 分析加锁过程，死锁的分析</description>
-    </item>
-    
-    <item>
-      <title>MySQL的恢复</title>
-      <link>https://hehe-1234.xyz/post/2022/12/mysql%E7%9A%84%E6%81%A2%E5%A4%8D/</link>
-      <pubDate>Thu, 22 Dec 2022 08:15:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2022/12/mysql%E7%9A%84%E6%81%A2%E5%A4%8D/</guid>
-      <description>redo log的格式(逻辑+物理混合格式)、Mini-Transaction、redo log写入过程，写入page cache，log_sys结构、redo log的文件格式，如何刷新到磁盘上的，checkpoint过程，恢复过程；   undo log的格式(逻辑格式)、undo log的组织、回滚段、系统表空间的5号page，多个回滚段、rollback的过程；以及源码中的redo log定义、undo log定义</description>
-    </item>
-    
-    <item>
-      <title>MySQL的缓存</title>
-      <link>https://hehe-1234.xyz/post/2022/12/mysql%E7%9A%84%E7%BC%93%E5%AD%98/</link>
-      <pubDate>Mon, 19 Dec 2022 08:15:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2022/12/mysql%E7%9A%84%E7%BC%93%E5%AD%98/</guid>
-      <description>Buffer Pool、Doublewrite Buffer、Redo相关的Log Buffer，自适应Hash索引、change buffer、以及InnoDB相关的参数汇总</description>
-    </item>
-    
-    <item>
-      <title>MySQL查询分析</title>
-      <link>https://hehe-1234.xyz/post/2022/12/mysql%E6%9F%A5%E8%AF%A2%E5%88%86%E6%9E%90/</link>
-      <pubDate>Thu, 15 Dec 2022 08:15:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2022/12/mysql%E6%9F%A5%E8%AF%A2%E5%88%86%E6%9E%90/</guid>
-      <description>一些经典的RBO优化，包括子查询优化；一些CBO优化，统计信息收集，CBO的统计计算方式，常数成本调节；JOIN优化，并详细介绍了EXPLAIN的各个字段含义，其中select_type、type、Extra这几个字段比较重要，另外还有JSON个事的执行计划，optimizer trace</description>
-    </item>
-    
-    <item>
       <title>用工具分析MySQL存储文件</title>
       <link>https://hehe-1234.xyz/post/2022/12/%E7%94%A8%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90mysql%E5%AD%98%E5%82%A8%E6%96%87%E4%BB%B6/</link>
       <pubDate>Tue, 13 Dec 2022 08:35:19 +0800</pubDate>
       
       <guid>https://hehe-1234.xyz/post/2022/12/%E7%94%A8%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90mysql%E5%AD%98%E5%82%A8%E6%96%87%E4%BB%B6/</guid>
       <description>innodb_ruby是专门分析InnoDB的工具，通过这个工具能获取到系统表空间、普通表空间的统计信息，段信息、区信息，以及4个核心的SYS表；；以及索引信息统计，page信息汇总，page信息dump，还可以用图表的方式展示</description>
-    </item>
-    
-    <item>
-      <title>MySQL文件存储结构</title>
-      <link>https://hehe-1234.xyz/post/2022/12/mysql%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/</link>
-      <pubDate>Fri, 02 Dec 2022 08:35:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2022/12/mysql%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/</guid>
-      <description>InnoDB架构包含内存、磁盘两种结构；基于磁盘的结构中包括：系统表空间、普通表空间、通用表空间、双写缓冲区、Undo表空间、redo日志；临时表空间；这里最重要的当属系统表空间 和 普通表空间；普通表空间分为段、区、页、行这些概念，256个区一组，第0组包含FSP_HDR、XDES、INODE，存储数据的地方是INDEX；系统表空间则多了Data Dictionary Header部分</description>
     </item>
     
     <item>
@@ -548,15 +467,6 @@
     </item>
     
     <item>
-      <title>高可用设计</title>
-      <link>https://hehe-1234.xyz/post/2022/09/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/</link>
-      <pubDate>Sun, 18 Sep 2022 12:12:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2022/09/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/</guid>
-      <description>扩展spark thrift，变成两层调度</description>
-    </item>
-    
-    <item>
       <title>Architecture of a Database System论文翻译</title>
       <link>https://hehe-1234.xyz/post/2022/09/architecture-of-a-database-system/</link>
       <pubDate>Sat, 03 Sep 2022 11:11:11 +0800</pubDate>
@@ -599,51 +509,6 @@
       
       <guid>https://hehe-1234.xyz/post/2022/07/%E5%AE%B9%E7%81%BE%E9%83%A8%E7%BD%B2%E8%B0%83%E7%A0%94/</guid>
       <description>容灾部署调研</description>
-    </item>
-    
-    <item>
-      <title>卡内基梅隆的数据库课程-1</title>
-      <link>https://hehe-1234.xyz/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B/</link>
-      <pubDate>Fri, 22 Jul 2022 20:32:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B/</guid>
-      <description>卡内基梅隆的数据库课程，包括：背景、关系代数、数据库存储、buffer pool、hash table、index、index concurrency control、sorting+aggregations、joins algorithms</description>
-    </item>
-    
-    <item>
-      <title>卡内基梅隆的数据库课程-2</title>
-      <link>https://hehe-1234.xyz/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-2/</link>
-      <pubDate>Mon, 04 Jul 2022 20:32:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-2/</guid>
-      <description>卡内基梅隆的数据库课程，包括：查询执行，火山-物化-向量模型，访问方式，顺序-索引-多索引等，顺序访问的优化，表达式评估，并行VS分布式，调度模式，I/O并行化；查询优化架构、RBO、CBO、逻辑计划VS物理计划、关系代数的优化以及一些例子、复杂谓词的类型和选择性、采样、基于概率的选择性、多join查询的优化，动态规划、遗传优化等</description>
-    </item>
-    
-    <item>
-      <title>卡内基梅隆的数据库课程-3</title>
-      <link>https://hehe-1234.xyz/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-3/</link>
-      <pubDate>Mon, 04 Jul 2022 19:32:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-3/</guid>
-      <description>卡内基梅隆的数据库课程，包括：事务的定义和ACID，隔离性(并发场景下的交错执行)，RW、WR、WW冲突，可串行化、Conflict Serializability(交换、优先图)、View Serializability(NP完全问题)；lock VS latch，lock类型，锁管理器，2PL，S2PL，SS2PL；死锁检测(是否有环)，根据各种条件打破循环，死锁预防(基于时间戳分配)，锁粒度(层级锁，支持更高并发)，IS、IX、SIX锁； 时间戳排序并发控制，W-TS(X)、R-TS(X)，可恢复性；OCC，三个方面阶段：读/写、校验、写入，backward validation，forward validation；幻读，重新执行，谓词锁，索引锁，事务隔离级别，基于2PL方式的各种隔离级别；MVCC并发控制，TO、OCC、2PL，版本存储append-only、time-travel、delta-storage；垃圾收集：Tuple-level(Background Vacuuming vs. Cooperative Cleaning)、Transaction-level；索引管理，主索引管理，二级索引管理(Logical Pointers、Physical Pointers)、MVCC index；MVCC delete(Deleted Flag、Tombstone Tuple)</description>
-    </item>
-    
-    <item>
-      <title>卡内基梅隆的数据库课程-4</title>
-      <link>https://hehe-1234.xyz/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-4/</link>
-      <pubDate>Mon, 04 Jul 2022 19:32:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-4/</guid>
-      <description>卡内基梅隆的数据库课程，包括：失败的各种情况，各种存储类型，失败的分类；redo 和 undo；buffer pool 策略；steal、no-force；shadow paging，sqlite的shadow paging；WAL协议格式，物理日志，逻辑日志，checkpoint失败恢复算法ARIES：Write-Ahead Logging，Repeating History During Redo，Logging Changes During Undo；LSN Log Sequence Numbers；正常事务操作恢复，终止事务操作恢复；Fuzzy Checkpointing，活跃事务表，脏页表；Recovery Algorithm的三个阶段：Analysis、Redo、Undo，恢复算法的性能改进</description>
-    </item>
-    
-    <item>
-      <title>卡内基梅隆的数据库课程-5</title>
-      <link>https://hehe-1234.xyz/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-5/</link>
-      <pubDate>Mon, 04 Jul 2022 19:31:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2022/07/cmu%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B-5/</guid>
-      <description>卡内基梅隆的数据库课程，包括：分布式数据库，并行vs分布式，分布式数据库架构，shared-everything、shared-memory、shared-disk、shared-nothing；同质化节点vs非同质化节点；数据的透明传输，单节点vs分布式节点；协调事务，hash分区，range分区；OLTP，非拜占庭环境，原子提交协议，2PC，3PC、paxos、raft、zab、viewstamped，2PC的优化，multi-paxos，2PC vs paxos；复制配置：主-副本、多主，k-safety，传播时机：continuous、on commit，主动 vs 被动；CAP理论联邦数据库；OLAP，星型模型vs雪花模型，push vs pull，查询计划片段 vs SQL重写，分布式join算法，云系统，组件分解：系统catalog、节点管理、query优化；统一的访问格式</description>
     </item>
     
     <item>
@@ -854,6 +719,15 @@
     </item>
     
     <item>
+      <title>用DFA验证字符串中的数字</title>
+      <link>https://hehe-1234.xyz/post/2022/01/%E7%94%A8dfa%E9%AA%8C%E8%AF%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%97/</link>
+      <pubDate>Sat, 08 Jan 2022 09:11:12 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2022/01/%E7%94%A8dfa%E9%AA%8C%E8%AF%81%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%97/</guid>
+      <description>一个字符串，包含小数和指数部分，采用DFA的方式做验证其有效性</description>
+    </item>
+    
+    <item>
       <title>数据迁移工具DB-bridge</title>
       <link>https://hehe-1234.xyz/post/2021/12/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E5%B7%A5%E5%85%B7db-bridge/</link>
       <pubDate>Thu, 30 Dec 2021 13:07:19 +0800</pubDate>
@@ -881,48 +755,12 @@
     </item>
     
     <item>
-      <title>统一查询项目整合Calcite</title>
-      <link>https://hehe-1234.xyz/post/2021/12/%E7%BB%9F%E4%B8%80%E6%9F%A5%E8%AF%A2%E6%95%B4%E5%90%88calcite/</link>
-      <pubDate>Mon, 27 Dec 2021 13:07:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2021/12/%E7%BB%9F%E4%B8%80%E6%9F%A5%E8%AF%A2%E6%95%B4%E5%90%88calcite/</guid>
-      <description>统一查询项目介绍</description>
-    </item>
-    
-    <item>
-      <title>统一查询项目介绍</title>
-      <link>https://hehe-1234.xyz/post/2021/12/%E7%BB%9F%E4%B8%80%E6%9F%A5%E8%AF%A2%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/</link>
-      <pubDate>Sun, 26 Dec 2021 13:07:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2021/12/%E7%BB%9F%E4%B8%80%E6%9F%A5%E8%AF%A2%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/</guid>
-      <description>统一查询项目介绍</description>
-    </item>
-    
-    <item>
       <title>QuickSQL执行过程</title>
       <link>https://hehe-1234.xyz/post/2021/12/quicksql%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/</link>
       <pubDate>Sun, 26 Dec 2021 13:06:19 +0800</pubDate>
       
       <guid>https://hehe-1234.xyz/post/2021/12/quicksql%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/</guid>
       <description>quick-sql 原理分析</description>
-    </item>
-    
-    <item>
-      <title>分布式数据库课程中的论文</title>
-      <link>https://hehe-1234.xyz/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/</link>
-      <pubDate>Sun, 19 Dec 2021 20:53:31 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2021/12/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%BE%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%AE%BA%E6%96%87/</guid>
-      <description>这里罗列了《分布式数据库课程中的论文》这个网络课程中推荐的论文</description>
-    </item>
-    
-    <item>
-      <title>数据密集型应用设计读书笔记</title>
-      <link>https://hehe-1234.xyz/post/2021/12/%E6%95%B0%E6%8D%AE%E5%AF%86%E9%9B%86%E5%9E%8B%E5%BA%94%E7%94%A8%E8%AE%BE%E8%AE%A1/</link>
-      <pubDate>Thu, 02 Dec 2021 12:07:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2021/12/%E6%95%B0%E6%8D%AE%E5%AF%86%E9%9B%86%E5%9E%8B%E5%BA%94%E7%94%A8%E8%AE%BE%E8%AE%A1/</guid>
-      <description>读《数据密集型应用设计》</description>
     </item>
     
     <item>
@@ -953,6 +791,24 @@
     </item>
     
     <item>
+      <title>N皇后</title>
+      <link>https://hehe-1234.xyz/post/2021/10/n%E7%9A%87%E5%90%8E/</link>
+      <pubDate>Thu, 21 Oct 2021 09:58:22 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2021/10/n%E7%9A%87%E5%90%8E/</guid>
+      <description>著名的8皇后问题</description>
+    </item>
+    
+    <item>
+      <title>马拉车算法</title>
+      <link>https://hehe-1234.xyz/post/2021/10/%E9%A9%AC%E6%8B%89%E8%BD%A6%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sat, 16 Oct 2021 10:49:09 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2021/10/%E9%A9%AC%E6%8B%89%E8%BD%A6%E7%AE%97%E6%B3%95/</guid>
+      <description>介绍马拉车算法，这是一种用在回文字符串场景下的算法，可以将时间复杂度压缩到极致</description>
+    </item>
+    
+    <item>
       <title>从汇编角度看程序的执行</title>
       <link>https://hehe-1234.xyz/post/2021/10/%E4%BB%8E%E6%B1%87%E7%BC%96%E8%A7%92%E5%BA%A6%E7%9C%8B%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C/</link>
       <pubDate>Sun, 10 Oct 2021 14:09:03 +0800</pubDate>
@@ -968,15 +824,6 @@
       
       <guid>https://hehe-1234.xyz/post/2021/09/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%9A%84ideals/</guid>
       <description>微服务的设计的IDEALS</description>
-    </item>
-    
-    <item>
-      <title>第一篇文章</title>
-      <link>https://hehe-1234.xyz/post/2021/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</link>
-      <pubDate>Wed, 22 Sep 2021 13:58:33 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2021/09/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</guid>
-      <description>用hugo+github自建的博客</description>
     </item>
     
   </channel>

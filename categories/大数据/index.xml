@@ -6,7 +6,16 @@
     <description>Recent content in 大数据 on 一个程序员的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 02 Oct 2024 09:08:07 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Apr 2025 10:10:12 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenLDAP研究</title>
+      <link>https://hehe-1234.xyz/post/2025/04/ldap/</link>
+      <pubDate>Sun, 13 Apr 2025 10:10:12 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/post/2025/04/ldap/</guid>
+      <description>OpenLDAP研究</description>
+    </item>
+    
     <item>
       <title>Parquet for Spark</title>
       <link>https://hehe-1234.xyz/post/2024/10/parquet_4_spark/</link>
@@ -80,15 +89,6 @@
     </item>
     
     <item>
-      <title>TPCx-HS优化总结</title>
-      <link>https://hehe-1234.xyz/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/</link>
-      <pubDate>Thu, 09 Nov 2023 09:13:07 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2023/11/tpcx-hs%E4%BC%98%E5%8C%96%E6%80%BB%E7%BB%93/</guid>
-      <description>TPCx-HS优化总结</description>
-    </item>
-    
-    <item>
       <title>Presto在各大公司的应用</title>
       <link>https://hehe-1234.xyz/post/2023/07/presto%E5%9C%A8%E5%90%84%E5%A4%A7%E5%85%AC%E5%8F%B8%E7%9A%84%E5%BA%94%E7%94%A8/</link>
       <pubDate>Wed, 12 Jul 2023 09:11:07 +0800</pubDate>
@@ -98,48 +98,12 @@
     </item>
     
     <item>
-      <title>资源隔离修改配置动态加载</title>
-      <link>https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</link>
-      <pubDate>Sun, 14 May 2023 11:23:04 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD/</guid>
-      <description>在资源隔离大功能的基础上，实现动态加载配置修改功能，当用户 alter 了资源配置表，会动态生效</description>
-    </item>
-    
-    <item>
-      <title>资源隔离设计</title>
-      <link>https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/</link>
-      <pubDate>Sat, 13 May 2023 11:23:04 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2023/06/%E8%B5%84%E6%BA%90%E9%9A%94%E7%A6%BB%E8%AE%BE%E8%AE%A1/</guid>
-      <description>基于高可用的两层调度方式，配合 k8s 实现一套资源隔离机制，并实现自定义的语法</description>
-    </item>
-    
-    <item>
-      <title>镜像合并&amp;配置文件同步</title>
-      <link>https://hehe-1234.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/</link>
-      <pubDate>Fri, 12 May 2023 11:23:04 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2023/06/%E9%95%9C%E5%83%8F%E5%90%88%E5%B9%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5/</guid>
-      <description>将业务镜像和底层基础镜像合并，去掉spark的k8s模板配置文件，通过init容器 + env + volumn方式实现</description>
-    </item>
-    
-    <item>
       <title>Photon A Fast Query Engine for Lakehouse Systems</title>
       <link>https://hehe-1234.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/</link>
       <pubDate>Mon, 02 Jan 2023 10:35:19 +0800</pubDate>
       
       <guid>https://hehe-1234.xyz/post/2023/01/photon-a-fast-query-engine-for-lakehouse-systems/</guid>
       <description>Databricks 2022年在SIGMOD上发表的论文(最佳工业论文奖)，由于I/O方面有很多优化措施，而JVM的对向量化支持较差，之后用C++实现了向量化的执行引擎Photon，来实现进一步的性能提升；首先是从最底层scan开始替换，因为中间替换的代价较高，之后不断往上，直到某个算子Photon不能适配，则由列存转换为Spark的行存，退回到Spark执行，总体看性能可以提升好几倍</description>
-    </item>
-    
-    <item>
-      <title>高可用设计</title>
-      <link>https://hehe-1234.xyz/post/2022/09/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/</link>
-      <pubDate>Sun, 18 Sep 2022 12:12:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2022/09/%E9%AB%98%E5%8F%AF%E7%94%A8%E8%AE%BE%E8%AE%A1/</guid>
-      <description>扩展spark thrift，变成两层调度</description>
     </item>
     
     <item>
@@ -266,24 +230,6 @@
       
       <guid>https://hehe-1234.xyz/post/2022/01/%E5%87%A0%E7%A7%8D%E5%BC%80%E6%BA%90%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%B9%E5%85%83%E6%95%B0%E6%8D%AE%E7%9A%84%E7%AE%A1%E7%90%86/</guid>
       <description>几种开源数据库对元数据的管理</description>
-    </item>
-    
-    <item>
-      <title>统一查询项目整合Calcite</title>
-      <link>https://hehe-1234.xyz/post/2021/12/%E7%BB%9F%E4%B8%80%E6%9F%A5%E8%AF%A2%E6%95%B4%E5%90%88calcite/</link>
-      <pubDate>Mon, 27 Dec 2021 13:07:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2021/12/%E7%BB%9F%E4%B8%80%E6%9F%A5%E8%AF%A2%E6%95%B4%E5%90%88calcite/</guid>
-      <description>统一查询项目介绍</description>
-    </item>
-    
-    <item>
-      <title>统一查询项目介绍</title>
-      <link>https://hehe-1234.xyz/post/2021/12/%E7%BB%9F%E4%B8%80%E6%9F%A5%E8%AF%A2%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/</link>
-      <pubDate>Sun, 26 Dec 2021 13:07:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/post/2021/12/%E7%BB%9F%E4%B8%80%E6%9F%A5%E8%AF%A2%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D/</guid>
-      <description>统一查询项目介绍</description>
     </item>
     
     <item>

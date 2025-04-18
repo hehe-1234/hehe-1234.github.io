@@ -243,29 +243,6 @@
     <article class="post">
         <header>
             <h1 class="post-title">
-                <a href="https://hehe-1234.xyz/post/2023/05/what-goes-around-comes-around/">What Goes Around Comes Around</a>
-            </h1>
-        </header>
-        <date class="post-meta meta-date">
-            2023年5月3日
-        </date>
-        
-        <div class="post-meta meta-category">
-            |
-            
-            <a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a>
-            
-        </div>
-        
-        <div class="post-content">
-            Stonebraker的论文，介绍了 9个不同时代的数据模型；层次数据库IMS，以及网络数据库CODASYL，这两者都是逻辑数据、物理数据耦合，之后出现了关系模型，有了数据独立；再往后就是各种对关系模型的补充，如实体-关系模型、关系模型++、语义数据模型、OO模型、对象关系模型、半结构模型等；从中我们可以总结到：查询优化器很有用、技术的争论通常由市场和其他因素决定，简单模型比复制模型更容易实现数据独立、KISS 保持简单是很重要的、除非用户使用中出现很大问题否则他们不会买单、没有编程语言社区的支持想在语言上做改进突破很难、新技术的推广，需要标准化，或者大力度的推广、schema-last 可能只合适小部分场景
-            <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/05/what-goes-around-comes-around/">阅读全文</a></p>
-        </div>
-    </article>
-    
-    <article class="post">
-        <header>
-            <h1 class="post-title">
                 <a href="https://hehe-1234.xyz/post/2023/02/efficiently-compiling-efficient-query-plans-for-modern-hardware/">Efficiently Compiling Efficient Query Plans for Modern Hardware</a>
             </h1>
         </header>
@@ -306,6 +283,29 @@
         <div class="post-content">
             英国爱丁堡大学的一篇论文，从传统系统到现代系统的变化一个重要点是：内存增大很多，以前的I/O瓶颈对于现在来说不那么重要了，反而是CPU和内存瓶颈；而之前的火山模型对于CPU利用率来说很不好，大量的虚函数调用，多层级的函数调用增加了cache miss，也会产生更多的指令，不利于并行化和cache局部性；这篇论文提出了一个代码模板，通过识别不同的查询计划算子，来对应的生成不同的代码(对应一个大函数)，不同函数之间通过物化来连接，之后通过编译器GCC来编译这段C代码，还可以对代码最O2级别优化(但会增加运行期执行时间)来达到更好的效果，论文对比了join、sort、聚合，虽然使用的是NSM存储模型，但是执行效果来看跟MonetDB的DSM差不多了；代码生成的缺点是对于小查询会有额外的开销(编译、优化、link时间)
             <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/02/generating-code-for-holistic-query-evaluation/">阅读全文</a></p>
+        </div>
+    </article>
+    
+    <article class="post">
+        <header>
+            <h1 class="post-title">
+                <a href="https://hehe-1234.xyz/post/2023/02/implementing-database-operations-using-simd-instructions/">Implementing Database Operations Using SIMD Instructions</a>
+            </h1>
+        </header>
+        <date class="post-meta meta-date">
+            2023年2月1日
+        </date>
+        
+        <div class="post-meta meta-category">
+            |
+            
+            <a href='/categories/%E6%95%B0%E6%8D%AE%E5%BA%93'>数据库</a>
+            
+        </div>
+        
+        <div class="post-content">
+            介绍了SIMD指令一些基本概念，并行流水线，以及分支预测失败带来的影响；论文中提到了使用SIMD指令的方式，以及不同平台产生的差异；之后用伪代码的方式描述几个数据库常用操作；scan操作详细对比了标量版和SIMD版的区别，以及如何消除分支的方式，还有返回选中的一个元素、多个元素的标量、SIMD方式；聚合的实现方式SIMD有提供相关的操作 SIMD_min、SIMD_max即可，对于索引部分主要是介绍树结构索引，详细讨论了中间节点、叶子节点的实现方式；在有序元素上使用二分效率是非常高的，但也会有分支预测失败问题，论文中给出了混合二分+顺序扫描方式；最后是join处理方式，这里只列出了nested-loop join的SIMD实现，Duplicate-outer、Duplicate-inner、Rotate-inner
+            <p class="readmore"><a href="https://hehe-1234.xyz/post/2023/02/implementing-database-operations-using-simd-instructions/">阅读全文</a></p>
         </div>
     </article>
     
@@ -360,6 +360,14 @@
 <ul class="widget-list">
     
     <li>
+        <a href="https://hehe-1234.xyz/post/2025/04/ldap/" title="OpenLDAP研究">OpenLDAP研究</a>
+    </li>
+    
+    <li>
+        <a href="https://hehe-1234.xyz/post/2025/02/py_torch/" title="PyTorch">PyTorch</a>
+    </li>
+    
+    <li>
         <a href="https://hehe-1234.xyz/post/2025/01/logs_collection_based_cloud/" title="云环境中的日志收集和处理方案">云环境中的日志收集和处理方案</a>
     </li>
     
@@ -391,14 +399,6 @@
         <a href="https://hehe-1234.xyz/post/2024/08/open_log_rac/" title="OpenLogReplicator的一些改动">OpenLogReplicator的一些改动</a>
     </li>
     
-    <li>
-        <a href="https://hehe-1234.xyz/post/2024/07/open_log_replicator/" title="Oracle的CDC工具OpenLogReplicator原理">Oracle的CDC工具OpenLogReplicator原理</a>
-    </li>
-    
-    <li>
-        <a href="https://hehe-1234.xyz/post/2024/06/open_log/" title="Oracle的CDC工具OpenLogReplicator编译">Oracle的CDC工具OpenLogReplicator编译</a>
-    </li>
-    
 </ul>
     </section>
 
@@ -410,27 +410,27 @@
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 (5)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (14)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90/">原理分析 (9)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (33)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据 (27)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/">工作记录 (1)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (27)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 (26)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E6%9E%B6%E6%9E%84/">架构 (4)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E7%AE%97%E6%B3%95/">算法 (1)</a></li>
     
+    <li><a href="https://hehe-1234.xyz/categories/%E7%AE%97%E6%B3%95%E5%92%8Cai/">算法和AI (4)</a></li>
+    
     <li><a href="https://hehe-1234.xyz/categories/%E7%B3%BB%E7%BB%9F/">系统 (5)</a></li>
     
     <li><a href="https://hehe-1234.xyz/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言 (5)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (2)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E8%A1%8C%E4%B8%9A%E8%A7%82%E5%AF%9F/">行业观察 (1)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (10)</a></li>
-    
-    <li><a href="https://hehe-1234.xyz/categories/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 (1)</a></li>
+    <li><a href="https://hehe-1234.xyz/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 (3)</a></li>
     
 </ul>
     </section>
@@ -439,15 +439,15 @@
         <h3 class="widget-title">归档</a></h3>
 <ul class="widget-list">
     
-    <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (14)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2021%E5%B9%B4/">2021年 (11)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (45)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2022%E5%B9%B4/">2022年 (36)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (31)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2023%E5%B9%B4/">2023年 (24)</a></li>
     
     <li><a href="https://hehe-1234.xyz/years/2024%E5%B9%B4/">2024年 (16)</a></li>
     
-    <li><a href="https://hehe-1234.xyz/years/2025%E5%B9%B4/">2025年 (2)</a></li>
+    <li><a href="https://hehe-1234.xyz/years/2025%E5%B9%B4/">2025年 (4)</a></li>
     
 </ul>
     </section>
@@ -459,8 +459,6 @@
     <a href="https://hehe-1234.xyz/tags/btrace/">BTrace </a>
     
     <a href="https://hehe-1234.xyz/tags/b%E6%A0%91/">B树 </a>
-    
-    <a href="https://hehe-1234.xyz/tags/calcite/">calcite </a>
     
     <a href="https://hehe-1234.xyz/tags/cmu-database/">CMU-Database </a>
     
@@ -492,13 +490,15 @@
     
     <a href="https://hehe-1234.xyz/tags/log4j/">log4j </a>
     
+    <a href="https://hehe-1234.xyz/tags/manacher/">Manacher </a>
+    
     <a href="https://hehe-1234.xyz/tags/mapreduce/">MapReduce </a>
     
     <a href="https://hehe-1234.xyz/tags/mysql/">MySQL </a>
     
     <a href="https://hehe-1234.xyz/tags/newsql/">NewSQL </a>
     
-    <a href="https://hehe-1234.xyz/tags/oceanbase/">OceanBase </a>
+    <a href="https://hehe-1234.xyz/tags/openldap/">OpenLDAP </a>
     
     <a href="https://hehe-1234.xyz/tags/openlogreplicator/">OpenLogReplicator </a>
     
@@ -507,6 +507,8 @@
     <a href="https://hehe-1234.xyz/tags/paxos/">paxos </a>
     
     <a href="https://hehe-1234.xyz/tags/presto/">Presto </a>
+    
+    <a href="https://hehe-1234.xyz/tags/pytorch/">PyTorch </a>
     
     <a href="https://hehe-1234.xyz/tags/quick-sql/">quick-sql </a>
     
@@ -522,8 +524,6 @@
     
     <a href="https://hehe-1234.xyz/tags/teradata/">TeraData </a>
     
-    <a href="https://hehe-1234.xyz/tags/tpcx-hs/">TPCx-HS </a>
-    
     <a href="https://hehe-1234.xyz/tags/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E5%88%97%E5%AD%98/">列存 </a>
@@ -531,6 +531,8 @@
     <a href="https://hehe-1234.xyz/tags/%E5%8A%A8%E6%80%81%E6%B3%A8%E5%85%A5/">动态注入 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E5%90%91%E9%87%8F%E5%8C%96/">向量化 </a>
+    
+    <a href="https://hehe-1234.xyz/tags/%E5%9B%9E%E6%BA%AF/">回溯 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E5%A4%9A%E7%A7%9F%E6%88%B7/">多租户 </a>
     
@@ -544,8 +546,6 @@
     
     <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>
     
-    <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">数据模型 </a>
-    
     <a href="https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/">数据迁移 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96/">查询优化 </a>
@@ -556,6 +556,8 @@
     
     <a href="https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/">测试 </a>
     
+    <a href="https://hehe-1234.xyz/tags/%E7%AE%97%E6%B3%95/">算法 </a>
+    
     <a href="https://hehe-1234.xyz/tags/%E7%B4%A2%E5%BC%95/">索引 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">编译原理 </a>
@@ -565,10 +567,6 @@
     <a href="https://hehe-1234.xyz/tags/%E8%AE%A1%E7%AE%97%E6%A1%86%E6%9E%B6/">计算框架 </a>
     
     <a href="https://hehe-1234.xyz/tags/%E8%AE%BA%E6%96%87/">论文 </a>
-    
-    <a href="https://hehe-1234.xyz/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记 </a>
-    
-    <a href="https://hehe-1234.xyz/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写 </a>
     
 </div>
     </section>

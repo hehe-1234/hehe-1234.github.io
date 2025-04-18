@@ -6,7 +6,25 @@
     <description>Recent content in Tags on 一个程序员的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 27 Jan 2025 01:08:07 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Apr 2025 10:10:12 +0800</lastBuildDate><atom:link href="https://hehe-1234.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenLDAP</title>
+      <link>https://hehe-1234.xyz/tags/openldap/</link>
+      <pubDate>Sun, 13 Apr 2025 10:10:12 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/tags/openldap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PyTorch</title>
+      <link>https://hehe-1234.xyz/tags/pytorch/</link>
+      <pubDate>Thu, 30 Jan 2025 01:08:07 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/tags/pytorch/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>log4j</title>
       <link>https://hehe-1234.xyz/tags/log4j/</link>
@@ -143,15 +161,6 @@
     </item>
     
     <item>
-      <title>TPCx-HS</title>
-      <link>https://hehe-1234.xyz/tags/tpcx-hs/</link>
-      <pubDate>Thu, 09 Nov 2023 09:13:07 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/tags/tpcx-hs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Presto</title>
       <link>https://hehe-1234.xyz/tags/presto/</link>
       <pubDate>Wed, 12 Jul 2023 09:11:07 +0800</pubDate>
@@ -206,29 +215,11 @@
     </item>
     
     <item>
-      <title>数据模型</title>
-      <link>https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/</link>
-      <pubDate>Wed, 03 May 2023 11:23:04 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>LevelDB</title>
       <link>https://hehe-1234.xyz/tags/leveldb/</link>
       <pubDate>Fri, 14 Apr 2023 19:20:03 +0800</pubDate>
       
       <guid>https://hehe-1234.xyz/tags/leveldb/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>OceanBase</title>
-      <link>https://hehe-1234.xyz/tags/oceanbase/</link>
-      <pubDate>Sun, 26 Mar 2023 11:32:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/tags/oceanbase/</guid>
       <description></description>
     </item>
     
@@ -280,7 +271,7 @@
     <item>
       <title>MySQL</title>
       <link>https://hehe-1234.xyz/tags/mysql/</link>
-      <pubDate>Sun, 01 Jan 2023 08:15:19 +0800</pubDate>
+      <pubDate>Tue, 13 Dec 2022 08:35:19 +0800</pubDate>
       
       <guid>https://hehe-1234.xyz/tags/mysql/</guid>
       <description></description>
@@ -431,6 +422,15 @@
     </item>
     
     <item>
+      <title>算法</title>
+      <link>https://hehe-1234.xyz/tags/%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sat, 08 Jan 2022 09:11:12 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/tags/%E7%AE%97%E6%B3%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>数据迁移</title>
       <link>https://hehe-1234.xyz/tags/%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/</link>
       <pubDate>Thu, 30 Dec 2021 13:07:19 +0800</pubDate>
@@ -458,15 +458,6 @@
     </item>
     
     <item>
-      <title>calcite</title>
-      <link>https://hehe-1234.xyz/tags/calcite/</link>
-      <pubDate>Mon, 27 Dec 2021 13:07:19 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/tags/calcite/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>quick-sql</title>
       <link>https://hehe-1234.xyz/tags/quick-sql/</link>
       <pubDate>Sun, 26 Dec 2021 13:06:19 +0800</pubDate>
@@ -476,20 +467,29 @@
     </item>
     
     <item>
-      <title>读书笔记</title>
-      <link>https://hehe-1234.xyz/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Sun, 19 Dec 2021 20:53:31 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>测试</title>
       <link>https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/</link>
       <pubDate>Fri, 26 Nov 2021 17:46:21 +0800</pubDate>
       
       <guid>https://hehe-1234.xyz/tags/%E6%B5%8B%E8%AF%95/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>回溯</title>
+      <link>https://hehe-1234.xyz/tags/%E5%9B%9E%E6%BA%AF/</link>
+      <pubDate>Thu, 21 Oct 2021 09:58:22 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/tags/%E5%9B%9E%E6%BA%AF/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Manacher</title>
+      <link>https://hehe-1234.xyz/tags/manacher/</link>
+      <pubDate>Sat, 16 Oct 2021 10:49:09 +0800</pubDate>
+      
+      <guid>https://hehe-1234.xyz/tags/manacher/</guid>
       <description></description>
     </item>
     
@@ -508,15 +508,6 @@
       <pubDate>Mon, 27 Sep 2021 18:34:37 +0800</pubDate>
       
       <guid>https://hehe-1234.xyz/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>随便写写</title>
-      <link>https://hehe-1234.xyz/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/</link>
-      <pubDate>Wed, 22 Sep 2021 13:58:33 +0800</pubDate>
-      
-      <guid>https://hehe-1234.xyz/tags/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/</guid>
       <description></description>
     </item>
     
