@@ -1,0 +1,4 @@
+[submodule "external/hehe-1234.github.io"]
+    path = external/hehe-1234.github.io
+    url = https://github.com/hehe-1234/hehe-1234.github.io.git
+    branch = main
